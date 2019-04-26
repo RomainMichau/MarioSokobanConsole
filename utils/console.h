@@ -19,10 +19,8 @@ class Console
 {
     private:
         // Empecher la création
-        __attribute__((no_instrument_function))
         Console();
 
-        __attribute__((no_instrument_function))
         ~Console();
 
         // Empecher la copie d'objet...
@@ -33,33 +31,24 @@ class Console
         static Console* m_instance;
 
         // Méthodes privées
-        __attribute__((no_instrument_function))
         void _setColor(short unsigned int front, short unsigned int back);
     public:
         // Méthodes statiques (publiques)
-        __attribute__((no_instrument_function))
         static Console* getInstance();
 
-        __attribute__((no_instrument_function))
         static void deleteInstance();
 
         // Méthodes publiques
-        __attribute__((no_instrument_function))
         void gotoLigCol(short int lig, short int col);
 
-        __attribute__((no_instrument_function))
         void gotoCurrentLigCol(short int lig, short int col);
 
-        __attribute__((no_instrument_function))
         void gotoCol(short int col);
 
-        __attribute__((no_instrument_function))
         bool isKeyboardPressed();
 
-        __attribute__((no_instrument_function))
         int getInputKey();
 
-        __attribute__((no_instrument_function))
         void setColor(int col);
 };
 

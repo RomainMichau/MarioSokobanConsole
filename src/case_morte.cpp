@@ -18,7 +18,7 @@ case_morte::~case_morte()
 
 
 void case_morte::detect_dead(Maze &m)
-{
+{	
     unsigned short cote_mort=0;
     int hauteur_mort=0;
     unsigned short cote_mur=0;

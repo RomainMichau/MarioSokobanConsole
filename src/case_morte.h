@@ -12,6 +12,7 @@ class case_morte
     public:
         case_morte();
         ~case_morte();
+		
         void detect_dead(Maze &m);
         bool dyn_dead(Maze m, unsigned short position, unsigned char dir);
 

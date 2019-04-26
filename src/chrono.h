@@ -18,8 +18,9 @@ class chrono
     private:
         time_t deb_time;
         time_t actual_time;
-        std::chrono::_V2::system_clock::time_point startc;
-        std::chrono::_V2::system_clock::time_point endc;
+		
+        std::chrono::system_clock::time_point startc;
+        std::chrono::system_clock::time_point endc;
 
 };
 

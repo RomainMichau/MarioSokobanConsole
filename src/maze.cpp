@@ -39,6 +39,8 @@ bool Maze::init()
     if (!res)
     {
         std::cerr << "Cannot load maze... Check file : " << this->m_level_path << std::endl;
+		system("pause");
+
         return false;
     }
 
