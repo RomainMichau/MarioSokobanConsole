@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="MarioSokoban"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="MarioSokoban">
+				<Option output="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/MarioSokoban.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/."/>
+					<Add directory="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/utils"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 MarioSokoban"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="MarioSokoban/fast">
+				<Option output="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/MarioSokoban.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/."/>
+					<Add directory="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/utils"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 MarioSokoban/fast"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-8~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Users/rmichau/Documents/projetPerso/MarioSokoban/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/include/BFSPLUS.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/include/marque_field.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/BFS.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/BFS.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/BFSPLUS.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/BFSPLUS.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/DFS.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/DFS.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/bruteforce.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/bruteforce.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/case_morte.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/case_morte.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/chrono.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/chrono.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/heuristique.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/heuristique.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/keyboardManager.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/keyboardManager.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/main.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/maze.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/maze.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/note.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/note.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/stock_field.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/stock_field.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/util.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/src/util.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/utils/console.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/utils/console.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/utils/coord.cpp">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/utils/coord.h">
+			<Option target="MarioSokoban"/>
+		</Unit>
+		<Unit filename="C:/Users/rmichau/Documents/projetPerso/MarioSokoban/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

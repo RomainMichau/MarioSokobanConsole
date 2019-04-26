@@ -1,0 +1,5 @@
+-Ne pas recalculer la zone accessible par le joueur à chaque tours, mais uniqement la recalculer
+
+-Enregistrer des "pattern" de deplacement
+
+-modifier l'heuristique de calcul de distance des box, pour éviter de le faire pour chaque box (c a d uniquement la box qui vient d'être deplacé)
