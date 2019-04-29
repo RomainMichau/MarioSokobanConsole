@@ -1,6 +1,5 @@
 #ifndef UTIL_H
 #define UTIL_H
-#include "../src/BFS.h"
 #include <queue>
 #include "../src/maze.h"
 #include <vector>

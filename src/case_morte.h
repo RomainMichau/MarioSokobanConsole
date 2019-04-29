@@ -19,7 +19,7 @@ class case_morte
     protected:
 
     private:
-        std::vector<unsigned short> liste;
+        std::vector<unsigned short> deadLocks_list;
 int nb_case_morte;
 
 

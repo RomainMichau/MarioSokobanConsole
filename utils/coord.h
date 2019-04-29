@@ -16,6 +16,7 @@ struct Coord
 {
     static int m_nb_col;
 
+
     inline static void coord2D(unsigned short pos, unsigned int& l, unsigned int& c);
     inline static unsigned short coord1D(unsigned int l, unsigned int c);
 
@@ -39,7 +40,8 @@ inline unsigned short Coord::coord1D(unsigned int l, unsigned int c)
     return (l * m_nb_col + c);
 }
 
-inline void Coord::coord2D(unsigned short pos, unsigned int& l, unsigned int& c)
+
+inline  void Coord::coord2D(unsigned short pos, unsigned int& l, unsigned int& c)
 {
     l = (pos / m_nb_col);
     c = (pos % m_nb_col);

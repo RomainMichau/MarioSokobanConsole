@@ -6,7 +6,6 @@ Date : 27/02/2016
 Please do not remove this header, if you use this file !
 ************************************************************/
 #include "maze.h"
-#include "bruteforce.h"
 #include "../utils/console.h"
 #include "../utils/coord.h"
 #include "keyboardManager.h"
@@ -14,9 +13,7 @@ Please do not remove this header, if you use this file !
 #include <stdio.h>
 #include "BFSPLUS.h"
 #include "heuristique.h"
-#include "DFS.h"
 #include "chrono.h"
-#include "BFS.h"
 #include "util.h"
 #include "case_morte.h"
 #include "stock_field.h"
@@ -31,10 +28,6 @@ std::vector<unsigned char>  goHeursitique(Maze m,chrono &chr,bool dispTime,int &
     BFSPLUS killa_bfs;
     std::vector<unsigned char> chemin;
     chemin=killa_bfs.bfs_malin(m,false, noeudVisite,1,300,50000000);
-
-
-
-
     return chemin;
 
 }
@@ -102,11 +95,8 @@ int main()
     Maze m(path);
 
     keyboardManager g;
-    Bruteforce labrutace;
-    BFS le_poto_b;
     heuristique h;
     chrono chr;
-    DFS le_poto_d;
     BFSPLUS killa_bfs;
     case_morte Lamoort;
     bool auto_mode=false;
@@ -121,10 +111,11 @@ int main()
 
     m.setPlayerPosOr(m.getPosPlayer());
     Lamoort.detect_dead(m);
+	std::cout << m << std::endl;
+
+
     if (g.init())
     {
-        // While playing...
-
         while(true)
         {
             while(!g.keyPressed())
@@ -136,7 +127,6 @@ int main()
             {
                 bool win = false;
                 char key=g.keyRead();
-                std::cout<<"key"<<key<<std::endl;
                 switch (key)
                 {
                 case ARROW_UP:
@@ -150,64 +140,9 @@ int main()
                     break;
                 case ARROW_LEFT:
                     win = m.updatePlayer(LEFT);
-                    break;
+                    break;               
 
-                case KEY_R:
-
-                    // djiki.heuristiquemaline(m);
-                    m.reinit();
-                    le_poto_b.reinit();
-                    le_poto_d.reinit();
-                    killa_bfs.reinit();
-                    break;
-                case KEY_1:
-
-                {
-                    chr.lancer_chrono();
-                    std::cout<<"//////////////////////////////////////////////////////////////////////"<<std::endl;
-                    std::cout<<"WARNING!!!  BRUTEFORCE ACTIVE!!!"<<std::endl;
-                    chemin=labrutace.forcage(m);
-                    if(chemin[0]!='s')
-                    {
-                        // rest(2000);
-                        std::cout<<"bruteforce succesfull"<<std::endl<<"nb de coup:"<<chemin.size()<<std::endl<<std::endl;
-                        auto_mode=true;
-                    }
-
-                }
-                break;
-                case KEY_2:
-
-                {
-                    chr.lancer_chrono();
-                    std::cout<<"//////////////////////////////////////////////////////////////////////"<<std::endl;
-                    std::cout<<"WARNING!!!  BFS ACTIVE!!!"<<std::endl;
-                    chemin=le_poto_b.letsgobfs(m);
-                    if(chemin[0]!='s')
-                    {
-                        //   rest(2000);
-                        std::cout<<"bfs successfull"<<std::endl<<"nb de coup:"<<chemin.size()<<std::endl;
-                        auto_mode=true;
-                    }
-                }
-                break;
-
-                case KEY_3:
-
-                {
-                    chr.lancer_chrono();
-                    std::cout<<"//////////////////////////////////////////////////////////////////////"<<std::endl;
-                    std::cout<<"WARNING!!!  DFS ACTIVE!!!"<<std::endl;
-                    chemin=le_poto_d.letsgodfs(m);
-                    if(chemin[0]!='s')
-                    {
-                        //   rest(2000);
-                        std::cout<<"dfs successfull"<<std::endl<<"nb de coup:"<<chemin.size()<<std::endl;
-                        auto_mode=true;
-
-                    }
-                }
-                break;
+              
 
 
                 case 53:
@@ -216,64 +151,23 @@ int main()
                     std::cout<<"BEST BFS";
                     chr.lancer_chrono();
 
-                    chemin= goHeursitique(m,chr,false,noeudvisite);
+                    chemin= goHeursitique(m,chr,false,noeudvisite );
 
                     auto_mode=true;
                 }
                 break;
-
-                case KEY_6:
-                    //DEADLOCKS DYNAMIQUE
-                {
-                    chr.lancer_chrono();
-
-                    testHeuristiqueXTime(300, m,chr,noeudvisite);
-                    auto_mode=true;
-                }
-                break;
-
-
-                case KEY_7:
-                    //DEADLOCKS DYNAMIQUE
-                {
-                    int mi;
-                    int ma;
-                    int pas;
-                    int plafond;
-                    std::cout<<std::endl<<"min: ";
-                    std::cin>>mi;
-                    std::cout<<std::endl<<"max: ";
-                    std::cin>>ma;
-                    std::cout<<std::endl<<"pas: ";
-                    std::cin>>pas;
-                    std::cout<<std::endl<<"plafond: ";
-                    std::cin>>plafond;
-                    std::cout<<std::endl<<std::endl<<"Test coef | min:"<<mi<<" max:"<<ma<<" plafond:"<<plafond<<" pas:"<<pas<<std::endl;
-                    chr.lancer_chrono();
-
-                    testBestCoefHeuristique( m,chr,mi,ma,plafond,pas);
-                    auto_mode=true;
-                }
-                break;
-
-
-
 
                 }
 
 
                 /**
                 *Montre le trajet à la fin de la partie
-                */
-                if(auto_mode)
-                {
-                    std::cout<<"temps: "<<chr.temps_ecoule()<<" s"<<std::endl<<"noeuds visite:"<<noeudvisite<<std::endl<<std::endl;
-                    std::cout<<"level: "<<path<<std::endl;
-                    for(int i=0; i<chemin.size(); i++)
-                    {
-                        m.updatePlayer(chemin[i]);
-                        m.draw();
-                    }
+				*/
+                if(auto_mode)              
+				{				
+						
+					m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);                 
+                  
                     auto_mode=false;
                     win =true;
                 }
@@ -284,10 +178,10 @@ int main()
                     break;
                 }
             }
-        }
+		}
 
         // Display on screen
-        m.draw();
+     
 
 
     }

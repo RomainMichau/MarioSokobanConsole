@@ -11,24 +11,17 @@ include_directories(utils)
 
 
 add_executable(MarioSokoban
-        include/BFSPLUS.h
         include/marque_field.h
         utils/console.cpp
         utils/console.h
         utils/coord.cpp
-        utils/coord.h
-        src/BFS.cpp
-        src/BFS.h
+        utils/coord.h 
         src/BFSPLUS.cpp
         src/BFSPLUS.h
-        src/bruteforce.cpp
-        src/bruteforce.h
         src/case_morte.cpp
         src/case_morte.h
         src/chrono.cpp
         src/chrono.h
-        src/DFS.cpp
-        src/DFS.h
         src/heuristique.cpp
         src/heuristique.h
         src/main.cpp

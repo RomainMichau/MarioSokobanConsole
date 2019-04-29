@@ -182,43 +182,46 @@ void util::insere(std::vector <unsigned short> &vec,int a, unsigned short b)
 }
 
 
+/**
+* Calculate all the accesble square in the field with BFS
+* (endless bfs which end the the queue is empty)
+*/
 std::vector<bool> util::zone_accessible(Maze m) //std::cout<<std::endl<<"perso: "<<m.getPosPlayer()<<std::endl<< "BOX:";
 {
 
-
-    std::vector<bool> vec;
-    vec.resize(m.getField().size(),false);
+    std::vector<bool> marque;
+    marque.resize(m.getField().size(),false);
     std::queue<unsigned short> file;
     unsigned short position=m.getPosPlayer();//std::cout<<std::endl<<"pos2:  "<<m.getField().size()<<std::endl;
-    vec[position]=true;
+    marque[position]=true;
     file.push(position);
 
     while(!file.empty())
     {
         position=file.front();
 
-        if(m.isSquareWalkable(position+m.getCol())&&!vec[position+m.getCol()])
+        if(m.isSquareWalkable(position+m.getCol())&&!marque[position+m.getCol()])
         {
             file.push(position+m.getCol());
-            vec[position+m.getCol()]=true;
+            marque[position+m.getCol()]=true;
 
         }
-        if(m.isSquareWalkable(position-m.getCol())&&!vec[position-m.getCol()])
+        if(m.isSquareWalkable(position-m.getCol())&&!marque[position-m.getCol()])
         {
             file.push(position-m.getCol());
-            vec[position-m.getCol()]=true;
+            marque[position-m.getCol()]=true;
 
         }
-        if(m.isSquareWalkable(position+1)&&!vec[position+1])
+        if(m.isSquareWalkable(position+1)&&!marque[position+1])
         {
             file.push(position+1);
-            vec[position+1]=true;
+            marque[position+1]=true;
 
         }
-        if(m.isSquareWalkable(position-1)&&!vec[position-1])
+        if(m.isSquareWalkable(position-1)&&!marque[position-1])
         {
             file.push(position-1);
-            vec[position-1]=true;
+            marque[position-1]=true;
 
         }
         file.pop();
@@ -232,7 +235,7 @@ std::vector<bool> util::zone_accessible(Maze m) //std::cout<<std::endl<<"perso: 
              std::cout<<i<<" ";}*/
 
     // std::cout<<std::endl;
-    return vec;
+    return marque;
 
 
 }
