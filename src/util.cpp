@@ -186,13 +186,13 @@ void util::insere(std::vector <unsigned short> &vec,int a, unsigned short b)
 * Calculate all the accesble square in the field with BFS
 * (endless bfs which end the the queue is empty)
 */
-std::vector<bool> util::calcZoneAccessible(Maze m) //std::cout<<std::endl<<"perso: "<<m.getPosPlayer()<<std::endl<< "BOX:";
-{
+std::vector<bool> util::calcZoneAccessible(Maze m)
+{//tst
 
     std::vector<bool> marque;
     marque.resize(m.getField().size(),false);
     std::queue<unsigned short> file;
-    unsigned short position=m.getPosPlayer();//std::cout<<std::endl<<"pos2:  "<<m.getField().size()<<std::endl;
+    unsigned short position=m.getPosPlayer();
     marque[position]=true;
     file.push(position);
 

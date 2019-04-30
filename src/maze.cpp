@@ -1,11 +1,3 @@
-/************************************************************
-Sokoban project - Maze file
-Copyright Florent DIEDLER
-Date : 27/02/2016
-
-Please do not remove this header, if you use this file !
-************************************************************/
-
 #include "maze.h"
 #include "../src/keyboardManager.h"
 #include "../utils/console.h"
