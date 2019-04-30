@@ -1,5 +1,10 @@
--Ne pas recalculer la zone accessible par le joueur à chaque tours, mais uniqement la recalculer
+-Ne pas recalculer la zone accessible par le joueur Ã  chaque tours, mais uniqement la recalculer
 
 -Enregistrer des "pattern" de deplacement
 
--modifier l'heuristique de calcul de distance des box, pour éviter de le faire pour chaque box (c a d uniquement la box qui vient d'être deplacé)
+-modifier l'heuristique de calcul de distance des box, pour Ã©viter de le faire pour chaque box (c a d uniquement la box qui vient d'Ãªtre deplacÃ©)
+
+-identifier les case de passage obligatoire (grace a un gros bfs). Des qu'une box est dessus, enclencher une macro ou mettre une tres grosse note heuristique
+
+-noter toute les cases en fonction de leur "frequentation"
+

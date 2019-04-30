@@ -146,7 +146,13 @@ public:
 	* for right will return (bootom,tom)
 	* for left will return (bottom,top)
 	*/
-	std::vector<char> getAdjacentDirection(char dir);
+	  std::vector<char> getAdjacentDirection(char dir);
+
+	/**
+	* rreturn the oppsoite direction of the one send in paramter
+	*/
+	inline const char getOppositeDirection(char dir);
+
 
 	/**
 	List des 4 directions

@@ -186,7 +186,7 @@ void util::insere(std::vector <unsigned short> &vec,int a, unsigned short b)
 * Calculate all the accesble square in the field with BFS
 * (endless bfs which end the the queue is empty)
 */
-std::vector<bool> util::zone_accessible(Maze m) //std::cout<<std::endl<<"perso: "<<m.getPosPlayer()<<std::endl<< "BOX:";
+std::vector<bool> util::calcZoneAccessible(Maze m) //std::cout<<std::endl<<"perso: "<<m.getPosPlayer()<<std::endl<< "BOX:";
 {
 
     std::vector<bool> marque;

@@ -163,7 +163,6 @@ bool case_morte::dyn_dead(Maze m, unsigned short position, unsigned char dir)
 
 
 
-
 		if (!m.isSquareWalkable(position_futur - m.getCol()))
 		{
 			cote_h++;

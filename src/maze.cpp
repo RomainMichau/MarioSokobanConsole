@@ -26,7 +26,7 @@ Maze::Maze(const std::string& path)
 	allDirection.push_back(TOP);
 	allDirection.push_back(BOTTOM);
 	allDirection.push_back(LEFT);
-	allDirection.push_back(RIGHT);	
+	allDirection.push_back(RIGHT);
 
 }
 
@@ -315,7 +315,7 @@ bool Maze::updatePlayer(char dir)
  */
 void Maze::updateDraw(char mov)
 {
-	Sleep(100);
+	Sleep(50);
 	Console* c = Console::getInstance();
 	bool boxPush = false;
 	short offset = getMoveOffset(mov);
@@ -364,7 +364,7 @@ short Maze::getMoveOffset(unsigned char dir)
 	return 0;
 }
 
-std::vector<char> Maze::getAdjacentDirection(char dir)
+  std::vector<char> Maze::getAdjacentDirection(char dir)
 {
 	std::vector<char> adjDir;
 	switch (dir)
@@ -384,6 +384,23 @@ std::vector<char> Maze::getAdjacentDirection(char dir)
 	}
 	return adjDir;
 
+}
+
+inline const char Maze::getOppositeDirection(char dir)
+{
+	switch (dir)
+	{
+	case TOP:
+		return BOTTOM;
+	case BOTTOM:
+		return TOP;
+	case LEFT:
+		return RIGHT;
+	case RIGHT:
+		return LEFT;
+	default:
+		return 0;
+	}
 }
 
 /**

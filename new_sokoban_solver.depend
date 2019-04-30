@@ -3487,3 +3487,154 @@
 	<string>
 	<iostream>
 
+1556637246 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfsplus.cpp
+	"BFSPLUS.h"
+	"maze.h"
+	"heuristique.h"
+	"util.h"
+	"case_morte.h"
+	<vector>
+	<algorithm>
+	<sstream>
+	<iostream>
+	<string>
+	<iterator>
+
+1556634156 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfsplus.h
+	"maze.h"
+	"note.h"
+	<unordered_set>
+
+1556633353 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze.h
+	<vector>
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<math.h>
+	<queue>
+	<stack>
+
+1556271312 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\stock_field.h
+	<unordered_map>
+	<vector>
+
+1556271312 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\note.h
+	<vector>
+
+1556633067 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\heuristique.h
+	"maze.h"
+	"note.h"
+
+1556630988 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\util.h
+	<queue>
+	"../src/maze.h"
+	<vector>
+	<string>
+	"../utils/coord.h"
+	"util.h"
+	<iostream>
+	"note.h"
+
+1556535023 c:\users\rmichau\documents\projetperso\mariosokobanconsole\utils\coord.h
+
+1556530738 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\case_morte.h
+	"maze.h"
+	"../utils/console.h"
+	"../utils/coord.h"
+	<fstream>
+	<iomanip>
+	"case_morte.h"
+
+1556534823 c:\users\rmichau\documents\projetperso\mariosokobanconsole\utils\console.h
+	<iostream>
+
+1556633067 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\case_morte.cpp
+	"maze.h"
+	"../utils/console.h"
+	"../utils/coord.h"
+	<fstream>
+	<iomanip>
+	"case_morte.h"
+
+1556271312 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\chrono.cpp
+	"chrono.h"
+	<chrono>
+	<ctime>
+
+1556305172 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\chrono.h
+	"ctime"
+	<iostream>
+	<chrono>
+	<ctime>
+
+1556639840 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\heuristique.cpp
+	"heuristique.h"
+	"maze.h"
+	"util.h"
+	<cmath>
+	<math.h>
+	<queue>
+	<vector>
+	"note.h"
+	<algorithm>
+
+1556293283 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\keyboardmanager.cpp
+	"keyboardManager.h"
+	<conio.h>
+	<iostream>
+
+1556284646 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\keyboardmanager.h
+
+1556639848 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
+	"maze.h"
+	"../utils/console.h"
+	"../utils/coord.h"
+	"keyboardManager.h"
+	<iostream>
+	<stdio.h>
+	"BFSPLUS.h"
+	"heuristique.h"
+	"chrono.h"
+	"util.h"
+	"case_morte.h"
+
+1556633464 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze.cpp
+	"maze.h"
+	"../src/keyboardManager.h"
+	"../utils/console.h"
+	"../utils/coord.h"
+	<fstream>
+	<queue>
+	<Windows.h>
+	<stack>
+	<iomanip>
+
+1556271312 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\note.cpp
+	"note.h"
+	<vector>
+
+1556271312 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\stock_field.cpp
+	"stock_field.h"
+	<vector>
+	<unordered_map>
+
+1556639062 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\util.cpp
+	"util.h"
+	"../src/maze.h"
+	"../utils/console.h"
+	"../utils/coord.h"
+	<math.h>
+	<sstream>
+	<fstream>
+	<string>
+	<iostream>
+
+1556291340 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\utils\console.cpp
+	"console.h"
+	<windows.h>
+	<conio.h>
+
+1556271312 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\utils\coord.cpp
+	"coord.h"
+
