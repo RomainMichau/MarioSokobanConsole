@@ -4,6 +4,12 @@
 #include "util.h"
 #include "case_morte.h"
 #include <vector>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
+#include <string>
+#include <iterator>
+
 BFSPLUS::BFSPLUS()
 {
 	//ctor
@@ -20,7 +26,6 @@ void BFSPLUS::reinit()
 	resolution.resize(0);
 	chemin.resize(0);
 
-	marque_field.resize(0);
 	origin.resize(0);
 
 }
@@ -28,69 +33,62 @@ void BFSPLUS::reinit()
 /**
 * modified BFS using heureting
 */
-std::vector<unsigned char> BFSPLUS::bfs_malin(Maze m, bool dynDeadLocks, int &noeudvisite, int noteA, int noteB, int plafond)  //plafond: nombre de noeud max a explor� avant abandon
+std::vector<unsigned char> BFSPLUS::bfs_malin(Maze m, int &noeudvisite , int noteA, int noteB, int plafond)  //plafond: nombre de noeud max a explor� avant abandon
 {
-	std::vector<unsigned short>  vec;
+	util u;
+	heuristique h;
+	case_morte dead;
+	Note note = h.heuristiquemaline(m, noteA, noteB, -1);
+
 	std::vector<bool> zone_accessible;
 	std::vector<bool> new_zone_accessible;
-	heuristique h;
-	int position_player_or = m.getPosPlayer();
-	int a = 0;
-	int b = 0;
-	int cpt = 0;
-	int classement = 0;
-	util u;
-	unsigned short newPositionOfBox, rang = 0, pos_originel = m.getPosPlayer();
-	Note note;
-	bool stop_urgent = false;
-	int num_position = 0;
 	std::vector<unsigned char> field = m.getField(), field_originel = m.getField();
 	std::vector<unsigned short> posBoxes = m.getPosBoxes();
-	bool win = false;
-	unsigned position;
-	std::vector<bool> zone_originel = u.zone_accessible(m);
-	note =h.heuristiquemaline(m, noteA, noteB, -1);
-	
-	unsigned profondeur;
-	marque_field.push_back(field);
+	std::vector<bool> zone_originel = u.calcZoneAccessible(m);
 
-	origin.resize(2);
-	case_morte dead;
-	origin[0] = 0;
-	origin[1] = 4444;
-	unsigned short poto = 0;
+
+	int position_player_or = m.getPosPlayer();
+	int classement = 0;
+	unsigned short newPositionOfBox, pos_originel = m.getPosPlayer();
+	unsigned short profondeur;
+	bool win = false;
+	std::unordered_set<std::string> marque;
+	std::stringstream result2;
+	std::copy(posBoxes.begin(), posBoxes.end(), std::ostream_iterator<short>(result2, " "));
+	marque.insert(result2.str());
+
+
+	origin.push_back(0);
+	origin.push_back(4444);
+
+
+
 	std::priority_queue<BFSPLUSCase, std::vector<BFSPLUSCase>, BestBFSCase> queue;
 	BFSPLUSCase initCase(zone_originel, m.getField(), note, 0, 0);
 	queue.push(initCase);
 
 
-	while (!win && !queue.empty() && !stop_urgent)
+	while (!win && !queue.empty())
 	{
-		poto++;
 
-		if (marque_field.size() > plafond)
+		if (marque.size() > plafond)
 		{
 			noeudvisite = 666666;
 			return chemin;
 		}
-
-
 		BFSPLUSCase currentCase = queue.top();
 		queue.pop();
-
 		profondeur = currentCase.profondeur;
 		field = currentCase.field;
 		zone_accessible = currentCase.accessibleZone;
 		classement = currentCase.classement;
-
+		/**
+		* We set the game in the state
+		*/
 		m.change_etat_jeu(field, zone_accessible);
 		posBoxes = m.getPosBoxes();
-
-		/*
-		*/
 		for (int boxID = 0; boxID < m.getPosBoxes().size(); boxID++)
 		{
-
 			/**
 			we look for pushed all boxes in all directions possibles
 			*/
@@ -104,12 +102,11 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(Maze m, bool dynDeadLocks, int &no
 				short newPosBox = posBox + offset;
 				std::vector<char> adjDir = m.getAdjacentDirection(direction);
 
-
 				//We look if the current box can be pushed in the direction 
 				if (!win&&zone_accessible[pusherPlace] && (m._canPushBox(posBox, direction, newPositionOfBox) && !m.isSquareDeadSquare(newPosBox)))
 				{
 					//If yes we check that it will not create any dynamical deadlocks
-					if (dynDeadLocks || !dead.dyn_dead(m, pusherPlace, direction))
+					if ( !dead.dyn_dead(m, pusherPlace, direction))
 					{
 						//We put the player a the place for pushing the box
 						m.setPlayerPos(pusherPlace);
@@ -118,17 +115,20 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(Maze m, bool dynDeadLocks, int &no
 						win = m.updatePlayer(direction);
 
 						//we check that we didn't already marque this case
-						if (!compare(m.getField()))
+						std::vector<unsigned short> nposBoxes = m.getPosBoxes();
+						std::stringstream result;
+						std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, " "));
+						std::string hash = result.str();
+						if (marque.find(hash) == marque.end())
 						{
-
-							//We estimate if the accessible zone need to be recalculate (if a path path has been open or closed we nn
+							//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
 							if ((m.isSquareWalkable(m.getPosPlayer() + adjDir[0]) && !m.isSquareWalkable(m.getPosPlayer() - offset + adjDir[0])) || //if we open an adj path
 								(m.isSquareWalkable(m.getPosPlayer() + adjDir[1]) && !m.isSquareWalkable(m.getPosPlayer() - offset - adjDir[1]) ////if we open an adj path
 									) || (!m.isSquareWalkable(m.getPosPlayer() + adjDir[0]) && m.isSquareWalkable(m.getPosPlayer() + offset + adjDir[0])) //if we close an adj path
 								|| (!m.isSquareWalkable(m.getPosPlayer() + adjDir[1]) && m.isSquareWalkable(m.getPosPlayer() + adjDir[1] + offset)))
 							{
 								//It needs to be recalculate
-								new_zone_accessible = u.zone_accessible(m);
+								new_zone_accessible = u.calcZoneAccessible(m);
 							}
 							else
 							{
@@ -138,11 +138,11 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(Maze m, bool dynDeadLocks, int &no
 								new_zone_accessible[m.getPosBoxes()[boxID]] = false;
 							}
 
-							///Calcul de l'heuristique
+							//Calcul de l'heuristique
 							note = h.heuristiquemaline(m, noteA, noteB, boxID);
 
-
-							marque_field.push_back(m.getField());
+							marque.insert(result.str());
+						//	marque_field.push_back(m.getField());
 							origin.push_back(classement);
 							origin.push_back(posBoxes[boxID] - offset);
 							BFSPLUSCase newCase(new_zone_accessible, m.getField(), note, profondeur + 1, origin.size());
@@ -152,41 +152,33 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(Maze m, bool dynDeadLocks, int &no
 
 						}
 						m.change_etat_jeu(field, zone_accessible);
-
 					}
 				}
 			}
-
 		}
-
-
 	}
 
+	//ON recrée le chemin
 	if (queue.empty()) {
 		std::cout << "empty";
 	}
 
 	classement = origin.size() - 2;
-	b = 0;
 
 	while (origin[classement + 1] != 4444)
 	{
 		resolution.push_back(origin[classement + 1]);
 		classement = origin[classement];
-		b++;
 	}
 
 	m.change_etat_jeu(field_originel, zone_originel);
 
 	resolution.push_back(pos_originel);
 	invert(resolution);
-
 	resolution = u.relier_point(m, resolution);
-	if (!stop_urgent)
-		chemin = m.convert(resolution);
+	chemin = m.convert(resolution);
 
-
-	noeudvisite = marque_field.size();
+	noeudvisite = marque.size();
 	// std::cout<<"cpt1:"<<AScpt1<<"  cpt2:"<<AScpt2;
 	return chemin;
 }
@@ -203,10 +195,7 @@ void BFSPLUS::invert(std::vector<unsigned short> &vec)
 }
 
 
-bool BFSPLUS::compare(std::vector<unsigned char> vec)
-{
-	return marque_field.exist(vec);
-}
+
 
 
 

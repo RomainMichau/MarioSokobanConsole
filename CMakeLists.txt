@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(MarioSokoban)
+project(MarioSokobanConsole)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -10,8 +10,7 @@ include_directories(.)
 include_directories(utils)
 
 
-add_executable(MarioSokoban
-        include/marque_field.h
+add_executable(MarioSokobanConsole
         utils/console.cpp
         utils/console.h
         utils/coord.cpp
@@ -29,7 +28,6 @@ add_executable(MarioSokoban
         src/maze.h
         src/note.cpp
         src/note.h
-        src/stock_field.cpp
-        src/stock_field.h
+    
         src/util.cpp
         src/util.h src/keyboardManager.cpp src/keyboardManager.h)

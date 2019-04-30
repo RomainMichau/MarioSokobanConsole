@@ -1,10 +1,4 @@
-/**********************************'**************************
-Sokoban project - Main file
-Copyright Florent DIEDLER
-Date : 27/02/2016
 
-Please do not remove this header, if you use this file !
-************************************************************/
 #include "maze.h"
 #include "../utils/console.h"
 #include "../utils/coord.h"
@@ -16,8 +10,6 @@ Please do not remove this header, if you use this file !
 #include "chrono.h"
 #include "util.h"
 #include "case_morte.h"
-#include "stock_field.h"
-// Init allegro with 800x600 (chemin)
 
 int noteA;
 int noteB;
@@ -27,7 +19,7 @@ std::vector<unsigned char>  goHeursitique(Maze m,chrono &chr,bool dispTime,int &
 
     BFSPLUS killa_bfs;
     std::vector<unsigned char> chemin;
-    chemin=killa_bfs.bfs_malin(m,false, noeudVisite,1,300,50000000);
+    chemin=killa_bfs.bfs_malin(m, noeudVisite,1,2,50000000);
     return chemin;
 
 }
@@ -60,7 +52,7 @@ void testBestCoefHeuristique(Maze m,chrono &chr,int mine,int maxe,int plafond,in
             killa_bfs.reinit();
             m.reinit();
 
-            killa_bfs.bfs_malin(m,false, noeudVisite,noteA,noteB,plafond);
+            killa_bfs.bfs_malin(m, noeudVisite,noteA,noteB,50000000);
 
             if(noeudVisite<bestnoeud)
             {
@@ -140,9 +132,9 @@ int main()
                     break;
                 case ARROW_LEFT:
                     win = m.updatePlayer(LEFT);
-                    break;               
+                    break;
 
-              
+
 
 
                 case 53:
@@ -163,11 +155,11 @@ int main()
                 /**
                 *Montre le trajet à la fin de la partie
 				*/
-                if(auto_mode)              
-				{				
-						
-					m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);                 
-                  
+                if(auto_mode)
+				{
+
+					m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);
+
                     auto_mode=false;
                     win =true;
                 }
@@ -181,7 +173,7 @@ int main()
 		}
 
         // Display on screen
-     
+
 
 
     }
@@ -192,3 +184,4 @@ int main()
     system("pause");
     return 0;
 }
+

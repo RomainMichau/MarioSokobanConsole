@@ -43,14 +43,8 @@
 			<Add library="alleg" />
 		</Linker>
 		<Unit filename="_Idée améloration.txt" />
-		<Unit filename="src/BFS.cpp" />
-		<Unit filename="src/BFS.h" />
 		<Unit filename="src/BFSPLUS.cpp" />
 		<Unit filename="src/BFSPLUS.h" />
-		<Unit filename="src/DFS.cpp" />
-		<Unit filename="src/DFS.h" />
-		<Unit filename="src/bruteforce.cpp" />
-		<Unit filename="src/bruteforce.h" />
 		<Unit filename="src/case_morte.cpp" />
 		<Unit filename="src/case_morte.h" />
 		<Unit filename="src/chrono.cpp" />
@@ -64,8 +58,6 @@
 		<Unit filename="src/maze.h" />
 		<Unit filename="src/note.cpp" />
 		<Unit filename="src/note.h" />
-		<Unit filename="src/stock_field.cpp" />
-		<Unit filename="src/stock_field.h" />
 		<Unit filename="src/util.cpp" />
 		<Unit filename="src/util.h" />
 		<Unit filename="utils/console.cpp" />

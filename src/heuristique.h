@@ -8,7 +8,6 @@ class heuristique
         heuristique();
         ~heuristique();
         Note heuristiquemaline(Maze m,int noteA,int noteB,int caisse);
-        unsigned short heuristiquenaif(Maze m);
 
     protected:
 
