@@ -3505,7 +3505,7 @@
 	"note.h"
 	<unordered_set>
 
-1556633353 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze.h
+1556880931 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze.h
 	<vector>
 	<string>
 	<stdio.h>
@@ -3526,7 +3526,7 @@
 	"maze.h"
 	"note.h"
 
-1556630988 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\util.h
+1556880152 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\util.h
 	<queue>
 	"../src/maze.h"
 	<vector>
@@ -3538,7 +3538,7 @@
 
 1556535023 c:\users\rmichau\documents\projetperso\mariosokobanconsole\utils\coord.h
 
-1556530738 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\case_morte.h
+1556881872 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\case_morte.h
 	"maze.h"
 	"../utils/console.h"
 	"../utils/coord.h"
@@ -3549,13 +3549,14 @@
 1556534823 c:\users\rmichau\documents\projetperso\mariosokobanconsole\utils\console.h
 	<iostream>
 
-1556633067 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\case_morte.cpp
+1556881586 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\case_morte.cpp
 	"maze.h"
 	"../utils/console.h"
 	"../utils/coord.h"
 	<fstream>
 	<iomanip>
 	"case_morte.h"
+	<unordered_set>
 
 1556271312 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\chrono.cpp
 	"chrono.h"
@@ -3568,7 +3569,7 @@
 	<chrono>
 	<ctime>
 
-1556639840 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\heuristique.cpp
+1556640053 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\heuristique.cpp
 	"heuristique.h"
 	"maze.h"
 	"util.h"
@@ -3586,7 +3587,7 @@
 
 1556284646 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\keyboardmanager.h
 
-1556639848 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
+1556881683 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
 	"maze.h"
 	"../utils/console.h"
 	"../utils/coord.h"
@@ -3619,7 +3620,7 @@
 	<vector>
 	<unordered_map>
 
-1556639062 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\util.cpp
+1556880177 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\util.cpp
 	"util.h"
 	"../src/maze.h"
 	"../utils/console.h"

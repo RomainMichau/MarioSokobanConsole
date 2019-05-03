@@ -24,9 +24,7 @@ class util
         void invert(std::vector<unsigned short> &vec);
         void vider(std::stack <std::vector<bool>> &t);
         std::vector<unsigned short> doubldim(unsigned short a, Maze m);
-        unsigned short rang(std::vector <Note> vec, Note note);
-        void insere(std::vector <std::vector<unsigned char>> &vec,int a, std::vector<unsigned char> b);
-        void insere(std::vector <unsigned short> &vec,int a, unsigned short b);
+        unsigned short rang(std::vector <Note> vec, Note note);     
         std::vector<bool> calcZoneAccessible(Maze m);
         std::vector<unsigned short> relier_point(Maze m,std::vector <unsigned short>);
         bool compare(std::vector<unsigned char> vec,unsigned short a);

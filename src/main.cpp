@@ -102,7 +102,7 @@ int main()
     m.setFieldOr(vec);
 
     m.setPlayerPosOr(m.getPosPlayer());
-    Lamoort.detect_dead(m);
+    Lamoort.detect_dead_with_BFS(m);
 	std::cout << m << std::endl;
 
 
