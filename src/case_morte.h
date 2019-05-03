@@ -13,8 +13,15 @@ class case_morte
         case_morte();
         ~case_morte();
 		
-        void detect_dead(Maze &m);
+		void detect_dead_staticMethod(Maze &m);
+	
+		void detect_dead_with_BFS(Maze &m);
         bool dyn_dead(Maze m, unsigned short position, unsigned char dir);
+		/**
+	* will execute a bfs on each square to see if an exit is accesible
+	* if not the square will be mark as dead_sqare
+	* will ofc not toak in accoount any box
+	*/
 
     protected:
 
