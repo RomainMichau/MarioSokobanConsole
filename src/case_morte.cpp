@@ -145,8 +145,7 @@ void case_morte::detect_dead_staticMethod(Maze &m)
 
 void case_morte::detect_dead_with_BFS(Maze &m) {
 	for (int square = 0; square < m.getSize(); square++) {
-		if (square == 146)
-			std::cout << 128;
+	
 		/**
 		* Si il ne s'agit pas d'une case marquable comme deadSquare
 		*/
@@ -191,12 +190,10 @@ void case_morte::detect_dead_with_BFS(Maze &m) {
 	}
 }
 
-
 /** 
 * Detect if a move will create a dynamique deadLock
 * 
 */
-
 bool case_morte::dyn_dead(Maze m, unsigned short position, unsigned char dir)
 {
 	unsigned short cote_d = 0, cote_g = 0, cote_h = 0, cote_b = 0, cote_hor = 0, cote_ver = 0;

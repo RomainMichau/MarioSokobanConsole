@@ -34,6 +34,12 @@ Note heuristique::heuristiquemaline(Maze m, int coefA, int coefB, int caisse)
 	/* else
 	 note_caisse=note_distance_box_bfs_one_box(m,caisse);*/
 
+	short boxPutable = checkIfBoxCanAccessGoal(m);
+	if (boxPutable != NULL) {
+		std :: cout << boxPutable << std::endl << m;
+		system("pause");
+	}
+
 	note_caisse_place = 0;
 	for (unsigned int i = 0; i < box.size(); i++)
 	{
@@ -44,7 +50,6 @@ Note heuristique::heuristiquemaline(Maze m, int coefA, int coefB, int caisse)
 	note.calculTotal();
 	return note;
 }
-
 
 /**
 * calcul la sommes des distance entre caisse et goal avec un mahnatan
@@ -61,10 +66,6 @@ unsigned short heuristique::note_distance_box_manhatan(Maze m) {
 	}
 	return res;
 }
-
-
-
-
 
 /**
 * calcul la sommes des distance entre caisse et goal avec un bfs
@@ -156,7 +157,6 @@ unsigned short heuristique::note_distance_box_bfs_multiple_box(Maze m)
 	}
 	return somme;
 }
-
 
 /**
 * calcul la distance entre une caisse (param) et les goals
@@ -480,8 +480,6 @@ unsigned short heuristique::note_disance_perso(Maze m)
 
 }
 
-
-
 unsigned short heuristique::note_goal_access(Maze m)
 {
 	std::vector<unsigned short> box = m.getPosBoxes(), vec;
@@ -564,4 +562,50 @@ unsigned short heuristique::note_goal_access(Maze m)
 		return goal_atteint;
 	}
 	return 0;
+}
+
+
+unsigned short heuristique::checkIfBoxCanAccessGoal(Maze &m) {
+	for (int boxID = 0; boxID < m.getPosBoxes().size(); boxID++) {
+		
+		/**
+		* Si il ne s'agit pas d'une case marquable comme deadSquare
+		*/
+		short posBox = m.getPosBoxes()[boxID];
+		std::queue< unsigned char> queue;
+		std::vector<bool> marque;
+		marque.resize(m.getField().size(), false);
+		queue.push(posBox);
+		marque[posBox] = true;
+		bool goal_reached = false;
+		while (!queue.empty()) {
+			unsigned char pos = queue.front();
+			queue.pop();
+			for (char dir : m.allDirection) {
+				short offset = m.getMoveOffset(dir);
+				short newPos = pos + offset;
+				short playerPos = pos - offset;
+				//si on sort du terrain, on abbandone
+				if (playerPos < 0 || newPos >= m.getSize() || playerPos >= m.getSize() || newPos < 0)
+					continue;
+				//si la nouvelle case de la box est marqué, ou deadSq ou mur ou box on abbandone
+				if (marque[newPos] || !(m.isSquareWalkable(newPos)) || m.isSquareDeadSquare(newPos))
+					continue;
+				//Si la player pos est innaccesilbe on abbandonne
+				if (!(m.isSquareWalkable(playerPos) )) {
+					continue;
+				}
+				queue.push(newPos);
+				marque[newPos] = true;
+				if (m.isSquareGoal(newPos)) {
+					goal_reached = true;
+					break;
+				}
+			}
+		}
+		if (!goal_reached) {
+			return boxID;
+		}
+	}
+	return NULL;
 }
