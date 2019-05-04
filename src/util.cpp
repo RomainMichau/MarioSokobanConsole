@@ -509,9 +509,7 @@ std::string util::choose_level()
 	{
 		c = round(10 * (c - floor(c)));
 		oss << c;
-
 		path = path + oss.str();
-
 	}
 
 	if (a == 110)
@@ -519,12 +517,7 @@ std::string util::choose_level()
 	path = path + ".dat";
 	std::cout << path << std::endl;
 	std::ifstream fichier(path.c_str());
-
-
-
-
 	return path;
-
 }
 
 
@@ -541,9 +534,6 @@ void util::dispVector(std::vector<bool> vec, Maze maze)
 
 		if (i == maze.getPosPlayer())
 			Console::getInstance()->setColor(_COLOR_GREEN);
-
-
-
 
 		std::cout << vec[i] << " ";
 		if ((i + 1) % maze.getCol() == 0)
