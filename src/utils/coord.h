@@ -23,10 +23,14 @@ struct Coord
     inline static char getPosDir(int pos)
     {
         char dir = NONE;
-        if (pos == -1) dir = LEFT;
-        else if (pos == 1) dir = RIGHT;
-        else if (pos == -m_nb_col) dir = TOP;
-        else if (pos == m_nb_col) dir = BOTTOM;
+        if (pos == -1)
+            dir = LEFT;
+        else if (pos == 1)
+            dir = RIGHT;
+        else if (pos == -m_nb_col)
+            dir = TOP;
+        else if (pos == m_nb_col)
+            dir = BOTTOM;
 
         return dir;
     }
@@ -40,7 +44,9 @@ inline unsigned short Coord::coord1D(unsigned int l, unsigned int c)
     return (l * m_nb_col + c);
 }
 
-
+/**
+* transform 1D pos in 2D coord
+*/
 inline  void Coord::coord2D(unsigned short pos, unsigned int& l, unsigned int& c)
 {
     l = (pos / m_nb_col);
@@ -54,18 +60,18 @@ inline unsigned short Coord::getDirPos(unsigned short pos, char dir)
 {
     switch (dir)
     {
-        case TOP:
-            pos -= m_nb_col;
-            break;
-        case BOTTOM:
-            pos += m_nb_col;
-            break;
-        case LEFT:
-            --pos;
-            break;
-        case RIGHT:
-            ++pos;
-            break;
+    case TOP:
+        pos -= m_nb_col;
+        break;
+    case BOTTOM:
+        pos += m_nb_col;
+        break;
+    case LEFT:
+        --pos;
+        break;
+    case RIGHT:
+        ++pos;
+        break;
     }
     return pos;
 }
@@ -74,18 +80,18 @@ inline unsigned short Coord::getOppositeDirPos(unsigned short pos, char dir)
 {
     switch (dir)
     {
-        case TOP:
-            pos += m_nb_col;
-            break;
-        case BOTTOM:
-            pos -= m_nb_col;
-            break;
-        case LEFT:
-            ++pos;
-            break;
-        case RIGHT:
-            --pos;
-            break;
+    case TOP:
+        pos += m_nb_col;
+        break;
+    case BOTTOM:
+        pos -= m_nb_col;
+        break;
+    case LEFT:
+        ++pos;
+        break;
+    case RIGHT:
+        --pos;
+        break;
     }
     return pos;
 }

@@ -6,7 +6,8 @@
 #define MARIOSOKOBAN_KEYBOARDMANAGER_H
 
 
-class keyboardManager {
+class keyboardManager
+{
 
 public:
     keyboardManager();

@@ -7,26 +7,45 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 
-include_directories(utils)
-
 
 add_executable(MarioSokobanConsole
-        utils/console.cpp
-        utils/console.h
-        utils/coord.cpp
-        utils/coord.h 
-        src/BFSPLUS.cpp
-        src/BFSPLUS.h
-        src/case_morte.cpp
-        src/case_morte.h
-        src/chrono.cpp
-        src/chrono.h
-        src/heuristique.cpp
-        src/heuristique.h
-        src/main.cpp
-        src/maze.cpp
-        src/maze.h
-        src/note.cpp
-        src/note.h    
-        src/util.cpp
-        src/util.h src/keyboardManager.cpp src/keyboardManager.h)
+#main
+src/main.cpp
+#Maze
+src/Maze/maze.cpp
+src/Maze/maze.h
+#utils
+src/utils/console.cpp
+src/utils/console.h
+
+src/utils/coord.cpp
+src/utils/coord.h 
+		
+src/utils/chrono.cpp
+src/utils/chrono.h
+		
+src/utils/util.cpp
+src/utils/util.h 
+		
+src/utils/keyboardManager.cpp 
+src/utils/keyboardManager.h
+
+#BFS_Stuff
+src/BFS_Stuff/BFSPLUS.cpp
+src/BFS_Stuff/BFSPLUS.h
+	#Deadlocks
+	src/BFS_Stuff/Deadlocks/case_morte.cpp
+    src/BFS_Stuff/Deadlocks/case_morte.h
+    #Heuristique
+    src/BFS_Stuff/Heuristique/heuristique.cpp
+    src/BFS_Stuff/Heuristique/heuristique.h
+		#Note 
+		src/BFS_Stuff/Heuristique/note.cpp
+        src/BFS_Stuff/Heuristique/note.h  
+	#BFS_Objects
+	src/BFS_Stuff/BFS_Objects/MapStat.cpp
+	src/BFS_Stuff/BFS_Objects/MapStat.h
+        
+        
+          
+        )

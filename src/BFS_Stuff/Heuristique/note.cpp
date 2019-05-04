@@ -1,4 +1,4 @@
-#include "note.h"
+#include "src/BFS_Stuff/Heuristique/note.h"
 #include <vector>
 
 
