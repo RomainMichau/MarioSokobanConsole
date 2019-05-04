@@ -16,6 +16,7 @@ class heuristique
         unsigned short note_goal_access(Maze m);
         unsigned short note_distance_box_manhatan(Maze m);
         unsigned short note_distance_box_bfs_one_box(Maze m,int numBox);
+		unsigned short checkIfBoxCanAccessGoal(Maze &m);
 
     private:
 };

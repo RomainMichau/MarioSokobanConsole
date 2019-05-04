@@ -415,6 +415,12 @@ inline void Maze::setSquare(unsigned short pos, unsigned char s) {
 	}
 }
 
+
+/**
+ *
+ * @param pos
+ * @return true if pos is a walkable square (deadsquare, goal or ground)
+ */
 inline bool Maze::isSquareWalkable(unsigned short pos) const {
 	return ((this->m_field[pos] == SPRITE_GROUND || this->m_field[pos] == SPRITE_GOAL ||
 		this->m_field[pos] == SPRITE_DEADSQUARE) ? true : false);

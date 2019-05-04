@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include "case_morte.h"
+#include <unordered_set>
 
 case_morte::case_morte()
 	:nb_case_morte(0)
@@ -24,7 +25,7 @@ case_morte::~case_morte()
  ** Then it mark all the square between two corner as deadlocks (see pdf page 12)
  * @param m Maze
  */
-void case_morte::detect_dead(Maze &m)
+void case_morte::detect_dead_staticMethod(Maze &m)
 {
 
 	int cote_mur = 0;
@@ -142,12 +143,57 @@ void case_morte::detect_dead(Maze &m)
 
 }
 
+void case_morte::detect_dead_with_BFS(Maze &m) {
+	for (int square = 0; square < m.getSize(); square++) {
+	
+		/**
+		* Si il ne s'agit pas d'une case marquable comme deadSquare
+		*/
+		if ( m.isSquareGoal(square)||m.isSquareWall(square)||m.isSquareDeadSquare(square)) {
+			continue;
+		}
+		std::queue< unsigned char> queue;
+		std::vector<bool> marque;
+		marque.resize(m.getField().size(), false);
+		queue.push(square);
+		marque[square] = true;
+		bool goal_reached = false;
+		while(!queue.empty()) {
+			unsigned char pos = queue.front();
+			queue.pop();
+			for (char dir : m.allDirection) {
+				short offset = m.getMoveOffset(dir);
+				short newPos = pos + offset;
+				short playerPos = pos - offset;
+				//si on sort du terrain, on abbandone
+				if (playerPos<0 || newPos>=m.getSize()||playerPos>=m.getSize()||newPos<0)
+					continue;
+				//si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
+				if (marque[newPos] || !(m.isSquareWalkable(newPos) || m.isSquareBox(newPos)) || m.isSquareDeadSquare(newPos))
+					continue;
+				//Si la player pos est innaccesilbe on abbandonne
+				if (!(m.isSquareWalkable(playerPos) || m.isSquareBox(playerPos))) {
+					continue;
+				}
+				queue.push(newPos);
+				marque[newPos] = true;
+				if (m.isSquareGoal(newPos)) {
+					goal_reached = true;
+					break;
+				}
+			}
+		}
+		if (!goal_reached) {
+			m.setSquare(square, SPRITE_DEADSQUARE);
+		}
+
+	}
+}
 
 /** 
 * Detect if a move will create a dynamique deadLock
 * 
 */
-
 bool case_morte::dyn_dead(Maze m, unsigned short position, unsigned char dir)
 {
 	unsigned short cote_d = 0, cote_g = 0, cote_h = 0, cote_b = 0, cote_hor = 0, cote_ver = 0;

@@ -27,7 +27,6 @@ add_executable(MarioSokobanConsole
         src/maze.cpp
         src/maze.h
         src/note.cpp
-        src/note.h
-    
+        src/note.h    
         src/util.cpp
         src/util.h src/keyboardManager.cpp src/keyboardManager.h)
