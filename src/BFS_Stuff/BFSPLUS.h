@@ -3,6 +3,7 @@
 #include "src/Maze/maze.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include <unordered_set>
+#include "src/BFS_Stuff/BFS_Objects/BFSCase.h"
 class BFSPLUS
 {
 public:
@@ -20,30 +21,12 @@ private:
     // necessaire pour arriver a cette nouvelle etat
     void invert(std::vector<unsigned short> &vec);
 	Maze *m;
+	   	 
 
-
-
-
-
-public:
-    class BFSPLUSCase
-    {
-    public:
-        BFSPLUSCase(std::vector<bool> accessibleZone, std::vector<unsigned char> field, Note note, unsigned short profondeur, int classement) :
-            accessibleZone(accessibleZone), field(field), note(note), profondeur(profondeur), classement(classement)
-        {
-
-        }
-        std::vector<bool> accessibleZone;
-        std::vector<unsigned char> field;
-        Note note;
-        unsigned short profondeur;
-        int classement;
-    };
 
     struct BestBFSCase
     {
-        bool operator()(BFSPLUSCase b1, BFSPLUSCase b2) const
+        bool operator()(BFSCase b1, BFSCase b2) const
         {
             return b1.note.get_note_total() < b2.note.get_note_total();
         }

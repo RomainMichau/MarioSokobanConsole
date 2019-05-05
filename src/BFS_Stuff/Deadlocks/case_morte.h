@@ -10,13 +10,13 @@
 class case_morte
 {
 public:
-    case_morte();
+    case_morte(Maze *m);
     ~case_morte();
 
-    void detect_dead_staticMethod(Maze &m);
-
-    void detect_dead_with_BFS(Maze &m);
-    bool detect_dyn_dead(Maze m, unsigned short position, unsigned char dir);
+    void detect_dead_staticMethod();
+	void detect_dead_with_BFS_idealGoal(Maze& m,short idealGoal);
+    void detect_dead_with_BFS();
+    bool detect_dyn_dead( unsigned short position, unsigned char dir);
     /**
     * will execute a bfs on each square to see if an exit is accesible
     * if not the square will be mark as dead_sqare
@@ -28,7 +28,7 @@ protected:
 private:
     std::vector<unsigned short> deadLocks_list;
     int nb_case_morte;
-
+	Maze *m;
 
 };
 

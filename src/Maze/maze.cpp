@@ -494,25 +494,7 @@ std::ostream& operator << (std::ostream& O, const Maze& m)
     }
     Console::getInstance()->setColor(_COLOR_DEFAULT);
     O << std::endl;
-    O << "Box position : " << std::endl;
-    for (unsigned int i = 0; i < m.m_pos_boxes.size(); i++)
-    {
-        Coord::coord2D(m.m_pos_boxes[i], l, c);
-        O << "\t" << "Box #" << i << " => " << std::setw(3) << m.m_pos_boxes[i] << std::setw(2) << " (" << l << "," << c << ")" << std::endl;
-    }
-    O << std::endl;
-    O << "Goal position : " << std::endl;
-    for (const auto& goal : m.m_pos_goals)
-    {
-        unsigned int l, c;
-        Coord::coord2D(goal, l, c);
-        if (m.isSquareBoxPlaced(goal))
-            Console::getInstance()->setColor(_COLOR_GREEN);
-        O << "\t" << "Goal #" << i << " => " << std::setw(3) << goal << std::setw(2) << " (" << l << "," << c << ")" << std::endl;
-        if (m.isSquareBoxPlaced(goal))
-            Console::getInstance()->setColor(_COLOR_DEFAULT);
-        i++;
-    }
+   
     return O;
 }
 

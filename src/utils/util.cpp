@@ -465,7 +465,7 @@ std::deque<short> Util::getPathSquareToSquare(Maze m, short fromSquare, short to
     /**
     * Si il ne s'agit pas d'une case marquable comme deadSquare
     */
-    if (m.isSquareGoal(square) || m.isSquareWall(square) || m.isSquareDeadSquare(square))
+    if ( m.isSquareWall(square) || m.isSquareDeadSquare(square))
     {
         return res;
     }

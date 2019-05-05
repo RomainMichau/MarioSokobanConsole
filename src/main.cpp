@@ -24,41 +24,6 @@ std::vector<unsigned char>  goHeursitique(Maze m, int &noeudVisite)
 
 }
 
-void testBestCoefHeuristique(Maze m, chrono &chr, int mine, int maxe, int plafond, int pas)
-{
-
-    int noeudVisite;
-    long bestnoeud = 1000000;
-    int bestnoteA;
-    int bestnoteB;
-    int cpt = 0;
-    BFSPLUS killa_bfs(&m);
-    for (noteA = mine; noteA <= maxe; noteA += pas)
-    {
-        for (noteB = mine; noteB <= maxe; noteB += pas)
-        {
-            cpt++;
-            killa_bfs.reinit();
-            m.reinit();
-
-            killa_bfs.bfs_malin( noeudVisite, noteA, noteB, 50000000);
-
-            if (noeudVisite < bestnoeud)
-            {
-                bestnoeud = noeudVisite;
-                bestnoteA = noteA;
-                bestnoteB = noteB;
-                std::cout << std::endl << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << std::endl;
-                std::cout << "best noeud:" << bestnoeud << std::endl << "best noteA:" << bestnoteA << "  best noteB:" << bestnoteB << std::endl;
-                std::cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << std::endl << std::endl;
-
-            }
-            if (cpt % 100 == 0)
-                std::cout << "cpt:" << cpt << std::endl << "note A:" << noteA << std::endl << "noteB:" << noteB << "temps: " << chr.temps_ecoule() << std::endl;
-        }
-    }
-}
-
 
 
 int main()
@@ -76,9 +41,7 @@ int main()
     Maze m(path);
 
     keyboardManager g;
-    Heuristique h(&m);
     chrono chr;
-    case_morte Lamoort;
     bool auto_mode = false;
     if (!m.init())
         return -1;
@@ -89,8 +52,10 @@ int main()
     std::vector<unsigned char> vec = m.getField();
     m.setFieldOr(vec);
 
+
     m.setPlayerPosOr(m.getPosPlayer());
-    Lamoort.detect_dead_with_BFS(m);
+	case_morte Lamoort(&m);
+    Lamoort.detect_dead_with_BFS();
     std::cout << m << std::endl;
 //u.dispVector(m,	h.calcFrequentationSquares(m));
 
