@@ -93,7 +93,6 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int n
 		posBoxes = m->getPosBoxes();
 		for (int boxID = 0; boxID < m->getPosBoxes().size(); boxID++)
 		{
-			// i 
 			if (currentCase.mapStat.isBoxPlaceOnIdealGoal(boxID))
 				continue;
 			/**
