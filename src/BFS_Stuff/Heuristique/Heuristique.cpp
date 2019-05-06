@@ -1,11 +1,13 @@
 #include "src/BFS_Stuff/Heuristique/heuristique.h"
 #include "src/Maze/maze.h"
 #include "src/utils/util.h"
+#include "src/BFS_Stuff/Heuristique/note.h"
+
 #include <cmath>
 #include <math.h>
 #include <queue>
 #include <vector>
-#include "src/BFS_Stuff/Heuristique/note.h"
+#include <unordered_set>
 #include <algorithm>
 Heuristique::Heuristique(Maze *m, int coefA, int coefB)
 	:m(m), note(Note(coefA, coefB, 50000)),deadlocks(case_morte(m))
@@ -38,23 +40,21 @@ void Heuristique::calcHeuristiqueNote(BFSCase *bfsCase, short boxPushedID, short
 	unsigned short note_caisse_place;
 	if (newPos == this->bfsCase->mapStat.getcIdealGoalPos()) {
 			this->bfsCase->mapStat.setBoxIsPlaceOnIdealGoal(boxPushedID, true);
-	//	std::cout << "1 "<<*m;
 		refreshMapStat();
 	}
 
 	std::vector<unsigned short> box = m->getPosBoxes();
 	std::vector<unsigned short> pluscourt;
-	//if(caisse==-1)
 	unsigned short distanecNoteBFS = calc_note_distance_box_bfs_multiple_box();
 
-//	unsigned short distanecNoteMap = calc_note_distance_with_distMap();
+	//	unsigned short distanecNoteMap = calc_note_distance_with_distMap();
 	note.set_note_distance_box(distanecNoteBFS);
 
 	note_caisse_place = 0;
 	for (unsigned int i = 0; i < box.size(); i++)
 	{
 		if (!bfsCase->mapStat.isBoxPlaceOnIdealGoal(i))
-			note_caisse_place++;
+			note_caisse_place+=1;
 	}
 	note.set_note_caisse_place(note_caisse_place);
 	note.calculTotal();
@@ -232,8 +232,10 @@ short Heuristique::calcIdealGoalPos()
 	for (unsigned i = 0; i < goals.size(); i++) {
 		short pos = goals[i];
 		short dist = u.getPathSquareToSquare(*m, pivotpoint, pos).size();
-		if (!bfsCase->mapStat.isBoxPlaceOnIdealGoal(i) && dist > longuestDist)
+		if (!bfsCase->mapStat.isBoxPlaceOnIdealGoal(i) && dist > longuestDist) {
 			idealGoalPos = pos;
+			longuestDist=dist;
+		}
 	}
 	return idealGoalPos;
 }

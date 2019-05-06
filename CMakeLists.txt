@@ -21,11 +21,11 @@ src/utils/console.h
 src/utils/coord.cpp
 src/utils/coord.h 
 		
-src/utils/chrono.cpp
+src/utils/chrono.cpp 
 src/utils/chrono.h
 		
 src/utils/util.cpp
-src/utils/util.h 
+src/utils/util.h  
 		
 src/utils/keyboardManager.cpp 
 src/utils/keyboardManager.h
@@ -43,9 +43,11 @@ src/BFS_Stuff/BFSPLUS.h
 		src/BFS_Stuff/Heuristique/note.cpp
         src/BFS_Stuff/Heuristique/note.h  
 	#BFS_Objects
-	src/BFS_Stuff/BFS_Objects/MapStat.cpp
+	src/BFS_Stuff/BFS_Objects/MapStat.cpp 
 	src/BFS_Stuff/BFS_Objects/MapStat.h
-        
-        
+	src/BFS_Stuff/BFS_Objects/BFSCase.h
+	src/BFS_Stuff/BFS_Objects/BFSCase.cpp
+
+         
           
         )

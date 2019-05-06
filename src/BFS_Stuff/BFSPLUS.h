@@ -7,32 +7,30 @@
 class BFSPLUS
 {
 public:
-    BFSPLUS(Maze *m);
-    virtual ~BFSPLUS();
-    std::vector<unsigned char> bfs_malin( int &noeudvisite, int noteA, int noteB, int plafond);
-    void reinit();
-
-
+	BFSPLUS(Maze *m);
+	virtual ~BFSPLUS() ;
+	std::vector<unsigned char> bfs_malin(unsigned &noeudvisite, int noteA, int noteB, int plafond);
+	void reinit();
+	int showSetSize() { return marque.size(); };
 
 private:
-    std::vector<unsigned short> resolution;
-    std::vector<unsigned char> chemin;
-    std::vector< short>origin;  //je fais un tableau ou j'alterne la postion precedente et le mouvement
-    // necessaire pour arriver a cette nouvelle etat
-    void invert(std::vector<unsigned short> &vec);
+	std::vector<unsigned short> resolution;
+	std::vector<unsigned char> chemin;
+	
+
 	Maze *m;
-	   	 
 
+	struct BestBFSCase
+	{
+		bool operator()(BFSCase b1, BFSCase b2) const
+		{
+			return b1.note.get_note_total() < b2.note.get_note_total();
+		}
+	};
 
-    struct BestBFSCase
-    {
-        bool operator()(BFSCase b1, BFSCase b2) const
-        {
-            return b1.note.get_note_total() < b2.note.get_note_total();
-        }
-    };
-
-
+	bool accessZoneChange(char offset);
+	bool isMarqued();
+	std::unordered_set<std::string> marque;
 
 };
 

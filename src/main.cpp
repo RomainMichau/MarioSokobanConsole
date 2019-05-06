@@ -11,10 +11,8 @@
 #include "src/utils/util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 
-int noteA;
-int noteB;
 
-std::vector<unsigned char>  goHeursitique(Maze m, int &noeudVisite)
+std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 {
 
     BFSPLUS killa_bfs(&m);
@@ -46,7 +44,7 @@ int main()
     if (!m.init())
         return -1;
 
-    int noeudvisite = 0;
+    unsigned noeudvisite = 0;
 
     std::cout << m << std::endl;
     std::vector<unsigned char> vec = m.getField();

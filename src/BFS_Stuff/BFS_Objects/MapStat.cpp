@@ -10,5 +10,6 @@ MapStat::~MapStat()
 MapStat::MapStat(int numberOfGoal)
 {
 	boxIsPlaceOnIdealGoal.resize(numberOfGoal, false);
+	//idealGoals.resize(numberOfGoal, false);
 }
 

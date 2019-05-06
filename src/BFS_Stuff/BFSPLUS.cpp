@@ -4,23 +4,25 @@
 #include "src/BFS_Stuff/Heuristique/heuristique.h"
 #include "src/utils/util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
+#include "src/BFS_Stuff/BFS_Objects/BFSCase.h"
 #include <vector>
 #include <algorithm>
 #include <sstream>
 #include <iostream>
 #include <string>
 #include <iterator>
+#include <unordered_set>
+
+
 
 BFSPLUS::BFSPLUS(Maze *m)
 {
 	this->m = m;
 	//ctor
+	
 }
 
-BFSPLUS::~BFSPLUS()
-{
-	//dtor
-}
+BFSPLUS:: ~BFSPLUS() {}
 
 void BFSPLUS::reinit()
 {
@@ -28,50 +30,72 @@ void BFSPLUS::reinit()
 	resolution.resize(0);
 	chemin.resize(0);
 
-	origin.resize(0);
 
+}
+
+bool BFSPLUS::accessZoneChange(char direction)
+{
+	short offset = m->getMoveOffset(direction);
+	std::vector<char> adjDir = m->getAdjacentDirection(direction);
+
+	return ((m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && !m->isSquareWalkable(m->getPosPlayer() - offset + adjDir[0])) || //if we open an adj path
+		(m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && !m->isSquareWalkable(m->getPosPlayer() - offset - adjDir[1]) ////if we open an adj path
+			) || (!m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && m->isSquareWalkable(m->getPosPlayer() + offset + adjDir[0])) //if we close an adj path
+		|| (!m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && m->isSquareWalkable(m->getPosPlayer() + adjDir[1] + offset)));
+}
+
+bool BFSPLUS::isMarqued()
+{
+	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
+	std::stringstream result;
+	std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, " "));
+	std::string hash = result.str();
+	bool marqued= marque.find(hash) != marque.end();
+	if (!marqued) {
+		marque.insert(result.str());
+	}
+	return marqued;
 }
 
 /**
 * modified BFS using heureting
 */
-std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int noteB, int plafond)   //plafond: nombre de noeud max a explor� avant abandon
+std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, int noteB, int plafond)   //plafond: nombre de noeud max a explor� avant abandon
 {
 	Util u;
 	Heuristique h(m, noteA, noteB);
 	case_morte dead(m);
-
 	std::vector<bool> zone_accessible;
 	std::vector<bool> new_zone_accessible;
 	std::vector<unsigned char> field = m->getField(), field_originel = m->getField();
 	std::vector<unsigned short> posBoxes = m->getPosBoxes();
 	std::vector<bool> zone_originel = u.calcZoneAccessible(*m);
-
+//	marque.clear();
 
 	int position_player_or = m->getPosPlayer();
 	int classement = 0;
 	unsigned short newPositionOfBox, pos_originel = m->getPosPlayer();
 	unsigned short profondeur;
 	bool win = false;
-	std::unordered_set<std::string> marque;
 	std::stringstream result2;
 	std::copy(posBoxes.begin(), posBoxes.end(), std::ostream_iterator<short>(result2, " "));
 	marque.insert(result2.str());
 
 
-	origin.push_back(0);
-	origin.push_back(4444);
+	std::vector< BFSCase::BFSCaseInfo>originNew;  //je fais un tableau ou j'alterne la postion precedente et le mouvement
+	// necessaire pour arriver a cette nouvelle etat
 
 
 
 	std::priority_queue<BFSCase, std::vector<BFSCase>, BestBFSCase> queue;
-	BFSCase initCase(m->getPosBoxes().size(), zone_originel, m->getField(), 0, 0);
+	BFSCase::BFSCaseInfo bfsR(0,-1,position_player_or,-1);
+	//bfsR.
+	(0, -1, position_player_or, position_player_or);
+	BFSCase initCase(m->getPosBoxes().size(), zone_originel, m->getField(),(unsigned short) 0, bfsR);
+	originNew.push_back(bfsR);
 	h.generateMapStateFromField(&initCase);
-
-	h.calcHeuristiqueNote(&initCase,-1,-1);
+	h.calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
-
-
 	while (!win && !queue.empty())
 	{
 
@@ -85,7 +109,6 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int n
 		profondeur = currentCase.profondeur;
 		field = currentCase.field;
 		zone_accessible = currentCase.accessibleZone;
-		classement = currentCase.classement;
 		/**
 		* We set the game in the state
 		*/
@@ -122,17 +145,11 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int n
 						win = m->updatePlayer(direction);
 
 						//we check that we didn't already marque this case
-						std::vector<unsigned short> nposBoxes = m->getPosBoxes();
-						std::stringstream result;
-						std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, " "));
-						std::string hash = result.str();
-						if (marque.find(hash) == marque.end())
+
+						if(!isMarqued())
 						{
 							//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
-							if ((m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && !m->isSquareWalkable(m->getPosPlayer() - offset + adjDir[0])) || //if we open an adj path
-								(m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && !m->isSquareWalkable(m->getPosPlayer() - offset - adjDir[1]) ////if we open an adj path
-									) || (!m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && m->isSquareWalkable(m->getPosPlayer() + offset + adjDir[0])) //if we close an adj path
-								|| (!m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && m->isSquareWalkable(m->getPosPlayer() + adjDir[1] + offset)))
+							if (accessZoneChange(direction))
 							{
 								//It needs to be recalculate
 								new_zone_accessible = u.calcZoneAccessible(*m);
@@ -147,15 +164,12 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int n
 
 							//Calcul de l'heuristique
 
-							marque.insert(result.str());
 							//	marque_field.push_back(m->getField());
-							origin.push_back(classement);
-							origin.push_back(posBoxes[boxID] - offset);
-							BFSCase newCase(currentCase.mapStat, new_zone_accessible, m->getField(), profondeur + 1, origin.size());
-							h.calcHeuristiqueNote(&newCase,boxID,newPosBox);
+							BFSCase::BFSCaseInfo bfsR(originNew.size(), currentCase.bfsRetrack.id, posBoxes[boxID] - offset, posBoxes[boxID]);
+							BFSCase newCase(currentCase.mapStat, new_zone_accessible, m->getField(), profondeur + 1, bfsR);
+							h.calcHeuristiqueNote(&newCase, boxID, newPosBox);
 							queue.push(newCase);
-							origin.push_back(origin.size() - 2);
-							origin.push_back(posBoxes[boxID]);
+							originNew.push_back(bfsR);
 
 						}
 						m->change_etat_jeu(field, zone_accessible);
@@ -171,18 +185,19 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int n
 		std::cout << "empty";
 	}
 
-	classement = origin.size() - 2;
 
-	while (origin[classement + 1] != 4444)
-	{
-		resolution.push_back(origin[classement + 1]);
-		classement = origin[classement];
+	BFSCase::BFSCaseInfo retrack = originNew.back();
+	while (retrack.id != 0) {
+		resolution.push_back(retrack.playerPosAfterMove);
+		resolution.push_back(retrack.playerPosBeforeMove);
+		retrack = originNew[retrack.idParent];
 	}
 
+	//setting back the game in its original field
 	m->change_etat_jeu(field_originel, zone_originel);
 
 	resolution.push_back(pos_originel);
-	invert(resolution);
+	std::reverse(resolution.begin(), resolution.end());
 	resolution = u.relier_point(*m, resolution);
 	chemin = m->convert(resolution);
 
@@ -191,16 +206,7 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(int &noeudvisite, int noteA, int n
 	return chemin;
 }
 
-void BFSPLUS::invert(std::vector<unsigned short> &vec)
-{
-	std::vector<unsigned short> vec2;
-	vec2 = vec;
-	vec.resize(0);
-	for (int i = vec2.size() - 1; i >= 0; i = i - 1)
-	{
-		vec.push_back(vec2[i]);
-	}
-}
+
 
 
 
