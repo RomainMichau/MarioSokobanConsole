@@ -6,10 +6,7 @@
 **/
 enum
 {
-    MIN_DIR = 0, TOP = 0, BOTTOM = 1, LEFT = 2, RIGHT = 3, NONE = -1, MAX_DIR = 4,
-    ARROW_UP=1,ARROW_BOTTOM=2,ARROW_RIGHT=3,ARROW_LEFT=4,KEY_1=6,KEY_2=7,KEY_3=8,KEY_6=10,KEY_7=11,KEY_8=11,KEY_9=9,
-    KEY_R=5
-    ,KEY_5=53,
+    MIN_DIR = 0, TOP = 0, BOTTOM = 1, LEFT = 2, RIGHT = 3, NONE = -1, MAX_DIR = 4
 };
 
 struct Coord

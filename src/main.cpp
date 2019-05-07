@@ -15,10 +15,10 @@
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 {
 
-    BFSPLUS killa_bfs(&m);
-    std::vector<unsigned char> chemin;
-    chemin = killa_bfs.runBFS( noeudVisite, 1, 2);
-    return chemin;
+	BFSPLUS killa_bfs(&m);
+	std::vector<unsigned char> chemin;
+	chemin = killa_bfs.runBFS(noeudVisite, 1, 2);
+	return chemin;
 
 }
 
@@ -27,109 +27,78 @@ std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 int main()
 {
 
-    //std::cout<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
-    std::cout << "///////////////////////////MARIO SOKOBAN SOLVER///////////////////////////" << std::endl;
-    Util u;
+	//std::cout<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
+	std::cout << "///////////////////////////MARIO SOKOBAN SOLVER///////////////////////////" << std::endl;
+	Util u;
 
-    Console::getInstance()->setColor(_COLOR_DEFAULT);
-    std::vector<unsigned char> chemin;
-    std::string path = u.choose_level();
+	Console::getInstance()->setColor(_COLOR_DEFAULT);
+	std::vector<unsigned char> chemin;
+	std::string path = u.choose_level();
+	// Load level from a file
+	Maze m(path);
 
-    // Load level from a file
-    Maze m(path);
+	KeyboardManager g;
+	Chrono chr;
+	if (!m.init())
+		return -1;
 
-    KeyboardManager g;
-    Chrono chr;
-    bool auto_mode = false;
-    if (!m.init())
-        return -1;
-
-    unsigned noeudvisite = 0;
-
-    std::cout << m << std::endl;
-    std::vector<unsigned char> vec = m.getField();
-    m.setFieldOr(vec);
+	unsigned noeudvisite = 0;
+	std::cout << m << std::endl;
+	std::vector<unsigned char> vec = m.getField();
+	m.setFieldOr(vec);
 
 
-    m.setPlayerPosOr(m.getPosPlayer());
+	m.setPlayerPosOr(m.getPosPlayer());
 	Case_morte Lamoort(&m);
-    Lamoort.detect_dead_with_BFS();
-    std::cout << m << std::endl;
-//u.dispVector(m,	h.calcFrequentationSquares(m));
+	Lamoort.detect_dead_with_BFS();
+	std::cout << m << std::endl;
+	//u.dispVector(m,	h.calcFrequentationSquares(m));
 
-    while (true)
-    {
-        while (!g.keyPressed())
-        {
+	while (true)
+	{
+		std::cout << "press space for launch BFS";
+		while (!g.keyPressed())
+		{
 
-        }
-        // Check if user has pressed a key
-        if (!auto_mode)
-        {
-            bool win = false;
-            char key = g.keyRead();
-            switch (key)
-            {
-            case ARROW_UP:
-                win = m.updatePlayer(TOP);
-                break;
-            case ARROW_BOTTOM:
-                win = m.updatePlayer(BOTTOM);
-                break;
-            case ARROW_RIGHT:
-                win = m.updatePlayer(RIGHT);
-                break;
-            case ARROW_LEFT:
-                win = m.updatePlayer(LEFT);
-                break;
-            case 53:
-                //DEADLOCKS DYNAMIQUE
-            {
-                std::cout << "BEST BFS";
-                chr.lancer_chrono();
+		}
+		// Check if user has pressed a key
 
-                chemin = goHeursitique(m,   noeudvisite);
-				if (chemin.size() == 0) {
-					std::cout << "no solution to this Maze :(";
-					system("pause");
-					return 0;
-				}
-                auto_mode = true;
-            }
-            break;
-            }
+		char key = g.keyRead();
+		switch (key)
+		{
+		case ' ':
+			//DEADLOCKS DYNAMIQUE
 
+			std::cout << "BEST BFS";
+			chr.lancer_chrono();
+			chemin = goHeursitique(m, noeudvisite);
+			break;
+		}
 
-            /**
-            *Montre le trajet à la fin de la partie
-            */
-            if (auto_mode)
-            {
+		if (chemin.size() == 0) {
+			std::cout << "no solution to this Maze :(";
+			system("pause");
+			return 0;
+		}
 
-                m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);
+		/**
+		*Montre le trajet à la fin de la partie
+		*/
+		m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);
+		std::cout << "Win ! " << std::endl;
+		break;
+	}
 
-                auto_mode = false;
-                win = true;
-            }
-
-            if (win)
-            {
-                std::cout << "Win ! " << std::endl;
-                break;
-            }
-        }
-    }
-
-    // Display on screen
+	// Display on screen
 
 
 
 
 
 
-    // Free memory
-    Console::deleteInstance();
-    system("pause");
-    return 0;
+	// Free memory
+	Console::deleteInstance();
+	system("pause");
+	return 0;
 }
 
