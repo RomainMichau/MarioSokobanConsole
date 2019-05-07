@@ -13,7 +13,6 @@ public:
     case_morte(Maze *m);
     ~case_morte();
 
-    void detect_dead_staticMethod();
 	void detect_dead_with_BFS_idealGoal(Maze& m,short idealGoal);
     void detect_dead_with_BFS();
     bool detect_dyn_dead( unsigned short position, unsigned char dir);

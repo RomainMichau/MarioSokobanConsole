@@ -33,7 +33,10 @@ void BFSPLUS::reinit()
 
 }
 
-bool BFSPLUS::accessZoneChange(char direction)
+/**
+* return true if the mov in the direction sent in parameters is going to change the accesible zone
+*/
+bool BFSPLUS::hasAccessZoneChange(char direction)
 {
 	short offset = m->getMoveOffset(direction);
 	std::vector<char> adjDir = m->getAdjacentDirection(direction);
@@ -44,7 +47,11 @@ bool BFSPLUS::accessZoneChange(char direction)
 		|| (!m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && m->isSquareWalkable(m->getPosPlayer() + adjDir[1] + offset)));
 }
 
-bool BFSPLUS::isMarqued()
+/**
+* return true if the current boxPos of *m is already marqued
+* if it is not the case it wil marque it
+*/
+bool BFSPLUS::marqued()
 {
 	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
 	std::stringstream result;
@@ -58,12 +65,12 @@ bool BFSPLUS::isMarqued()
 }
 
 /**
-* modified BFS using heureting
+* modified BFS using heursitic
 */
-std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, int noteB, int plafond)   //plafond: nombre de noeud max a explor� avant abandon
+std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int noteB)   //plafond: nombre de noeud max a explor� avant abandon
 {
 	Util u;
-	Heuristique h(m, noteA, noteB);
+	Heuristique heurisitique(m, noteA, noteB);
 	case_morte dead(m);
 	std::vector<bool> zone_accessible;
 	std::vector<bool> new_zone_accessible;
@@ -77,13 +84,10 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, 
 	unsigned short newPositionOfBox, pos_originel = m->getPosPlayer();
 	unsigned short profondeur;
 	bool win = false;
-	std::stringstream result2;
-	std::copy(posBoxes.begin(), posBoxes.end(), std::ostream_iterator<short>(result2, " "));
-	marque.insert(result2.str());
+	marqued();
 
-
-	std::vector< BFSCase::BFSCaseInfo>originNew;  //je fais un tableau ou j'alterne la postion precedente et le mouvement
-	// necessaire pour arriver a cette nouvelle etat
+	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
+	std::vector< BFSCase::BFSCaseInfo>originNew;  
 
 
 
@@ -93,17 +97,13 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, 
 	(0, -1, position_player_or, position_player_or);
 	BFSCase initCase(m->getPosBoxes().size(), zone_originel, m->getField(),(unsigned short) 0, bfsR);
 	originNew.push_back(bfsR);
-	h.generateMapStateFromField(&initCase);
-	h.calcHeuristiqueNote(&initCase, -1, -1);
+	heurisitique.generateMapStateFromField(&initCase);
+	heurisitique.calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
 	while (!win && !queue.empty())
 	{
 
-		if (marque.size() > plafond)
-		{
-			noeudvisite = 666666;
-			return chemin;
-		}
+
 		BFSCase currentCase = queue.top();
 		queue.pop();
 		profondeur = currentCase.profondeur;
@@ -144,12 +144,12 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, 
 						//we push the box in the wanted direction
 						win = m->updatePlayer(direction);
 
-						//we check that we didn't already marque this case
+						//we check that we didn't already marque this case and marqued it if ut is not the case
 
-						if(!isMarqued())
+						if(!marqued())
 						{
 							//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
-							if (accessZoneChange(direction))
+							if (hasAccessZoneChange(direction))
 							{
 								//It needs to be recalculate
 								new_zone_accessible = u.calcZoneAccessible(*m);
@@ -167,7 +167,7 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, 
 							//	marque_field.push_back(m->getField());
 							BFSCase::BFSCaseInfo bfsR(originNew.size(), currentCase.bfsRetrack.id, posBoxes[boxID] - offset, posBoxes[boxID]);
 							BFSCase newCase(currentCase.mapStat, new_zone_accessible, m->getField(), profondeur + 1, bfsR);
-							h.calcHeuristiqueNote(&newCase, boxID, newPosBox);
+							heurisitique.calcHeuristiqueNote(&newCase, boxID, newPosBox);
 							queue.push(newCase);
 							originNew.push_back(bfsR);
 
@@ -202,7 +202,6 @@ std::vector<unsigned char> BFSPLUS::bfs_malin(unsigned &noeudvisite, int noteA, 
 	chemin = m->convert(resolution);
 
 	noeudvisite = marque.size();
-	// std::cout<<"cpt1:"<<AScpt1<<"  cpt2:"<<AScpt2;
 	return chemin;
 }
 

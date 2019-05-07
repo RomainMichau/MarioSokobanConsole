@@ -17,7 +17,7 @@ std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 
     BFSPLUS killa_bfs(&m);
     std::vector<unsigned char> chemin;
-    chemin = killa_bfs.bfs_malin( noeudVisite, 1, 2, 50000000);
+    chemin = killa_bfs.runBFS( noeudVisite, 1, 2);
     return chemin;
 
 }

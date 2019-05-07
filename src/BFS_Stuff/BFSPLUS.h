@@ -9,7 +9,7 @@ class BFSPLUS
 public:
 	BFSPLUS(Maze *m);
 	virtual ~BFSPLUS() ;
-	std::vector<unsigned char> bfs_malin(unsigned &noeudvisite, int noteA, int noteB, int plafond);
+	std::vector<unsigned char> runBFS(unsigned &noeudvisite, int noteA, int noteB);
 	void reinit();
 	int showSetSize() { return marque.size(); };
 
@@ -28,8 +28,8 @@ private:
 		}
 	};
 
-	bool accessZoneChange(char offset);
-	bool isMarqued();
+	bool hasAccessZoneChange(char offset);
+	bool marqued();
 	std::unordered_set<std::string> marque;
 
 };

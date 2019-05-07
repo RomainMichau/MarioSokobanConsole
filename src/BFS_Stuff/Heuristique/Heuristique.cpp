@@ -44,7 +44,7 @@ void Heuristique::calcHeuristiqueNote(BFSCase *bfsCase, short boxPushedID, short
 	}
 
 	std::vector<unsigned short> box = m->getPosBoxes();
-	std::vector<unsigned short> pluscourt;
+	//std::vector<unsigned short> pluscourt;
 	unsigned short distanecNoteBFS = calc_note_distance_box_bfs_multiple_box();
 
 	//	unsigned short distanecNoteMap = calc_note_distance_with_distMap();
@@ -331,6 +331,11 @@ unsigned short Heuristique::calc_note_distance_box_bfs_multiple_box()
 	return somme;
 }
 
+/**
+* calculate the distance note with the help of the distMap of the current BFSCase
+* formule of the note is: 
+* nearestBoxDist /(nbOfBox - 0) +  2ndNearestBoxDist /(nbOfBox -1) ...
+*/
 unsigned short Heuristique::calc_note_distance_with_distMap() {
 	std::vector<short> boxesDistFromidealGoal;
 	int i = 0;
