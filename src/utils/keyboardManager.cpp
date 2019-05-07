@@ -2,15 +2,15 @@
 // Created by rmichau on 26/04/2019.
 //
 
-#include "src/utils/keyboardManager.h"
+#include "src/utils/KeyboardManager.h"
 #include <conio.h>
 #include <iostream>
 
 using namespace std;
-keyboardManager::keyboardManager()   {}
+KeyboardManager::KeyboardManager()   {}
 
 
-bool keyboardManager::keyPressed()
+bool KeyboardManager::keyPressed()
 {
     if(kbhit())
     {
@@ -22,7 +22,7 @@ bool keyboardManager::keyPressed()
     return false;
 }
 
-char keyboardManager::keyRead()
+char KeyboardManager::keyRead()
 {
     return lastKey;
 }

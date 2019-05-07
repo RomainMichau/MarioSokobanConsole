@@ -1,11 +1,11 @@
 #ifndef HEURISTIQUE_H
 #define HEURISTIQUE_H
-#include "src/Maze/maze.h"
+#include "src/Maze/Maze.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
-#include "src/utils/util.h"
+#include "src/utils/Util.h"
 #include "src/BFS_Stuff/BFS_Objects/MapStat.h"
 #include "src/BFS_Stuff/BFS_Objects/BFSCase.h"
-#include "src/BFS_Stuff/Deadlocks/case_morte.h"
+#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
 class Heuristique
 {
 public:
@@ -57,7 +57,7 @@ private:
 	Util u;
 	Maze *m;
 	Note note;
-	case_morte deadlocks;
+	Case_morte deadlocks;
 
 
 };

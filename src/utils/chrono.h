@@ -5,11 +5,11 @@
 #include <chrono>
 #include <ctime>
 
-class chrono
+class Chrono
 {
 public:
-    chrono();
-	virtual  ~chrono();
+    Chrono();
+	virtual  ~Chrono();
     void lancer_chrono();
     double temps_ecoule();
 

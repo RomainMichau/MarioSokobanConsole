@@ -5,12 +5,12 @@
 1557134737 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\mapstat.h
 	<vector>
 
-1557150424 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.cpp
+1557237726 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.cpp
 	"BFSPLUS.h"
-	"src/Maze/maze.h"
-	"src/BFS_Stuff/Heuristique/heuristique.h"
-	"src/utils/util.h"
-	"src/BFS_Stuff/DeadLocks/case_morte.h"
+	"src/Maze/Maze.h"
+	"src/BFS_Stuff/Heuristique/Heuristique.h"
+	"src/utils/Util.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 	"src/BFS_Stuff/BFS_Objects/BFSCase.h"
 	<vector>
 	<algorithm>
@@ -20,8 +20,8 @@
 	<iterator>
 	<unordered_set>
 
-1557150025 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.h
-	"src/Maze/maze.h"
+1557225674 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.h
+	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	<unordered_set>
 	"src/BFS_Stuff/BFS_Objects/BFSCase.h"
@@ -43,19 +43,19 @@
 	"src/BFS_Stuff/BFS_Objects/MapStat.h"
 
 1557134107 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristique.h
-	"src/Maze/maze.h"
+	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/util.h"
 	"src/BFS_Stuff/BFS_Objects/MapStat.h"
 	"src/BFS_Stuff/BFS_Objects/BFSCase.h"
-	"src/BFS_Stuff/Deadlocks/case_morte.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\util.h
 	<queue>
-	"src/Maze/maze.h"
+	"src/Maze/Maze.h"
 	<vector>
 	<string>
-	"src/utils/coord.h"
+	"src/utils/Coord.h"
 	"src/utils/util.h"
 	<iostream>
 	"src/BFS_Stuff/Heuristique/note.h"
@@ -63,23 +63,23 @@
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\coord.h
 
 1557134107 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\deadlocks\case_morte.h
-	"src/Maze/maze.h"
-	"src/utils/console.h"
-	"src/utils/coord.h"
+	"src/Maze/Maze.h"
+	"src/utils/Console.h"
+	"src/utils/Coord.h"
 	<fstream>
 	<iomanip>
-	"src/BFS_Stuff/DeadLocks/case_morte.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\console.h
 	<iostream>
 
-1557134107 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\deadlocks\case_morte.cpp
-	"src/Maze/maze.h"
-	"src/utils/console.h"
-	"src/utils/coord.h"
+1557237660 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\deadlocks\case_morte.cpp
+	"src/Maze/Maze.h"
+	"src/utils/Console.h"
+	"src/utils/Coord.h"
 	<fstream>
 	<iomanip>
-	"src/BFS_Stuff/DeadLocks/case_morte.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 	<unordered_set>
 	"src/utils/util.h"
 
@@ -87,18 +87,18 @@
 	"src/BFS_Stuff/Heuristique/note.h"
 	<vector>
 
-1557150478 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
-	"src/Maze/maze.h"
-	"src/utils/console.h"
-	"src/utils/coord.h"
-	"src/utils/keyboardManager.h"
+1557237141 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
+	"src/Maze/Maze.h"
+	"src/utils/Console.h"
+	"src/utils/Coord.h"
+	"src/utils/KeyboardManager.h"
 	<iostream>
 	<stdio.h>
 	"src/BFS_Stuff/BFSPLUS.h"
-	"src/BFS_Stuff/Heuristique/heuristique.h"
-	"src/utils/chrono.h"
+	"src/BFS_Stuff/Heuristique/Heuristique.h"
+	"src/utils/Chrono.h"
 	"src/utils/util.h"
-	"src/BFS_Stuff/DeadLocks/case_morte.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\keyboardmanager.h
 
@@ -108,11 +108,11 @@
 	<chrono>
 	<ctime>
 
-1557134107 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze\maze.cpp
-	"src/Maze/maze.h"
-	"src/utils/keyboardManager.h"
-	"src/utils/console.h"
-	"src/utils/coord.h"
+1557225766 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze\maze.cpp
+	"src/Maze/Maze.h"
+	"src/utils/KeyboardManager.h"
+	"src/utils/Console.h"
+	"src/utils/Coord.h"
 	<fstream>
 	<queue>
 	<Windows.h>
@@ -120,7 +120,7 @@
 	<iomanip>
 
 1557133570 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\chrono.cpp
-	"src/utils/chrono.h"
+	"src/utils/Chrono.h"
 	<chrono>
 	<ctime>
 
@@ -133,15 +133,15 @@
 	"coord.h"
 
 1557133570 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\keyboardmanager.cpp
-	"src/utils/keyboardManager.h"
+	"src/utils/KeyboardManager.h"
 	<conio.h>
 	<iostream>
 
-1557134107 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\util.cpp
+1557237522 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\util.cpp
 	"src/utils/util.h"
-	"src/Maze/maze.h"
-	"src/utils/console.h"
-	"src/utils/coord.h"
+	"src/Maze/Maze.h"
+	"src/utils/Console.h"
+	"src/utils/Coord.h"
 	<math.h>
 	<sstream>
 	<fstream>
@@ -149,9 +149,9 @@
 	<iostream>
 	<unordered_map>
 
-1557142389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristique.cpp
-	"src/BFS_Stuff/Heuristique/heuristique.h"
-	"src/Maze/maze.h"
+1557237867 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristique.cpp
+	"src/BFS_Stuff/Heuristique/Heuristique.h"
+	"src/Maze/Maze.h"
 	"src/utils/util.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	<cmath>
@@ -176,46 +176,48 @@
 
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\coord.h
 
-1557134107 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\deadlocks\case_morte.h
-	"src/Maze/maze.h"
-	"src/utils/console.h"
-	"src/utils/coord.h"
+1557237214 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\deadlocks\case_morte.h
+	"src/Maze/Maze.h"
+	"src/utils/Console.h"
+	"src/utils/Coord.h"
 	<fstream>
 	<iomanip>
-	"src/BFS_Stuff/DeadLocks/case_morte.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 
-1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\util.h
+1557240977 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\util.h
 	<queue>
-	"src/Maze/maze.h"
+	"src/Maze/Maze.h"
 	<vector>
 	<string>
-	"src/utils/coord.h"
+	"src/utils/Coord.h"
 	"src/utils/util.h"
 	<iostream>
 	"src/BFS_Stuff/Heuristique/note.h"
+	"src/BFS_Stuff/BFS_Objects/Mother_Class/BFSCaseMother.h"
 
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\note.h
 	<vector>
 
-1557134107 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristique.h
-	"src/Maze/maze.h"
+1557237141 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristique.h
+	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/util.h"
 	"src/BFS_Stuff/BFS_Objects/MapStat.h"
 	"src/BFS_Stuff/BFS_Objects/BFSCase.h"
-	"src/BFS_Stuff/Deadlocks/case_morte.h"
+	"src/BFS_Stuff/DeadLocks/Case_morte.h"
 
 1557134737 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\mapstat.h
 	<vector>
 
-1557150972 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\bfscase.h
+1557241422 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\bfscase.h
 	"src/BFS_Stuff/BFS_Objects/MapStat.h"
 	"src/BFS_Stuff/Heuristique/note.h"
+	"src/BFS_Stuff/BFS_Objects/Mother_Class/BFSCaseMother.h"
 
 1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\keyboardmanager.h
 
-1557150025 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfsplus.h
-	"src/Maze/maze.h"
+1557225674 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfsplus.h
+	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	<unordered_set>
 	"src/BFS_Stuff/BFS_Objects/BFSCase.h"
@@ -228,4 +230,6 @@
 
 1557148618 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\bfscase.cpp
 	"src/BFS_Stuff/BFS_Objects/BFSCase.h"
+
+1557241496 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\mother_class\bfscasemother.h
 

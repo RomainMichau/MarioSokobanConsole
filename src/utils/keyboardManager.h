@@ -6,15 +6,14 @@
 #define MARIOSOKOBAN_KEYBOARDMANAGER_H
 
 
-class keyboardManager
+class KeyboardManager
 {
 
 public:
-    keyboardManager();
+    KeyboardManager();
 
     int vitesse;
 
-    bool init();
 
     bool keyPressed();
 

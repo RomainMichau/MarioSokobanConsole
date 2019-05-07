@@ -1,9 +1,9 @@
 #include "BFSPLUS.h"
 
-#include "src/Maze/maze.h"
-#include "src/BFS_Stuff/Heuristique/heuristique.h"
-#include "src/utils/util.h"
-#include "src/BFS_Stuff/DeadLocks/case_morte.h"
+#include "src/Maze/Maze.h"
+#include "src/BFS_Stuff/Heuristique/Heuristique.h"
+#include "src/utils/Util.h"
+#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
 #include "src/BFS_Stuff/BFS_Objects/BFSCase.h"
 #include <vector>
 #include <algorithm>
@@ -19,19 +19,12 @@ BFSPLUS::BFSPLUS(Maze *m)
 {
 	this->m = m;
 	//ctor
-	
+
 }
 
 BFSPLUS:: ~BFSPLUS() {}
 
-void BFSPLUS::reinit()
-{
-	Util u;
-	resolution.resize(0);
-	chemin.resize(0);
 
-
-}
 
 /**
 * return true if the mov in the direction sent in parameters is going to change the accesible zone
@@ -57,7 +50,7 @@ bool BFSPLUS::marqued()
 	std::stringstream result;
 	std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, " "));
 	std::string hash = result.str();
-	bool marqued= marque.find(hash) != marque.end();
+	bool marqued = marque.find(hash) != marque.end();
 	if (!marqued) {
 		marque.insert(result.str());
 	}
@@ -71,39 +64,33 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 {
 	Util u;
 	Heuristique heurisitique(m, noteA, noteB);
-	case_morte dead(m);
+	Case_morte dead(m);
 	std::vector<bool> zone_accessible;
 	std::vector<bool> new_zone_accessible;
 	std::vector<unsigned char> field = m->getField(), field_originel = m->getField();
 	std::vector<unsigned short> posBoxes = m->getPosBoxes();
 	std::vector<bool> zone_originel = u.calcZoneAccessible(*m);
-//	marque.clear();
+	//	marque.clear();
 
 	int position_player_or = m->getPosPlayer();
 	int classement = 0;
 	unsigned short newPositionOfBox, pos_originel = m->getPosPlayer();
 	unsigned short profondeur;
 	bool win = false;
+
 	marqued();
-
 	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
-	std::vector< BFSCase::BFSCaseInfo>originNew;  
-
-
-
+	std::vector< BFSCase::BFSCaseInfo>caseTracker;
 	std::priority_queue<BFSCase, std::vector<BFSCase>, BestBFSCase> queue;
-	BFSCase::BFSCaseInfo bfsR(0,-1,position_player_or,-1);
+	BFSCase::BFSCaseInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	(0, -1, position_player_or, position_player_or);
-	BFSCase initCase(m->getPosBoxes().size(), zone_originel, m->getField(),(unsigned short) 0, bfsR);
-	originNew.push_back(bfsR);
+	BFSCase initCase(m->getPosBoxes().size(), zone_originel, m->getField(), (unsigned short)0, bfsR);
+	caseTracker.push_back(bfsR);
 	heurisitique.generateMapStateFromField(&initCase);
 	heurisitique.calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
 	while (!win && !queue.empty())
 	{
-
-
 		BFSCase currentCase = queue.top();
 		queue.pop();
 		profondeur = currentCase.profondeur;
@@ -116,8 +103,12 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 		posBoxes = m->getPosBoxes();
 		for (int boxID = 0; boxID < m->getPosBoxes().size(); boxID++)
 		{
+			//si la caisse est deja sur un goal ideal on a pas besoin d'étudier son cas
+			//Attention ne marchera pas pour tous les niveau
 			if (currentCase.mapStat.isBoxPlaceOnIdealGoal(boxID))
 				continue;
+
+
 			/**
 			we look for pushed all boxes in all directions possibles
 			*/
@@ -146,7 +137,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 
 						//we check that we didn't already marque this case and marqued it if ut is not the case
 
-						if(!marqued())
+						if (!marqued())
 						{
 							//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
 							if (hasAccessZoneChange(direction))
@@ -165,11 +156,11 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 							//Calcul de l'heuristique
 
 							//	marque_field.push_back(m->getField());
-							BFSCase::BFSCaseInfo bfsR(originNew.size(), currentCase.bfsRetrack.id, posBoxes[boxID] - offset, posBoxes[boxID]);
+							BFSCase::BFSCaseInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
 							BFSCase newCase(currentCase.mapStat, new_zone_accessible, m->getField(), profondeur + 1, bfsR);
 							heurisitique.calcHeuristiqueNote(&newCase, boxID, newPosBox);
 							queue.push(newCase);
-							originNew.push_back(bfsR);
+							caseTracker.push_back(bfsR);
 
 						}
 						m->change_etat_jeu(field, zone_accessible);
@@ -179,18 +170,21 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 		}
 	}
 
+	std::vector<unsigned char> chemin;
+
 	//ON recrée le chemin
 	if (queue.empty())
 	{
 		std::cout << "empty";
+		return chemin;
 	}
 
 
-	BFSCase::BFSCaseInfo retrack = originNew.back();
-	while (retrack.id != 0) {
+	BFSCase::BFSCaseInfo retrack = caseTracker.back();
+	while (retrack.idCase != 0) {
 		resolution.push_back(retrack.playerPosAfterMove);
 		resolution.push_back(retrack.playerPosBeforeMove);
-		retrack = originNew[retrack.idParent];
+		retrack = caseTracker[retrack.idParentCase];
 	}
 
 	//setting back the game in its original field

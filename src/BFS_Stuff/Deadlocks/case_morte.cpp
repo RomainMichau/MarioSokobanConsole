@@ -1,19 +1,19 @@
-#include "src/Maze/maze.h"
-#include "src/utils/console.h"
-#include "src/utils/coord.h"
+#include "src/Maze/Maze.h"
+#include "src/utils/Console.h"
+#include "src/utils/Coord.h"
 #include <fstream>
 #include <iomanip>
-#include "src/BFS_Stuff/DeadLocks/case_morte.h"
+#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
 #include <unordered_set>
-#include "src/utils/util.h"
+#include "src/utils/Util.h"
 
-case_morte::case_morte(Maze *m)
+Case_morte::Case_morte(Maze *m)
     :nb_case_morte(0),m(m)
 {
     //ctor
 }
 
-case_morte::~case_morte()
+Case_morte::~Case_morte()
 {
     //dtor
 }
@@ -24,7 +24,7 @@ case_morte::~case_morte()
 * will detect all deadlocks with a BFS system (if a square can not reach a goal with BFS, it is not a deadlocks)
 * algo act like if there is no box on the field
 */
-void case_morte::detect_dead_with_BFS_idealGoal(Maze& maze,short idealGoal)
+void Case_morte::detect_dead_with_BFS_idealGoal(Maze& maze,short idealGoal)
 {
 	Util u;
 	for (unsigned int square = 0; square < maze.getSize(); square++)
@@ -40,7 +40,7 @@ void case_morte::detect_dead_with_BFS_idealGoal(Maze& maze,short idealGoal)
 * will detect all deadlocks with a BFS system (if a square can not reach a goal with BFS, it is not a deadlocks)
 * algo act like if there is no box on the field
 */
-void case_morte::detect_dead_with_BFS()
+void Case_morte::detect_dead_with_BFS()
 {
     Util u;
     for (unsigned int square = 0; square < m->getSize(); square++)
@@ -56,7 +56,7 @@ void case_morte::detect_dead_with_BFS()
 * Detect if a move will create a dynamique deadLock
 *
 */
-bool case_morte::detect_dyn_dead( unsigned short position, unsigned char dir)
+bool Case_morte::detect_dyn_dead( unsigned short position, unsigned char dir)
 {
     unsigned short cote_d = 0, cote_g = 0, cote_h = 0, cote_b = 0, cote_hor = 0, cote_ver = 0;
     unsigned short position_box = 0, position_futur = 0, murd = 0, murh = 0, murg = 0, murb = 0, boxh = 0, boxb = 0, boxg = 0, boxd = 0;

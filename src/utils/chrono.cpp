@@ -1,26 +1,26 @@
-#include "src/utils/chrono.h"
+#include "src/utils/Chrono.h"
 #include <chrono>
 #include <ctime>
 
-chrono::chrono()
+Chrono::Chrono()
 {
     //ctor
 }
 
-chrono::~chrono()
+Chrono::~Chrono()
 {
     //dtor
 }
 
 
 
-void chrono::lancer_chrono()
+void Chrono::lancer_chrono()
 {
     startc = std::chrono::system_clock::now();
 }
 
 
-double chrono::temps_ecoule()
+double Chrono::temps_ecoule()
 {
     endc = std::chrono::system_clock::now();
     std::chrono::duration<double> temp=endc-startc;

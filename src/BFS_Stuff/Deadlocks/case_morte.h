@@ -1,17 +1,17 @@
 #ifndef CASE_MORTE_H
 #define CASE_MORTE_H
-#include "src/Maze/maze.h"
-#include "src/utils/console.h"
-#include "src/utils/coord.h"
+#include "src/Maze/Maze.h"
+#include "src/utils/Console.h"
+#include "src/utils/Coord.h"
 #include <fstream>
 #include <iomanip>
-#include "src/BFS_Stuff/DeadLocks/case_morte.h"
+#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
 
-class case_morte
+class Case_morte
 {
 public:
-    case_morte(Maze *m);
-    ~case_morte();
+    Case_morte(Maze *m);
+    ~Case_morte();
 
 	void detect_dead_with_BFS_idealGoal(Maze& m,short idealGoal);
     void detect_dead_with_BFS();

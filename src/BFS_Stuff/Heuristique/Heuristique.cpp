@@ -1,6 +1,6 @@
-#include "src/BFS_Stuff/Heuristique/heuristique.h"
-#include "src/Maze/maze.h"
-#include "src/utils/util.h"
+#include "src/BFS_Stuff/Heuristique/Heuristique.h"
+#include "src/Maze/Maze.h"
+#include "src/utils/Util.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
 
 #include <cmath>
@@ -10,7 +10,7 @@
 #include <unordered_set>
 #include <algorithm>
 Heuristique::Heuristique(Maze *m, int coefA, int coefB)
-	:m(m), note(Note(coefA, coefB, 50000)),deadlocks(case_morte(m))
+	:m(m), note(Note(coefA, coefB, 50000)),deadlocks(Case_morte(m))
 {
 
 }
@@ -58,7 +58,6 @@ void Heuristique::calcHeuristiqueNote(BFSCase *bfsCase, short boxPushedID, short
 	}
 	note.set_note_caisse_place(note_caisse_place);
 	note.calculTotal();
-	int tot = note.get_note_total();
 	//	calcMapStat();
 	bfsCase->note = note;
 }
@@ -165,11 +164,7 @@ std::vector<short> Heuristique::calcFrequentationSquares()
 	std::vector<unsigned char> field = m->getField();
 	for (int box : m->getPosBoxes())
 	{
-		if (m->isSquareWall(box) || m->isSquareDeadSquare(box))
-		{
-			res.push_back(-1);
-			continue;
-		}
+
 		std::deque<short> path = u.getPathSquareToGoal(*m, box);
 
 		//the last element is the goal himself, so we remove him
@@ -333,7 +328,7 @@ unsigned short Heuristique::calc_note_distance_box_bfs_multiple_box()
 
 /**
 * calculate the distance note with the help of the distMap of the current BFSCase
-* formule of the note is: 
+* formule of the note is:
 * nearestBoxDist /(nbOfBox - 0) +  2ndNearestBoxDist /(nbOfBox -1) ...
 */
 unsigned short Heuristique::calc_note_distance_with_distMap() {

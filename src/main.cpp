@@ -1,15 +1,15 @@
 
-#include "src/Maze/maze.h"
-#include "src/utils/console.h"
-#include "src/utils/coord.h"
-#include "src/utils/keyboardManager.h"
+#include "src/Maze/Maze.h"
+#include "src/utils/Console.h"
+#include "src/utils/Coord.h"
+#include "src/utils/KeyboardManager.h"
 #include <iostream>
 #include <stdio.h>
 #include "src/BFS_Stuff/BFSPLUS.h"
-#include "src/BFS_Stuff/Heuristique/heuristique.h"
-#include "src/utils/chrono.h"
-#include "src/utils/util.h"
-#include "src/BFS_Stuff/DeadLocks/case_morte.h"
+#include "src/BFS_Stuff/Heuristique/Heuristique.h"
+#include "src/utils/Chrono.h"
+#include "src/utils/Util.h"
+#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
 
 
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
@@ -38,8 +38,8 @@ int main()
     // Load level from a file
     Maze m(path);
 
-    keyboardManager g;
-    chrono chr;
+    KeyboardManager g;
+    Chrono chr;
     bool auto_mode = false;
     if (!m.init())
         return -1;
@@ -52,7 +52,7 @@ int main()
 
 
     m.setPlayerPosOr(m.getPosPlayer());
-	case_morte Lamoort(&m);
+	Case_morte Lamoort(&m);
     Lamoort.detect_dead_with_BFS();
     std::cout << m << std::endl;
 //u.dispVector(m,	h.calcFrequentationSquares(m));
@@ -89,7 +89,11 @@ int main()
                 chr.lancer_chrono();
 
                 chemin = goHeursitique(m,   noeudvisite);
-
+				if (chemin.size() == 0) {
+					std::cout << "no solution to this Maze :(";
+					system("pause");
+					return 0;
+				}
                 auto_mode = true;
             }
             break;

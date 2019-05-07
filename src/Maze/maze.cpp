@@ -1,7 +1,7 @@
-#include "src/Maze/maze.h"
-#include "src/utils/keyboardManager.h"
-#include "src/utils/console.h"
-#include "src/utils/coord.h"
+#include "src/Maze/Maze.h"
+#include "src/utils/KeyboardManager.h"
+#include "src/utils/Console.h"
+#include "src/utils/Coord.h"
 #include <fstream>
 #include <queue>
 #include <Windows.h>
@@ -353,6 +353,9 @@ void Maze::updateDraw(char mov)
     this->updatePlayer(mov);
 }
 
+/**
+* return the offset created a mov in this dir
+*/
 short Maze::getMoveOffset(unsigned char dir)
 {
     switch (dir)

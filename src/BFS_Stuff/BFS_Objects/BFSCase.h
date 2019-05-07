@@ -2,6 +2,7 @@
 #define BFSPLUSCASE_H
 #include "src/BFS_Stuff/BFS_Objects/MapStat.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
+#include "src/BFS_Stuff/BFS_Objects/Mother_Class/BFSCaseMother.h"
 class BFSCase {
 public:
 
@@ -10,20 +11,18 @@ public:
 	* this class represent the specific information about the BFSCase
 	* it is used for retrack the path at the end of the BFS
 	*/
-	class BFSCaseInfo {
+	class BFSCaseInfo: public BFSCaseMother {
 	public:
 
 		BFSCaseInfo(int id, int idParent, short playerPosBeforeMove, int playerPosAfterMove)
-			:id(id), idParent(idParent), playerPosBeforeMove(playerPosBeforeMove), playerPosAfterMove(playerPosAfterMove)
+			: playerPosBeforeMove(playerPosBeforeMove), playerPosAfterMove(playerPosAfterMove),BFSCaseMother(id,idParent)
 		{
 		};
 
-		BFSCaseInfo() {};
+		BFSCaseInfo():BFSCaseMother(-1, -1) {};
 		//ID of the BFSCase
 		~BFSCaseInfo() {};
-		int id;
-		//id of the BFSCase wich create the current state
-		int idParent;
+		
 		//pos of the player before he pushed the box
 		short playerPosBeforeMove;
 		//pos of the player after he pushed the box
