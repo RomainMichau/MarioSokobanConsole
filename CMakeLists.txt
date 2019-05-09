@@ -5,15 +5,16 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 include_directories(.)
+include_directories(/levels)
 
-
+ 
 
 add_executable(MarioSokobanConsole
 #main
 src/main.cpp
 #Maze
 src/Maze/Maze.cpp
-src/Maze/Maze.h
+src/Maze/Maze.h 
 #utils
 src/utils/Console.cpp
 src/utils/Console.h
@@ -22,7 +23,7 @@ src/utils/Coord.cpp
 src/utils/Coord.h 
 		
 src/utils/Chrono.cpp 
-src/utils/Chrono.h
+src/utils/Chrono.h 
 		
 src/utils/Util.cpp
 src/utils/Util.h  
@@ -43,14 +44,16 @@ src/BFS_Stuff/BFSPLUS.h
 		src/BFS_Stuff/Heuristique/note.cpp
         src/BFS_Stuff/Heuristique/note.h  
 	#BFS_Objects
-	src/BFS_Stuff/BFS_Objects/MapStat.cpp 
-	src/BFS_Stuff/BFS_Objects/MapStat.h
-	src/BFS_Stuff/BFS_Objects/BFSCase.h
-	src/BFS_Stuff/BFS_Objects/BFSCase.cpp
+	
+	src/BFS_Stuff/BFS_Objects/Node.h
+	src/BFS_Stuff/BFS_Objects/Node.cpp 
+	src/BFS_Stuff/BFS_Objects/Chapter.h
 		#Mother_Class
-		src/BFS_Stuff/BFS_Objects/Mother_Class/BFSCaseMother.cpp
-		src/BFS_Stuff/BFS_Objects/Mother_Class/BFSCaseMother.h
+		src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.cpp
+		src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h
+
+
 
          
           
-        )
+)

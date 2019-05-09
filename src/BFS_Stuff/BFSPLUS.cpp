@@ -4,7 +4,7 @@
 #include "src/BFS_Stuff/Heuristique/Heuristique.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/DeadLocks/Case_morte.h"
-#include "src/BFS_Stuff/BFS_Objects/BFSCase.h"
+#include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include <vector>
 #include <algorithm>
 #include <sstream>
@@ -69,7 +69,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 	std::vector<bool> new_zone_accessible;
 	std::vector<unsigned char> field = m->getField(), field_originel = m->getField();
 	std::vector<unsigned short> posBoxes = m->getPosBoxes();
-	std::vector<bool> zone_originel = u.calcZoneAccessible(*m);
+	std::vector<bool> zone_originel = u.calcZoneAccessible(m);
 	//	marque.clear();
 
 	int position_player_or = m->getPosPlayer();
@@ -80,18 +80,17 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 
 	marqued();
 	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
-	std::vector< BFSCase::BFSCaseInfo>caseTracker;
-	std::priority_queue<BFSCase, std::vector<BFSCase>, BestBFSCase> queue;
-	BFSCase::BFSCaseInfo bfsR(0, -1, position_player_or, -1);
+	std::vector< Node::NodeRetrackInfo>caseTracker;
+	std::priority_queue<Node, std::vector<Node>, BestBFSCase> queue;
+	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	BFSCase initCase(m->getPosBoxes().size(), zone_originel, m->getField(), (unsigned short)0, bfsR);
+	Node initCase(heurisitique.getChapters(), zone_originel, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
 	caseTracker.push_back(bfsR);
-	heurisitique.generateMapStateFromField(&initCase);
 	heurisitique.calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
 	while (!win && !queue.empty())
 	{
-		BFSCase currentCase = queue.top();
+		Node currentCase = queue.top();
 		queue.pop();
 		profondeur = currentCase.profondeur;
 		field = currentCase.field;
@@ -102,11 +101,12 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 		m->change_etat_jeu(field, zone_accessible);
 		posBoxes = m->getPosBoxes();
 		for (int boxID = 0; boxID < m->getPosBoxes().size(); boxID++)
-		{
+		{	//position of the box
+
 			//si la caisse est deja sur un goal ideal on a pas besoin d'étudier son cas
 			//Attention ne marchera pas pour tous les niveau
-			if (currentCase.mapStat.isBoxPlaceOnIdealGoal(boxID))
-				continue;
+				if (currentCase.placedBoxes[boxID])
+					continue;
 
 
 			/**
@@ -114,9 +114,10 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 			*/
 			for (char direction : m->allDirection)
 			{
-				short offset = m->getMoveOffset(direction);
-				//position of the box
 				short posBox = posBoxes[boxID];
+
+				short offset = m->getMoveOffset(direction);
+
 				//position of the player for push the box
 				short pusherPlace = posBox - offset;
 				//position of th ebox after pushing it
@@ -143,7 +144,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 							if (hasAccessZoneChange(direction))
 							{
 								//It needs to be recalculate
-								new_zone_accessible = u.calcZoneAccessible(*m);
+								new_zone_accessible = u.calcZoneAccessible(m);
 							}
 							else
 							{
@@ -156,8 +157,8 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 							//Calcul de l'heuristique
 
 							//	marque_field.push_back(m->getField());
-							BFSCase::BFSCaseInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
-							BFSCase newCase(currentCase.mapStat, new_zone_accessible, m->getField(), profondeur + 1, bfsR);
+							Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
+							Node newCase(currentCase.chapter, new_zone_accessible, m->getField(), profondeur + 1, bfsR,currentCase.placedBoxes);
 							heurisitique.calcHeuristiqueNote(&newCase, boxID, newPosBox);
 							queue.push(newCase);
 							caseTracker.push_back(bfsR);
@@ -180,7 +181,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 	}
 
 
-	BFSCase::BFSCaseInfo retrack = caseTracker.back();
+	Node::NodeRetrackInfo retrack = caseTracker.back();
 	while (retrack.idCase != 0) {
 		resolution.push_back(retrack.playerPosAfterMove);
 		resolution.push_back(retrack.playerPosBeforeMove);

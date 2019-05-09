@@ -2,7 +2,7 @@
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"
 #include "src/utils/Coord.h"
-#include "src/BFS_Stuff/BFS_Objects/Mother_Class/BFSCaseMother.h"
+#include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 
 #include <math.h>
 #include <sstream>
@@ -21,7 +21,9 @@ Util::~Util()
 	//dtor
 }
 
-
+/*
+* empty a queue
+*/
 void Util::vider(std::queue<unsigned short> &t)
 {
 	while (!t.empty())
@@ -29,6 +31,9 @@ void Util::vider(std::queue<unsigned short> &t)
 
 }
 
+/*
+* empty a queue
+*/
 void Util::vider(std::queue<std::vector<unsigned char>> &t)
 {
 	while (!t.empty())
@@ -36,6 +41,9 @@ void Util::vider(std::queue<std::vector<unsigned char>> &t)
 
 }
 
+/*
+* empty a queue
+*/
 void Util::vider(std::queue< BFSCase_relier_point> &queue)
 {
 	std::queue<BFSCase_relier_point> empty;
@@ -46,23 +54,23 @@ void Util::vider(std::queue< BFSCase_relier_point> &queue)
 * Calculate all the accesble square in the field with BFS
 * (endless bfs which end the the queue is empty)
 */
-std::vector<bool> Util::calcZoneAccessible(Maze m)
+std::vector<bool> Util::calcZoneAccessible(const Maze  *m)
 {
 
 	std::vector<bool> marque;
-	marque.resize(m.getField().size(), false);
+	marque.resize(m->getField().size(), false);
 	std::queue<unsigned short> file;
-	short position = m.getPosPlayer();
+	short position = m->getPosPlayer();
 	marque[position] = true;
 	file.push(position);
 
 	while (!file.empty())
 	{
 		position = file.front();
-		for (char dir : m.allDirection) {
-			short offset = m.getMoveOffset(dir);
+		for (char dir : m->allDirection) {
+			short offset = m->getMoveOffset(dir);
 			short newPos = position + offset;
-			if (m.isSquareWalkable(newPos) && !marque[newPos]) {
+			if (m->isSquareWalkable(newPos) && !marque[newPos]) {
 				file.push(newPos);
 				marque[newPos] = true;
 			}
@@ -76,7 +84,7 @@ std::vector<bool> Util::calcZoneAccessible(Maze m)
 * this method will receive a vector of succesive position.
 * it will give in return a vector of move directctive to follow in passed through each position of the vector
 */
-std::vector<unsigned short> Util::relier_point(Maze m, std::vector <unsigned short> positions)
+std::vector<unsigned short> Util::relier_point( Maze  m, std::vector <unsigned short> positions)
 {
 	std::cout << std::endl << "BFS DONE, linking points..." << std::endl;
 	std::vector<unsigned short> resolution, temp;
@@ -88,7 +96,7 @@ std::vector<unsigned short> Util::relier_point(Maze m, std::vector <unsigned sho
 	{
 		win = false;
 		this->vider(queue);
-		queue.push(BFSCase_relier_point(m.getField(), positions[i],0,-1,-1));
+		queue.push(BFSCase_relier_point(m.getField(), positions[i], 0, -1, -1));
 		marque.push_back(BFSCase_relier_point(m.getField(), positions[i], 0, -1, -1));
 
 		while (!win)
@@ -107,7 +115,7 @@ std::vector<unsigned short> Util::relier_point(Maze m, std::vector <unsigned sho
 					if (!m.isSquareBox(newPosition) || (newPosition == positions[i + 1]))
 					{
 						m.updatePlayer(dir);
-						BFSCase_relier_point newCase(m.getField(), m.getPosPlayer(),(int)marque.size(),currentCase.idCase,dir) ;
+						BFSCase_relier_point newCase(m.getField(), m.getPosPlayer(), (int)marque.size(), currentCase.idCase, dir);
 
 						if (!compare(newCase))
 						{
@@ -138,12 +146,14 @@ std::vector<unsigned short> Util::relier_point(Maze m, std::vector <unsigned sho
 	}
 
 	return resolution;
-	   	 
+
 
 }
 
 
-
+/*
+*return true if th tstCase is alrea	dy marqueds
+*/
 bool Util::compare(BFSCase_relier_point tstCase)
 {
 	for (std::vector<BFSCase_relier_point>::iterator ccase = marque.begin(); ccase != marque.end(); ++ccase)
@@ -154,7 +164,6 @@ bool Util::compare(BFSCase_relier_point tstCase)
 	}
 	return false;
 }
-
 
 
 /**
@@ -224,24 +233,24 @@ std::string Util::choose_level()
 	return path;
 }
 
-
 /**
 	* Return the path beetween the square  send in parameters and the nearest goal.
 	* If no possible path, return empty vector
 	* path is the id of all the square.
+	*calculating in "pushingBox movement"
 	*@param:squareID number of the square in the field
 	*@return if the square can not reached a goal, return empty vector. If it is a wall or a goal return empty vector
 	* else will return a path of all the square ID to reach the goal
 
 */
-std::deque<short> Util::getPathSquareToGoal(Maze m, short square)
+std::deque<short> Util::getPathSquareToGoalPBM(const Maze  *m , short square)
 {
 	std::deque<short> res;
 
 	/**
 	* Si il ne s'agit pas d'une case marquable comme deadSquare
 	*/
-	if (m.isSquareGoal(square) || m.isSquareWall(square) || m.isSquareDeadSquare(square))
+	if (m->isSquareGoal(square) || m->isSquareWall(square) || m->isSquareDeadSquare(square))
 	{
 		return res;
 	}
@@ -251,7 +260,7 @@ std::deque<short> Util::getPathSquareToGoal(Maze m, short square)
 	//map to retrace the path to the goal
 	//  square=>previous_square
 	std::unordered_map<short, short> origin;
-	marque.resize(m.getField().size(), false);
+	marque.resize(m->getField().size(), false);
 	queue.push(square);
 	marque[square] = true;
 	bool goal_reached = false;
@@ -260,19 +269,19 @@ std::deque<short> Util::getPathSquareToGoal(Maze m, short square)
 	{
 		unsigned char pos = queue.front();
 		queue.pop();
-		for (char dir : m.allDirection)
+		for (char dir : m->allDirection)
 		{
-			short offset = m.getMoveOffset(dir);
+			short offset = m->getMoveOffset(dir);
 			short newPos = pos + offset;
 			short playerPos = pos - offset;
 			//si on sort du terrain, on abbandone
-			if (playerPos < 0 || newPos >= (short)m.getSize() || playerPos >= (short)m.getSize() || newPos < 0)
+			if (playerPos < 0 || newPos >= (short)m->getSize() || playerPos >= (short)m->getSize() || newPos < 0)
 				continue;
 			//si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
-			if (marque[newPos] || !(m.isSquareWalkable(newPos) || m.isSquareBox(newPos)) || m.isSquareDeadSquare(newPos))
+			if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
 				continue;
 			//Si la player pos est innaccesilbe on abbandonne
-			if (!(m.isSquareWalkable(playerPos) || m.isSquareBox(playerPos)))
+			if (!(m->isSquareWalkable(playerPos) || m->isSquareBox(playerPos)))
 			{
 				continue;
 			}
@@ -280,7 +289,7 @@ std::deque<short> Util::getPathSquareToGoal(Maze m, short square)
 			queue.push(newPos);
 			marque[newPos] = true;
 			lastPos = newPos;
-			if (m.isSquareGoal(newPos))
+			if (m->isSquareGoal(newPos))
 			{
 				goal_reached = true;
 				break;
@@ -300,8 +309,6 @@ std::deque<short> Util::getPathSquareToGoal(Maze m, short square)
 	return res;
 }
 
-
-
 /**
 	* Return the path beetween the fromSquare  send in parameters and the toSquare .
 	* If no possible path, return empty vector
@@ -309,16 +316,17 @@ std::deque<short> Util::getPathSquareToGoal(Maze m, short square)
 	*@param:fromSquare number of the square in the field
 	*@return if the square can not reached a goal, return empty vector. If it is a wall or a goal return empty vector
 	* else will return a path of all the square ID to reach the goal
+	*calculating in "pushingBox movement"
 
 */
-std::deque<short> Util::getPathSquareToSquare(Maze m, short fromSquare, short toSquare)
+std::deque<short> Util::getPathSquareToSquarePBM(const Maze  *m, short fromSquare, short toSquare)
 {
 	std::deque<short> res;
 	short square = fromSquare;
 	/**
 	* Si il ne s'agit pas d'une case marquable comme deadSquare
 	*/
-	if (m.isSquareWall(square) || m.isSquareDeadSquare(square))
+	if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
 	{
 		return res;
 	}
@@ -328,7 +336,7 @@ std::deque<short> Util::getPathSquareToSquare(Maze m, short fromSquare, short to
 	//map to retrace the path to the goal
 	//  square=>previous_square
 	std::unordered_map<short, short> origin;
-	marque.resize(m.getField().size(), false);
+	marque.resize(m->getField().size(), false);
 	queue.push(square);
 	marque[square] = true;
 	bool goal_reached = false;
@@ -337,19 +345,19 @@ std::deque<short> Util::getPathSquareToSquare(Maze m, short fromSquare, short to
 	{
 		unsigned char pos = queue.front();
 		queue.pop();
-		for (char dir : m.allDirection)
+		for (char dir : m->allDirection)
 		{
-			short offset = m.getMoveOffset(dir);
+			short offset = m->getMoveOffset(dir);
 			short newPos = pos + offset;
 			short playerPos = pos - offset;
 			//si on sort du terrain, on abbandone
-			if (playerPos < 0 || newPos >= (short)m.getSize() || playerPos >= (short)m.getSize() || newPos < 0)
+			if (playerPos < 0 || newPos >= (short)m->getSize() || playerPos >= (short)m->getSize() || newPos < 0)
 				continue;
 			//si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
-			if (marque[newPos] || !(m.isSquareWalkable(newPos) || m.isSquareBox(newPos)) || m.isSquareDeadSquare(newPos))
+			if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
 				continue;
 			//Si la player pos est innaccesilbe on abbandonne
-			if (!(m.isSquareWalkable(playerPos) || m.isSquareBox(playerPos)))
+			if (!(m->isSquareWalkable(playerPos) || m->isSquareBox(playerPos)))
 			{
 				continue;
 			}
@@ -377,7 +385,103 @@ std::deque<short> Util::getPathSquareToSquare(Maze m, short fromSquare, short to
 	return res;
 }
 
-void Util::dispVector(Maze m, std::vector<short> vec)
+/**
+	* Return the path beetween the fromSquare  send in parameters and the toSquare .
+	* If no possible path, return empty vector
+	* path is the id of all the square.
+	*@param:fromSquare number of the square in the field
+	*@return if the square can not reached a goal, return empty vector. If it is a wall or a goal return empty vector
+	* else will return a path of all the square ID to reach the goal
+	*calculating in "moving player movement"
+*/
+std::deque<short> Util::getPathSquareToSquareMPM(const Maze  *m, short fromSquare, short toSquare)
+{
+	std::deque<short> res;
+	short square = fromSquare;
+	/**
+	* Si il ne s'agit pas d'une case marquable comme deadSquare
+	*/
+	if (m->isSquareWall(square) )
+	{
+		return res;
+	}
+	std::queue< unsigned short> queue;
+	std::vector<bool> marque;
+
+	//map to retrace the path to the goal
+	//  square=>previous_square
+	std::unordered_map<short, short> origin;
+	marque.resize(m->getField().size(), false);
+	queue.push(square);
+	marque[square] = true;
+	bool goal_reached = false;
+	short lastPos;
+	while (!queue.empty())
+	{
+		unsigned char pos = queue.front();
+		queue.pop();
+		for (char dir : m->allDirection)
+		{
+			short offset = m->getMoveOffset(dir);
+			short newPos = pos + offset;
+			//si on sort du terrain, on abbandone
+			if (newPos < 0 || newPos >= (short)m->getSize())
+				continue;
+			//si la nouvelle case de la box est marqué, ou pas walkable ou mur on abbandone ou un deadsquare
+			if (marque[newPos] || !(m->isSquareWalkable(newPos)||m->isSquareBox(newPos)) ||m->isSquareDeadSquare(newPos))
+				continue;
+		
+			origin.insert({ newPos, pos });
+			queue.push(newPos);
+			marque[newPos] = true;
+			lastPos = newPos;
+			if (newPos == toSquare)
+			{
+				goal_reached = true;
+				break;
+			}
+		}
+		if (goal_reached)
+		{
+			break;
+		}
+	}
+
+	while (goal_reached&&lastPos != square)
+	{
+		res.push_front(lastPos);
+		lastPos = origin[lastPos];
+	}
+	return res;
+}
+/**
+* return the dist map to go to this.
+* calcuate in ignoring box
+*  calcuate in "pushingBox movement"
+*/
+std::vector<short> Util::getDistMapOfSquare(const Maze  *m, short toSquare) {
+	std::vector<short> res;
+	std::vector<unsigned char> field = m->getField();
+	for (unsigned square = 0; square < m->getField().size(); square++)
+	{
+		if (square == toSquare) {
+			res.push_back(0);
+			continue;
+		}
+		if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
+		{
+			res.push_back(-1);
+			continue;
+		}
+		unsigned size = this->getPathSquareToSquarePBM(m, square, toSquare).size();
+		size = size == 0 ? -1 : size;
+		res.push_back(size);
+	}
+	return res;
+}
+
+
+void Util::dispVector(const Maze  *m, std::vector<short> vec)
 {
 	int i = 1;
 	for (short sq : vec)
@@ -387,7 +491,7 @@ void Util::dispVector(Maze m, std::vector<short> vec)
 		{
 			std::cout << " ";
 		}
-		if (i % (m.getCol()) == 0 && i > 0)
+		if (i % (m->getCol()) == 0 && i > 0)
 			std::cout << std::endl;
 		i++;
 	}

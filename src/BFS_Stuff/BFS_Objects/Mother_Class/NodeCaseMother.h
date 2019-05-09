@@ -1,11 +1,11 @@
 #ifndef BFSCASE_MOTHER_H
 #define BFSCASE_MOTHER_H
 
-class BFSCaseMother {
+class NodeCaseMother {
 public:
-	BFSCaseMother(int id, int idParent) :
+	NodeCaseMother(int id, int idParent) :
 		idParentCase(idParent), idCase(id) {};
-	virtual ~BFSCaseMother() {};
+	virtual ~NodeCaseMother() {};
 	
 	int idCase;
 	int idParentCase;

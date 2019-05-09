@@ -356,7 +356,7 @@ void Maze::updateDraw(char mov)
 /**
 * return the offset created a mov in this dir
 */
-short Maze::getMoveOffset(unsigned char dir)
+ short Maze::getMoveOffset(unsigned char dir) const
 {
     switch (dir)
     {
@@ -497,7 +497,7 @@ std::ostream& operator << (std::ostream& O, const Maze& m)
     }
     Console::getInstance()->setColor(_COLOR_DEFAULT);
     O << std::endl;
-   
+
     return O;
 }
 

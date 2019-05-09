@@ -56,7 +56,7 @@ int main()
 
 	while (true)
 	{
-		std::cout << "press space for launch BFS";
+		std::cout << "press space for launch BFS"<<std::endl;
 		while (!g.keyPressed())
 		{
 
@@ -67,6 +67,7 @@ int main()
 		switch (key)
 		{
 		case ' ':
+		case 53:
 			//DEADLOCKS DYNAMIQUE
 
 			std::cout << "BEST BFS";

@@ -139,7 +139,7 @@ public:
     * right +1
     * left -1
     */
-    short getMoveOffset(unsigned char dir);
+    short getMoveOffset(unsigned char dir) const;
 
     /**
     * return a vector of possible adjacents position.
@@ -302,7 +302,7 @@ public:
      *
      * @return number of col
      */
-    unsigned int getCol()
+    unsigned int getCol() const
     {
         return m_col;
     }
