@@ -416,6 +416,7 @@ inline  char Maze::getOppositeDirection(char dir)
 */
 void Maze::initDraw()
 {
+
     for (unsigned int l = 0; l < this->getSize(); l++)
     {
         if (l == this->m_pos_player)
@@ -438,7 +439,8 @@ void Maze::initDraw()
             std::cout << std::endl;
         }
     }
-    std::cout << std::endl;
+	std::cout << std::endl;
+
 }
 
 /**
@@ -448,6 +450,15 @@ void Maze::initDraw()
 void Maze::drawMove(std::vector<unsigned char> chemin, double temp, int noeudVisit)
 {
     system("CLS");
+	Console* c = Console::getInstance();
+
+	c->gotoLigCol(this->getLig() + 10, 0);
+	std::cout << std::endl;
+	std::cout << chemin.size() << " mouvements" << std::endl;
+	for (short c : chemin) {
+		std::cout << c << " ";
+	}
+	c->gotoLigCol(0, 0);
     std::cout << "temps: " << temp << " s" << std::endl << "noeuds visite:" << noeudVisit << std::endl << std::endl;
     this->initDraw();
     for (int i = 0; i < chemin.size(); i++)

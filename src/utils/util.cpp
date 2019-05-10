@@ -195,7 +195,7 @@ std::string Util::choose_level()
 	std::cout << "level: ";
 	std::cin >> a;
 	std::cout << std::endl << std::endl;
-	path = "./levels/";
+	path = "C:/levels/";
 	b = a / 10;
 	c = a;
 	c = c / 10;

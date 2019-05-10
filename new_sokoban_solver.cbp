@@ -56,7 +56,7 @@
 		<Unit filename="src/BFS_Stuff/DeadLocks/Case_morte.h" />
 		<Unit filename="src/BFS_Stuff/Deadlocks/case_morte.cpp" />
 		<Unit filename="src/BFS_Stuff/Heuristique/Heuristique.cpp" />
-		<Unit filename="src/BFS_Stuff/Heuristique/Heuristique.h" />
+		<Unit filename="src/BFS_Stuff/Heuristique/HeuristiquePivot.h" />
 		<Unit filename="src/BFS_Stuff/Heuristique/note.cpp" />
 		<Unit filename="src/BFS_Stuff/Heuristique/note.h" />
 		<Unit filename="src/Maze/Maze.cpp" />

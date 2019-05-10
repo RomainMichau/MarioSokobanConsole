@@ -1,11 +1,11 @@
-#ifndef HEURISTIQUE_H
-#define HEURISTIQUE_H
+#ifndef AHEURISTIQUE_H
+#define AHEURISTIQUE_H
 #include "src/Maze/Maze.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/Case_morte.h"
-class Heuristique
+class AHeuristique
 {
 public:
 
@@ -49,43 +49,10 @@ public:
 	};
 
 public:
-	Heuristique(Maze *m, int coefA, int coefB);
-	~Heuristique();
-	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
-	Chapter* getChapters() { return &chapters; };
+	AHeuristique(Maze *m, int coefA, int coefB);
+	~AHeuristique();
+	virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)=0;
 private:
-
-	void calcGameStat();
-
-
-	Node *node;
-
-	/**
-	* Stat calculators
-	*/
-	std::vector<short> calcFrequentationSquares();
-
-	std::vector<short> calcMapDistanceFromNearestGoals();
-
-
-	/**
-	* return the pivot point of mapStat
-	* definit of pivotPoint: the point with the most frequentation.
-	* if there is many point with the same max frequentation, then the farest from the goal win
-	* @see MapStat
-	*/
-	short calcPivotPointPos(std::vector<short> distMap);
-
-
-	Chapter  calcChapter();
-
-	/**
-	* Note calculator
-	*/
-	unsigned short calc_note_distance_box_bfs_multiple_box();
-	unsigned short calc_note_distance_box_bfs_multiple_box_new();
-	unsigned short calc_note_distance_with_distMap();
-
 
 	Util u;
 	Maze *m;
@@ -95,13 +62,7 @@ private:
 	* stats about the game
 	*/
 	GameStat gameStat;
-	/*
-	* lionked list of chapterts order by number:
-	*	chapters[0]=> chapter0
-	*	chapters[1]=> chapter1
-	*	chapters[2]=> chapter2
-	*/
-	Chapter  chapters;
+
 };
 
 

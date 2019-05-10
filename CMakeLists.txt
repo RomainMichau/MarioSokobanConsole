@@ -38,8 +38,8 @@ src/BFS_Stuff/BFSPLUS.h
 	src/BFS_Stuff/Deadlocks/Case_morte.cpp
     src/BFS_Stuff/Deadlocks/Case_morte.h
     #Heuristique
-    src/BFS_Stuff/Heuristique/Heuristique.cpp
-    src/BFS_Stuff/Heuristique/Heuristique.h
+    src/BFS_Stuff/Heuristique/HeuristiquePivot.cpp
+    src/BFS_Stuff/Heuristique/HeuristiquePivot.h
 		#Note  
 		src/BFS_Stuff/Heuristique/note.cpp
         src/BFS_Stuff/Heuristique/note.h  

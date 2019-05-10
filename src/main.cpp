@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "src/BFS_Stuff/BFSPLUS.h"
-#include "src/BFS_Stuff/Heuristique/Heuristique.h"
+#include "src/BFS_Stuff/Heuristique/HeuristiquePivot.h"
 #include "src/utils/Chrono.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/DeadLocks/Case_morte.h"

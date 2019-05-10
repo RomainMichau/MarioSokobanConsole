@@ -27,7 +27,7 @@ private:
 	};
 
 	bool hasAccessZoneChange(char offset);
-	bool marqued();
+	bool marqued(std::vector<bool> acc);
 	std::unordered_set<std::string> marque;
 
 };

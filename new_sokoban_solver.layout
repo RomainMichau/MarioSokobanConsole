@@ -2,29 +2,49 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="src\BFS_Stuff\BFSPLUS.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\BFS_Stuff\BFS_Objects\Node.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2892" topLine="48" />
+			<Cursor1 position="209" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\BFS_Stuff\BFS_Objects\BFSCase.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\BFS_Stuff\BFS_Objects\Node.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="346" topLine="0" />
+			<Cursor1 position="49" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\BFS_Stuff\BFS_Objects\BFSCase.h" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\BFS_Stuff\Deadlocks\case_morte.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="533" topLine="10" />
+			<Cursor1 position="701" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\BFS_Stuff\Heuristique\Heuristique.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\BFS_Stuff\Heuristique\Heuristique.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1667" topLine="25" />
+			<Cursor1 position="2486" topLine="63" />
+		</Cursor>
+	</File>
+	<File name="src\BFS_Stuff\BFSPLUS.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1445" topLine="33" />
 		</Cursor>
 	</File>
 	<File name="src\BFS_Stuff\BFSPLUS.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="38" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Maze\Maze.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9370" topLine="345" />
+		</Cursor>
+	</File>
+	<File name="src\Maze\Maze.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2715" topLine="122" />
+		</Cursor>
+	</File>
+	<File name="src\BFS_Stuff\Heuristique\Heuristique.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="578" topLine="7" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
