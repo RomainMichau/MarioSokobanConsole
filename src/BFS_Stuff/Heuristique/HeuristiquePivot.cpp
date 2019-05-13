@@ -32,8 +32,10 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 {
 	this->node = node; 
 	unsigned short note_caisse_place;
+	//[OPTIMIZER]
+	//if idealGoal is reach then we pass to the next chapter
  	if ( newPos == this->node->chapter->getIdealGoalPos()) {
-		//this->node->chapter = this->node->chapter->getNextChapter();
+		this->node->chapter = this->node->chapter->getNextChapter();
 		this->node->placedBoxes[boxPushedID] = true;
 
 	}
@@ -44,6 +46,8 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 
 	note.set_note_distance_box(distanecNoteBFS);
 
+	//[OPTIMIZER]
+	//we add a penalty for each box which is not on a ideal Goal
 	note_caisse_place = 0;
 	for (unsigned int i = 0; i < box.size(); i++)
 	{

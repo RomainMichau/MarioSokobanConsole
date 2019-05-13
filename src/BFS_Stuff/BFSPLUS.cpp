@@ -7,7 +7,7 @@
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include <vector>
 #include <algorithm>
-#include <sstream>
+#include <sstream>	
 #include <iostream>
 #include <string>
 #include <iterator>
@@ -31,14 +31,17 @@ BFSPLUS:: ~BFSPLUS() {}
 */
 bool BFSPLUS::hasAccessZoneChange(char direction)
 {
-	short offset = m->getMoveOffset(direction);
+	 /*short offset = m->getMoveOffset(direction);
 	std::vector<char> adjDir = m->getAdjacentDirection(direction);
 
 	return ((m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && !m->isSquareWalkable(m->getPosPlayer() - offset + adjDir[0])) || //if we open an adj path
 		(m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && !m->isSquareWalkable(m->getPosPlayer() - offset - adjDir[1]) ////if we open an adj path
 			) || (!m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && m->isSquareWalkable(m->getPosPlayer() + offset + adjDir[0])) //if we close an adj path
 		|| (!m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && m->isSquareWalkable(m->getPosPlayer() + adjDir[1] + offset)));
-}
+
+	*/
+	return true;
+		}
 
 /**
 * return true if the current boxPos of *m is already marqued
@@ -49,10 +52,7 @@ bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
 	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
 		std::vector<unsigned char> field = m->getField();
 	std::stringstream result;
-
-	//REAL hash
-	nposBoxes.push_back(acc);
-	
+	nposBoxes.push_back(acc);	
 	std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, "."));
 	std::string hashG =  result.str();
 
@@ -112,12 +112,12 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 		for (int boxID = 0; boxID < m->getPosBoxes().size(); boxID++)
 		{	//position of the box
 
+			//[OPTIMIZER]
 			//si la caisse est deja sur un goal ideal on a pas besoin d'étudier son cas
 			//Attention ne marchera pas pour tous les niveau
-
-			/*if (currentCase.placedBoxes[boxID])
+			if (currentCase.placedBoxes[boxID])
 					continue;
-*/
+
 
 					/**
 					we look for pushed all boxes in all directions possibles
@@ -137,16 +137,16 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 				//We look if the current box can be pushed in the direction
 				if (!win&&zone_accessible[pusherPlace] && (m->_canPushBox(posBox, direction, newPositionOfBox) && !m->isSquareDeadSquare(newPosBox)))
 				{
+					//[OPTIMIZER]
 					//If yes we check that it will not create any dynamical deadlocks
-					if (true) {
-				//	if (!dead.detect_dyn_dead(pusherPlace, direction)) {
-						/*	std :: cout << "cheliu";*/
+					if (!dead.detect_dyn_dead(pusherPlace, direction)) {
 							//We put the player a the place for pushing the box
 						m->setPlayerPos(pusherPlace);
 
 						//we push the box in the wanted direction
 						win = m->updatePlayer(direction);
 
+						//[OPTIMIZER TODO]
 						//we check that we didn't already marque this case and marqued it if ut is not the case
 						//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
 						if (hasAccessZoneChange(direction))
@@ -154,17 +154,10 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 							//It needs to be recalculate
 							new_zone_accessible = u.calcZoneAccessible(m, newNPos);
 						}
-						else
-						{
-							//it does not need, we juste have to make few changement
-							new_zone_accessible = u.calcZoneAccessible(m, newNPos);
-
-						}
+					
+						//[OPTIMIZER]
 						if (!marqued(newNPos, new_zone_accessible))
 						{
-							
-
-							//Calcul de l'heuristique
 
 							//	marque_field.push_back(m->getField());
 							Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
@@ -204,11 +197,9 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 	resolution.push_back(pos_originel);
 	std::reverse(resolution.begin(), resolution.end());
 	resolution = u.relier_point(*m, resolution);
-
 	for (unsigned short s : resolution) {
 		std::cout << s << " ";
 	}
-	//system("pause");
 	chemin = m->convert(resolution);
 
 	noeudvisite = marque.size();
