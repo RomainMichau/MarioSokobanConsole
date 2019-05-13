@@ -33,7 +33,7 @@ public:
 	void vider(std::queue< BFSCase_relier_point> &queue);
 
 
-	std::vector<bool> calcZoneAccessible(const Maze* m);
+	std::vector<bool> calcZoneAccessible(const Maze* m,short &normPos);
 	std::vector<unsigned short> relier_point( Maze m, std::vector <unsigned short>);
 	std::string choose_level();
 	/**

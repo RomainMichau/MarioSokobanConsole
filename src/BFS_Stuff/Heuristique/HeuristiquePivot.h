@@ -4,7 +4,7 @@
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
-#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
+#include "src/BFS_Stuff/DeadLocks/case_morte.h"
 class HeuristiquePivot
 {
 public:

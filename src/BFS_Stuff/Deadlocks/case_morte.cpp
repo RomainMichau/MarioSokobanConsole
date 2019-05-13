@@ -3,7 +3,7 @@
 #include "src/utils/Coord.h"
 #include <fstream>
 #include <iomanip>
-#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
+#include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include <unordered_set>
 #include "src/utils/Util.h"
 

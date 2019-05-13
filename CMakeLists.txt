@@ -4,6 +4,7 @@ project(MarioSokobanConsole)
 set(CMAKE_CXX_STANDARD 14)
 
 
+
 include_directories(.)
 include_directories(/levels)
 
@@ -36,7 +37,7 @@ src/BFS_Stuff/BFSPLUS.cpp
 src/BFS_Stuff/BFSPLUS.h
 	#Deadlocks
 	src/BFS_Stuff/Deadlocks/Case_morte.cpp
-    src/BFS_Stuff/Deadlocks/Case_morte.h
+    src/BFS_Stuff/Deadlocks/case_morte.h
     #Heuristique
     src/BFS_Stuff/Heuristique/HeuristiquePivot.cpp
     src/BFS_Stuff/Heuristique/HeuristiquePivot.h
@@ -48,6 +49,7 @@ src/BFS_Stuff/BFSPLUS.h
 	src/BFS_Stuff/BFS_Objects/Node.h
 	src/BFS_Stuff/BFS_Objects/Node.cpp 
 	src/BFS_Stuff/BFS_Objects/Chapter.h
+	src/BFS_Stuff/BFS_Objects/Chapter.cpp
 		#Mother_Class
 		src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.cpp
 		src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h

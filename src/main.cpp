@@ -4,12 +4,12 @@
 #include "src/utils/Coord.h"
 #include "src/utils/KeyboardManager.h"
 #include <iostream>
-#include <stdio.h>
+#include <stdio.h> 
 #include "src/BFS_Stuff/BFSPLUS.h"
 #include "src/BFS_Stuff/Heuristique/HeuristiquePivot.h"
 #include "src/utils/Chrono.h"
 #include "src/utils/Util.h"
-#include "src/BFS_Stuff/DeadLocks/Case_morte.h"
+#include "src/BFS_Stuff/DeadLocks/case_morte.h"
 
 
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)

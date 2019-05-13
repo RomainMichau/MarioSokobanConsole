@@ -8,13 +8,13 @@ class BFSPLUS
 {
 public:
 	BFSPLUS(Maze *m);
-	virtual ~BFSPLUS() ;
+	virtual ~BFSPLUS();
 	std::vector<unsigned char> runBFS(unsigned &noeudvisite, int noteA, int noteB);
 	unsigned showSetSize() { return marque.size(); };
 
 private:
 	std::vector<unsigned short> resolution;
-	
+
 
 	Maze *m;
 
@@ -27,8 +27,8 @@ private:
 	};
 
 	bool hasAccessZoneChange(char offset);
-	bool marqued(std::vector<bool> acc);
-	std::unordered_set<std::string> marque;
+	bool marqued(short acc, std::vector<bool> zone);
+	std::unordered_set<std::string>marque;
 
 };
 

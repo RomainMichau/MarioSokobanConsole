@@ -30,10 +30,10 @@ HeuristiquePivot::~HeuristiquePivot()
 */
 void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)
 {
-	this->node = node;
+	this->node = node; 
 	unsigned short note_caisse_place;
-	if (newPos == this->node->chapter->getIdealGoalPos()) {
-		this->node->chapter = this->node->chapter->getNextChapter();
+ 	if ( newPos == this->node->chapter->getIdealGoalPos()) {
+		//this->node->chapter = this->node->chapter->getNextChapter();
 		this->node->placedBoxes[boxPushedID] = true;
 
 	}

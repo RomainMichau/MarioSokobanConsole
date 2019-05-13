@@ -11,5 +11,6 @@
 -detecter si il y a u point de pivot, si ce n'est pas le cas ne pas utiliser ce système
 
 CORRECTION:
-	-detection de changement de zone accessible a refaire
-	-probleme de deadlocks dynamique
+	-detection de changement de zone accessible a refaire 
+	-probleme de deadlocks dynamique (niveau 44 par exemple)
+	-probleme de marquage

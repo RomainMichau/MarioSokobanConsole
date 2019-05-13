@@ -30,9 +30,10 @@ public:
 	};
 
 
-	Node(Chapter *chapter, std::vector<bool> accessibleZone, std::vector<unsigned char> field, unsigned short profondeur, NodeRetrackInfo bfsR, short nbBoxes);
-	Node(Chapter *chapter, std::vector<bool> accessibleZone, std::vector<unsigned char> field, unsigned short profondeur, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
+	Node(Chapter *chapter, std::vector<bool> accessibleZone, short normalisePos,std::vector<unsigned char> field, unsigned short profondeur, NodeRetrackInfo bfsR, short nbBoxes);
+	Node(Chapter *chapter, std::vector<bool> accessibleZone, short normalisePos, std::vector<unsigned char> field, unsigned short profondeur, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
 	std::vector<bool> accessibleZone;
+	short normalisePos;
 	std::vector<unsigned char> field;
 	//true if box with id i is placed on current or past idealGOal
 	// placedBoxes[i] =>true

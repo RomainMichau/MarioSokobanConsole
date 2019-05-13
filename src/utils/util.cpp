@@ -54,9 +54,9 @@ void Util::vider(std::queue< BFSCase_relier_point> &queue)
 * Calculate all the accesble square in the field with BFS
 * (endless bfs which end the the queue is empty)
 */
-std::vector<bool> Util::calcZoneAccessible(const Maze  *m)
+std::vector<bool> Util::calcZoneAccessible(const Maze  *m, short &normPos)
 {
-
+	normPos = m->getSize();
 	std::vector<bool> marque;
 	marque.resize(m->getField().size(), false);
 	std::queue<unsigned short> file;
@@ -73,6 +73,8 @@ std::vector<bool> Util::calcZoneAccessible(const Maze  *m)
 			if (m->isSquareWalkable(newPos) && !marque[newPos]) {
 				file.push(newPos);
 				marque[newPos] = true;
+				if (newPos < normPos)
+					normPos = newPos;
 			}
 		}
 		file.pop();
@@ -80,11 +82,13 @@ std::vector<bool> Util::calcZoneAccessible(const Maze  *m)
 	return marque;
 }
 
+
+
 /**
 * this method will receive a vector of succesive position.
 * it will give in return a vector of move directctive to follow in passed through each position of the vector
 */
-std::vector<unsigned short> Util::relier_point( Maze  m, std::vector <unsigned short> positions)
+std::vector<unsigned short> Util::relier_point(Maze  m, std::vector <unsigned short> positions)
 {
 	std::cout << std::endl << "BFS DONE, linking points..." << std::endl;
 	std::vector<unsigned short> resolution, temp;
@@ -243,7 +247,7 @@ std::string Util::choose_level()
 	* else will return a path of all the square ID to reach the goal
 
 */
-std::deque<short> Util::getPathSquareToGoalPBM(const Maze  *m , short square)
+std::deque<short> Util::getPathSquareToGoalPBM(const Maze  *m, short square)
 {
 	std::deque<short> res;
 
@@ -401,7 +405,7 @@ std::deque<short> Util::getPathSquareToSquareMPM(const Maze  *m, short fromSquar
 	/**
 	* Si il ne s'agit pas d'une case marquable comme deadSquare
 	*/
-	if (m->isSquareWall(square) )
+	if (m->isSquareWall(square))
 	{
 		return res;
 	}
@@ -428,9 +432,9 @@ std::deque<short> Util::getPathSquareToSquareMPM(const Maze  *m, short fromSquar
 			if (newPos < 0 || newPos >= (short)m->getSize())
 				continue;
 			//si la nouvelle case de la box est marqué, ou pas walkable ou mur on abbandone ou un deadsquare
-			if (marque[newPos] || !(m->isSquareWalkable(newPos)||m->isSquareBox(newPos)) ||m->isSquareDeadSquare(newPos))
+			if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
 				continue;
-		
+
 			origin.insert({ newPos, pos });
 			queue.push(newPos);
 			marque[newPos] = true;

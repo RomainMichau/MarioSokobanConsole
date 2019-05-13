@@ -1,5 +1,6 @@
 #ifndef CHAPTER_H
 #define CHAPTER_H
+#include <vector>
 /**
 * represent a chapter.
 * work like a linked list
@@ -13,9 +14,9 @@ public:
 	short getIdealGoalId()const { return idealGoalId; };
 	void setGoalId(short id) { idealGoalId = id; };
 
-	short getIdealGoalPos()const { return idealGoalPos; };
+	short getIdealGoalPos()  ;
 	void setGoalPos(short Pos) { idealGoalPos = Pos; };
-
+	 
 	std::vector<short> getDistMap()const { return mapDistanceFromGoal; };
 	void setDistMap(std::vector<short> map) { mapDistanceFromGoal = map; };
 

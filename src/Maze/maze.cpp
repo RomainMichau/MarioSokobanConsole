@@ -658,7 +658,7 @@ void Maze::change_etat_jeu(std::vector<unsigned char> newField, unsigned short n
     unsigned short p = 0;
     for (int i = 0; i < newField.size(); i++)
     {
-        if (m_field[i] == 2 || m_field[i] == 3)
+        if (m_field[i] == SPRITE_BOX || m_field[i] == SPRITE_BOX_PLACED)
         {
             m_pos_boxes[b] = i;
 
