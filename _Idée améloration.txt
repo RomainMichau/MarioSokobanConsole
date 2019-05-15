@@ -11,7 +11,10 @@ TODO:
 	-identifier les case de passage obligatoire (grace a un gros bfs). Des qu'une box est dessus, enclencher une macro ou mettre une tres grosse note heuristique
 	-modifier l'heuristique de calcul de distance des box, pour éviter de le faire pour chaque box (c a d uniquement la box qui vient d'être deplacé)
 
-	
+
+DOING:
+	-Mettre en place en heritage pour l'heuristique (avoir 2 classe heuristique avec point de pivot et classical)
+=========================================================================================================================
 	
 DONE:
 	-probleme de marquage :DONE
@@ -20,4 +23,4 @@ DONE:
 	
 UNDOABLE:
 		-detection de changement de zone accessible a refaire  >> detectAccessZoneChangeCorrection
-			-To expensive
+			-To expensive and complexe to do
