@@ -501,3 +501,25 @@ void Util::dispVector(const Maze  *m, std::vector<short> vec)
 	}
 }
 
+
+void Util::dispVector(const Maze  *m, std::vector<bool> vec)
+{
+	int i = 1;
+	for (short sq : vec)
+	{
+		if (sq) {
+			Console::getInstance()->setColor(_COLOR_GREEN);
+		}
+		else {
+			Console::getInstance()->setColor(_COLOR_RED);
+
+		}
+		std::cout <<  "  "<<sq;
+	
+		if (i % (m->getCol()) == 0 && i > 0)
+			std::cout << std::endl;
+		i++;
+	}
+	Console::getInstance()->setColor(_COLOR_DEFAULT);
+
+}

@@ -58,6 +58,7 @@ public:
 	* display a vector of the size of the field
 	*/
 	void dispVector(const Maze* m, std::vector<short> vec);
+	void dispVector(const Maze* m, std::vector<bool> vec);
 
 
 

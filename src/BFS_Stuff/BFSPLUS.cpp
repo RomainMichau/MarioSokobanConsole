@@ -26,22 +26,9 @@ BFSPLUS:: ~BFSPLUS() {}
 
 
 
-/**
-* return true if the mov in the direction sent in parameters is going to change the accesible zone
-*/
-bool BFSPLUS::hasAccessZoneChange(char direction)
-{
-	 /*short offset = m->getMoveOffset(direction);
-	std::vector<char> adjDir = m->getAdjacentDirection(direction);
 
-	return ((m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && !m->isSquareWalkable(m->getPosPlayer() - offset + adjDir[0])) || //if we open an adj path
-		(m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && !m->isSquareWalkable(m->getPosPlayer() - offset - adjDir[1]) ////if we open an adj path
-			) || (!m->isSquareWalkable(m->getPosPlayer() + adjDir[0]) && m->isSquareWalkable(m->getPosPlayer() + offset + adjDir[0])) //if we close an adj path
-		|| (!m->isSquareWalkable(m->getPosPlayer() + adjDir[1]) && m->isSquareWalkable(m->getPosPlayer() + adjDir[1] + offset)));
 
-	*/
-	return true;
-		}
+
 
 /**
 * return true if the current boxPos of *m is already marqued
@@ -50,11 +37,11 @@ bool BFSPLUS::hasAccessZoneChange(char direction)
 bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
 {
 	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
-		std::vector<unsigned char> field = m->getField();
+	std::vector<unsigned char> field = m->getField();
 	std::stringstream result;
-	nposBoxes.push_back(acc);	
+	nposBoxes.push_back(acc);
 	std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, "."));
-	std::string hashG =  result.str();
+	std::string hashG = result.str();
 
 	bool marqued = marque.find(hashG) != marque.end();
 	if (!marqued) {
@@ -76,7 +63,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 	short pos_or;
 	std::vector<unsigned char> field = m->getField(), field_originel = m->getField();
 	std::vector<unsigned short> posBoxes = m->getPosBoxes();
-	std::vector<bool> zone_originel = u.calcZoneAccessible(m,  pos_or);
+	std::vector<bool> zone_originel = u.calcZoneAccessible(m, pos_or);
 	//	marque.clear();
 
 	int position_player_or = m->getPosPlayer();
@@ -85,13 +72,13 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 	unsigned short profondeur;
 	bool win = false;
 
-	marqued(pos_or,zone_originel);
+	marqued(pos_or, zone_originel);
 	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
 	std::vector< Node::NodeRetrackInfo>caseTracker;
 	std::priority_queue<Node, std::vector<Node>, BestBFSCase> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(heurisitique.getChapters(), zone_originel, pos_or,m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
+	Node initCase(heurisitique.getChapters(), zone_originel, pos_or, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
 	caseTracker.push_back(bfsR);
 	heurisitique.calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
@@ -116,12 +103,12 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 			//si la caisse est deja sur un goal ideal on a pas besoin d'étudier son cas
 			//Attention ne marchera pas pour tous les niveau
 			if (currentCase.placedBoxes[boxID])
-					continue;
+				continue;
 
 
-					/**
-					we look for pushed all boxes in all directions possibles
-					*/
+			/**
+			we look for pushed all boxes in all directions possibles
+			*/
 			for (char direction : m->allDirection)
 			{
 				short posBox = posBoxes[boxID];
@@ -140,7 +127,6 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 					//[OPTIMIZER]
 					//If yes we check that it will not create any dynamical deadlocks
 					if (!dead.detect_dyn_dead(pusherPlace, direction)) {
-							//We put the player a the place for pushing the box
 						m->setPlayerPos(pusherPlace);
 
 						//we push the box in the wanted direction
@@ -149,17 +135,11 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 						//[OPTIMIZER TODO]
 						//we check that we didn't already marque this case and marqued it if ut is not the case
 						//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
-						if (hasAccessZoneChange(direction))
-						{
-							//It needs to be recalculate
-							new_zone_accessible = u.calcZoneAccessible(m, newNPos);
-						}
-					
+						new_zone_accessible = u.calcZoneAccessible(m, newNPos);
+
 						//[OPTIMIZER]
 						if (!marqued(newNPos, new_zone_accessible))
 						{
-
-							//	marque_field.push_back(m->getField());
 							Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
 							Node newCase(currentCase.chapter, new_zone_accessible, newNPos, m->getField(), profondeur + 1, bfsR, currentCase.placedBoxes);
 							heurisitique.calcHeuristiqueNote(&newCase, boxID, newPosBox);
