@@ -6,11 +6,15 @@
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+/**
+*	Class of heuristique wich use a Pivot Point Method (see def below)
+*	Method: When the pivot point is reached by a box, a macro drive the box to the ideal goal 
+*/
 class HeuristiquePivot:public AHeuristique
 {
+	friend class FHeuristique;
+
 public:
-
-
 
 
 	/**
@@ -50,7 +54,6 @@ public:
 	};
 
 public:
-	HeuristiquePivot(Maze *m, int coefA, int coefB);
 	~HeuristiquePivot();
 	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
 	virtual std::string sayHello() { return "Pivot Method Heurisique"; };
@@ -58,6 +61,7 @@ public:
 private:
 
 	void calcGameStat();
+	HeuristiquePivot(Maze *m, int coefA, int coefB);
 
 
 	Node *node;

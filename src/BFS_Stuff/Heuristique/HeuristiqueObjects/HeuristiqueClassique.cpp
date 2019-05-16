@@ -1,7 +1,7 @@
 #include "HeuristiqueClassique.h"
 
 HeuristiqueClassique::HeuristiqueClassique(Maze * m, int coefA, int coefB)
-	:AHeuristique(m, coefA,coefB)
+	:AHeuristique(m, coefA,coefB) 
 {
 }
 

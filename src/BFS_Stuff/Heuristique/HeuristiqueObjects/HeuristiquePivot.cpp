@@ -1,4 +1,4 @@
-#include "src/BFS_Stuff/Heuristique/HeuristiquePivot.h"
+#include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 #include "src/Maze/Maze.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
@@ -8,7 +8,7 @@
 #include <math.h>
 #include <queue>
 #include <vector>
-#include <unordered_set>
+#include <unordered_set> 
 #include <algorithm>
 HeuristiquePivot::HeuristiquePivot(Maze *m, int coefA, int coefB)
 	:AHeuristique(m,coefA,coefB)

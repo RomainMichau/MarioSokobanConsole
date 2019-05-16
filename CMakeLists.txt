@@ -39,16 +39,20 @@ src/BFS_Stuff/BFSPLUS.h
 	src/BFS_Stuff/Deadlocks/Case_morte.cpp
     src/BFS_Stuff/Deadlocks/case_morte.h
     #Heuristique
-    src/BFS_Stuff/Heuristique/HeuristiquePivot.cpp
-    src/BFS_Stuff/Heuristique/HeuristiquePivot.h
-    src/BFS_Stuff/Heuristique/HeuristiqueClassique.cpp
-    src/BFS_Stuff/Heuristique/HeuristiqueClassique.h
+    src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.cpp
+    src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h
+    src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.cpp
+    src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h
 		#Note  
 		src/BFS_Stuff/Heuristique/note.cpp
         src/BFS_Stuff/Heuristique/note.h  
 		#Mother_Class
 		src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h
 		src/BFS_Stuff/Heuristique/Abstract/AHeuristique.cpp
+		#Factroy
+		src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.cpp
+		src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.h
+
 	#BFS_Objects
 	
 	src/BFS_Stuff/BFS_Objects/Node.h

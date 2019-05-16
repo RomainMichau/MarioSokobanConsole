@@ -48,12 +48,14 @@ public:
 		short pivotPoint;
 	};
 
+
 public:
 	AHeuristique(Maze *m, int coefA, int coefB);
 	virtual ~AHeuristique();
 	virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)=0;
 	virtual std::string sayHello()=0; 
 	virtual Chapter* getChapters() = 0;
+	
 protected:
 
 	Util u;
@@ -65,6 +67,8 @@ protected:
 	* Note calculator
 	*/
 	unsigned short calc_note_distance_box_bfs_multiple_box();
+
+
 
 };
 
