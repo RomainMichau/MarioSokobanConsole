@@ -50,18 +50,21 @@ public:
 
 public:
 	AHeuristique(Maze *m, int coefA, int coefB);
-	~AHeuristique();
+	virtual ~AHeuristique();
 	virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)=0;
-private:
+	virtual std::string sayHello()=0; 
+	virtual Chapter* getChapters() = 0;
+protected:
 
 	Util u;
 	Maze *m;
 	Note note;
 	Case_morte deadlocks;
+
 	/**
-	* stats about the game
+	* Note calculator
 	*/
-	GameStat gameStat;
+	unsigned short calc_note_distance_box_bfs_multiple_box();
 
 };
 

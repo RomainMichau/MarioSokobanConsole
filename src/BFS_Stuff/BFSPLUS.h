@@ -4,17 +4,18 @@
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include <unordered_set>
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
+#include"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 class BFSPLUS
 {
 public:
-	BFSPLUS(Maze *m);
+	BFSPLUS(Maze *m,AHeuristique* heuristique);
 	virtual ~BFSPLUS();
-	std::vector<unsigned char> runBFS(unsigned &noeudvisite, int noteA, int noteB);
+	std::vector<unsigned char> runBFS(unsigned &noeudvisite);
 	unsigned showSetSize() { return marque.size(); };
 
 private:
 	std::vector<unsigned short> resolution;
-
+	AHeuristique* heurisitique;
 
 	Maze *m;
 
@@ -26,7 +27,6 @@ private:
 		}
 	};
 
-	bool hasAccessZoneChange(char offset);
 	bool marqued(short acc, std::vector<bool> zone);
 	std::unordered_set<std::string>marque;
 

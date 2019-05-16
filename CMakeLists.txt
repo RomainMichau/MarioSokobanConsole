@@ -41,9 +41,14 @@ src/BFS_Stuff/BFSPLUS.h
     #Heuristique
     src/BFS_Stuff/Heuristique/HeuristiquePivot.cpp
     src/BFS_Stuff/Heuristique/HeuristiquePivot.h
+    src/BFS_Stuff/Heuristique/HeuristiqueClassique.cpp
+    src/BFS_Stuff/Heuristique/HeuristiqueClassique.h
 		#Note  
 		src/BFS_Stuff/Heuristique/note.cpp
         src/BFS_Stuff/Heuristique/note.h  
+		#Mother_Class
+		src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h
+		src/BFS_Stuff/Heuristique/Abstract/AHeuristique.cpp
 	#BFS_Objects
 	
 	src/BFS_Stuff/BFS_Objects/Node.h

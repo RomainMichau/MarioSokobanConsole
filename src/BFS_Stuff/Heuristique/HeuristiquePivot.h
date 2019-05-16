@@ -5,7 +5,8 @@
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
-class HeuristiquePivot
+#include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+class HeuristiquePivot:public AHeuristique
 {
 public:
 
@@ -52,7 +53,8 @@ public:
 	HeuristiquePivot(Maze *m, int coefA, int coefB);
 	~HeuristiquePivot();
 	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
-	Chapter* getChapters() { return &chapters; };
+	virtual std::string sayHello() { return "Pivot Method Heurisique"; };
+	Chapter* getChapters() { return &chapters; }; 
 private:
 
 	void calcGameStat();
@@ -79,18 +81,8 @@ private:
 
 	Chapter  calcChapter();
 
-	/**
-	* Note calculator
-	*/
-	unsigned short calc_note_distance_box_bfs_multiple_box();
-	unsigned short calc_note_distance_box_bfs_multiple_box_new();
-	unsigned short calc_note_distance_with_distMap();
+	
 
-
-	Util u;
-	Maze *m;
-	Note note;
-	Case_morte deadlocks;
 	/**
 	* stats about the game
 	*/

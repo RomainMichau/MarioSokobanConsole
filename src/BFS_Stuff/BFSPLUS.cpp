@@ -15,11 +15,9 @@
 
 
 
-BFSPLUS::BFSPLUS(Maze *m)
+BFSPLUS::BFSPLUS(Maze *m, AHeuristique* heuristique) :
+	heurisitique(heuristique), m(m)
 {
-	this->m = m;
-	//ctor
-
 }
 
 BFSPLUS:: ~BFSPLUS() {}
@@ -33,7 +31,7 @@ BFSPLUS:: ~BFSPLUS() {}
 /**
 * return true if the current boxPos of *m is already marqued
 * if it is not the case it wil marque it
-*/
+*/ 
 bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
 {
 	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
@@ -54,10 +52,11 @@ bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
 /**
 * modified BFS using heursitic
 */
-std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int noteB)   //plafond: nombre de noeud max a explor� avant abandon
+std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: nombre de noeud max a explor� avant abandon
 {
+	std::cout << std::endl << heurisitique->sayHello() << std::endl;
+
 	Util u;
-	HeuristiquePivot heurisitique(m, noteA, noteB);
 	Case_morte dead(m);
 	std::vector<bool> new_zone_accessible;
 	short pos_or;
@@ -78,10 +77,11 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 	std::priority_queue<Node, std::vector<Node>, BestBFSCase> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(heurisitique.getChapters(), zone_originel, pos_or, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
+	Node initCase(heurisitique->getChapters(), zone_originel, pos_or, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
 	caseTracker.push_back(bfsR);
-	heurisitique.calcHeuristiqueNote(&initCase, -1, -1);
+	heurisitique->calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
+
 	while (!win && !queue.empty())
 	{
 		Node currentCase = queue.top();
@@ -142,10 +142,9 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite, int noteA, int
 						{
 							Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
 							Node newCase(currentCase.chapter, new_zone_accessible, newNPos, m->getField(), profondeur + 1, bfsR, currentCase.placedBoxes);
-							heurisitique.calcHeuristiqueNote(&newCase, boxID, newPosBox);
+							heurisitique->calcHeuristiqueNote(&newCase, boxID, newPosBox);
 							queue.push(newCase);
 							caseTracker.push_back(bfsR);
-
 						}
 						m->change_etat_jeu(field, nPos);
 					}

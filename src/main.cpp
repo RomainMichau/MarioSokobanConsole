@@ -7,20 +7,22 @@
 #include <stdio.h> 
 #include "src/BFS_Stuff/BFSPLUS.h"
 #include "src/BFS_Stuff/Heuristique/HeuristiquePivot.h"
+#include "src/BFS_Stuff/Heuristique/HeuristiqueClassique.h"
 #include "src/utils/Chrono.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 
 
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
-{
-
-	BFSPLUS killa_bfs(&m);
+{	
+	AHeuristique *heurP = new HeuristiquePivot(&m, 1, 2);
+	AHeuristique *heurC = new HeuristiqueClassique(&m, 1, 2);
+	BFSPLUS killa_bfs(&m,heurC);
 	std::vector<unsigned char> chemin;
-	chemin = killa_bfs.runBFS(noeudVisite, 1, 2);
+	chemin = killa_bfs.runBFS(noeudVisite);
 	return chemin;
 
-}
+}	
 
 
 
