@@ -2,7 +2,7 @@
 #define FHEURISTIQUE_H
 #include "src/Maze/Maze.h"
 #include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
-
+#include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 /**
 * Factory de l'heuristique
 * methode getInstance renvoit:
@@ -18,9 +18,17 @@ public:
 
 
 public:
-	FHeuristique(Maze *m) ;
+	FHeuristique(Maze *m, int coefA, int coefB) ;
 	virtual ~FHeuristique();
-	 AHeuristique* getInstance( int coefA, int coefB);
+	/**
+	* return the most appropriate tpye of heurisitque in function of the MAze
+	*	Pivot Heuritique
+	*	or
+	*	Classical Heuristique
+	*/
+	 AHeuristique* getInstance();
+
+	 HeuristiqueClassique* getClassicalHeuritique();
 
 
 private:
@@ -46,6 +54,7 @@ private:
 
 	bool checkIfPivotLevel(short pivotPos);
 
+	int coefA,coefB;
 
 };
 

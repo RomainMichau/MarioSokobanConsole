@@ -30,7 +30,7 @@ public:
 		std::vector<short> getMapFrequentationSquares() const
 		{
 			return mapFrequentationSquares;
-		}
+		} 
 		void setMapFrequentationSquares(std::vector<short> map)
 		{
 			this->mapFrequentationSquares = map;
@@ -57,7 +57,7 @@ public:
 public:
 	~HeuristiquePivot();
 	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
-	virtual std::string sayHello() { return "Pivot Method Heurisique"; };
+	virtual std::string sayHello() { return "Pivot Method Heuristique"; };
 	Chapter* getChapters() { return &chapters; }; 
 private:
 

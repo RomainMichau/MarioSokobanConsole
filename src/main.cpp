@@ -1,23 +1,29 @@
 
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"
-#include "src/utils/Coord.h"
-#include "src/utils/KeyboardManager.h"
+#include "src/utils/coord.h"
+#include "src/utils/keyboardManager.h"
 #include <iostream>
 #include <stdio.h> 
 #include "src/BFS_Stuff/BFSPLUS.h"
-#include "src/utils/Chrono.h"
-#include "src/utils/Util.h"
+#include "src/utils/chrono.h"
+#include "src/utils/util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h" 
 #include "src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.h"
 
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 {	
-//	AHeuristique *heurC = new HeuristiqueClassique(&m, 1, 2);
-	FHeuristique heurBuilder(&m);
-	BFSPLUS killa_bfs(&m, heurBuilder.getInstance(1,2));
+	FHeuristique heurBuilder(&m,1,2);
+	AHeuristique *heuristique = heurBuilder.getInstance();
+	BFSPLUS killa_bfs(&m, heuristique);
 	std::vector<unsigned char> chemin;
 	chemin = killa_bfs.runBFS(noeudVisite);
+	if (chemin.size() == 0 && heuristique->isPivotHeuristique()) {
+		std::cout << std::endl << "Pivot Heuritique failed #RT si t'es trise" << std::endl << "Trying with classical heuristique";
+		AHeuristique *	heuristiqueCL = heurBuilder.getClassicalHeuritique();
+		killa_bfs = BFSPLUS(&m, heuristiqueCL);
+		chemin = killa_bfs.runBFS(noeudVisite);
+	}
 	return chemin;
 
 }	

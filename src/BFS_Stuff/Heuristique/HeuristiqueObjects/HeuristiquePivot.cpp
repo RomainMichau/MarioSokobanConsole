@@ -11,7 +11,7 @@
 #include <unordered_set> 
 #include <algorithm>
 HeuristiquePivot::HeuristiquePivot(Maze *m, int coefA, int coefB,GameStat gameStat)
-	:AHeuristique(m,coefA,coefB), gameStat(gameStat)
+	:AHeuristique(m,coefA,coefB,true), gameStat(gameStat)
 {
 	
 	chapters = calcChapter();
@@ -25,7 +25,7 @@ HeuristiquePivot::~HeuristiquePivot()
 
 /**
 * calculate the note of the current state of the field
-* will autmaticly set the note in the sent BFSCase
+* will autmaticly set the note in the sent BFSCase 
 * will also refresh the mapStat of the BFSCase
 */
 void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)

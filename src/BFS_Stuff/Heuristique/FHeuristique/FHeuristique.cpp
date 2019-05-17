@@ -2,13 +2,13 @@
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 #include "FHeuristique.h"
 
-FHeuristique::FHeuristique(Maze *m) :m(m) {}
+FHeuristique::FHeuristique(Maze *m, int coefA, int coefB) :m(m),coefA(coefA),coefB(coefB) {}
 
 FHeuristique::~FHeuristique()
 {
 }
 
-AHeuristique * FHeuristique::getInstance(int coefA, int coefB)
+AHeuristique * FHeuristique::getInstance()
 {
 	// calculatiing and setting frequentationMap
 	std::vector<short> freqMap = calcFrequentationSquares();
@@ -21,6 +21,11 @@ AHeuristique * FHeuristique::getInstance(int coefA, int coefB)
 	if (checkIfPivotLevel(posPivotPointPos))
 		return new HeuristiquePivot(m, coefA, coefB, HeuristiquePivot::GameStat(freqMap, posPivotPointPos));
 	else return new HeuristiqueClassique(m, coefA, coefB);
+}
+
+HeuristiqueClassique * FHeuristique::getClassicalHeuritique()
+{
+	return new HeuristiqueClassique(m,coefA,coefB);
 }
 
 
@@ -52,6 +57,7 @@ std::vector<short> FHeuristique::calcMapDistanceFromNearestGoals()
 * for each box we calculate the path to go to the goal
 * each square is represented by the number of box wich have run on it
 *
+* [WARNING] Is not 100% trustable, so in case of failure, you must try the other type of heurtistique
 */
 std::vector<short> FHeuristique::calcFrequentationSquares()
 {
@@ -120,8 +126,9 @@ short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<sh
 */
 bool FHeuristique::checkIfPivotLevel(short pivotPos)
 {
-
+	
 	for (short box : m->getPosBoxes()) {
+//	for(short box=0;box<m->getSize();box++){
 		for (short goal : m->getGoals()) {
 			short distPivotGoal = u.getPathSquareToSquareBM(m, pivotPos, goal).size();
 

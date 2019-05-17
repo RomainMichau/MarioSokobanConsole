@@ -15,7 +15,7 @@
 
 
 BFSPLUS::BFSPLUS(Maze *m, AHeuristique* heuristique) :
-	heurisitique(heuristique), m(m)
+	heuristique(heuristique), m(m)
 {
 }
 
@@ -53,7 +53,7 @@ bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
 */
 std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: nombre de noeud max a explor� avant abandon
 {
-	std::cout << std::endl << heurisitique->sayHello() << std::endl;
+	std::cout << std::endl << heuristique->sayHello() << std::endl;
 
 	Util u;
 	Case_morte dead(m);
@@ -76,9 +76,9 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 	std::priority_queue<Node, std::vector<Node>, BestBFSCase> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(heurisitique->getChapters(), zone_originel, pos_or, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
+	Node initCase(heuristique->getChapters(), zone_originel, pos_or, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
 	caseTracker.push_back(bfsR);
-	heurisitique->calcHeuristiqueNote(&initCase, -1, -1);
+	heuristique->calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
 
 	while (!win && !queue.empty())
@@ -141,7 +141,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 						{
 							Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
 							Node newCase(currentCase.chapter, new_zone_accessible, newNPos, m->getField(), profondeur + 1, bfsR, currentCase.placedBoxes);
-							heurisitique->calcHeuristiqueNote(&newCase, boxID, newPosBox);
+							heuristique->calcHeuristiqueNote(&newCase, boxID, newPosBox);
 							queue.push(newCase);
 							caseTracker.push_back(bfsR);
 						}

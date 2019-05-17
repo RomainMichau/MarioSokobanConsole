@@ -12,10 +12,10 @@ public:
 	virtual ~BFSPLUS();
 	std::vector<unsigned char> runBFS(unsigned &noeudvisite);
 	unsigned showSetSize() { return marque.size(); };
-
+	void setHeuristique(AHeuristique *newHeuristique) { heuristique = newHeuristique; };
 private:
 	std::vector<unsigned short> resolution;
-	AHeuristique* heurisitique;
+	AHeuristique* heuristique;
 
 	Maze *m;
 

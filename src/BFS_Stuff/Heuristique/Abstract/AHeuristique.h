@@ -50,11 +50,12 @@ public:
 
 
 public:
-	AHeuristique(Maze *m, int coefA, int coefB);
+	AHeuristique(Maze *m, int coefA, int coefB,bool isPivotHeuristique);
 	virtual ~AHeuristique();
 	virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)=0;
 	virtual std::string sayHello()=0; 
 	virtual Chapter* getChapters() = 0;
+	virtual bool isPivotHeuristique() { return pivotHeuristique; };
 	
 protected:
 
@@ -68,7 +69,10 @@ protected:
 	*/
 	unsigned short calc_note_distance_box_bfs_multiple_box();
 
-
+	/*
+	* true if is a pivot heurisitique
+	*/
+	bool pivotHeuristique;
 
 };
 
