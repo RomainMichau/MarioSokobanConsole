@@ -17,6 +17,7 @@ public:
 
 	~Util();
 public:
+	//Is the trackBFS Type of the BFS in relier_point(...)
 	class BFSCase_relier_point :public  NodeCaseMother {
 	public:
 		BFSCase_relier_point(std::vector<unsigned char> field, unsigned short pos, int id, int pId, char dir)
@@ -40,16 +41,19 @@ public:
 	* Return the path beetween the squareID send in parameters and the nearest goal.
 	* If no possible path, return null
 	* path is the id of all the square
+	BM: box movement (path is like a path if we push a box)
+	*
 	*/
-	std::deque<short> getPathSquareToGoalPBM(const Maze* m, short squareID);
+	std::deque<short> getPathSquareToGoalBM(const Maze* m, short squareID);
 
 	/**
 	* Return the path beetween the squareID send in parameters and the toSquare goal.
 	* If no possible path, return null
 	* path is the id of all the square
+	* BM: box movement (path is like a path if we push a box)
 	*/
-	std::deque<short> getPathSquareToSquarePBM(const Maze* m, short fromSquare, short toSquare);
-	std::deque<short> getPathSquareToSquareMPM(const Maze* m, short fromSquare, short toSquare);
+	std::deque<short> getPathSquareToSquareBM(const Maze* m, short fromSquare, short toSquare);
+	std::deque<short> getPathSquareToSquarePM(const Maze* m, short fromSquare, short toSquare);
 
 	std::vector<short>  getDistMapOfSquare(const Maze *m,  short toSquare);
 

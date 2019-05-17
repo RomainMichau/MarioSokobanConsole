@@ -23,10 +23,11 @@ public:
 	*/
 	class GameStat {
 	public:
-
-		short getPivotPointPos() { return pivotPoint; };
+		GameStat(std::vector<short> mapFrequentationSquares, short pivotPoint) :
+			mapFrequentationSquares(mapFrequentationSquares), pivotPoint(pivotPoint) {};
+		short getPivotPointPos() const { return pivotPoint; };
 		void setPivotPoint(short pivotPoint) { this->pivotPoint = pivotPoint; }
-		std::vector<short> getMapFrequentationSquares()
+		std::vector<short> getMapFrequentationSquares() const
 		{
 			return mapFrequentationSquares;
 		}
@@ -60,29 +61,9 @@ public:
 	Chapter* getChapters() { return &chapters; }; 
 private:
 
-	void calcGameStat();
-	HeuristiquePivot(Maze *m, int coefA, int coefB);
+	HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat);
 
-
-	Node *node;
-
-	/**
-	* Stat calculators
-	*/
-	std::vector<short> calcFrequentationSquares();
-
-	std::vector<short> calcMapDistanceFromNearestGoals();
-
-
-	/**
-	* return the pivot point of mapStat
-	* definit of pivotPoint: the point with the most frequentation.
-	* if there is many point with the same max frequentation, then the farest from the goal win
-	* @see MapStat
-	*/
-	short calcPivotPointPos(std::vector<short> distMap);
-
-
+		
 	Chapter  calcChapter();
 
 	
@@ -90,7 +71,7 @@ private:
 	/**
 	* stats about the game
 	*/
-	GameStat gameStat;
+	const GameStat gameStat;
 	/*
 	* lionked list of chapterts order by number:
 	*	chapters[0]=> chapter0

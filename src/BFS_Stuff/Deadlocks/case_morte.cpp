@@ -29,7 +29,7 @@ void Case_morte::detect_dead_with_BFS_idealGoal(Maze& maze,short idealGoal)
 	Util u;
 	for (unsigned int square = 0; square < maze.getSize(); square++)
 	{
-		if (!maze.isSquareWall(square)  && u.getPathSquareToSquarePBM(&maze, square, idealGoal).empty())
+		if (!maze.isSquareWall(square)  && u.getPathSquareToSquareBM(&maze, square, idealGoal).empty())
 		{
 			maze.setSquare(square, SPRITE_DEADSQUARE);
 		}
@@ -45,7 +45,7 @@ void Case_morte::detect_dead_with_BFS()
     Util u;
     for (unsigned int square = 0; square < m->getSize(); square++)
     {
-        if (!m->isSquareWall(square)&&!m->isSquareGoal(square)&&  u.getPathSquareToGoalPBM(m, square).empty())
+        if (!m->isSquareWall(square)&&!m->isSquareGoal(square)&&  u.getPathSquareToGoalBM(m, square).empty())
         {
             m->setSquare(square, SPRITE_DEADSQUARE);
         }

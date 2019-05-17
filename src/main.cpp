@@ -6,8 +6,6 @@
 #include <iostream>
 #include <stdio.h> 
 #include "src/BFS_Stuff/BFSPLUS.h"
-#include "src/BFS_Stuff/Heuristique/HeuristiquePivot.h"
-#include "src/BFS_Stuff/Heuristique/HeuristiqueClassique.h"
 #include "src/utils/Chrono.h"
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h" 
@@ -16,7 +14,8 @@
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 {	
 //	AHeuristique *heurC = new HeuristiqueClassique(&m, 1, 2);
-	BFSPLUS killa_bfs(&m,FHeuristique::getInstance(&m,1,2));
+	FHeuristique heurBuilder(&m);
+	BFSPLUS killa_bfs(&m, heurBuilder.getInstance(1,2));
 	std::vector<unsigned char> chemin;
 	chemin = killa_bfs.runBFS(noeudVisite);
 	return chemin;

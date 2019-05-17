@@ -1,7 +1,6 @@
 #include "BFSPLUS.h"
 
 #include "src/Maze/Maze.h"
-#include "src/BFS_Stuff/Heuristique/HeuristiquePivot.h"
 #include "src/utils/Util.h" 
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"

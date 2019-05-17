@@ -247,7 +247,7 @@ std::string Util::choose_level()
 	* else will return a path of all the square ID to reach the goal
 
 */
-std::deque<short> Util::getPathSquareToGoalPBM(const Maze  *m, short square)
+std::deque<short> Util::getPathSquareToGoalBM(const Maze  *m, short square)
 {
 	std::deque<short> res;
 
@@ -323,7 +323,7 @@ std::deque<short> Util::getPathSquareToGoalPBM(const Maze  *m, short square)
 	*calculating in "pushingBox movement"
 
 */
-std::deque<short> Util::getPathSquareToSquarePBM(const Maze  *m, short fromSquare, short toSquare)
+std::deque<short> Util::getPathSquareToSquareBM(const Maze  *m, short fromSquare, short toSquare)
 {
 	std::deque<short> res;
 	short square = fromSquare;
@@ -398,7 +398,7 @@ std::deque<short> Util::getPathSquareToSquarePBM(const Maze  *m, short fromSquar
 	* else will return a path of all the square ID to reach the goal
 	*calculating in "moving player movement"
 */
-std::deque<short> Util::getPathSquareToSquareMPM(const Maze  *m, short fromSquare, short toSquare)
+std::deque<short> Util::getPathSquareToSquarePM(const Maze  *m, short fromSquare, short toSquare)
 {
 	std::deque<short> res;
 	short square = fromSquare;
@@ -477,7 +477,7 @@ std::vector<short> Util::getDistMapOfSquare(const Maze  *m, short toSquare) {
 			res.push_back(-1);
 			continue;
 		}
-		unsigned size = this->getPathSquareToSquarePBM(m, square, toSquare).size();
+		unsigned size = this->getPathSquareToSquareBM(m, square, toSquare).size();
 		size = size == 0 ? -1 : size;
 		res.push_back(size);
 	}

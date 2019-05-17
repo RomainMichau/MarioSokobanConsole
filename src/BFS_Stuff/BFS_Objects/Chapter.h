@@ -33,9 +33,9 @@ public:
 private:
 	//id of the ideal goal of this chapter
 	short  idealGoalId;
-	//pos of the idealGOal
-	short idealGoalPos;
-	//dist map from the idealGoal
+	//pos of the idealGOal of this chapter
+	short idealGoalPos; 
+	//dist map from the idealGoal of this chapter
 	std::vector<short> mapDistanceFromGoal;
 	//index of ths chapter
 	short chapterIndex;
