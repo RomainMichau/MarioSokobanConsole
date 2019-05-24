@@ -9,7 +9,11 @@
 #include <iostream>
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
-
+#include "src/BFS_Stuff/BFS_Objects/Node.h"
+#include <algorithm>
+#include <sstream>	
+#include <iostream>
+#include <unordered_set>
 class Util
 {
 public:
@@ -34,8 +38,8 @@ public:
 	void vider(std::queue< BFSCase_relier_point> &queue);
 
 
-	std::vector<bool> calcZoneAccessible(const Maze* m,short &normPos);
-	std::vector<unsigned short> relier_point( Maze m, std::vector <unsigned short>);
+	std::vector<bool> calcZoneAccessible(const Maze* m, short &normPos);
+	std::vector<unsigned short> relier_point(Maze m, std::vector <unsigned short>);
 	std::string choose_level();
 	/**
 	* Return the path beetween the squareID send in parameters and the nearest goal.
@@ -53,9 +57,10 @@ public:
 	* BM: box movement (path is like a path if we push a box)
 	*/
 	std::deque<short> getPathSquareToSquareBM(const Maze* m, short fromSquare, short toSquare);
+	std::vector< Node::NodeRetrackInfo> getPathSquareToSquareZoneMethod(const Maze* m, short fromSquare, short toSquare, short posPlayer);
 	std::deque<short> getPathSquareToSquarePM(const Maze* m, short fromSquare, short toSquare);
 
-	std::vector<short>  getDistMapOfSquare(const Maze *m,  short toSquare);
+	std::vector<short>  getDistMapOfSquare(const Maze *m, short toSquare);
 
 
 	/**
@@ -69,6 +74,8 @@ public:
 private:
 	std::vector<BFSCase_relier_point> marque;
 	bool compare(BFSCase_relier_point tstCase);
+	bool marqued(short acc, const  Maze *m, std::unordered_set<std::string > &marqueZoneBFS);
+
 
 };
 

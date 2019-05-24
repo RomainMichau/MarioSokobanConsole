@@ -3,10 +3,12 @@
 
 class NodeCaseMother {
 public:
-	NodeCaseMother(int id, int idParent) :
-		idParentCase(idParent), idCase(id) {};
+	NodeCaseMother(int id, int idParent) {
+		idParentCase=idParent;
+		idCase=id;
+		};
 	virtual ~NodeCaseMother() {};
-	
+
 	int idCase;
 	int idParentCase;
 };

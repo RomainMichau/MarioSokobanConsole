@@ -10,12 +10,13 @@
 #include <vector>
 #include <unordered_set> 
 #include <algorithm>
-HeuristiquePivot::HeuristiquePivot(Maze *m, int coefA, int coefB,GameStat gameStat)
-	:AHeuristique(m,coefA,coefB,true), gameStat(gameStat)
+HeuristiquePivot::HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat)
+	:AHeuristique(m, coefA, coefB, true), gameStat(gameStat)
 {
-	
+
 	chapters = calcChapter();
 	this->chapters = chapters;
+	nb_caisse_place_best = 0;
 }
 
 HeuristiquePivot::~HeuristiquePivot()
@@ -25,7 +26,7 @@ HeuristiquePivot::~HeuristiquePivot()
 
 /**
 * calculate the note of the current state of the field
-* will autmaticly set the note in the sent BFSCase 
+* will autmaticly set the note in the sent BFSCase
 * will also refresh the mapStat of the BFSCase
 */
 void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)
@@ -33,11 +34,12 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 	unsigned short note_caisse_place;
 	//[OPTIMIZER]
 	//if idealGoal is reach then we pass to the next chapter
- 	if ( newPos == node->chapter->getIdealGoalPos()) {
+	if (newPos == node->chapter->getIdealGoalPos()) {
 		node->chapter = node->chapter->getNextChapter();
 		node->placedBoxes[boxPushedID] = true;
 
 	}
+
 
 	std::vector<unsigned short> box = m->getPosBoxes();
 	unsigned short distanecNoteBFS = calc_note_distance_box_bfs_multiple_box();
@@ -48,10 +50,19 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 	//[OPTIMIZER]
 	//we add a penalty for each box which is not on a ideal Goal
 	note_caisse_place = 0;
+	int nb_caisse_place = 0;
 	for (unsigned int i = 0; i < box.size(); i++)
 	{
 		if (!node->placedBoxes[i])
-			note_caisse_place += 1;
+			note_caisse_place += 1000;
+		else {
+			nb_caisse_place++;
+		}
+	}
+	if (nb_caisse_place > nb_caisse_place_best) {
+		nb_caisse_place_best = nb_caisse_place;
+		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place_best << std::endl;
+
 	}
 	note.set_note_caisse_place(note_caisse_place);
 	note.calculTotal();
@@ -59,14 +70,19 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 }
 
 
+std::pair<short, short>HeuristiquePivot::macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition) {
+	if (boxPosition == this->gameStat.getPivotPointPos())
+		return 	macroMover.macroMovePivotToPoint(caseTracker, node, boxPosition);
 
+	return std::pair<short, short>(-1, -1);
+}
 
 
 
 
 /**
 * Create and order all the chapters
-*
+* IdealGoal is the farest empty goal from the pivot point
 */
 Chapter  HeuristiquePivot::calcChapter() {
 	std::vector<Chapter*> res;
@@ -93,6 +109,11 @@ Chapter  HeuristiquePivot::calcChapter() {
 		lastChatper = c;
 	}
 	return *res[0];
+}
+
+void HeuristiquePivot::calcMacroPath()
+{
+
 }
 
 

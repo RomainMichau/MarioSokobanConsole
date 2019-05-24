@@ -12,7 +12,6 @@ TODO:
 
 
 DOING:
-	-Differentiate when you have a pivot point or not >> detectTypeHeuristique
 
 =========================================================================================================================
 	
@@ -21,6 +20,8 @@ DONE:
 	-noter toute les cases en fonction de leur "frequentation"
 	-detecter point de pivot
 	-Mettre en place en heritage pour l'heuristique (avoir 2 classe heuristique avec point de pivot et classical)>>legacyHeuristique
+	-Differentiate when you have a pivot point or not >> detectTypeHeuristique
+
 
 	
 UNDOABLE:

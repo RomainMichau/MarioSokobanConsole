@@ -6,11 +6,12 @@
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+#include <unordered_map>
 /**
 *	Class of heuristique wich use a Pivot Point Method (see def below)
-*	Method: When the pivot point is reached by a box, a macro drive the box to the ideal goal 
+*	Method: When the pivot point is reached by a box, a macro drive the box to the ideal goal
 */
-class HeuristiquePivot:public AHeuristique
+class HeuristiquePivot :public AHeuristique
 {
 	friend class FHeuristique;
 
@@ -30,7 +31,7 @@ public:
 		std::vector<short> getMapFrequentationSquares() const
 		{
 			return mapFrequentationSquares;
-		} 
+		}
 		void setMapFrequentationSquares(std::vector<short> map)
 		{
 			this->mapFrequentationSquares = map;
@@ -55,18 +56,30 @@ public:
 	};
 
 public:
+	/**
+	* PUBLIC METHOD
+	*/
 	~HeuristiquePivot();
 	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
 	virtual std::string sayHello() { return "Pivot Method Heuristique"; };
-	Chapter* getChapters() { return &chapters; }; 
+	Chapter* getChapters() { return &chapters; };
+	std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
 private:
 
+	int nb_caisse_place_best;
+	/**
+	* PRIVATE METHOD
+	*/
 	HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat);
-
-		
 	Chapter  calcChapter();
+	void calcMacroPath();
 
-	
+	/**
+	* PRIVATE ATTRIBUT
+	*/
+
+
+
 
 	/**
 	* stats about the game

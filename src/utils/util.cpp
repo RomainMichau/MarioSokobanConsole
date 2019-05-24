@@ -1,9 +1,9 @@
-#include "src/utils/Util.h"
+#include "src/utils/util.h"
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"
 #include "src/utils/Coord.h"
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
-
+#include "src/Maze/GameState.h"
 #include <math.h>
 #include <sstream>
 #include <fstream>
@@ -11,6 +11,10 @@
 #include <iostream>
 #include <unordered_map>
 #include <algorithm>
+#include <sstream>	
+#include <iterator>
+#include <unordered_set>
+
 Util::Util()
 {
 	//ctor
@@ -389,6 +393,8 @@ std::deque<short> Util::getPathSquareToSquareBM(const Maze  *m, short fromSquare
 	return res;
 }
 
+
+
 /**
 	* Return the path beetween the fromSquare  send in parameters and the toSquare .
 	* If no possible path, return empty vector
@@ -514,12 +520,160 @@ void Util::dispVector(const Maze  *m, std::vector<bool> vec)
 			Console::getInstance()->setColor(_COLOR_RED);
 
 		}
-		std::cout <<  "  "<<sq;
-	
+		std::cout << "  " << sq;
+
 		if (i % (m->getCol()) == 0 && i > 0)
 			std::cout << std::endl;
 		i++;
 	}
 	Console::getInstance()->setColor(_COLOR_DEFAULT);
 
+}
+
+
+std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const Maze * orM, short fromSquare, short toSquare, short posPlayer)
+{
+	std::unordered_set<std::string > marqueZoneBFS;
+
+	short posBox = fromSquare;
+	Maze m = *orM;
+
+	short idBox;
+	for (int i = 0; i < m.getPosBoxes().size(); i++) {
+		if (m.getPosBoxes()[i] == fromSquare) {
+			idBox = i;
+			break;
+		}
+	}
+
+	m.setPlayerPos(posPlayer);
+
+	std::vector<bool> new_zone_accessible;
+	short pos_or;
+	std::vector<unsigned char>  field_originel = m.getField();
+	std::vector<unsigned short> posBoxes = m.getPosBoxes();
+	std::vector<bool> zone_originel = calcZoneAccessible(&m, pos_or);
+	//	marque.clear();
+
+	int position_player_or = m.getPosPlayer();
+	int classement = 0;
+	unsigned short newPositionOfBox, pos_originel = m.getPosPlayer();
+	unsigned short profondeur;
+
+	marqued(pos_or, &m, marqueZoneBFS);
+	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
+	std::vector< Node::NodeRetrackInfo>caseTracker;
+	std::vector< Node::NodeRetrackInfo>res;
+	std::queue<Node> queue;
+	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
+	//bfsR.
+	Node initCase(NULL, zone_originel, GameState(m.getField(),pos_or,m.getPosBoxes()), (unsigned short)0, bfsR, m.getPosBoxes().size());
+	caseTracker.push_back(bfsR);
+	queue.push(initCase);
+	bool win = false;
+	while (!win&&!queue.empty())
+	{
+		Node currentCase = queue.front();
+		queue.pop();
+		profondeur = currentCase.profondeur;
+		GameState curGameState = currentCase.gameState;
+		short newNPos;
+		std::vector<bool> 	zone_accessible = currentCase.accessibleZone;
+		/**
+		* We set the game in the state
+		*/
+		m.change_etat_jeu(curGameState);
+		posBoxes = m.getPosBoxes();
+
+
+		/**
+		we look for pushed all boxes in all directions possibles
+		*/
+		for (char direction : m.allDirection)
+		{
+			short posBox = m.getPosBoxes()[idBox];
+
+			short offset = m.getMoveOffset(direction);
+
+			//position of the player for push the box
+			short pusherPlace = posBox - offset;
+			//position of th ebox after pushing it
+			short newPosBox = posBox + offset;
+			std::vector<char> adjDir = m.getAdjacentDirection(direction);
+
+			//We look if the current box can be pushed in the direction
+			if (zone_accessible[pusherPlace] && (m._canPushBox(posBox, direction, newPositionOfBox) && !m.isSquareDeadSquare(newPosBox)))
+			{
+				//[OPTIMIZER]
+				//If yes we check that it will not create any dynamical deadlocks
+				m.setPlayerPos(pusherPlace);
+
+				//we push the box in the wanted direction
+				m.updatePlayer(direction);
+
+				//[OPTIMIZER TODO]
+				//we check that we didn't already marque this case and marqued it if ut is not the case
+				//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
+				new_zone_accessible = calcZoneAccessible(&m, newNPos);
+
+
+
+				//[OPTIMIZER]
+				if (!marqued(newNPos, &m, marqueZoneBFS))
+				{
+					Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
+					Node newCase(currentCase.chapter, new_zone_accessible,  GameState( m.getField(),newNPos ,m.getPosBoxes()), profondeur + 1, bfsR, currentCase.placedBoxes);
+					queue.push(newCase);
+					caseTracker.push_back(bfsR);
+				}
+				m.change_etat_jeu(curGameState);
+
+				if (newPosBox == toSquare) {
+					win=true;
+					break;
+				}
+			}
+		}
+
+	}
+
+	std::vector<unsigned char> chemin;
+
+	//ON recrée le chemin
+
+	if (!win) {
+		return res;
+	}
+	Node::NodeRetrackInfo retrack = caseTracker.back();
+	while (retrack.idCase != 0) {
+		res.push_back(retrack);
+		retrack = caseTracker[retrack.idParentCase];
+	}
+
+	//setting back the game in its original field
+
+	std::reverse(res.begin(), res.end());
+	return res;
+}
+
+
+/**
+* return true if the current boxPos of *m is already marqued
+* if it is not the case it wil marque it
+*/
+bool Util::marqued(short acc, const  Maze *m, std::unordered_set<std::string > & marqueZoneBFS)
+{
+	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
+	std::vector<unsigned char> field = m->getField();
+	std::stringstream result;
+	nposBoxes.push_back(acc);
+	std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, "."));
+	std::string hashG = result.str();
+
+	bool marqued = marqueZoneBFS.find(hashG) != marqueZoneBFS.end();
+	if (!marqued) {
+		marqueZoneBFS.insert(hashG);
+	}
+
+	return marqued;
 }

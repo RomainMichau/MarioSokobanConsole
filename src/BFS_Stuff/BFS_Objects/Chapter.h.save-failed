@@ -8,7 +8,7 @@
 class Chapter {
 public:
 	Chapter(short idealGoalId, short idealGoalPos, std::vector<short>  mapDist, short chapterIndex, short distPivotGoal)
-		:idealGoalId(idealGoalId), idealGoalPos(idealGoalPos), mapDistanceFromGoal(mapDist), chapterIndex(chapterIndex) ,distPivotGoal(distPivotGoal) {}
+		:idealGoalId(idealGoalId), mapDistanceFromGoal(mapDist), chapterIndex(chapterIndex), distPivotGoal(distPivotGoal), idealGoalPos(idealGoalPos) {}
 	Chapter() {}
 
 	short getIdealGoalId()const { return idealGoalId; };

@@ -99,6 +99,11 @@ void Maze::setPosBoxes(std::vector<unsigned short> newPlayerPosOr)
     m_pos_boxes = newPlayerPosOr;
 }
 
+void Maze::setPosBox(short i,short pos)
+{
+	m_pos_boxes[i] = pos;
+}
+
 /**
  *
  * @return true if the game is currently won
@@ -616,11 +621,11 @@ std::vector<unsigned char> Maze::convert(std::vector<unsigned short> toConvert)
         if (toConvert[i] == 2)
             reso.push_back(LEFT);
         if (toConvert[i] == 3)
-            reso.push_back(RIGHT);
+            reso.push_back(RIGHT); 
     }
     return reso;
 
-
+	 
 }
 
 /**
@@ -671,31 +676,20 @@ void Maze::change_etat_jeu(std::vector<unsigned char> newField, unsigned short n
     }
     m_pos_player = newPosPlayer;
 }
-
-
 /**
-* change the game state with a new field and bool vector of accesible zone
-* will put the player at the first accesible zone found
-*/
-void Maze::change_etat_jeu(std::vector<unsigned char> field, std::vector<bool> accesible_zone)
+ * Change the state of the game (field and posPlayer)
+ * @param newField
+ * @param newPosPlayer
+ */
+void Maze::change_etat_jeu(GameState gameState)
 {
-    m_field = field;
-    int b = 0;
-    unsigned short p = 0;
-    for (int i = 0; i < field.size(); i++)
-    {
-        if (m_field[i] == 2 || m_field[i] == 3)
-        {
-            m_pos_boxes[b] = i;
-            b++;
-        }
-    }
-    while (!accesible_zone[b])
-    {
-        b++;
-    }
-    setPlayerPos(b);
+	m_field = gameState.field;
+	int b = 0;
+	unsigned short p = 0;
+	m_pos_boxes = gameState.posBox;
+	m_pos_player = gameState.posPlayer;
 }
+
 
 
 

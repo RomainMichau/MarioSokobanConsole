@@ -20,7 +20,7 @@ AHeuristique * FHeuristique::getInstance()
 	short posPivotPointPos = calcPivotPointPos(distanceMap, freqMap);
 	if (checkIfPivotLevel(posPivotPointPos))
 		return new HeuristiquePivot(m, coefA, coefB, HeuristiquePivot::GameStat(freqMap, posPivotPointPos));
-	else return new HeuristiqueClassique(m, coefA, coefB);
+ 	else return new HeuristiqueClassique(m, coefA, coefB);
 }
 
 HeuristiqueClassique * FHeuristique::getClassicalHeuritique()
@@ -104,6 +104,7 @@ short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<sh
 		short dist = distMap[i];
 		short freq = freqMap[i];
 		if (freq > mostFreqValue)
+
 		{
 			mostFreqValue = freq;
 			longestDistance = dist;
@@ -122,11 +123,11 @@ short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<sh
 * method to verify;
 *	for each box we checks that it need to pass throug the pivot to reach each goal
 *	1 exception:
-*		if the box if nearer from the goal than the pivot, then its 
+*		if the box if nearer from the goal than the pivot, then its
 */
 bool FHeuristique::checkIfPivotLevel(short pivotPos)
 {
-	
+
 	for (short box : m->getPosBoxes()) {
 //	for(short box=0;box<m->getSize();box++){
 		for (short goal : m->getGoals()) {

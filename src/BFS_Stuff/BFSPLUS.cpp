@@ -1,17 +1,17 @@
 #include "BFSPLUS.h"
 
 #include "src/Maze/Maze.h"
-#include "src/utils/Util.h" 
+#include "src/utils/Util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include <vector>
 #include <algorithm>
-#include <sstream>	
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <iterator>
 #include <unordered_set>
-
+#include "src/Maze/GameState.h"
 
 
 BFSPLUS::BFSPLUS(Maze *m, AHeuristique* heuristique) :
@@ -30,8 +30,8 @@ BFSPLUS:: ~BFSPLUS() {}
 /**
 * return true if the current boxPos of *m is already marqued
 * if it is not the case it wil marque it
-*/ 
-bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
+*/
+bool BFSPLUS::marqued(short acc)
 {
 	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
 	std::vector<unsigned char> field = m->getField();
@@ -54,12 +54,13 @@ bool BFSPLUS::marqued(short acc, std::vector<bool> zone)
 std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: nombre de noeud max a explor� avant abandon
 {
 	std::cout << std::endl << heuristique->sayHello() << std::endl;
+	GameState orginalGameState = m->getGameState();
 
 	Util u;
 	Case_morte dead(m);
 	std::vector<bool> new_zone_accessible;
 	short pos_or;
-	std::vector<unsigned char> field = m->getField(), field_originel = m->getField();
+	std::vector<unsigned char>  field_originel = m->getField();
 	std::vector<unsigned short> posBoxes = m->getPosBoxes();
 	std::vector<bool> zone_originel = u.calcZoneAccessible(m, pos_or);
 	//	marque.clear();
@@ -70,13 +71,13 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 	unsigned short profondeur;
 	bool win = false;
 
-	marqued(pos_or, zone_originel);
+	marqued(pos_or);
 	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
 	std::vector< Node::NodeRetrackInfo>caseTracker;
 	std::priority_queue<Node, std::vector<Node>, BestBFSCase> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(heuristique->getChapters(), zone_originel, pos_or, m->getField(), (unsigned short)0, bfsR, m->getPosBoxes().size());
+	Node initCase(heuristique->getChapters(), zone_originel, GameState(m->getField(), pos_or, m->getPosBoxes()), (unsigned short)0, bfsR, m->getPosBoxes().size());
 	caseTracker.push_back(bfsR);
 	heuristique->calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
@@ -86,16 +87,17 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 		Node currentCase = queue.top();
 		queue.pop();
 		profondeur = currentCase.profondeur;
-		field = currentCase.field;
-		short nPos = currentCase.normalisePos;
+		GameState currentGameState = currentCase.gameState;
+		//	field = currentCase.field;
+		//	short nPos = currentCase.normalisePos;
 		short newNPos;
 		std::vector<bool> 	zone_accessible = currentCase.accessibleZone;
 		/**
 		* We set the game in the state
 		*/
-		m->change_etat_jeu(field, nPos);
+		m->change_etat_jeu(currentGameState);
 		posBoxes = m->getPosBoxes();
-		for (int boxID = 0; boxID < m->getPosBoxes().size(); boxID++)
+		for (unsigned int boxID = 0; boxID < m->getPosBoxes().size(); boxID++)
 		{	//position of the box
 
 			//[OPTIMIZER]
@@ -118,7 +120,6 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 				short pusherPlace = posBox - offset;
 				//position of th ebox after pushing it
 				short newPosBox = posBox + offset;
-				std::vector<char> adjDir = m->getAdjacentDirection(direction);
 
 				//We look if the current box can be pushed in the direction
 				if (!win&&zone_accessible[pusherPlace] && (m->_canPushBox(posBox, direction, newPositionOfBox) && !m->isSquareDeadSquare(newPosBox)))
@@ -137,15 +138,46 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 						new_zone_accessible = u.calcZoneAccessible(m, newNPos);
 
 						//[OPTIMIZER]
-						if (!marqued(newNPos, new_zone_accessible))
+						if (!win && !marqued(newNPos))
 						{
 							Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
-							Node newCase(currentCase.chapter, new_zone_accessible, newNPos, m->getField(), profondeur + 1, bfsR, currentCase.placedBoxes);
+							Node newCase(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), profondeur + 1, bfsR, currentCase.placedBoxes);
 							heuristique->calcHeuristiqueNote(&newCase, boxID, newPosBox);
-							queue.push(newCase);
+
 							caseTracker.push_back(bfsR);
+
+							std::pair<short, short> macroRes = heuristique->macroMove(caseTracker, &newCase, newPosBox);
+
+
+
+							if (macroRes.first == -2) {
+								continue;
+							}
+							//[OPTIMIZER MACRO]
+							else	if (macroRes.first != -1)
+							{
+
+								short	boxAfterMacr0 = macroRes.second;
+								short	newPlayerPos = macroRes.first;
+								// setting game
+								m->setPosBox(boxID, boxAfterMacr0);
+								m->setPlayerPos(newPlayerPos);
+								m->setSquare(boxAfterMacr0, SPRITE_BOX_PLACED);
+								m->setSquare(newPosBox, field_originel[newPosBox]);
+								if (m->_isCompleted())
+									win = true;
+								new_zone_accessible = u.calcZoneAccessible(m, newNPos);
+
+								bfsR = caseTracker.back();
+								newCase = Node(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), profondeur + 2, bfsR, currentCase.placedBoxes);
+								heuristique->calcHeuristiqueNote(&newCase, boxID, boxAfterMacr0);
+
+							}
+
+
+							queue.push(newCase);
 						}
-						m->change_etat_jeu(field, nPos);
+						m->change_etat_jeu(currentGameState);
 					}
 				}
 			}
@@ -170,7 +202,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 	}
 
 	//setting back the game in its original field
-	m->change_etat_jeu(field_originel, zone_originel);
+	m->change_etat_jeu(orginalGameState);
 
 	resolution.push_back(pos_originel);
 	std::reverse(resolution.begin(), resolution.end());

@@ -63,6 +63,8 @@
 		<Unit filename="src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h" />
 		<Unit filename="src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.cpp" />
 		<Unit filename="src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h" />
+		<Unit filename="src/BFS_Stuff/Heuristique/MacroMover/MacroMover.cpp" />
+		<Unit filename="src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h" />
 		<Unit filename="src/BFS_Stuff/Heuristique/note.cpp" />
 		<Unit filename="src/BFS_Stuff/Heuristique/note.h" />
 		<Unit filename="src/Maze/maze.cpp" />
@@ -70,13 +72,13 @@
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/utils/Console.h" />
 		<Unit filename="src/utils/KeyboardManager.h" />
-		<Unit filename="src/utils/Util.cpp" />
 		<Unit filename="src/utils/chrono.cpp" />
 		<Unit filename="src/utils/chrono.h" />
 		<Unit filename="src/utils/console.cpp" />
 		<Unit filename="src/utils/coord.cpp" />
 		<Unit filename="src/utils/coord.h" />
 		<Unit filename="src/utils/keyboardManager.cpp" />
+		<Unit filename="src/utils/util.cpp" />
 		<Unit filename="src/utils/util.h" />
 		<Extensions>
 			<code_completion />

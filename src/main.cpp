@@ -25,7 +25,7 @@ std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 		chemin = killa_bfs.runBFS(noeudVisite);
 	}
 	return chemin;
-
+	 
 }	
 
 

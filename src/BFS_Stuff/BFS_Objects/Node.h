@@ -3,10 +3,10 @@
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 #include "src/BFS_Stuff/BFS_Objects/Chapter.h"
+#include "src/Maze/GameState.h"
 class Node {
 public:
 
-	~Node() {};
 	/**
 	* this class represent the specific information about the BFSCase
 	* it is used for retrack the path at the end of the BFS
@@ -15,7 +15,7 @@ public:
 	public:
 
 		NodeRetrackInfo	(int id, int idParent, short playerPosBeforeMove, int playerPosAfterMove)
-			: playerPosBeforeMove(playerPosBeforeMove), playerPosAfterMove(playerPosAfterMove), NodeCaseMother(id, idParent)
+			: NodeCaseMother(id, idParent),playerPosBeforeMove(playerPosBeforeMove), playerPosAfterMove(playerPosAfterMove)
 		{
 		};
 
@@ -29,12 +29,12 @@ public:
 		short playerPosAfterMove;
 	};
 
+	~Node() {};
+	Node(Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, unsigned short profondeur, NodeRetrackInfo bfsR, short nbBoxes);
+	Node(Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, unsigned short profondeur, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
 
-	Node(Chapter *chapter, std::vector<bool> accessibleZone, short normalisePos,std::vector<unsigned char> field, unsigned short profondeur, NodeRetrackInfo bfsR, short nbBoxes);
-	Node(Chapter *chapter, std::vector<bool> accessibleZone, short normalisePos, std::vector<unsigned char> field, unsigned short profondeur, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
 	std::vector<bool> accessibleZone;
-	short normalisePos;
-	std::vector<unsigned char> field;
+	GameState gameState;
 	//true if box with id i is placed on current or past idealGOal
 	// placedBoxes[i] =>true
 	std::vector<bool> placedBoxes;

@@ -5,6 +5,8 @@
 #include "src/utils/Util.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
+#include "src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h"
+#include <unordered_map>
 class AHeuristique
 {
 public:
@@ -50,20 +52,25 @@ public:
 
 
 public:
-	AHeuristique(Maze *m, int coefA, int coefB,bool isPivotHeuristique);
+	AHeuristique(Maze *m, int coefA, int coefB, bool isPivotHeuristique);
 	virtual ~AHeuristique();
-	virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos)=0;
-	virtual std::string sayHello()=0; 
+	virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos) = 0;
+	virtual std::string sayHello() = 0;
 	virtual Chapter* getChapters() = 0;
 	virtual bool isPivotHeuristique() { return pivotHeuristique; };
-	
+	/**
+* Make a automatical move.
+* return {player_box, box pos}	after moves
+*/
+	virtual std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition) = 0;
+
 protected:
 
 	Util u;
 	Maze *m;
 	Note note;
 	Case_morte deadlocks;
-
+	MacroMover macroMover;
 	/**
 	* Note calculator
 	*/

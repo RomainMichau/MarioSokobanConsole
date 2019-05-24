@@ -3,6 +3,7 @@
 #include "src/Maze/Maze.h"
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include <unordered_set>
+#include <unordered_map>
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 class BFSPLUS
@@ -27,8 +28,9 @@ private:
 		}
 	};
 
-	bool marqued(short acc, std::vector<bool> zone);
+	bool marqued(short acc);
 	std::unordered_set<std::string>marque;
+	std::unordered_map<int, std::vector< Node::NodeRetrackInfo>> savedPath;
 
 };
 
