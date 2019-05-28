@@ -26,8 +26,8 @@ public:
     class GameStat
     {
     public:
-        GameStat(std::vector<short> mapFrequentationSquares, short pivotPoint) :
-            mapFrequentationSquares(mapFrequentationSquares), pivotPoint(pivotPoint) {};
+		GameStat(std::vector<short> mapFrequentationSquares, short pivotPoint, std::vector<short> distMapFromPivotPoint) :
+			mapFrequentationSquares(mapFrequentationSquares), pivotPoint(pivotPoint) , distMapFromPivotPoint(distMapFromPivotPoint){};
         short getPivotPointPos() const
         {
             return pivotPoint;
@@ -35,16 +35,19 @@ public:
         void setPivotPoint(short pivotPoint)
         {
             this->pivotPoint = pivotPoint;
-        }
+		};
         std::vector<short> getMapFrequentationSquares() const
         {
             return mapFrequentationSquares;
-        }
+		};
         void setMapFrequentationSquares(std::vector<short> map)
         {
             this->mapFrequentationSquares = map;
 
-        }
+		};
+		short getDistFromPivotPoint(short pos) const {
+			return distMapFromPivotPoint[pos];
+		};
     private:
         /**
         * a vector of the side of the field wich is calculate like that:
@@ -61,6 +64,11 @@ public:
         * will never change during the game
         */
         short pivotPoint;
+
+		/**
+		* the dist map from the pivotPoint
+		*/
+		std::vector<short> distMapFromPivotPoint;
     };
 
 public:
@@ -86,7 +94,8 @@ private:
     */
     HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat);
     Chapter  calcChapter();
-    void calcMacroPath();
+	unsigned short calc_note_distance_box_pivot();
+
 
     /**
     * PRIVATE ATTRIBUT

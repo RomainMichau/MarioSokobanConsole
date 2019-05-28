@@ -38,6 +38,7 @@ public:
 
 private:
     HeuristiqueClassique(Maze *m, int coefA, int coefB);
+	unsigned short calc_note_distance_box_bfs_multiple_box();
 
 
 };

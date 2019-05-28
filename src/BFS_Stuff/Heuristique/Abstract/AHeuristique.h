@@ -73,8 +73,8 @@ public:
     * return {player_box, box pos}	after moves
     */
     virtual std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition) = 0;
-
 protected:
+
 
     Util u;
     Maze *m;
@@ -84,7 +84,7 @@ protected:
     /**
     * Note calculator
     */
-    unsigned short calc_note_distance_box_bfs_multiple_box();
+
 
     /*
     * true if is a pivot heurisitique
