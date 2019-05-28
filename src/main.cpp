@@ -56,8 +56,8 @@ int main()
 
 
     m.setPlayerPosOr(m.getPosPlayer());
-    Case_morte Lamoort(&m);
-    Lamoort.detect_dead_with_BFS();
+    Case_morte lamoort(&m);
+	lamoort.detect_dead_with_BFS();
     std::cout << m << std::endl;
     //u.dispVector(m,	h.calcFrequentationSquares(m));
 

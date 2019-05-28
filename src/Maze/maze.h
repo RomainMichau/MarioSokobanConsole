@@ -156,6 +156,11 @@ public:
     */
     std::vector<char> getAdjacentDirection(char dir);
 
+	/**
+	* return position of adjacaent walkable square
+	*/
+	std::vector<short> getAdjacentWalkableSquare(short square);
+
     /**
     * rreturn the oppsoite direction of the one send in paramter
     */
@@ -206,8 +211,14 @@ public:
 	* return all the dir doable from the square sent in parameters.
 	* ignore boxes
 	*/
-	std::vector<char> getPossibleDirFromSquare(short square);
+	std::vector<char> getPossibleDirFromSquareIBox(short square);
 
+
+	/**
+	* return all the dir doable from the square sent in parameters.
+	* dont ignore boxes
+	*/
+	std::vector<char> getPossibleDirFromSquareWBox(short square);
 
     bool _canPushBox(unsigned short posBox, char dir, unsigned short &newPosBox) const;
 

@@ -120,12 +120,24 @@ bool Maze::_isCompleted() const
 
 /*
 */
-std::vector<char> Maze::getPossibleDirFromSquare(short square)
+std::vector<char> Maze::getPossibleDirFromSquareIBox(short square)
 {
 	std::vector<char> possibleDir;
 	for (char dir : allDirection) {
 		short newSquare = square + getMoveOffset(dir);
 		if (newSquare > 0 && newSquare < getSize() && (isSquareWalkable(newSquare) || isSquareBox(newSquare)))
+			possibleDir.push_back(dir);
+	}
+	return possibleDir;
+}
+
+
+std::vector<char> Maze::getPossibleDirFromSquareWBox(short square)
+{
+	std::vector<char> possibleDir;
+	for (char dir : allDirection) {
+		short newSquare = square + getMoveOffset(dir);
+		if (newSquare > 0 && newSquare < getSize() && (isSquareWalkable(newSquare) ))
 			possibleDir.push_back(dir);
 	}
 	return possibleDir;
@@ -409,6 +421,19 @@ std::vector<char> Maze::getAdjacentDirection(char dir)
 		break;
 	}
 	return adjDir;
+
+}
+
+std::vector<short> Maze::getAdjacentWalkableSquare(short square)
+{
+	 std::vector<short> res;
+	 for (char dir : allDirection) {
+		 short offset = getMoveOffset(dir);
+		 short adjSquare = square + offset;
+		 if (adjSquare >= 0 && adjSquare < this->getSize() && this->isSquareWalkable(adjSquare))
+			 res.push_back(adjSquare);
+	 }
+	 return res;
 
 }
 

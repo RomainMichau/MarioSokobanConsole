@@ -46,12 +46,7 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 
 	std::vector<unsigned short> box = m->getPosBoxes();
 	unsigned short distanecNoteBFS = calc_note_distance_box_pivot();
-	//calc_note_distance_box_bfs_multiple_box_new();
-
 	note.set_note_distance_box(distanecNoteBFS);
-
-	std::unordered_map<short, short> tunnelMap = gameStat.getTunnelMap();
-
 
 
 	//[OPTIMIZER]
@@ -68,7 +63,16 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 		}
 	}
 
-	/*if(nb_caisse_place_best >=6)
+
+	if (nb_caisse_place > nb_caisse_place_best) {
+		nb_caisse_place_best = nb_caisse_place;
+		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
+	}/*
+	if (nb_caisse_place == 6) {
+		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
+		system("pause");
+	}
+	if (nb_caisse_place_best >= 6)
 		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
 		*/
 	note.set_note_caisse_place(note_caisse_place);

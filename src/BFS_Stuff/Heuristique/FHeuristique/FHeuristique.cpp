@@ -139,7 +139,7 @@ std::unordered_map<short, short> FHeuristique::tunnelDetector()
 			continue;
 		}
 		//on compte le nb de direction faisable depuis cette case
-		std::vector<char> possibleDir = m->getPossibleDirFromSquare(square);
+		std::vector<char> possibleDir = m->getPossibleDirFromSquareIBox(square);
 
 		//si 2 direction sont possible
 		if (possibleDir.size() == 2) {
@@ -149,8 +149,8 @@ std::unordered_map<short, short> FHeuristique::tunnelDetector()
 			short offsetDir1 = m->getMoveOffset(dir1);
 			short neigbourh0 = square + offsetDir0;
 			short neigbourh1 = square + offsetDir1;
-			std::vector<char> dirNeigbourh0 = m->getPossibleDirFromSquare(neigbourh0);
-			std::vector<char> dirNeigbourh1 = m->getPossibleDirFromSquare(neigbourh1);
+			std::vector<char> dirNeigbourh0 = m->getPossibleDirFromSquareIBox(neigbourh0);
+			std::vector<char> dirNeigbourh1 = m->getPossibleDirFromSquareIBox(neigbourh1);
 			//the two dir must be opposite
 			if (offsetDir0 != -offsetDir1)
 				continue;
@@ -176,7 +176,7 @@ std::unordered_map<short, short> FHeuristique::tunnelDetector()
 			std::vector<char> newPossibleDir = possibleDir;
 			while (newPossibleDir == possibleDir) {
 				nextSquare += m->getMoveOffset(dirToTunnelNeigbourh);
-				newPossibleDir = m->getPossibleDirFromSquare(nextSquare);
+				newPossibleDir = m->getPossibleDirFromSquareIBox(nextSquare);
 			}
 			res[square] = nextSquare - m->getMoveOffset(dirToTunnelNeigbourh);
 
