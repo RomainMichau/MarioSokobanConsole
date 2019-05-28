@@ -7,14 +7,14 @@
 
 
 TODO:
-	-emepcher le deadlock qui apparait sur le niveau 26  >> upgradeDynDeadLocks
-	-Detecter les tunnels >> tunnelDetector
+	
+	-
 		
 	
 
 
 DOING:
-	
+	-emepcher le deadlock qui apparait sur le niveau 26  >> upgradeDynDeadLocks
 =========================================================================================================================
 	
 DONE:
@@ -25,7 +25,7 @@ DONE:
 	-Differentiate when you have a pivot point or not >> detectTypeHeuristique
 	-identifier les case de passage obligatoire (grace a un gros bfs). Des qu'une box est dessus, enclencher une macro ou mettre une tres grosse note heuristique >> MacroMove
 	-au lieu de faire un BFS pour mesurer les distance, utiliser la distmap >> staticMapMesasuringDist
-		
+	-Detecter les tunnels >> tunnelDetector
 
 
 	
