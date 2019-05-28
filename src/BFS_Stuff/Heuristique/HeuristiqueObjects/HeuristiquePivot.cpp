@@ -63,16 +63,24 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 			nb_caisse_place++;
 		}
 	}
-
-	/*if(nb_caisse_place_best >=6)
+	if (nb_caisse_place > nb_caisse_place_best) {
+		nb_caisse_place_best = nb_caisse_place;
 		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
-		*/
+
+	}
+	if (nb_caisse_place_best >= 6)
+		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
+	if (nb_caisse_place == 6)
+		system("pause");
 	note.set_note_caisse_place(note_caisse_place);
 	note.calculTotal();
 	node->note = note;
 }
 
 
+/**
+* detect and call for a macro move if needed
+*/
 std::pair<short, short>HeuristiquePivot::macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition)
 {
 	if (boxPosition == this->gameStat.getPivotPointPos())
@@ -128,12 +136,12 @@ Chapter  HeuristiquePivot::calcChapter()
 /**
 * calcul la sommes des distance entre caisse et pivot avec la dist map du GameStat
 */
-unsigned short HeuristiquePivot::calc_note_distance_box_pivot(){
+unsigned short HeuristiquePivot::calc_note_distance_box_pivot() {
 	std::vector<unsigned short> boxes = m->getPosBoxes();
 	std::vector<unsigned short> distances;
 	for (unsigned int box = 0; box < boxes.size(); box++)                                         ////////////Calcul note distance des box
 	{
-		short dist = 0;	
+		short dist = 0;
 		if (!(m->isSquareBoxPlaced(boxes[box]) || boxes[box] == gameStat.getPivotPointPos()))
 		{
 			dist = gameStat.getDistFromPivotPoint(boxes[box]);
