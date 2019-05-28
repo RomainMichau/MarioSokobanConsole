@@ -2,6 +2,7 @@
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 #include "FHeuristique.h"
 
+
 FHeuristique::FHeuristique(Maze *m, int coefA, int coefB) :m(m), coefA(coefA), coefB(coefB) {}
 
 FHeuristique::~FHeuristique()
@@ -18,8 +19,9 @@ AHeuristique * FHeuristique::getInstance()
 
 	// with the distance map and the previously calculated frequentation map, we calculate the piovtPoint
 	short posPivotPointPos = calcPivotPointPos(distanceMap, freqMap);
+	std::unordered_map<short, short> tunnelMap=tunnelDetector();
 	if (checkIfPivotLevel(posPivotPointPos))
-		return new HeuristiquePivot(m, coefA, coefB, HeuristiquePivot::GameStat(freqMap, posPivotPointPos,u.getDistMapOfSquare(m,posPivotPointPos)));
+		return new HeuristiquePivot(m, coefA, coefB, HeuristiquePivot::GameStat(freqMap, posPivotPointPos, u.getDistMapOfSquare(m, posPivotPointPos), tunnelMap));
 	else
 		return new HeuristiqueClassique(m, coefA, coefB);
 }
@@ -118,6 +120,69 @@ short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<sh
 		}
 	}
 	return pivotPoint;
+}
+/**
+* detect the presence of tunnel in the maze
+* tunnel is a path compose of a least two tunnelSquare
+* tunnelSquare: square which have only 2 walkable adjacent square. Each of this square must be in oppossite direction
+* return a map:
+* entryTunnelSquare => exitTunnelSquare
+*/
+std::unordered_map<short, short> FHeuristique::tunnelDetector()
+{
+	std::unordered_map<short, short> res;
+	//on regarde toute les cases du jeu
+	for (short square = 0; square < m->getSize(); square++) {
+		if (square == 103)
+			std::cout << 139;
+		if (!m->isSquareWalkable(square) || m->isSquareGoal(square)) {
+			continue;
+		}
+		//on compte le nb de direction faisable depuis cette case
+		std::vector<char> possibleDir = m->getPossibleDirFromSquare(square);
+
+		//si 2 direction sont possible
+		if (possibleDir.size() == 2) {
+			char dir0 = possibleDir[0];
+			char dir1 = possibleDir[1];
+			short offsetDir0 = m->getMoveOffset(dir0);
+			short offsetDir1 = m->getMoveOffset(dir1);
+			short neigbourh0 = square + offsetDir0;
+			short neigbourh1 = square + offsetDir1;
+			std::vector<char> dirNeigbourh0 = m->getPossibleDirFromSquare(neigbourh0);
+			std::vector<char> dirNeigbourh1 = m->getPossibleDirFromSquare(neigbourh1);
+			//the two dir must be opposite
+			if (offsetDir0 != -offsetDir1)
+				continue;
+
+			/**
+			* only the enter and the end is intersting for us, so we check than one neigbourg is not a TunnelSquare, and than the other is
+			*/
+
+
+			char dirToTunnelNeigbourh;
+
+			if (dirNeigbourh0 == possibleDir && dirNeigbourh1.size() > 2) {
+				dirToTunnelNeigbourh = dir0;
+			}
+			else if (dirNeigbourh1 == possibleDir && dirNeigbourh0.size() > 2) {
+				dirToTunnelNeigbourh = dir1;
+			}
+			else {
+				continue;
+			}
+
+			short nextSquare = square;
+			std::vector<char> newPossibleDir = possibleDir;
+			while (newPossibleDir == possibleDir) {
+				nextSquare += m->getMoveOffset(dirToTunnelNeigbourh);
+				newPossibleDir = m->getPossibleDirFromSquare(nextSquare);
+			}
+			res[square] = nextSquare - m->getMoveOffset(dirToTunnelNeigbourh);
+
+		}
+	}
+	return res;
 }
 /**
 * return true if the level sent in parameters is indeed a pivot level

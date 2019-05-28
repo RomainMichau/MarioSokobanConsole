@@ -3,6 +3,7 @@
 #include "src/Maze/Maze.h"
 #include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
+#include <unordered_map>
 /**
 * Factory de l'heuristique
 * methode getInstance renvoit:
@@ -50,11 +51,13 @@ private:
     * if there is many point with the same max frequentation, then the farest from the goal win
     * @see MapStat
     */
-    short calcPivotPointPos(std::vector<short> distMap,  std::vector<short> freqMap);
+	short calcPivotPointPos(std::vector<short> distMap, std::vector<short> freqMap);
+	std::unordered_map<short,short> tunnelDetector();
 
     bool checkIfPivotLevel(short pivotPos);
 
     int coefA,coefB;
+	
 
 };
 

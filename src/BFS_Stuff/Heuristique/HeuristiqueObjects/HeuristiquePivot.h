@@ -14,107 +14,116 @@
 */
 class HeuristiquePivot :public AHeuristique
 {
-    friend class FHeuristique;
+	friend class FHeuristique;
 
 public:
 
 
-    /**
-    * Represent the calculated stat and informations about the Game	*
-    * only the information which are true for ALL the game are in this class
-    */
-    class GameStat
-    {
-    public:
-		GameStat(std::vector<short> mapFrequentationSquares, short pivotPoint, std::vector<short> distMapFromPivotPoint) :
-			mapFrequentationSquares(mapFrequentationSquares), pivotPoint(pivotPoint) , distMapFromPivotPoint(distMapFromPivotPoint){};
-        short getPivotPointPos() const
-        {
-            return pivotPoint;
-        };
-        void setPivotPoint(short pivotPoint)
-        {
-            this->pivotPoint = pivotPoint;
+	/**
+	* Represent the calculated stat and informations about the Game	*
+	* only the information which are true for ALL the game are in this class
+	*/
+	class GameStat
+	{
+	public:
+		GameStat(std::vector<short> mapFrequentationSquares, short pivotPoint, std::vector<short> distMapFromPivotPoint, std::unordered_map<short, short> tunnelMap) :
+			mapFrequentationSquares(mapFrequentationSquares), pivotPoint(pivotPoint), distMapFromPivotPoint(distMapFromPivotPoint), tunnelMap(tunnelMap) {};
+		short getPivotPointPos() const
+		{
+			return pivotPoint;
 		};
-        std::vector<short> getMapFrequentationSquares() const
-        {
-            return mapFrequentationSquares;
+		void setPivotPoint(short pivotPoint)
+		{
+			this->pivotPoint = pivotPoint;
 		};
-        void setMapFrequentationSquares(std::vector<short> map)
-        {
-            this->mapFrequentationSquares = map;
+		std::vector<short> getMapFrequentationSquares() const
+		{
+			return mapFrequentationSquares;
+		};
+		void setMapFrequentationSquares(std::vector<short> map)
+		{
+			this->mapFrequentationSquares = map;
 
 		};
 		short getDistFromPivotPoint(short pos) const {
 			return distMapFromPivotPoint[pos];
 		};
-    private:
-        /**
-        * a vector of the side of the field wich is calculate like that:
-        *	we make a bfs for fin the way beetween each box and the goal
-        *	for each square we count how many time a box passed on it
-        *	we put this info in this vector
-        *
-        * will not change during the game
-        */
-        std::vector<short> mapFrequentationSquares;
 
-        /**
-        * the pivotPoint is a square of the field where the passage is necessary for reach any goals
-        * will never change during the game
-        */
-        short pivotPoint;
+		std::unordered_map<short, short> getTunnelMap() const {
+			return tunnelMap;
+		}
+	private:
+		/**
+		* a vector of the side of the field wich is calculate like that:
+		*	we make a bfs for fin the way beetween each box and the goal
+		*	for each square we count how many time a box passed on it
+		*	we put this info in this vector
+		*
+		* will not change during the game
+		*/
+		std::vector<short> mapFrequentationSquares;
+
+		/**
+		* the pivotPoint is a square of the field where the passage is necessary for reach any goals
+		* will never change during the game
+		*/
+		short pivotPoint;
 
 		/**
 		* the dist map from the pivotPoint
 		*/
 		std::vector<short> distMapFromPivotPoint;
-    };
+		/**
+		* map of the tunnel in the Game:
+		* entrySquare => endSquare of the tunnel
+		*/
+		std::unordered_map<short, short> tunnelMap;
+	};
 
 public:
-    /**
-    * PUBLIC METHOD
-    */
-    ~HeuristiquePivot();
-    void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
-    virtual std::string sayHello()
-    {
-        return "Pivot Method Heuristique";
-    };
-    Chapter* getChapters()
-    {
-        return &chapters;
-    };
-    std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
+	/**
+	* PUBLIC METHOD
+	*/
+	~HeuristiquePivot();
+	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
+	virtual std::string sayHello()
+	{
+		return "Pivot Method Heuristique";
+	};
+	Chapter* getChapters()
+	{
+		return &chapters;
+	};
+	std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
 private:
 
-    int nb_caisse_place_best;
-    /**
-    * PRIVATE METHOD
-    */
-    HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat);
-    Chapter  calcChapter();
+	int nb_caisse_place_best;
+	/**
+	* PRIVATE METHOD
+	*/
+	HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat);
+	Chapter  calcChapter();
 	unsigned short calc_note_distance_box_pivot();
 
 
-    /**
-    * PRIVATE ATTRIBUT
-    */
+	/**
+	* PRIVATE ATTRIBUT
+	*/
 
 
 
 
-    /**
-    * stats about the game
-    */
-    const GameStat gameStat;
-    /*
-    * lionked list of chapterts order by number:
-    *	chapters[0]=> chapter0
-    *	chapters[1]=> chapter1
-    *	chapters[2]=> chapter2
-    */
-    Chapter  chapters;
+	/**
+	* stats about the game
+	*/
+	const GameStat gameStat;
+	/*
+	* lionked list of chapterts order by number:
+	*	chapters[0]=> chapter0
+	*	chapters[1]=> chapter1
+	*	chapters[2]=> chapter2
+	*/
+	Chapter  chapters;
 };
 
 

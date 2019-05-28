@@ -50,6 +50,10 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 
 	note.set_note_distance_box(distanecNoteBFS);
 
+	std::unordered_map<short, short> tunnelMap = gameStat.getTunnelMap();
+
+
+
 	//[OPTIMIZER]
 	//we add a penalty for each box which is not on a ideal Goal
 	note_caisse_place = 0;
@@ -72,7 +76,6 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 	node->note = note;
 }
 
-
 std::pair<short, short>HeuristiquePivot::macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition)
 {
 	if (boxPosition == this->gameStat.getPivotPointPos())
@@ -80,9 +83,6 @@ std::pair<short, short>HeuristiquePivot::macroMove(std::vector<Node::NodeRetrack
 
 	return std::pair<short, short>(-1, -1);
 }
-
-
-
 
 /**
 * Create and order all the chapters
@@ -119,21 +119,15 @@ Chapter  HeuristiquePivot::calcChapter()
 	return *res[0];
 }
 
-
-
-
-
-
-
 /**
 * calcul la sommes des distance entre caisse et pivot avec la dist map du GameStat
 */
-unsigned short HeuristiquePivot::calc_note_distance_box_pivot(){
+unsigned short HeuristiquePivot::calc_note_distance_box_pivot() {
 	std::vector<unsigned short> boxes = m->getPosBoxes();
 	std::vector<unsigned short> distances;
 	for (unsigned int box = 0; box < boxes.size(); box++)                                         ////////////Calcul note distance des box
 	{
-		short dist = 0;	
+		short dist = 0;
 		if (!(m->isSquareBoxPlaced(boxes[box]) || boxes[box] == gameStat.getPivotPointPos()))
 		{
 			dist = gameStat.getDistFromPivotPoint(boxes[box]);

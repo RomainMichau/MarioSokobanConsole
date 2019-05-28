@@ -202,7 +202,11 @@ public:
      */
     void lire_chemin(std::vector<unsigned char> vec);
 
-
+	/**
+	* return all the dir doable from the square sent in parameters.
+	* ignore boxes
+	*/
+	std::vector<char> getPossibleDirFromSquare(short square);
 
 
     bool _canPushBox(unsigned short posBox, char dir, unsigned short &newPosBox) const;
