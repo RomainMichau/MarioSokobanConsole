@@ -62,24 +62,25 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 			nb_caisse_place++;
 		}
 	}
-
-
 	if (nb_caisse_place > nb_caisse_place_best) {
 		nb_caisse_place_best = nb_caisse_place;
 		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
-	}/*
-	if (nb_caisse_place == 6) {
-		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
-		system("pause");
+
+
 	}
 	if (nb_caisse_place_best >= 6)
 		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
-		*/
+	if (nb_caisse_place == 6)
+		system("pause");
 	note.set_note_caisse_place(note_caisse_place);
 	note.calculTotal();
 	node->note = note;
 }
 
+
+/**
+* detect and call for a macro move if needed
+*/
 std::pair<short, short>HeuristiquePivot::macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition)
 {
 	if (boxPosition == this->gameStat.getPivotPointPos())

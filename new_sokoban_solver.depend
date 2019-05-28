@@ -239,7 +239,11 @@
 	"src/BFS_Stuff/DeadLocks/case_morte.h"
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 
+<<<<<<< HEAD
 1559054287 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\fheuristique\fheuristique.cpp
+=======
+1559043794 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\fheuristique\fheuristique.cpp
+>>>>>>> upgradeDynDeadLocks
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 	"FHeuristique.h"
@@ -268,7 +272,11 @@
 	<unordered_map>
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 
+<<<<<<< HEAD
 1559054697 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.cpp
+=======
+1559044447 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.cpp
+>>>>>>> upgradeDynDeadLocks
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 	"src/Maze/Maze.h"
 	"src/utils/Util.h"
@@ -283,7 +291,11 @@
 	<unordered_set>
 	<algorithm>
 
+<<<<<<< HEAD
 1559051821 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.h
+=======
+1559043794 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.h
+>>>>>>> upgradeDynDeadLocks
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/Util.h"
