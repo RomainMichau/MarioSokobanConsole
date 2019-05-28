@@ -9,7 +9,7 @@ class Chrono
 {
 public:
     Chrono();
-	virtual  ~Chrono();
+    virtual  ~Chrono();
     void lancer_chrono();
     double temps_ecoule();
 

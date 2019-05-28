@@ -11,18 +11,18 @@
 #include <iostream>
 #include <unordered_map>
 #include <algorithm>
-#include <sstream>	
+#include <sstream>
 #include <iterator>
 #include <unordered_set>
 
 Util::Util()
 {
-	//ctor
+    //ctor
 }
 
 Util::~Util()
 {
-	//dtor
+    //dtor
 }
 
 /*
@@ -30,8 +30,8 @@ Util::~Util()
 */
 void Util::vider(std::queue<unsigned short> &t)
 {
-	while (!t.empty())
-		t.pop();
+    while (!t.empty())
+        t.pop();
 
 }
 
@@ -40,8 +40,8 @@ void Util::vider(std::queue<unsigned short> &t)
 */
 void Util::vider(std::queue<std::vector<unsigned char>> &t)
 {
-	while (!t.empty())
-		t.pop();
+    while (!t.empty())
+        t.pop();
 
 }
 
@@ -50,8 +50,8 @@ void Util::vider(std::queue<std::vector<unsigned char>> &t)
 */
 void Util::vider(std::queue< BFSCase_relier_point> &queue)
 {
-	std::queue<BFSCase_relier_point> empty;
-	std::swap(queue, empty);
+    std::queue<BFSCase_relier_point> empty;
+    std::swap(queue, empty);
 }
 
 /**
@@ -60,30 +60,32 @@ void Util::vider(std::queue< BFSCase_relier_point> &queue)
 */
 std::vector<bool> Util::calcZoneAccessible(const Maze  *m, short &normPos)
 {
-	normPos = m->getSize();
-	std::vector<bool> marque;
-	marque.resize(m->getField().size(), false);
-	std::queue<unsigned short> file;
-	short position = m->getPosPlayer();
-	marque[position] = true;
-	file.push(position);
+    normPos = m->getSize();
+    std::vector<bool> marque;
+    marque.resize(m->getField().size(), false);
+    std::queue<unsigned short> file;
+    short position = m->getPosPlayer();
+    marque[position] = true;
+    file.push(position);
 
-	while (!file.empty())
-	{
-		position = file.front();
-		for (char dir : m->allDirection) {
-			short offset = m->getMoveOffset(dir);
-			short newPos = position + offset;
-			if (m->isSquareWalkable(newPos) && !marque[newPos]) {
-				file.push(newPos);
-				marque[newPos] = true;
-				if (newPos < normPos)
-					normPos = newPos;
-			}
-		}
-		file.pop();
-	}
-	return marque;
+    while (!file.empty())
+    {
+        position = file.front();
+        for (char dir : m->allDirection)
+        {
+            short offset = m->getMoveOffset(dir);
+            short newPos = position + offset;
+            if (m->isSquareWalkable(newPos) && !marque[newPos])
+            {
+                file.push(newPos);
+                marque[newPos] = true;
+                if (newPos < normPos)
+                    normPos = newPos;
+            }
+        }
+        file.pop();
+    }
+    return marque;
 }
 
 
@@ -94,66 +96,67 @@ std::vector<bool> Util::calcZoneAccessible(const Maze  *m, short &normPos)
 */
 std::vector<unsigned short> Util::relier_point(Maze  m, std::vector <unsigned short> positions)
 {
-	std::cout << std::endl << "BFS DONE, linking points..." << std::endl;
-	std::vector<unsigned short> resolution, temp;
-	std::queue< BFSCase_relier_point> queue;
-	std::vector <unsigned char> field = m.getField();
-	unsigned short currentPosition = positions[0];
-	bool win;
-	for (unsigned int i = 0; i < positions.size() - 1; i++)
-	{
-		win = false;
-		this->vider(queue);
-		queue.push(BFSCase_relier_point(m.getField(), positions[i], 0, -1, -1));
-		marque.push_back(BFSCase_relier_point(m.getField(), positions[i], 0, -1, -1));
+    std::cout << std::endl << "BFS DONE, linking points..." << std::endl;
+    std::vector<unsigned short> resolution, temp;
+    std::queue< BFSCase_relier_point> queue;
+    std::vector <unsigned char> field = m.getField();
+    unsigned short currentPosition = positions[0];
+    bool win;
+    for (unsigned int i = 0; i < positions.size() - 1; i++)
+    {
+        win = false;
+        this->vider(queue);
+        queue.push(BFSCase_relier_point(m.getField(), positions[i], 0, -1, -1));
+        marque.push_back(BFSCase_relier_point(m.getField(), positions[i], 0, -1, -1));
 
-		while (!win)
-		{
-			BFSCase_relier_point currentCase = queue.front();
-			currentPosition = currentCase.position;
-			field = currentCase.field;
-			m.change_etat_jeu(field, currentPosition);
-			if (currentPosition == positions[i + 1])
-				win = true;
-			for (char dir : m.allDirection) {
-				short offset = m.getMoveOffset(dir);
-				short newPosition = currentPosition + offset;
-				if (!m.isSquareWall(newPosition) && !win)
-				{
-					if (!m.isSquareBox(newPosition) || (newPosition == positions[i + 1]))
-					{
-						m.updatePlayer(dir);
-						BFSCase_relier_point newCase(m.getField(), m.getPosPlayer(), (int)marque.size(), currentCase.idCase, dir);
+        while (!win)
+        {
+            BFSCase_relier_point currentCase = queue.front();
+            currentPosition = currentCase.position;
+            field = currentCase.field;
+            m.change_etat_jeu(field, currentPosition);
+            if (currentPosition == positions[i + 1])
+                win = true;
+            for (char dir : m.allDirection)
+            {
+                short offset = m.getMoveOffset(dir);
+                short newPosition = currentPosition + offset;
+                if (!m.isSquareWall(newPosition) && !win)
+                {
+                    if (!m.isSquareBox(newPosition) || (newPosition == positions[i + 1]))
+                    {
+                        m.updatePlayer(dir);
+                        BFSCase_relier_point newCase(m.getField(), m.getPosPlayer(), (int)marque.size(), currentCase.idCase, dir);
 
-						if (!compare(newCase))
-						{
-							if (m.getPosPlayer() == positions[i + 1])
-							{
-								win = true;
-							}
-							queue.push(newCase);
-							marque.push_back(newCase);
-						}
-					}
-					if (!win)
-						m.change_etat_jeu(field, currentPosition);
-				}
-			}
-			queue.pop();
-		}
-		temp.resize(0);
-		BFSCase_relier_point currentCase = marque.back();
-		while (currentCase.idCase != 0)
-		{
-			temp.push_back(currentCase.mov);
-			currentCase = marque[currentCase.idParentCase];
-		}
-		std::reverse(temp.begin(), temp.end());
-		for (unsigned int h = 0; h < temp.size(); h++)
-			resolution.push_back(temp[h]);
-	}
+                        if (!compare(newCase))
+                        {
+                            if (m.getPosPlayer() == positions[i + 1])
+                            {
+                                win = true;
+                            }
+                            queue.push(newCase);
+                            marque.push_back(newCase);
+                        }
+                    }
+                    if (!win)
+                        m.change_etat_jeu(field, currentPosition);
+                }
+            }
+            queue.pop();
+        }
+        temp.resize(0);
+        BFSCase_relier_point currentCase = marque.back();
+        while (currentCase.idCase != 0)
+        {
+            temp.push_back(currentCase.mov);
+            currentCase = marque[currentCase.idParentCase];
+        }
+        std::reverse(temp.begin(), temp.end());
+        for (unsigned int h = 0; h < temp.size(); h++)
+            resolution.push_back(temp[h]);
+    }
 
-	return resolution;
+    return resolution;
 
 
 }
@@ -164,13 +167,14 @@ std::vector<unsigned short> Util::relier_point(Maze  m, std::vector <unsigned sh
 */
 bool Util::compare(BFSCase_relier_point tstCase)
 {
-	for (std::vector<BFSCase_relier_point>::iterator ccase = marque.begin(); ccase != marque.end(); ++ccase)
-	{
-		if (ccase->field == tstCase.field&&ccase->position == tstCase.position) {
-			return true;
-		}
-	}
-	return false;
+    for (std::vector<BFSCase_relier_point>::iterator ccase = marque.begin(); ccase != marque.end(); ++ccase)
+    {
+        if (ccase->field == tstCase.field&&ccase->position == tstCase.position)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 
@@ -180,65 +184,65 @@ bool Util::compare(BFSCase_relier_point tstCase)
  */
 std::string Util::choose_level()
 {
-	std::string path;
-	unsigned short a, b;
-	float c;
+    std::string path;
+    unsigned short a, b;
+    float c;
 
-	std::ostringstream oss;
-	Console::getInstance()->setColor(_COLOR_RED);
-	std::cout << std::endl << std::endl << std::endl;
-	std::cout << "choose a level:";
-	Console::getInstance()->setColor(_COLOR_YELLOW);
-	std::cout << std::endl << "easy 1: 11" << std::endl << "easy 2: 12" << std::endl << "easy 3: 13" << std::endl << "easy 4: 14" << std::endl << "easy 5: 15" << std::endl;
-	std::cout << "easy 6: 16" << std::endl << "easy 7: 17" << std::endl << "easy 8: 18" << std::endl << "easy 9: 19" << std::endl << "easy 10: 110" << std::endl << std::endl;
-	Console::getInstance()->setColor(_COLOR_BLUE);
-	std::cout << "medium 1: 21" << std::endl << "medium 2: 22" << std::endl << "medium 3: 23" << std::endl << std::endl;
-	Console::getInstance()->setColor(_COLOR_GREEN);
-	std::cout << "hard 1: 31" << std::endl << "hard 2: 32" << std::endl << "hard 3: 33" << std::endl << std::endl;
-	Console::getInstance()->setColor(_COLOR_PURPLE);
-	std::cout << "test 1: 41" << std::endl << "test 2: 42" << std::endl << "test 3: 43" << std::endl << std::endl;
-	Console::getInstance()->setColor(_COLOR_WHITE);
+    std::ostringstream oss;
+    Console::getInstance()->setColor(_COLOR_RED);
+    std::cout << std::endl << std::endl << std::endl;
+    std::cout << "choose a level:";
+    Console::getInstance()->setColor(_COLOR_YELLOW);
+    std::cout << std::endl << "easy 1: 11" << std::endl << "easy 2: 12" << std::endl << "easy 3: 13" << std::endl << "easy 4: 14" << std::endl << "easy 5: 15" << std::endl;
+    std::cout << "easy 6: 16" << std::endl << "easy 7: 17" << std::endl << "easy 8: 18" << std::endl << "easy 9: 19" << std::endl << "easy 10: 110" << std::endl << std::endl;
+    Console::getInstance()->setColor(_COLOR_BLUE);
+    std::cout << "medium 1: 21" << std::endl << "medium 2: 22" << std::endl << "medium 3: 23" << std::endl << std::endl;
+    Console::getInstance()->setColor(_COLOR_GREEN);
+    std::cout << "hard 1: 31" << std::endl << "hard 2: 32" << std::endl << "hard 3: 33" << std::endl << std::endl;
+    Console::getInstance()->setColor(_COLOR_PURPLE);
+    std::cout << "test 1: 41" << std::endl << "test 2: 42" << std::endl << "test 3: 43" << std::endl << std::endl;
+    Console::getInstance()->setColor(_COLOR_WHITE);
 
 
-	std::cout << "level: ";
-	std::cin >> a;
-	std::cout << std::endl << std::endl;
-	path = "C:/levels/";
-	b = a / 10;
-	c = a;
-	c = c / 10;
-	if (b == 1)
-	{
-		path = path + "easy/easy_";
-	}
-	if (b == 2)
-	{
-		path = path + "medium/medium_";
-	}
-	if (b == 3)
-	{
-		path = path + "hard/hard_";
-	}
-	if (b == 4)
-	{
+    std::cout << "level: ";
+    std::cin >> a;
+    std::cout << std::endl << std::endl;
+    path = "C:/levels/";
+    b = a / 10;
+    c = a;
+    c = c / 10;
+    if (b == 1)
+    {
+        path = path + "easy/easy_";
+    }
+    if (b == 2)
+    {
+        path = path + "medium/medium_";
+    }
+    if (b == 3)
+    {
+        path = path + "hard/hard_";
+    }
+    if (b == 4)
+    {
 
-		path = path + "test/test_";
+        path = path + "test/test_";
 
-	}
+    }
 
-	if (a != 110)
-	{
-		c = round(10 * (c - floor(c)));
-		oss << c;
-		path = path + oss.str();
-	}
+    if (a != 110)
+    {
+        c = round(10 * (c - floor(c)));
+        oss << c;
+        path = path + oss.str();
+    }
 
-	if (a == 110)
-		path = "./levels/easy_10";
-	path = path + ".dat";
-	std::cout << path << std::endl;
-	std::ifstream fichier(path.c_str());
-	return path;
+    if (a == 110)
+        path = "./levels/easy_10";
+    path = path + ".dat";
+    std::cout << path << std::endl;
+    std::ifstream fichier(path.c_str());
+    return path;
 }
 
 /**
@@ -253,68 +257,68 @@ std::string Util::choose_level()
 */
 std::deque<short> Util::getPathSquareToGoalBM(const Maze  *m, short square)
 {
-	std::deque<short> res;
+    std::deque<short> res;
 
-	/**
-	* Si il ne s'agit pas d'une case marquable comme deadSquare
-	*/
-	if (m->isSquareGoal(square) || m->isSquareWall(square) || m->isSquareDeadSquare(square))
-	{
-		return res;
-	}
-	std::queue< unsigned short> queue;
-	std::vector<bool> marque;
+    /**
+    * Si il ne s'agit pas d'une case marquable comme deadSquare
+    */
+    if (m->isSquareGoal(square) || m->isSquareWall(square) || m->isSquareDeadSquare(square))
+    {
+        return res;
+    }
+    std::queue< unsigned short> queue;
+    std::vector<bool> marque;
 
-	//map to retrace the path to the goal
-	//  square=>previous_square
-	std::unordered_map<short, short> origin;
-	marque.resize(m->getField().size(), false);
-	queue.push(square);
-	marque[square] = true;
-	bool goal_reached = false;
-	short lastPos;
-	while (!queue.empty())
-	{
-		unsigned char pos = queue.front();
-		queue.pop();
-		for (char dir : m->allDirection)
-		{
-			short offset = m->getMoveOffset(dir);
-			short newPos = pos + offset;
-			short playerPos = pos - offset;
-			//si on sort du terrain, on abbandone
-			if (playerPos < 0 || newPos >= (short)m->getSize() || playerPos >= (short)m->getSize() || newPos < 0)
-				continue;
-			//si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
-			if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
-				continue;
-			//Si la player pos est innaccesilbe on abbandonne
-			if (!(m->isSquareWalkable(playerPos) || m->isSquareBox(playerPos)))
-			{
-				continue;
-			}
-			origin.insert({ newPos, pos });
-			queue.push(newPos);
-			marque[newPos] = true;
-			lastPos = newPos;
-			if (m->isSquareGoal(newPos))
-			{
-				goal_reached = true;
-				break;
-			}
-		}
-		if (goal_reached)
-		{
-			break;
-		}
-	}
+    //map to retrace the path to the goal
+    //  square=>previous_square
+    std::unordered_map<short, short> origin;
+    marque.resize(m->getField().size(), false);
+    queue.push(square);
+    marque[square] = true;
+    bool goal_reached = false;
+    short lastPos;
+    while (!queue.empty())
+    {
+        unsigned char pos = queue.front();
+        queue.pop();
+        for (char dir : m->allDirection)
+        {
+            short offset = m->getMoveOffset(dir);
+            short newPos = pos + offset;
+            short playerPos = pos - offset;
+            //si on sort du terrain, on abbandone
+            if (playerPos < 0 || newPos >= (short)m->getSize() || playerPos >= (short)m->getSize() || newPos < 0)
+                continue;
+            //si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
+            if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
+                continue;
+            //Si la player pos est innaccesilbe on abbandonne
+            if (!(m->isSquareWalkable(playerPos) || m->isSquareBox(playerPos)))
+            {
+                continue;
+            }
+            origin.insert({ newPos, pos });
+            queue.push(newPos);
+            marque[newPos] = true;
+            lastPos = newPos;
+            if (m->isSquareGoal(newPos))
+            {
+                goal_reached = true;
+                break;
+            }
+        }
+        if (goal_reached)
+        {
+            break;
+        }
+    }
 
-	while (goal_reached&&lastPos != square)
-	{
-		res.push_front(lastPos);
-		lastPos = origin[lastPos];
-	}
-	return res;
+    while (goal_reached&&lastPos != square)
+    {
+        res.push_front(lastPos);
+        lastPos = origin[lastPos];
+    }
+    return res;
 }
 
 /**
@@ -329,68 +333,68 @@ std::deque<short> Util::getPathSquareToGoalBM(const Maze  *m, short square)
 */
 std::deque<short> Util::getPathSquareToSquareBM(const Maze  *m, short fromSquare, short toSquare)
 {
-	std::deque<short> res;
-	short square = fromSquare;
-	/**
-	* Si il ne s'agit pas d'une case marquable comme deadSquare
-	*/
-	if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
-	{
-		return res;
-	}
-	std::queue< unsigned short> queue;
-	std::vector<bool> marque;
+    std::deque<short> res;
+    short square = fromSquare;
+    /**
+    * Si il ne s'agit pas d'une case marquable comme deadSquare
+    */
+    if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
+    {
+        return res;
+    }
+    std::queue< unsigned short> queue;
+    std::vector<bool> marque;
 
-	//map to retrace the path to the goal
-	//  square=>previous_square
-	std::unordered_map<short, short> origin;
-	marque.resize(m->getField().size(), false);
-	queue.push(square);
-	marque[square] = true;
-	bool goal_reached = false;
-	short lastPos;
-	while (!queue.empty())
-	{
-		unsigned char pos = queue.front();
-		queue.pop();
-		for (char dir : m->allDirection)
-		{
-			short offset = m->getMoveOffset(dir);
-			short newPos = pos + offset;
-			short playerPos = pos - offset;
-			//si on sort du terrain, on abbandone
-			if (playerPos < 0 || newPos >= (short)m->getSize() || playerPos >= (short)m->getSize() || newPos < 0)
-				continue;
-			//si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
-			if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
-				continue;
-			//Si la player pos est innaccesilbe on abbandonne
-			if (!(m->isSquareWalkable(playerPos) || m->isSquareBox(playerPos)))
-			{
-				continue;
-			}
-			origin.insert({ newPos, pos });
-			queue.push(newPos);
-			marque[newPos] = true;
-			lastPos = newPos;
-			if (newPos == toSquare)
-			{
-				goal_reached = true;
-				break;
-			}
-		}
-		if (goal_reached)
-		{
-			break;
-		}
-	}
+    //map to retrace the path to the goal
+    //  square=>previous_square
+    std::unordered_map<short, short> origin;
+    marque.resize(m->getField().size(), false);
+    queue.push(square);
+    marque[square] = true;
+    bool goal_reached = false;
+    short lastPos;
+    while (!queue.empty())
+    {
+        unsigned char pos = queue.front();
+        queue.pop();
+        for (char dir : m->allDirection)
+        {
+            short offset = m->getMoveOffset(dir);
+            short newPos = pos + offset;
+            short playerPos = pos - offset;
+            //si on sort du terrain, on abbandone
+            if (playerPos < 0 || newPos >= (short)m->getSize() || playerPos >= (short)m->getSize() || newPos < 0)
+                continue;
+            //si la nouvelle case de la box est marqué, ou deadSq ou mur on abbandone
+            if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
+                continue;
+            //Si la player pos est innaccesilbe on abbandonne
+            if (!(m->isSquareWalkable(playerPos) || m->isSquareBox(playerPos)))
+            {
+                continue;
+            }
+            origin.insert({ newPos, pos });
+            queue.push(newPos);
+            marque[newPos] = true;
+            lastPos = newPos;
+            if (newPos == toSquare)
+            {
+                goal_reached = true;
+                break;
+            }
+        }
+        if (goal_reached)
+        {
+            break;
+        }
+    }
 
-	while (goal_reached&&lastPos != square)
-	{
-		res.push_front(lastPos);
-		lastPos = origin[lastPos];
-	}
-	return res;
+    while (goal_reached&&lastPos != square)
+    {
+        res.push_front(lastPos);
+        lastPos = origin[lastPos];
+    }
+    return res;
 }
 
 
@@ -406,254 +410,263 @@ std::deque<short> Util::getPathSquareToSquareBM(const Maze  *m, short fromSquare
 */
 std::deque<short> Util::getPathSquareToSquarePM(const Maze  *m, short fromSquare, short toSquare)
 {
-	std::deque<short> res;
-	short square = fromSquare;
-	/**
-	* Si il ne s'agit pas d'une case marquable comme deadSquare
-	*/
-	if (m->isSquareWall(square))
-	{
-		return res;
-	}
-	std::queue< unsigned short> queue;
-	std::vector<bool> marque;
+    std::deque<short> res;
+    short square = fromSquare;
+    /**
+    * Si il ne s'agit pas d'une case marquable comme deadSquare
+    */
+    if (m->isSquareWall(square))
+    {
+        return res;
+    }
+    std::queue< unsigned short> queue;
+    std::vector<bool> marque;
 
-	//map to retrace the path to the goal
-	//  square=>previous_square
-	std::unordered_map<short, short> origin;
-	marque.resize(m->getField().size(), false);
-	queue.push(square);
-	marque[square] = true;
-	bool goal_reached = false;
-	short lastPos;
-	while (!queue.empty())
-	{
-		unsigned char pos = queue.front();
-		queue.pop();
-		for (char dir : m->allDirection)
-		{
-			short offset = m->getMoveOffset(dir);
-			short newPos = pos + offset;
-			//si on sort du terrain, on abbandone
-			if (newPos < 0 || newPos >= (short)m->getSize())
-				continue;
-			//si la nouvelle case de la box est marqué, ou pas walkable ou mur on abbandone ou un deadsquare
-			if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
-				continue;
+    //map to retrace the path to the goal
+    //  square=>previous_square
+    std::unordered_map<short, short> origin;
+    marque.resize(m->getField().size(), false);
+    queue.push(square);
+    marque[square] = true;
+    bool goal_reached = false;
+    short lastPos;
+    while (!queue.empty())
+    {
+        unsigned char pos = queue.front();
+        queue.pop();
+        for (char dir : m->allDirection)
+        {
+            short offset = m->getMoveOffset(dir);
+            short newPos = pos + offset;
+            //si on sort du terrain, on abbandone
+            if (newPos < 0 || newPos >= (short)m->getSize())
+                continue;
+            //si la nouvelle case de la box est marqué, ou pas walkable ou mur on abbandone ou un deadsquare
+            if (marque[newPos] || !(m->isSquareWalkable(newPos) || m->isSquareBox(newPos)) || m->isSquareDeadSquare(newPos))
+                continue;
 
-			origin.insert({ newPos, pos });
-			queue.push(newPos);
-			marque[newPos] = true;
-			lastPos = newPos;
-			if (newPos == toSquare)
-			{
-				goal_reached = true;
-				break;
-			}
-		}
-		if (goal_reached)
-		{
-			break;
-		}
-	}
+            origin.insert({ newPos, pos });
+            queue.push(newPos);
+            marque[newPos] = true;
+            lastPos = newPos;
+            if (newPos == toSquare)
+            {
+                goal_reached = true;
+                break;
+            }
+        }
+        if (goal_reached)
+        {
+            break;
+        }
+    }
 
-	while (goal_reached&&lastPos != square)
-	{
-		res.push_front(lastPos);
-		lastPos = origin[lastPos];
-	}
-	return res;
+    while (goal_reached&&lastPos != square)
+    {
+        res.push_front(lastPos);
+        lastPos = origin[lastPos];
+    }
+    return res;
 }
 /**
 * return the dist map to go to this.
 * calcuate in ignoring box
 *  calcuate in "pushingBox movement"
 */
-std::vector<short> Util::getDistMapOfSquare(const Maze  *m, short toSquare) {
-	std::vector<short> res;
-	std::vector<unsigned char> field = m->getField();
-	for (unsigned square = 0; square < m->getField().size(); square++)
-	{
-		if (square == toSquare) {
-			res.push_back(0);
-			continue;
-		}
-		if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
-		{
-			res.push_back(-1);
-			continue;
-		}
-		unsigned size = this->getPathSquareToSquareBM(m, square, toSquare).size();
-		size = size == 0 ? -1 : size;
-		res.push_back(size);
-	}
-	return res;
+std::vector<short> Util::getDistMapOfSquare(const Maze  *m, short toSquare)
+{
+    std::vector<short> res;
+    std::vector<unsigned char> field = m->getField();
+    for (unsigned square = 0; square < m->getField().size(); square++)
+    {
+        if (square == toSquare)
+        {
+            res.push_back(0);
+            continue;
+        }
+        if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
+        {
+            res.push_back(-1);
+            continue;
+        }
+        unsigned size = this->getPathSquareToSquareBM(m, square, toSquare).size();
+        size = size == 0 ? -1 : size;
+        res.push_back(size);
+    }
+    return res;
 }
 
 
 void Util::dispVector(const Maze  *m, std::vector<short> vec)
 {
-	int i = 1;
-	for (short sq : vec)
-	{
-		std::cout << sq << " ";
-		if (sq >= 0 && sq < 10)
-		{
-			std::cout << " ";
-		}
-		if (i % (m->getCol()) == 0 && i > 0)
-			std::cout << std::endl;
-		i++;
-	}
+    int i = 1;
+    for (short sq : vec)
+    {
+        std::cout << sq << " ";
+        if (sq >= 0 && sq < 10)
+        {
+            std::cout << " ";
+        }
+        if (i % (m->getCol()) == 0 && i > 0)
+            std::cout << std::endl;
+        i++;
+    }
 }
 
 
 void Util::dispVector(const Maze  *m, std::vector<bool> vec)
 {
-	int i = 1;
-	for (short sq : vec)
-	{
-		if (sq) {
-			Console::getInstance()->setColor(_COLOR_GREEN);
-		}
-		else {
-			Console::getInstance()->setColor(_COLOR_RED);
+    int i = 1;
+    for (short sq : vec)
+    {
+        if (sq)
+        {
+            Console::getInstance()->setColor(_COLOR_GREEN);
+        }
+        else
+        {
+            Console::getInstance()->setColor(_COLOR_RED);
 
-		}
-		std::cout << "  " << sq;
+        }
+        std::cout << "  " << sq;
 
-		if (i % (m->getCol()) == 0 && i > 0)
-			std::cout << std::endl;
-		i++;
-	}
-	Console::getInstance()->setColor(_COLOR_DEFAULT);
+        if (i % (m->getCol()) == 0 && i > 0)
+            std::cout << std::endl;
+        i++;
+    }
+    Console::getInstance()->setColor(_COLOR_DEFAULT);
 
 }
 
 
 std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const Maze * orM, short fromSquare, short toSquare, short posPlayer)
 {
-	std::unordered_set<std::string > marqueZoneBFS;
+    std::unordered_set<std::string > marqueZoneBFS;
 
-	short posBox = fromSquare;
-	Maze m = *orM;
+    short posBox = fromSquare;
+    Maze m = *orM;
 
-	short idBox;
-	for (int i = 0; i < m.getPosBoxes().size(); i++) {
-		if (m.getPosBoxes()[i] == fromSquare) {
-			idBox = i;
-			break;
-		}
-	}
+    short idBox;
+    for (int i = 0; i < m.getPosBoxes().size(); i++)
+    {
+        if (m.getPosBoxes()[i] == fromSquare)
+        {
+            idBox = i;
+            break;
+        }
+    }
 
-	m.setPlayerPos(posPlayer);
+    m.setPlayerPos(posPlayer);
 
-	std::vector<bool> new_zone_accessible;
-	short pos_or;
-	std::vector<unsigned char>  field_originel = m.getField();
-	std::vector<unsigned short> posBoxes = m.getPosBoxes();
-	std::vector<bool> zone_originel = calcZoneAccessible(&m, pos_or);
-	//	marque.clear();
+    std::vector<bool> new_zone_accessible;
+    short pos_or;
+    std::vector<unsigned char>  field_originel = m.getField();
+    std::vector<unsigned short> posBoxes = m.getPosBoxes();
+    std::vector<bool> zone_originel = calcZoneAccessible(&m, pos_or);
+    //	marque.clear();
 
-	int position_player_or = m.getPosPlayer();
-	int classement = 0;
-	unsigned short newPositionOfBox, pos_originel = m.getPosPlayer();
-	unsigned short profondeur;
+    int position_player_or = m.getPosPlayer();
+    int classement = 0;
+    unsigned short newPositionOfBox, pos_originel = m.getPosPlayer();
+    unsigned short profondeur;
 
-	marqued(pos_or, &m, marqueZoneBFS);
-	// Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
-	std::vector< Node::NodeRetrackInfo>caseTracker;
-	std::vector< Node::NodeRetrackInfo>res;
-	std::queue<Node> queue;
-	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
-	//bfsR.
-	Node initCase(NULL, zone_originel, GameState(m.getField(),pos_or,m.getPosBoxes()), (unsigned short)0, bfsR, m.getPosBoxes().size());
-	caseTracker.push_back(bfsR);
-	queue.push(initCase);
-	bool win = false;
-	while (!win&&!queue.empty())
-	{
-		Node currentCase = queue.front();
-		queue.pop();
-		profondeur = currentCase.profondeur;
-		GameState curGameState = currentCase.gameState;
-		short newNPos;
-		std::vector<bool> 	zone_accessible = currentCase.accessibleZone;
-		/**
-		* We set the game in the state
-		*/
-		m.change_etat_jeu(curGameState);
-		posBoxes = m.getPosBoxes();
-
-
-		/**
-		we look for pushed all boxes in all directions possibles
-		*/
-		for (char direction : m.allDirection)
-		{
-			short posBox = m.getPosBoxes()[idBox];
-
-			short offset = m.getMoveOffset(direction);
-
-			//position of the player for push the box
-			short pusherPlace = posBox - offset;
-			//position of th ebox after pushing it
-			short newPosBox = posBox + offset;
-			std::vector<char> adjDir = m.getAdjacentDirection(direction);
-
-			//We look if the current box can be pushed in the direction
-			if (zone_accessible[pusherPlace] && (m._canPushBox(posBox, direction, newPositionOfBox) && !m.isSquareDeadSquare(newPosBox)))
-			{
-				//[OPTIMIZER]
-				//If yes we check that it will not create any dynamical deadlocks
-				m.setPlayerPos(pusherPlace);
-
-				//we push the box in the wanted direction
-				m.updatePlayer(direction);
-
-				//[OPTIMIZER TODO]
-				//we check that we didn't already marque this case and marqued it if ut is not the case
-				//We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
-				new_zone_accessible = calcZoneAccessible(&m, newNPos);
+    marqued(pos_or, &m, marqueZoneBFS);
+    // Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
+    std::vector< Node::NodeRetrackInfo>caseTracker;
+    std::vector< Node::NodeRetrackInfo>res;
+    std::queue<Node> queue;
+    Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
+    //bfsR.
+    Node initCase(NULL, zone_originel, GameState(m.getField(),pos_or,m.getPosBoxes()), (unsigned short)0, bfsR, m.getPosBoxes().size());
+    caseTracker.push_back(bfsR);
+    queue.push(initCase);
+    bool win = false;
+    while (!win&&!queue.empty())
+    {
+        Node currentCase = queue.front();
+        queue.pop();
+        profondeur = currentCase.profondeur;
+        GameState curGameState = currentCase.gameState;
+        short newNPos;
+        std::vector<bool> 	zone_accessible = currentCase.accessibleZone;
+        /**
+        * We set the game in the state
+        */
+        m.change_etat_jeu(curGameState);
+        posBoxes = m.getPosBoxes();
 
 
+        /**
+        we look for pushed all boxes in all directions possibles
+        */
+        for (char direction : m.allDirection)
+        {
+            short posBox = m.getPosBoxes()[idBox];
 
-				//[OPTIMIZER]
-				if (!marqued(newNPos, &m, marqueZoneBFS))
-				{
-					Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
-					Node newCase(currentCase.chapter, new_zone_accessible,  GameState( m.getField(),newNPos ,m.getPosBoxes()), profondeur + 1, bfsR, currentCase.placedBoxes);
-					queue.push(newCase);
-					caseTracker.push_back(bfsR);
-				}
-				m.change_etat_jeu(curGameState);
+            short offset = m.getMoveOffset(direction);
 
-				if (newPosBox == toSquare) {
-					win=true;
-					break;
-				}
-			}
-		}
+            //position of the player for push the box
+            short pusherPlace = posBox - offset;
+            //position of th ebox after pushing it
+            short newPosBox = posBox + offset;
+            std::vector<char> adjDir = m.getAdjacentDirection(direction);
 
-	}
+            //We look if the current box can be pushed in the direction
+            if (zone_accessible[pusherPlace] && (m._canPushBox(posBox, direction, newPositionOfBox) && !m.isSquareDeadSquare(newPosBox)))
+            {
+                //[OPTIMIZER]
+                //If yes we check that it will not create any dynamical deadlocks
+                m.setPlayerPos(pusherPlace);
 
-	std::vector<unsigned char> chemin;
+                //we push the box in the wanted direction
+                m.updatePlayer(direction);
 
-	//ON recrée le chemin
+                //[OPTIMIZER TODO]
+                //we check that we didn't already marque this case and marqued it if ut is not the case
+                //We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
+                new_zone_accessible = calcZoneAccessible(&m, newNPos);
 
-	if (!win) {
-		return res;
-	}
-	Node::NodeRetrackInfo retrack = caseTracker.back();
-	while (retrack.idCase != 0) {
-		res.push_back(retrack);
-		retrack = caseTracker[retrack.idParentCase];
-	}
 
-	//setting back the game in its original field
 
-	std::reverse(res.begin(), res.end());
-	return res;
+                //[OPTIMIZER]
+                if (!marqued(newNPos, &m, marqueZoneBFS))
+                {
+                    Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
+                    Node newCase(currentCase.chapter, new_zone_accessible,  GameState( m.getField(),newNPos,m.getPosBoxes()), profondeur + 1, bfsR, currentCase.placedBoxes);
+                    queue.push(newCase);
+                    caseTracker.push_back(bfsR);
+                }
+                m.change_etat_jeu(curGameState);
+
+                if (newPosBox == toSquare)
+                {
+                    win=true;
+                    break;
+                }
+            }
+        }
+
+    }
+
+    std::vector<unsigned char> chemin;
+
+    //ON recrée le chemin
+
+    if (!win)
+    {
+        return res;
+    }
+    Node::NodeRetrackInfo retrack = caseTracker.back();
+    while (retrack.idCase != 0)
+    {
+        res.push_back(retrack);
+        retrack = caseTracker[retrack.idParentCase];
+    }
+
+    //setting back the game in its original field
+
+    std::reverse(res.begin(), res.end());
+    return res;
 }
 
 
@@ -663,17 +676,18 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 */
 bool Util::marqued(short acc, const  Maze *m, std::unordered_set<std::string > & marqueZoneBFS)
 {
-	std::vector<unsigned short> nposBoxes = m->getPosBoxes();
-	std::vector<unsigned char> field = m->getField();
-	std::stringstream result;
-	nposBoxes.push_back(acc);
-	std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, "."));
-	std::string hashG = result.str();
+    std::vector<unsigned short> nposBoxes = m->getPosBoxes();
+    std::vector<unsigned char> field = m->getField();
+    std::stringstream result;
+    nposBoxes.push_back(acc);
+    std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, "."));
+    std::string hashG = result.str();
 
-	bool marqued = marqueZoneBFS.find(hashG) != marqueZoneBFS.end();
-	if (!marqued) {
-		marqueZoneBFS.insert(hashG);
-	}
+    bool marqued = marqueZoneBFS.find(hashG) != marqueZoneBFS.end();
+    if (!marqued)
+    {
+        marqueZoneBFS.insert(hashG);
+    }
 
-	return marqued;
+    return marqued;
 }

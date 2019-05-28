@@ -26,14 +26,14 @@ Case_morte::~Case_morte()
 */
 void Case_morte::detect_dead_with_BFS_idealGoal(Maze& maze,short idealGoal)
 {
-	Util u;
-	for (unsigned int square = 0; square < maze.getSize(); square++)
-	{
-		if (!maze.isSquareWall(square)  && u.getPathSquareToSquareBM(&maze, square, idealGoal).empty())
-		{
-			maze.setSquare(square, SPRITE_DEADSQUARE);
-		}
-	}
+    Util u;
+    for (unsigned int square = 0; square < maze.getSize(); square++)
+    {
+        if (!maze.isSquareWall(square)  && u.getPathSquareToSquareBM(&maze, square, idealGoal).empty())
+        {
+            maze.setSquare(square, SPRITE_DEADSQUARE);
+        }
+    }
 }
 
 /**

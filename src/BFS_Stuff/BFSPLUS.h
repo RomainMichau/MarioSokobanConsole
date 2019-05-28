@@ -9,28 +9,34 @@
 class BFSPLUS
 {
 public:
-	BFSPLUS(Maze *m,AHeuristique* heuristique);
-	virtual ~BFSPLUS();
-	std::vector<unsigned char> runBFS(unsigned &noeudvisite);
-	unsigned showSetSize() { return marque.size(); };
-	void setHeuristique(AHeuristique *newHeuristique) { heuristique = newHeuristique; };
+    BFSPLUS(Maze *m,AHeuristique* heuristique);
+    virtual ~BFSPLUS();
+    std::vector<unsigned char> runBFS(unsigned &noeudvisite);
+    unsigned showSetSize()
+    {
+        return marque.size();
+    };
+    void setHeuristique(AHeuristique *newHeuristique)
+    {
+        heuristique = newHeuristique;
+    };
 private:
-	std::vector<unsigned short> resolution;
-	AHeuristique* heuristique;
+    std::vector<unsigned short> resolution;
+    AHeuristique* heuristique;
 
-	Maze *m;
+    Maze *m;
 
-	struct BestBFSCase
-	{
-		bool operator()(Node b1, Node b2) const
-		{
-			return b1.note.get_note_total() < b2.note.get_note_total();
-		}
-	};
+    struct BestBFSCase
+    {
+        bool operator()(Node b1, Node b2) const
+        {
+            return b1.note.get_note_total() < b2.note.get_note_total();
+        }
+    };
 
-	bool marqued(short acc);
-	std::unordered_set<std::string>marque;
-	std::unordered_map<int, std::vector< Node::NodeRetrackInfo>> savedPath;
+    bool marqued(short acc);
+    std::unordered_set<std::string>marque;
+    std::unordered_map<int, std::vector< Node::NodeRetrackInfo>> savedPath;
 
 };
 

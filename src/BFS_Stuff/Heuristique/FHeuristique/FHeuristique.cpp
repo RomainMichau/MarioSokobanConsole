@@ -10,22 +10,23 @@ FHeuristique::~FHeuristique()
 
 AHeuristique * FHeuristique::getInstance()
 {
-	// calculatiing and setting frequentationMap
-	std::vector<short> freqMap = calcFrequentationSquares();
+    // calculatiing and setting frequentationMap
+    std::vector<short> freqMap = calcFrequentationSquares();
 
-	// get an estimation of the distance beetween all the squares and goals
-	std::vector<short> distanceMap = calcMapDistanceFromNearestGoals();
+    // get an estimation of the distance beetween all the squares and goals
+    std::vector<short> distanceMap = calcMapDistanceFromNearestGoals();
 
-	// with the distance map and the previously calculated frequentation map, we calculate the piovtPoint
-	short posPivotPointPos = calcPivotPointPos(distanceMap, freqMap);
-	if (checkIfPivotLevel(posPivotPointPos))
-		return new HeuristiquePivot(m, coefA, coefB, HeuristiquePivot::GameStat(freqMap, posPivotPointPos));
- 	else return new HeuristiqueClassique(m, coefA, coefB);
+    // with the distance map and the previously calculated frequentation map, we calculate the piovtPoint
+    short posPivotPointPos = calcPivotPointPos(distanceMap, freqMap);
+    if (checkIfPivotLevel(posPivotPointPos))
+        return new HeuristiquePivot(m, coefA, coefB, HeuristiquePivot::GameStat(freqMap, posPivotPointPos));
+    else
+        return new HeuristiqueClassique(m, coefA, coefB);
 }
 
 HeuristiqueClassique * FHeuristique::getClassicalHeuritique()
 {
-	return new HeuristiqueClassique(m,coefA,coefB);
+    return new HeuristiqueClassique(m,coefA,coefB);
 }
 
 
@@ -36,19 +37,19 @@ HeuristiqueClassique * FHeuristique::getClassicalHeuritique()
 */
 std::vector<short> FHeuristique::calcMapDistanceFromNearestGoals()
 {
-	std::vector<short> res;
-	std::vector<unsigned char> field = m->getField();
-	for (unsigned square = 0; square < m->getField().size(); square++)
-	{
-		if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
-		{
-			res.push_back(-1);
-			continue;
-		}
-		unsigned size = u.getPathSquareToGoalBM(m, square).size();
-		res.push_back(size);
-	}
-	return res;
+    std::vector<short> res;
+    std::vector<unsigned char> field = m->getField();
+    for (unsigned square = 0; square < m->getField().size(); square++)
+    {
+        if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
+        {
+            res.push_back(-1);
+            continue;
+        }
+        unsigned size = u.getPathSquareToGoalBM(m, square).size();
+        res.push_back(size);
+    }
+    return res;
 }
 
 
@@ -61,25 +62,25 @@ std::vector<short> FHeuristique::calcMapDistanceFromNearestGoals()
 */
 std::vector<short> FHeuristique::calcFrequentationSquares()
 {
-	std::vector<short> res;
-	res.resize(m->getField().size(), 0);
-	std::vector<unsigned char> field = m->getField();
-	for (int box : m->getPosBoxes())
-	{
+    std::vector<short> res;
+    res.resize(m->getField().size(), 0);
+    std::vector<unsigned char> field = m->getField();
+    for (int box : m->getPosBoxes())
+    {
 
-		std::deque<short> path = u.getPathSquareToGoalBM(m, box);
+        std::deque<short> path = u.getPathSquareToGoalBM(m, box);
 
-		//the last element is the goal himself, so we remove him
-		if (path.size() > 0)
-		{
-			path.pop_back();
-		}
-		for (short sq : path)
-		{
-			res[sq]++;
-		}
-	}
-	return res;
+        //the last element is the goal himself, so we remove him
+        if (path.size() > 0)
+        {
+            path.pop_back();
+        }
+        for (short sq : path)
+        {
+            res[sq]++;
+        }
+    }
+    return res;
 }
 
 
@@ -96,27 +97,27 @@ std::vector<short> FHeuristique::calcFrequentationSquares()
 short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<short> freqMap)
 {
 
-	short pivotPoint = -1;
-	int mostFreqValue = 0;
-	int longestDistance = 0;
-	for (unsigned i = 0; i < freqMap.size(); i++)
-	{
-		short dist = distMap[i];
-		short freq = freqMap[i];
-		if (freq > mostFreqValue)
+    short pivotPoint = -1;
+    int mostFreqValue = 0;
+    int longestDistance = 0;
+    for (unsigned i = 0; i < freqMap.size(); i++)
+    {
+        short dist = distMap[i];
+        short freq = freqMap[i];
+        if (freq > mostFreqValue)
 
-		{
-			mostFreqValue = freq;
-			longestDistance = dist;
-			pivotPoint = i;
-		}
-		else if (freq == mostFreqValue && dist > longestDistance)
-		{
-			longestDistance = dist;
-			pivotPoint = i;
-		}
-	}
-	return pivotPoint;
+        {
+            mostFreqValue = freq;
+            longestDistance = dist;
+            pivotPoint = i;
+        }
+        else if (freq == mostFreqValue && dist > longestDistance)
+        {
+            longestDistance = dist;
+            pivotPoint = i;
+        }
+    }
+    return pivotPoint;
 }
 /**
 * return true if the level sent in parameters is indeed a pivot level
@@ -128,24 +129,28 @@ short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<sh
 bool FHeuristique::checkIfPivotLevel(short pivotPos)
 {
 
-	for (short box : m->getPosBoxes()) {
+    for (short box : m->getPosBoxes())
+    {
 //	for(short box=0;box<m->getSize();box++){
-		for (short goal : m->getGoals()) {
-			short distPivotGoal = u.getPathSquareToSquareBM(m, pivotPos, goal).size();
+        for (short goal : m->getGoals())
+        {
+            short distPivotGoal = u.getPathSquareToSquareBM(m, pivotPos, goal).size();
 
-			std::deque<short> path = u.getPathSquareToSquareBM(m, box, goal);
-			if (path.size() < distPivotGoal)
-				continue;
-			bool passByPivot = false;
-			for (short squarePath : path) {
-				if (squarePath == pivotPos) {
-					passByPivot = true;
-					break;
-				}
-			}
-			if (!passByPivot)
-				return false;
-		}
-	}
-	return true;
+            std::deque<short> path = u.getPathSquareToSquareBM(m, box, goal);
+            if (path.size() < distPivotGoal)
+                continue;
+            bool passByPivot = false;
+            for (short squarePath : path)
+            {
+                if (squarePath == pivotPos)
+                {
+                    passByPivot = true;
+                    break;
+                }
+            }
+            if (!passByPivot)
+                return false;
+        }
+    }
+    return true;
 }

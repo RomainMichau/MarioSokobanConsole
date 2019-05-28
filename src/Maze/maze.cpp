@@ -101,7 +101,7 @@ void Maze::setPosBoxes(std::vector<unsigned short> newPlayerPosOr)
 
 void Maze::setPosBox(short i,short pos)
 {
-	m_pos_boxes[i] = pos;
+    m_pos_boxes[i] = pos;
 }
 
 /**
@@ -361,7 +361,7 @@ void Maze::updateDraw(char mov)
 /**
 * return the offset created a mov in this dir
 */
- short Maze::getMoveOffset(unsigned char dir) const
+short Maze::getMoveOffset(unsigned char dir) const
 {
     switch (dir)
     {
@@ -444,7 +444,7 @@ void Maze::initDraw()
             std::cout << std::endl;
         }
     }
-	std::cout << std::endl;
+    std::cout << std::endl;
 
 }
 
@@ -455,15 +455,16 @@ void Maze::initDraw()
 void Maze::drawMove(std::vector<unsigned char> chemin, double temp, int noeudVisit)
 {
     system("CLS");
-	Console* c = Console::getInstance();
+    Console* c = Console::getInstance();
 
-	c->gotoLigCol(this->getLig() + 10, 0);
-	std::cout << std::endl;
-	std::cout << chemin.size() << " mouvements" << std::endl;
-	for (short c : chemin) {
-		std::cout << c << " ";
-	}
-	c->gotoLigCol(0, 0);
+    c->gotoLigCol(this->getLig() + 10, 0);
+    std::cout << std::endl;
+    std::cout << chemin.size() << " mouvements" << std::endl;
+    for (short c : chemin)
+    {
+        std::cout << c << " ";
+    }
+    c->gotoLigCol(0, 0);
     std::cout << "temps: " << temp << " s" << std::endl << "noeuds visite:" << noeudVisit << std::endl << std::endl;
     this->initDraw();
     for (int i = 0; i < chemin.size(); i++)
@@ -621,11 +622,11 @@ std::vector<unsigned char> Maze::convert(std::vector<unsigned short> toConvert)
         if (toConvert[i] == 2)
             reso.push_back(LEFT);
         if (toConvert[i] == 3)
-            reso.push_back(RIGHT); 
+            reso.push_back(RIGHT);
     }
     return reso;
 
-	 
+
 }
 
 /**
@@ -683,11 +684,11 @@ void Maze::change_etat_jeu(std::vector<unsigned char> newField, unsigned short n
  */
 void Maze::change_etat_jeu(GameState gameState)
 {
-	m_field = gameState.field;
-	int b = 0;
-	unsigned short p = 0;
-	m_pos_boxes = gameState.posBox;
-	m_pos_player = gameState.posPlayer;
+    m_field = gameState.field;
+    int b = 0;
+    unsigned short p = 0;
+    m_pos_boxes = gameState.posBox;
+    m_pos_player = gameState.posPlayer;
 }
 
 

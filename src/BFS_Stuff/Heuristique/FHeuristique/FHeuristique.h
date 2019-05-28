@@ -18,43 +18,43 @@ public:
 
 
 public:
-	FHeuristique(Maze *m, int coefA, int coefB) ;
-	virtual ~FHeuristique();
-	/**
-	* return the most appropriate tpye of heurisitque in function of the MAze
-	*	Pivot Heuritique
-	*	or
-	*	Classical Heuristique
-	*/
-	 AHeuristique* getInstance();
+    FHeuristique(Maze *m, int coefA, int coefB) ;
+    virtual ~FHeuristique();
+    /**
+    * return the most appropriate tpye of heurisitque in function of the MAze
+    *	Pivot Heuritique
+    *	or
+    *	Classical Heuristique
+    */
+    AHeuristique* getInstance();
 
-	 HeuristiqueClassique* getClassicalHeuritique();
+    HeuristiqueClassique* getClassicalHeuritique();
 
 
 private:
 
-	Maze *m;
-	Util u;
+    Maze *m;
+    Util u;
 
 
-	/**
-	* Stat calculators
-	*/
-	std::vector<short> calcFrequentationSquares();
-	std::vector<short> calcMapDistanceFromNearestGoals();
+    /**
+    * Stat calculators
+    */
+    std::vector<short> calcFrequentationSquares();
+    std::vector<short> calcMapDistanceFromNearestGoals();
 
 
-	/**
-	* return the pivot point of mapStat
-	* definit of pivotPoint: the point with the most frequentation.
-	* if there is many point with the same max frequentation, then the farest from the goal win
-	* @see MapStat
-	*/
-	short calcPivotPointPos(std::vector<short> distMap,  std::vector<short> freqMap);
+    /**
+    * return the pivot point of mapStat
+    * definit of pivotPoint: the point with the most frequentation.
+    * if there is many point with the same max frequentation, then the farest from the goal win
+    * @see MapStat
+    */
+    short calcPivotPointPos(std::vector<short> distMap,  std::vector<short> freqMap);
 
-	bool checkIfPivotLevel(short pivotPos);
+    bool checkIfPivotLevel(short pivotPos);
 
-	int coefA,coefB;
+    int coefA,coefB;
 
 };
 

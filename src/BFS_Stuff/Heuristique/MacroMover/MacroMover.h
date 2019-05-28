@@ -6,20 +6,21 @@
 #include <unordered_map>
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/Maze/Maze.h"
-#include "src/utils/Util.h"
+#include "src/utils/Util.h" 
 
 
 
-class MacroMover {
+class MacroMover
+{
 
 public:
-	MacroMover(Maze* m) :m(m) {};
-	std::pair<short, short> macroMovePivotToPoint(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
+    MacroMover(Maze* m) :m(m) {};
+    std::pair<short, short> macroMovePivotToPoint(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
 
 private:
-	std::unordered_map<int, std::vector< Node::NodeRetrackInfo>> savedPath;
-	Util u;
-	Maze *m;
+    std::unordered_map<int, std::vector< Node::NodeRetrackInfo>> savedPath;
+    Util u;
+    Maze *m;
 
 
 };

@@ -18,7 +18,7 @@ src/Maze/Maze.cpp
 src/Maze/Maze.h 
 
 src/Maze/GameState.h
-src/Maze/GameState.cpp
+src/Maze/GameState.cpp 
 #utils
 src/utils/Console.cpp
 src/utils/Console.h
@@ -46,7 +46,7 @@ src/BFS_Stuff/BFSPLUS.h
     src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h
     src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.cpp
     src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h
-    src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h
+    src/BFS_Stuff/Heuristique/MacroMover/MacroMover.cpp
     src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h
 		#Note  
 		src/BFS_Stuff/Heuristique/note.cpp

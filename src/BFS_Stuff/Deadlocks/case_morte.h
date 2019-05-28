@@ -13,7 +13,7 @@ public:
     Case_morte(Maze *m);
     ~Case_morte();
 
-	void detect_dead_with_BFS_idealGoal(Maze& m,short idealGoal);
+    void detect_dead_with_BFS_idealGoal(Maze& m,short idealGoal);
     void detect_dead_with_BFS();
     bool detect_dyn_dead( unsigned short position, unsigned char dir);
     /**
@@ -27,7 +27,7 @@ protected:
 private:
     std::vector<unsigned short> deadLocks_list;
     int nb_case_morte;
-	Maze *m;
+    Maze *m;
 
 };
 

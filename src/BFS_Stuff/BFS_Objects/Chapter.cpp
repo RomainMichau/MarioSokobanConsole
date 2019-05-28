@@ -1,5 +1,6 @@
 #include "Chapter.h"
 
- short Chapter:: getIdealGoalPos()  {
-	return idealGoalPos;
+short Chapter:: getIdealGoalPos()
+{
+    return idealGoalPos;
 }
