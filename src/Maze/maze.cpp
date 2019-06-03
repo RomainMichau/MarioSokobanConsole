@@ -97,11 +97,24 @@ std::vector<unsigned short> Maze::getPosBoxes()
 void Maze::setPosBoxes(std::vector<unsigned short> newPlayerPosOr)
 {
 	m_pos_boxes = newPlayerPosOr;
+	short a = 0;
+	for (unsigned short s : getPosBoxes())
+		if (s == 76 || s == 90 || s == 103 || s == 104 || s == 105 || s == 106)
+			a++;
+	if (a == 6)
+		std::cout << this;
 }
 
 void Maze::setPosBox(short i, short pos)
 {
 	m_pos_boxes[i] = pos;
+
+	short a = 0;
+	for (unsigned short s : getPosBoxes())
+		if (s == 76 || s == 90 || s == 103 || s == 104 || s == 105 || s == 106)
+			a++;
+	if (a == 6)
+		std::cout << this;
 }
 
 /**
@@ -640,7 +653,12 @@ void Maze::move_box(int posBox, char dir)
 		}
 		m_pos_boxes[i] += 1;
 	}
-
+	short a = 0;
+	for (unsigned short s : getPosBoxes())
+		if (s == 76 || s == 90 || s == 103 || s == 104 || s == 105 || s == 106)
+			a++;
+	if (a == 6)
+		std::cout << this;
 }
 
 /**
@@ -714,6 +732,12 @@ void Maze::change_etat_jeu(std::vector<unsigned char> newField, unsigned short n
 
 	}
 	m_pos_player = newPosPlayer;
+	short a = 0;
+	for (unsigned short s : getPosBoxes())
+		if (s == 76 || s == 90 || s == 103 || s == 104 || s == 105 || s == 106)
+			a++;
+	if (a == 6)
+		std::cout << this;
 }
 /**
  * Change the state of the game (field and posPlayer)
@@ -727,6 +751,12 @@ void Maze::change_etat_jeu(GameState gameState)
 	unsigned short p = 0;
 	m_pos_boxes = gameState.posBox;
 	m_pos_player = gameState.posPlayer;
+	short a = 0;
+	for (unsigned short s : getPosBoxes())
+		if (s == 76 || s == 90 || s == 103 || s == 104 || s == 105 || s == 106)
+			a++;
+	if (a == 6)
+		std::cout << this;
 }
 
 

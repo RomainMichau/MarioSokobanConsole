@@ -1,10 +1,3 @@
-/************************************************************
-Sokoban project - Maze file
-Copyright Florent DIEDLER
-Date : 27/02/2016
-
-Please do not remove this header, if you use this file !
-************************************************************/
 
 #ifndef MAZE_H_INCLUDED
 #define MAZE_H_INCLUDED
@@ -221,7 +214,7 @@ public:
 	std::vector<char> getPossibleDirFromSquareWBox(short square);
 
     bool _canPushBox(unsigned short posBox, char dir, unsigned short &newPosBox) const;
-
+	   
     int cpt;
 
     /**
@@ -475,6 +468,9 @@ inline void Maze::setSquare(unsigned short pos, unsigned char s)
  */
 inline bool Maze::isSquareWalkable(unsigned short pos) const
 {
+	if (pos < 0 || pos >= getSize()) {
+		return false;
+	}
     return ((this->m_field[pos] == SPRITE_GROUND || this->m_field[pos] == SPRITE_GOAL ||
              this->m_field[pos] == SPRITE_DEADSQUARE) ? true : false);
 }

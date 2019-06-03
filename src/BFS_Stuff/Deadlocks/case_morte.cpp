@@ -3,8 +3,10 @@
 #include "src/utils/Coord.h"
 #include <fstream>
 #include <iomanip>
+#include <queue>
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include <unordered_set>
+#include <unordered_map>
 #include "src/utils/Util.h"
 
 Case_morte::Case_morte(Maze *m)
@@ -52,261 +54,136 @@ void Case_morte::detect_dead_with_BFS()
 	}
 }
 
+
+
+
+
 /**
-* Detect if a move will create a dynamique deadLock
-* return true if it is a dynamic deadlock
-* will detect static block, like square of boxes...
-* its shit but it works so i keep it for now
+* on verifie que l'on ne crée pas une situation de blocage on il serait impossible de bouger des boxes aglomeré entre elle
+* on fait un bfs qui va jusqua 2 de prof pour voir si on arrive uniquement à des cas de deadlocks, si c'est le cas on renvoit true
 */
-bool Case_morte::detect_dyn_dead(unsigned short positionPlayer, unsigned char dir)
+bool Case_morte::detect_dyn_dead_3(unsigned short positionBox, Node *node)
 {
+	std::unordered_set<short> aglomeratBoxes = u.detectAgglomerateOFBoxes(m, positionBox);
+	if (aglomeratBoxes.size() < 2)
+		return false;
+	bool res = isADynDeadlock(positionBox);
+	if (res) {
+		return true;
+	}
+	std::queue<short> toEvaluatate;
 
-	short offset = m->getMoveOffset(dir);
-	short posBox = positionPlayer + offset;
-	short newPosBox = posBox + offset;
-	std::vector<short> adjSquares = m->getAdjacentWalkableSquare(newPosBox);
-	for (short adjSquare : adjSquares) {
-		if (m->getAdjacentWalkableSquare(adjSquare).size() == 1) {
-			//return true;
+	Maze orM(*m);
+	bool notDeadLocks = false;
+	for (short box : aglomeratBoxes) {
+		toEvaluatate.push(box);
+	}
 
+	while (!toEvaluatate.empty()) {
+		short box = toEvaluatate.front();
+		toEvaluatate.pop();
+		for (char dir : m->allDirection) {
+			short offset = m->getMoveOffset(dir);
+			short pusherPlace = box - offset;
+			short newBoxPlace = box + offset;
+			if (!m->isSquareWalkable(pusherPlace))
+				continue;
+			if (!m->isSquareDeadSquare(newBoxPlace) && (m->isSquareGround(newBoxPlace) || m->isSquareGoal(newBoxPlace))) {
+
+				m->setPlayerPos(pusherPlace);
+				m->updatePlayer(dir);
+				std::unordered_set<short> newAglomeratBoxes = u.detectAgglomerateOFBoxes(m, newBoxPlace);
+				if (newAglomeratBoxes != aglomeratBoxes) {
+					for (short box2 : newAglomeratBoxes)
+						if (aglomeratBoxes.find(box2) == aglomeratBoxes.end() && box2 != newBoxPlace) {
+							aglomeratBoxes.insert(box2);
+							toEvaluatate.push(box2);
+						}
+				}
+				*m = orM;
+
+				if (!isADynDeadlock(newBoxPlace)) {
+					notDeadLocks = true;
+					return false;
+				}
+
+			}
 		}
 	}
 
-	/**
-	*	Deadlocks Dyn fait il y a longtemp
-	*	!!JE N'Y COMPREND RIEN, A REVOIR
-	*/
-	unsigned short cote_d = 0, cote_g = 0, cote_h = 0, cote_b = 0, cote_hor = 0, cote_ver = 0;
-	unsigned short position_box = 0, position_futur = 0, murd = 0, murh = 0, murg = 0, murb = 0, boxh = 0, boxb = 0, boxg = 0, boxd = 0;
+	std::cout << *m;
+	knownDealocks.insert(aglomeratBoxes);
+	return !notDeadLocks;
 
-	if (dir == TOP && m->isSquareBoxNonPlaced(positionPlayer - m->getCol()) && !m->isSquareGoal(positionPlayer - 2 * m->getCol()))
-	{
-
-		position_box = positionPlayer - m->getCol();
-		position_futur = position_box - m->getCol();
-
-
-
-		if (!m->isSquareWalkable(position_futur - m->getCol()))
-		{
-			cote_h++;
-		}
-
-
-		if (!m->isSquareWalkable(position_futur - 1))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur - 1))
-			{
-
-				boxg++;
-			}
-			if (m->isSquareWall(position_futur - 1))
-			{
-				murg++;
-			}
-			cote_g++;
-			cote_ver++;
-		}
-		if (!m->isSquareWalkable(position_futur + 1))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur + 1))
-			{
-
-				boxd++;
-			}
-			if (m->isSquareWall(position_futur + 1))
-			{
-				murd++;
-			}
-			cote_d++;
-			cote_ver++;
-		}
-	}
-	if (dir == BOTTOM && m->isSquareBoxNonPlaced(positionPlayer + m->getCol()) && !m->isSquareGoal(positionPlayer + 2 * m->getCol()))
-	{
-		position_box = positionPlayer + m->getCol();
-		position_futur = position_box + m->getCol();
-		if (!m->isSquareWalkable(position_futur + m->getCol()))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur + m->getCol()))
-				boxh++;
-			if (m->isSquareWall(position_futur + m->getCol()))
-			{
-				murb++;
-			}
-			cote_b++;
-			cote_hor++;
-		}
-
-		if (!m->isSquareWalkable(position_futur - 1))
-		{
-			cote_g++;
-			cote_ver++;
-			if (m->isSquareBoxNonPlaced(position_futur - 1))
-				boxg++;
-			if (m->isSquareWall(position_futur - 1))
-			{
-				murg++;
-			}
-		}
-		if (!m->isSquareWalkable(position_futur + 1))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur + 1))
-			{
-
-				boxd++;
-			}
-			if (m->isSquareWall(position_futur + 1))
-			{
-				murd++;
-			}
-			cote_d++;
-			cote_ver++;
-		}
-	}
-
-	if (dir == LEFT && m->isSquareBoxNonPlaced(positionPlayer - 1) && !m->isSquareGoal(positionPlayer - 2))
-	{
-		position_box = positionPlayer - 1;
-		position_futur = position_box - 1;
-		if (!m->isSquareWalkable(position_futur - m->getCol()))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur - m->getCol()))
-				boxh++;
-			if (m->isSquareWall(position_futur - m->getCol()))
-			{
-				murh++;
-			}
-			cote_h++;
-			cote_hor++;
-		}
-
-		if (!m->isSquareWalkable(position_futur - 1))
-		{
-			cote_g++;
-			cote_ver++;
-			if (m->isSquareBoxNonPlaced(position_futur - 1))
-				boxg++;
-			if (m->isSquareWall(position_futur - 1))
-			{
-				murg++;
-			}
-		}
-		if (!m->isSquareWalkable(position_futur + m->getCol()))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur + m->getCol()))
-				boxh++;
-			if (m->isSquareWall(position_futur + m->getCol()))
-			{
-				murb++;
-			}
-			cote_b++;
-			cote_hor++;
-		}
-	}
-
-	if (dir == RIGHT && m->isSquareBoxNonPlaced(positionPlayer + 1) && !m->isSquareGoal(positionPlayer + 2))
-	{
-		position_box = positionPlayer + 1;
-		position_futur = position_box + 1;
-		if (!m->isSquareWalkable(position_futur - m->getCol()))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur - m->getCol()))
-				boxh++;
-
-			if (m->isSquareWall(position_futur - m->getCol()))
-			{
-				murh++;
-			}
-			cote_h++;
-			cote_hor++;
-		}
-
-		if (!m->isSquareWalkable(position_futur + m->getCol()))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur + m->getCol()))
-				boxb++;
-			if (m->isSquareWall(position_futur + m->getCol()))
-			{
-				murb++;
-			}
-			cote_b++;
-			cote_hor++;
-		}
-
-		if (!m->isSquareWalkable(position_futur + 1))
-		{
-			if (m->isSquareBoxNonPlaced(position_futur + 1))
-			{
-
-				boxd++;
-			}
-			if (m->isSquareWall(position_futur + 1))
-			{
-				murd++;
-			}
-			cote_d++;
-			cote_ver++;
-		}
-	}
-
-
-
-	if (cote_hor >= 1 && cote_ver >= 1)
-	{
-
-		if (cote_h > 0 && cote_d > 0 && (!m->isSquareWalkable(position_futur + 1 - m->getCol())))
-			return true;
-
-		if (cote_h&&cote_g && (!m->isSquareWalkable(position_futur - 1 - m->getCol())))
-			return true;
-
-		if (cote_b&&cote_g && (!m->isSquareWalkable(position_futur - 1 + m->getCol())))
-		{
-			return true;
-		}
-
-		if (cote_b&&cote_d && (!m->isSquareWalkable(position_futur + 1 + m->getCol())))
-			return true;
-
-		if (boxb > 0 && murd > 0 && m->isSquareWall(position_futur - 1 + m->getCol()))
-			return true;
-		if (boxb > 0 && murg > 0 && m->isSquareWall(position_futur + 1 + m->getCol()))
-			return true;
-		if (boxh > 0 && murg > 0 && m->isSquareWall(position_futur + 1 - m->getCol()))
-			return true;
-		if (boxh > 0 && murd > 0 && m->isSquareWall(position_futur - 1 - m->getCol()))
-			return true;
-		if (boxg > 0 && murb > 0 && m->isSquareWall(position_futur - 1 - m->getCol()))
-		{
-
-		}
-		if (boxg > 0 && murh > 0 && m->isSquareWall(position_futur - 1 + m->getCol()))
-			return true;
-		if (boxd > 0 && murh > 0 && m->isSquareWall(position_futur + 1 + m->getCol()))
-			return true;
-		if (boxd > 0 && murb > 0 && m->isSquareWall(position_futur + 1 - m->getCol()))
-			return true;
-
-
-		if (murg > 0 && m->isSquareWall(position_futur - 2 * m->getCol()) && m->isSquareWall(position_futur - m->getCol() - 1) && m->isSquareBoxNonPlaced(position_futur - m->getCol() + 1) && m->isSquareWall(position_futur - m->getCol() * 2 + 1))
-			return true;
-		if (murh > 0 && m->isSquareWall(position_futur - 2) && m->isSquareWall(position_futur - m->getCol() - 1) && m->isSquareBoxNonPlaced(position_futur + m->getCol() - 1) && m->isSquareWall(position_futur + m->getCol() - 2))
-			return true;
-		if (murh > 0 && m->isSquareWall(position_futur + 2) && m->isSquareWall(position_futur - m->getCol() + 1) && m->isSquareBoxNonPlaced(position_futur + m->getCol() + 1) && m->isSquareWall(position_futur + 2 + m->getCol()))
-			return true;
-		if (murd > 0 && m->isSquareWall(position_futur - 2 * m->getCol()) && m->isSquareWall(position_futur - m->getCol() + 1) && m->isSquareBoxNonPlaced(position_futur - m->getCol() - 1) && m->isSquareWall(position_futur - 1 - 2 * m->getCol()))
-			return true;
-		if (murg > 0 && m->isSquareWall(position_futur + 2 * m->getCol()) && m->isSquareWall(position_futur + m->getCol() - 1) && m->isSquareBoxNonPlaced(position_futur + m->getCol() + 1) && m->isSquareWall(position_futur + 2 * m->getCol() + 1))
-			return true;
-		if (murb > 0 && m->isSquareWall(position_futur - 2) && m->isSquareWall(position_futur + m->getCol() - 1) && m->isSquareBoxNonPlaced(position_futur - m->getCol() - 1) && m->isSquareWall(position_futur - 2 - m->getCol()))
-			return true;
-		if (murb > 0 && m->isSquareWall(position_futur + 2) && m->isSquareWall(position_futur - m->getCol() + 1) && m->isSquareBoxNonPlaced(position_futur - m->getCol() + 1) && m->isSquareWall(position_futur - 2 - m->getCol()))
-			return true;
-		if (murd > 0 && m->isSquareWall(position_futur + 2 * m->getCol()) && m->isSquareWall(position_futur + m->getCol() + 1) && m->isSquareBoxNonPlaced(position_futur + m->getCol() - 1) && m->isSquareWall(position_futur - 1 + 2 * m->getCol()))
-			return true;
-
-	}
-
-	return false;
 }
+
+// return true si l'aglomerat forme une situation de dun deadlock, will also marque countered dynDe	dlox
+// work like that:
+// calculate if there is a agloremate of Boxes with the bos sent in parameter
+// if yes:
+//	will elimitate the box that can be mov and will check if some cant be in anycase moved
+bool Case_morte::isADynDeadlock(unsigned short positionBox)
+{
+	std::unordered_set<short> aglomerateBoxes = u.detectAgglomerateOFBoxes(m, positionBox);
+
+	std::unordered_set<short> movableBox;
+	std::unordered_set<short> unmovableSet;
+	std::unordered_set<short> nextUnmovableSet;
+
+	// si il n'y a pas d'aglomerat de box il n'y a pas de deadlocks dynamique
+	if (aglomerateBoxes.size() < 2) {
+		return false;
+	}
+
+	if (knownDealocks.find(aglomerateBoxes) != knownDealocks.end())
+		return true;
+
+
+
+	//we marque all box as unmovable
+	for (short box : aglomerateBoxes) {
+		unmovableSet.insert(box);
+	}
+
+	bool movedOne = false;
+	do {
+		movedOne = false;
+		nextUnmovableSet.clear();
+		for (short box : unmovableSet) {
+			bool isMovableBox = false;
+			for (char dir : m->allDirection) {
+				short offset = m->getMoveOffset(dir);
+				short pusherPlace = box - offset;
+				short newBoxPlace = box + offset;
+				bool isMovableBoxNeigbourh = movableBox.find(newBoxPlace) != movableBox.end();
+				if (!m->isSquareWalkable(pusherPlace))
+					continue;
+				if (!m->isSquareDeadSquare(newBoxPlace) && (m->isSquareWalkable(newBoxPlace) || isMovableBoxNeigbourh)) {
+					isMovableBox = true;
+					break;
+				}
+			}
+			if (isMovableBox) {
+				movableBox.insert(box);
+				movedOne = true;
+			}
+			else {
+				nextUnmovableSet.insert(box);
+			}
+		}
+		unmovableSet = nextUnmovableSet;
+	} while (movedOne&&unmovableSet.size() > 0);
+	if (unmovableSet.size() == 0) {
+
+		return false;
+	}
+	else {
+		knownDealocks.insert(aglomerateBoxes);
+		return true;
+	}
+
+}
+
+
+
+

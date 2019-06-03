@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.0)
 project(MarioSokobanConsole)
 
 set(CMAKE_CXX_STANDARD 14)
+ 
 
-
-
+ 
 include_directories(.)
 include_directories(/levels)
 
@@ -14,13 +14,13 @@ add_executable(MarioSokobanConsole
 #main
 src/main.cpp
 #Maze
-src/Maze/Maze.cpp
+src/Maze/Maze.cpp 
 src/Maze/Maze.h 
 
 src/Maze/GameState.h
 src/Maze/GameState.cpp 
 #utils
-src/utils/Console.cpp
+src/utils/Console.cpp 
 src/utils/Console.h
  
 src/utils/coord.cpp  

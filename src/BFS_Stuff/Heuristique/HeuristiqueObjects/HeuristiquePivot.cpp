@@ -68,10 +68,9 @@ void HeuristiquePivot::calcHeuristiqueNote(Node *node, short boxPushedID, short 
 
 
 	}
-	if (nb_caisse_place_best >= 6)
+/*	if (nb_caisse_place_best >= 1)
 		std::cout << *m << std::endl << "casse placé: " << nb_caisse_place << std::endl;
-	if (nb_caisse_place == 6)
-		system("pause");
+	*/
 	note.set_note_caisse_place(note_caisse_place);
 	note.calculTotal();
 	node->note = note;

@@ -3,32 +3,48 @@
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"
 #include "src/utils/Coord.h"
+#include "src/utils/util.h"
 #include <fstream>
 #include <iomanip>
-#include "src/BFS_Stuff/DeadLocks/case_morte.h"
-
+#include <unordered_set>
+#include "src/BFS_Stuff/DeadLocks/case_morte.h" 
+#include "src/BFS_Stuff/BFS_Objects/Node.h"
 class Case_morte
 {
-public:
-    Case_morte(Maze *m);
-    ~Case_morte();
 
-    void detect_dead_with_BFS_idealGoal(Maze& m,short idealGoal);
-    void detect_dead_with_BFS();
-    bool detect_dyn_dead( unsigned short position, unsigned char dir);
-    /**
-    * will execute a bfs on each square to see if an exit is accesible
-    * if not the square will be mark as dead_sqare
-    * will ofc not toak in accoount any box
-    */
+	struct VectorHash {
+		size_t operator()(const std::unordered_set<short>& v) const {
+			std::hash<short> hasher;
+			size_t seed = 0;
+			for (int i : v) {
+				seed ^= hasher(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			}
+			return seed;
+		}
+	};
+
+public:
+	Case_morte(Maze *m);
+	~Case_morte();
+
+	void detect_dead_with_BFS_idealGoal(Maze& m, short idealGoal);
+	void detect_dead_with_BFS();
+	bool detect_dyn_dead_3(unsigned short positionBox,  Node *node);
+	/**
+	* will execute a bfs on each square to see if an exit is accesible
+	* if not the square will be mark as dead_sqare
+	* will ofc not toak in accoount any box
+	*/
 
 protected:
 
 private:
-    std::vector<unsigned short> deadLocks_list;
-    int nb_case_morte;
-    Maze *m;
-
+	bool isADynDeadlock(unsigned short posBox);
+	std::vector<unsigned short> deadLocks_list;
+	int nb_case_morte;
+	Maze *m;
+	Util u;
+	std::unordered_set<std::unordered_set<short>, VectorHash> knownDealocks;
 };
 
 #endif // CASE_MORTE_H
