@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <unordered_set>
 #include <queue>
 #include <stack>
 #include "src/Maze/GameState.h"
@@ -378,7 +379,13 @@ public:
      * Set boxes position
      * @param newPlayerPosOr
      */
-    void setPosBoxes(std::vector<unsigned short> newPlayerPosOr);
+	void setPosBoxes(std::vector<unsigned short> newPlayerPosBoxes);
+
+	/**
+   * Set boxes position
+   * @param newPlayerPosOr
+   */
+	void setPosBoxes(std::unordered_set<unsigned short> newPosBoxes);
 
 
     void setPosBox(short i, short pos);

@@ -9,9 +9,7 @@
 */
 std::pair<short, short>   MacroMover::macroMovePivotToPoint(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition)
 {
-
-
-	 
+	   	 
     short boxGoal = node->chapter->getIdealGoalPos();
     bool alreadySave = true;
     std::vector< Node::NodeRetrackInfo> retrackToGoal;

@@ -77,7 +77,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 	std::priority_queue<Node, std::vector<Node>, BestBFSCase> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(heuristique->getChapters(), zone_originel, GameState(m->getField(), pos_or, m->getPosBoxes()), (unsigned short)0, bfsR, m->getPosBoxes().size());
+	Node initCase(heuristique->getChapters(), zone_originel, GameState(m->getField(), pos_or, m->getPosBoxes()), std::unordered_set<unsigned short>(), (unsigned short)0, bfsR, m->getPosBoxes().size());
 	caseTracker.push_back(bfsR);
 	heuristique->calcHeuristiqueNote(&initCase, -1, -1);
 	queue.push(initCase);
@@ -86,6 +86,10 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 	{
 		Node currentCase = queue.top();
 		queue.pop();
+		//if for any reasons this case ha been marqued has a deadlocks, we skip it
+		if (dead.isMarqueAsDeadlocks(&currentCase))
+			continue;
+
 		profondeur = currentCase.profondeur;
 		GameState currentGameState = currentCase.gameState;
 		//	field = currentCase.field;
@@ -140,18 +144,19 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 					//[OPTIMIZER]
 					if (!win && !marqued(newNPos))
 					{
+						std::unordered_set<unsigned short>aglomerat = u.detectAgglomerateOFBoxes(m, newPosBox);
 						Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
-						Node newCase(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), profondeur + 1, bfsR, currentCase.placedBoxes);
+						Node newCase(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), aglomerat, profondeur + 1, bfsR, currentCase.placedBoxes);
 
 						//[OPTIMIZER]
 							//we check that it will not create any dynamical deadlocks
 							// if it is the case we pass to the next Move
-						if (dead.detect_dyn_dead_3(newPosBox,&newCase)) {
+						if (dead.detect_dyn_dead_3(&newCase)) {
 							m->change_etat_jeu(currentGameState);
 							continue;
 						}
 						heuristique->calcHeuristiqueNote(&newCase, boxID, newPosBox);
-				
+
 						caseTracker.push_back(bfsR);
 
 						std::pair<short, short> macroRes = heuristique->macroMove(caseTracker, &newCase, newPosBox);
@@ -164,23 +169,21 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 						else	if (macroRes.first != -1)
 						{
 
-							short	boxAfterMacr0 = macroRes.second;
+							short	boxAfterMacro = macroRes.second;
 							short	newPlayerPos = macroRes.first;
 							// setting game
-							m->setPosBox(boxID, boxAfterMacr0);
-
-						
-
+							m->setPosBox(boxID, boxAfterMacro);
 							m->setPlayerPos(newPlayerPos);
-							m->setSquare(boxAfterMacr0, SPRITE_BOX_PLACED);
+							m->setSquare(boxAfterMacro, SPRITE_BOX_PLACED);
 							m->setSquare(newPosBox, field_originel[newPosBox]);
 							if (m->_isCompleted())
 								win = true;
 							new_zone_accessible = u.calcZoneAccessible(m, newNPos);
 
 							bfsR = caseTracker.back();
-							newCase = Node(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), profondeur + 2, bfsR, currentCase.placedBoxes);
-							heuristique->calcHeuristiqueNote(&newCase, boxID, boxAfterMacr0);
+							aglomerat = u.detectAgglomerateOFBoxes(m, boxAfterMacro);
+							newCase = Node(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), aglomerat, profondeur + 2, bfsR, currentCase.placedBoxes);
+							heuristique->calcHeuristiqueNote(&newCase, boxID, boxAfterMacro);
 
 						}
 

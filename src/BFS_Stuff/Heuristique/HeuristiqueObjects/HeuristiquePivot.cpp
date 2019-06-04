@@ -142,7 +142,7 @@ unsigned short HeuristiquePivot::calc_note_distance_box_pivot() {
 	std::sort(distances.begin(), distances.end());
 	for (unsigned int i = 0; i < distances.size(); i++)
 	{
-		somme = somme + (distances[i] * (distances.size() - i));
+		somme = somme + (distances[i] * 1);
 	}
 	return somme;
 }

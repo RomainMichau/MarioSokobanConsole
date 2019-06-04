@@ -13,8 +13,8 @@ class Case_morte
 {
 
 	struct VectorHash {
-		size_t operator()(const std::unordered_set<short>& v) const {
-			std::hash<short> hasher;
+		size_t operator()(const std::unordered_set<unsigned short>& v) const {
+			std::hash<unsigned short> hasher;
 			size_t seed = 0;
 			for (int i : v) {
 				seed ^= hasher(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
@@ -29,7 +29,8 @@ public:
 
 	void detect_dead_with_BFS_idealGoal(Maze& m, short idealGoal);
 	void detect_dead_with_BFS();
-	bool detect_dyn_dead_3(unsigned short positionBox,  Node *node);
+	bool detect_dyn_dead_3( Node *node);
+	bool isMarqueAsDeadlocks(Node *node);
 	/**
 	* will execute a bfs on each square to see if an exit is accesible
 	* if not the square will be mark as dead_sqare
@@ -39,12 +40,13 @@ public:
 protected:
 
 private:
-	bool isADynDeadlock(unsigned short posBox);
+	bool isADynDeadlock(std::unordered_set<unsigned short> aglomerateBoxes);
 	std::vector<unsigned short> deadLocks_list;
 	int nb_case_morte;
 	Maze *m;
 	Util u;
-	std::unordered_set<std::unordered_set<short>, VectorHash> knownDealocks;
+	// liste des cas de deadLocks connu
+	std::unordered_set<std::unordered_set<unsigned short>, VectorHash> knownDealocks;
 };
 
 #endif // CASE_MORTE_H

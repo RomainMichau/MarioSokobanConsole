@@ -40,7 +40,7 @@ public:
     void vider(std::queue< BFSCase_relier_point> &queue);
 
 	//return the pos of the boxes which are aglomerate to the box sent in parameters
-	std::unordered_set<short> detectAgglomerateOFBoxes(Maze *m,short boxes);
+	std::unordered_set<unsigned short> detectAgglomerateOFBoxes(Maze *m,short boxes);
 
     std::vector<bool> calcZoneAccessible(const Maze* m, short &normPos);
     std::vector<unsigned short> relier_point(Maze m, std::vector <unsigned short>);

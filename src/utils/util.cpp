@@ -57,11 +57,11 @@ void Util::vider(std::queue< BFSCase_relier_point> &queue)
 /**
 * fait un mini BFS pour localiser la presence d'un aglomerat de box autour de celle envoyer en parametre
 */
-std::unordered_set<short> Util::detectAgglomerateOFBoxes(Maze *m, short initBox)
+std::unordered_set<unsigned short> Util::detectAgglomerateOFBoxes(Maze *m, short initBox)
 {
 	std::vector<bool> marque;
 	marque.resize(m->getSize(), false);
-	std::unordered_set<short> res;
+	std::unordered_set< unsigned short> res;
 	res.insert(initBox);
 	std::queue<short> queue;
 	queue.push(initBox);
@@ -569,7 +569,9 @@ void Util::dispVector(const Maze  *m, std::vector<bool> vec)
 
 }
 
-
+/**
+* return the path beewteen fromSquare and toSquare with BFSPlus like method
+*/
 std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const Maze * orM, short fromSquare, short toSquare, short posPlayer)
 {
 	std::unordered_set<std::string > marqueZoneBFS;
@@ -608,7 +610,7 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 	std::queue<Node> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(NULL, zone_originel, GameState(m.getField(), pos_or, m.getPosBoxes()), (unsigned short)0, bfsR, m.getPosBoxes().size());
+	Node initCase(NULL, zone_originel, GameState(m.getField(), pos_or, m.getPosBoxes()), std::unordered_set<unsigned short>(),(unsigned short)0, bfsR, m.getPosBoxes().size());
 	caseTracker.push_back(bfsR);
 	queue.push(initCase);
 	bool win = false;
@@ -662,8 +664,9 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 				//[OPTIMIZER]
 				if (!marqued(newNPos, &m, marqueZoneBFS))
 				{
+					std::unordered_set<unsigned short> aglom = this->detectAgglomerateOFBoxes(&m, newPosBox);
 					Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
-					Node newCase(currentCase.chapter, new_zone_accessible, GameState(m.getField(), newNPos, m.getPosBoxes()), profondeur + 1, bfsR, currentCase.placedBoxes);
+					Node newCase(currentCase.chapter, new_zone_accessible, GameState(m.getField(), newNPos, m.getPosBoxes()),aglom, profondeur + 1, bfsR, currentCase.placedBoxes);
 					queue.push(newCase);
 					caseTracker.push_back(bfsR);
 				}

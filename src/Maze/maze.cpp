@@ -94,15 +94,32 @@ std::vector<unsigned short> Maze::getPosBoxes()
  * Set the new positions of the box
  * @param newPlayerPosOr
  */
-void Maze::setPosBoxes(std::vector<unsigned short> newPlayerPosOr)
+void Maze::setPosBoxes(std::vector<unsigned short> newBoxPoses)
 {
-	m_pos_boxes = newPlayerPosOr;
-	short a = 0;
-	for (unsigned short s : getPosBoxes())
-		if (s == 76 || s == 90 || s == 103 || s == 104 || s == 105 || s == 106)
-			a++;
-	if (a == 6)
-		std::cout << this;
+
+	for (unsigned short box : m_pos_boxes) {
+		this->m_field[box] = SPRITE_GROUND;
+	}
+	for (unsigned short box : newBoxPoses) {
+		this->m_field[box] = SPRITE_BOX;
+	}
+	m_pos_boxes = newBoxPoses;
+}
+
+/**
+ * Set the new positions of the box
+ * @param newPlayerPosOr
+ */
+void Maze::setPosBoxes(std::unordered_set<unsigned short> newBoxPoses)
+{
+
+	for (unsigned short box : m_pos_boxes) {
+		this->m_field[box] = SPRITE_GROUND;
+	}
+	for (unsigned short box : newBoxPoses) {
+		this->m_field[box] = SPRITE_BOX;
+	}
+	m_pos_boxes = std::vector<unsigned short>(newBoxPoses.begin(),newBoxPoses.end());
 }
 
 void Maze::setPosBox(short i, short pos)
@@ -150,7 +167,7 @@ std::vector<char> Maze::getPossibleDirFromSquareWBox(short square)
 	std::vector<char> possibleDir;
 	for (char dir : allDirection) {
 		short newSquare = square + getMoveOffset(dir);
-		if (newSquare > 0 && newSquare < getSize() && (isSquareWalkable(newSquare) ))
+		if (newSquare > 0 && newSquare < getSize() && (isSquareWalkable(newSquare)))
 			possibleDir.push_back(dir);
 	}
 	return possibleDir;
@@ -439,14 +456,14 @@ std::vector<char> Maze::getAdjacentDirection(char dir)
 
 std::vector<short> Maze::getAdjacentWalkableSquare(short square)
 {
-	 std::vector<short> res;
-	 for (char dir : allDirection) {
-		 short offset = getMoveOffset(dir);
-		 short adjSquare = square + offset;
-		 if (adjSquare >= 0 && adjSquare < this->getSize() && this->isSquareWalkable(adjSquare))
-			 res.push_back(adjSquare);
-	 }
-	 return res;
+	std::vector<short> res;
+	for (char dir : allDirection) {
+		short offset = getMoveOffset(dir);
+		short adjSquare = square + offset;
+		if (adjSquare >= 0 && adjSquare < this->getSize() && this->isSquareWalkable(adjSquare))
+			res.push_back(adjSquare);
+	}
+	return res;
 
 }
 

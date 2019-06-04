@@ -4,6 +4,7 @@
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 #include "src/BFS_Stuff/BFS_Objects/Chapter.h"
 #include "src/Maze/GameState.h"
+#include <unordered_set>
 class Node
 {
 public:
@@ -32,15 +33,19 @@ public:
     };
 
     ~Node() {};
-    Node(Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, unsigned short profondeur, NodeRetrackInfo bfsR, short nbBoxes);
-    Node(Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, unsigned short profondeur, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
+    Node(Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short profondeur, NodeRetrackInfo bfsR, short nbBoxes);
+    Node(Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes,unsigned short profondeur, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
 
     std::vector<bool> accessibleZone;
+	//State of the game at the node
     GameState gameState;
     //true if box with id i is placed on current or past idealGOal
     // placedBoxes[i] =>true
     std::vector<bool> placedBoxes;
+	//note of this node
     Note note;
+	//Aglomerat of box created by the move of this node
+	std::unordered_set<unsigned short> aglomeratBoxes;
     unsigned short profondeur;
     Chapter *chapter;
     NodeRetrackInfo  bfsRetrack;
