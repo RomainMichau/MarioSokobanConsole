@@ -79,6 +79,7 @@ private:
     std::vector<BFSCase_relier_point> marque;
     bool compare(BFSCase_relier_point tstCase);
     bool marqued(short acc, const  Maze *m, std::unordered_set<std::string > &marqueZoneBFS);
+	bool file_exist(const std::string& name);
 
 
 };

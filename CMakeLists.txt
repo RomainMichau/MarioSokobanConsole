@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 include_directories(/levels)
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config.xml
+DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     
    
 add_executable(MarioSokobanConsole

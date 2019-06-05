@@ -72,7 +72,7 @@ int main()
 		}
 		// Check if user has pressed a key
 
-		char key = g.keyRead();
+		char key = g.keyRead(); 
 		switch (key)
 		{
 		case ' ':

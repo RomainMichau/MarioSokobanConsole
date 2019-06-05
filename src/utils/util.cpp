@@ -4,6 +4,8 @@
 #include "src/utils/Coord.h"
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 #include "src/Maze/GameState.h"
+#include "src/utils/Tinyxml2.h"
+
 #include <math.h>
 #include <sstream>
 #include <fstream>
@@ -14,7 +16,8 @@
 #include <sstream>
 #include <iterator>
 #include <unordered_set>
-#include "src/utils/Tinyxml2.h"
+#include <fstream>
+
 
 #define CONFIG_FILE_PATH "config.xml"
 Util::Util()
@@ -210,6 +213,10 @@ bool Util::compare(BFSCase_relier_point tstCase)
 	return false;
 }
 
+ bool Util::file_exist(const std::string& name) {
+	struct stat buffer;
+	return (stat(name.c_str(), &buffer) == 0);
+}
 
 /**
  * Permet de choisir un niveau a jouer. Renvoit le chemin du niveau en String
@@ -217,6 +224,12 @@ bool Util::compare(BFSCase_relier_point tstCase)
  */
 std::string Util::choose_level()
 {
+
+	if (!file_exist(CONFIG_FILE_PATH)) {
+		std::cout << "config.xml is missing"<<std::endl<<"aborting"<<std::endl << std::endl;
+		return "";
+	}
+
 	std::string path;
 	unsigned short a, b;
 	float c;
@@ -237,8 +250,11 @@ std::string Util::choose_level()
 	Console::getInstance()->setColor(_COLOR_WHITE);
 
 	tinyxml2::XMLDocument doc;
+	//On verifie que le fichier existe bien
+
+
 	doc.LoadFile(CONFIG_FILE_PATH);
-	 path = doc.FirstChildElement("Config")->FirstChildElement("Levels_path")->GetText();
+	path = doc.FirstChildElement("Config")->FirstChildElement("Levels_path")->GetText();
 	path.erase(std::remove(path.begin(), path.end(), '\n'), path.end());
 	path.erase(std::remove(path.begin(), path.end(), ' '), path.end());
 
@@ -617,7 +633,7 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 	std::queue<Node> queue;
 	Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
 	//bfsR.
-	Node initCase(NULL, zone_originel, GameState(m.getField(), pos_or, m.getPosBoxes()), std::unordered_set<unsigned short>(),(unsigned short)0, bfsR, m.getPosBoxes().size());
+	Node initCase(NULL, zone_originel, GameState(m.getField(), pos_or, m.getPosBoxes()), std::unordered_set<unsigned short>(), (unsigned short)0, bfsR, m.getPosBoxes().size());
 	caseTracker.push_back(bfsR);
 	queue.push(initCase);
 	bool win = false;
@@ -673,7 +689,7 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 				{
 					std::unordered_set<unsigned short> aglom = this->detectAgglomerateOFBoxes(&m, newPosBox);
 					Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
-					Node newCase(currentCase.chapter, new_zone_accessible, GameState(m.getField(), newNPos, m.getPosBoxes()),aglom, profondeur + 1, bfsR, currentCase.placedBoxes);
+					Node newCase(currentCase.chapter, new_zone_accessible, GameState(m.getField(), newNPos, m.getPosBoxes()), aglom, profondeur + 1, bfsR, currentCase.placedBoxes);
 					queue.push(newCase);
 					caseTracker.push_back(bfsR);
 				}

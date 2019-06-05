@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Config>
     <Levels_path>
-        rom
+        C:/sokoban_levels/
     </Levels_path>
-</Config>
+</Config> 
