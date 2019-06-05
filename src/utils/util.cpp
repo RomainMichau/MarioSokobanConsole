@@ -14,7 +14,9 @@
 #include <sstream>
 #include <iterator>
 #include <unordered_set>
+#include "src/utils/Tinyxml2.h"
 
+#define CONFIG_FILE_PATH "config.xml"
 Util::Util()
 {
 	//ctor
@@ -234,11 +236,16 @@ std::string Util::choose_level()
 	std::cout << "test 1: 41" << std::endl << "test 2: 42" << std::endl << "test 3: 43" << std::endl << std::endl;
 	Console::getInstance()->setColor(_COLOR_WHITE);
 
+	tinyxml2::XMLDocument doc;
+	doc.LoadFile(CONFIG_FILE_PATH);
+	 path = doc.FirstChildElement("Config")->FirstChildElement("Levels_path")->GetText();
+	path.erase(std::remove(path.begin(), path.end(), '\n'), path.end());
+	path.erase(std::remove(path.begin(), path.end(), ' '), path.end());
 
+	std::cout << path;
 	std::cout << "level: ";
 	std::cin >> a;
 	std::cout << std::endl << std::endl;
-	path = "C:/levels/";
 	b = a / 10;
 	c = a;
 	c = c / 10;

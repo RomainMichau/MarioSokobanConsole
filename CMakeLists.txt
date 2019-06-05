@@ -31,7 +31,10 @@ src/utils/chrono.h
 		
 src/utils/util.cpp
 src/utils/util.h  
-			   
+
+src/utils/Tinyxml2.h  
+src/utils/Tinyxml2.cpp
+
 src/utils/keyboardManager.cpp 
 src/utils/keyboardManager.h
  
@@ -67,7 +70,6 @@ src/BFS_Stuff/BFSPLUS.h
 		#Mother_Class
 		src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.cpp
 		src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h
-
 
 
          

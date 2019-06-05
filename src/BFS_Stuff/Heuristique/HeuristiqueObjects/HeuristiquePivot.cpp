@@ -128,7 +128,8 @@ Chapter  HeuristiquePivot::calcChapter()
 */
 unsigned short HeuristiquePivot::calc_note_distance_box_pivot() {
 	std::vector<unsigned short> boxes = m->getPosBoxes();
-	std::vector<unsigned short> distances;
+	short somme = 0;
+
 	for (unsigned int box = 0; box < boxes.size(); box++)                                         ////////////Calcul note distance des box
 	{
 		short dist = 0;
@@ -136,13 +137,7 @@ unsigned short HeuristiquePivot::calc_note_distance_box_pivot() {
 		{
 			dist = gameStat.getDistFromPivotPoint(boxes[box]);
 		}
-		distances.push_back(dist);
-	}
-	short somme = 0;
-	std::sort(distances.begin(), distances.end());
-	for (unsigned int i = 0; i < distances.size(); i++)
-	{
-		somme = somme + (distances[i] * 1);
+		somme += dist;
 	}
 	return somme;
 }
