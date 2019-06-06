@@ -1,3 +1,9 @@
+/**
+ * \file chrono.h
+ * \brief declaration of the class chrono
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef CHRONO_H
 #define CHRONO_H
 #include "ctime"

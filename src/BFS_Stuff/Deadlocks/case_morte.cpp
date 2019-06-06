@@ -1,3 +1,9 @@
+/**
+ * \file case_morte.cpp
+ * \brief implementation of the class case_morte
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"
 #include "src/utils/Coord.h"

@@ -1,3 +1,10 @@
+/**
+ * \file HeuristiqueClassique.cpp
+ * \brief implementation of the class HeuristiqueClassique
+ * \author romain michau
+ * \version 2.1
+ */
+
 #include "HeuristiqueClassique.h"
 
 HeuristiqueClassique::HeuristiqueClassique(Maze * m, int coefA, int coefB)

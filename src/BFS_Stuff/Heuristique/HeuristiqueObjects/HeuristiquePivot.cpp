@@ -1,3 +1,9 @@
+/**
+ * \file HeuristiquePivot.cpp
+ * \brief implementation of the class HeuristiquePivot
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 #include "src/Maze/Maze.h"
 #include "src/utils/Util.h"

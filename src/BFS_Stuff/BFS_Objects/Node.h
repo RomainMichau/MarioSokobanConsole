@@ -1,3 +1,10 @@
+/**
+ * \file Node.h
+ * \brief declaration of the class Node
+ * \author romain michau
+ * \version 2.1
+ */
+
 #ifndef NODE_H
 #define NODE_H
 #include "src/BFS_Stuff/Heuristique/note.h"

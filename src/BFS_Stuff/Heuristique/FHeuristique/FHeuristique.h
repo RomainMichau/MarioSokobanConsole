@@ -1,3 +1,10 @@
+/**
+ * \file FHeurisitique.cpp
+ * \brief declaration of the class FHeurisitique
+ * \author romain michau
+ * \version 2.1
+ */
+
 #ifndef FHEURISTIQUE_H
 #define FHEURISTIQUE_H
 #include "src/Maze/Maze.h"

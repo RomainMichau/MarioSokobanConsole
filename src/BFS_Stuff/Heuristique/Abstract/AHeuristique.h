@@ -1,3 +1,10 @@
+/**
+ * \file AHeurisitique.h
+ * \brief declaration of the class AHeurisitique
+ * \author romain michau
+ * \version 2.1
+ */
+
 #ifndef AHEURISTIQUE_H
 #define AHEURISTIQUE_H
 #include "src/Maze/Maze.h"

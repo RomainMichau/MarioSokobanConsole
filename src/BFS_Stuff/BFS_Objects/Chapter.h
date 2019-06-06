@@ -1,3 +1,9 @@
+/**
+ * \file Chapter.h
+ * \brief declaration of the class chapter
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef CHAPTER_H
 #define CHAPTER_H
 #include <vector>

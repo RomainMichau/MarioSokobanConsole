@@ -1,3 +1,9 @@
+/**
+ * \file util.cpp
+ * \brief implementation of the class util
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/utils/util.h"
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"

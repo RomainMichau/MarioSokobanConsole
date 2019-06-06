@@ -1,7 +1,9 @@
-//
-// Created by rmichau on 26/04/2019.
-//
-
+/**
+ * \file keyboardManager.cpp
+ * \brief implementation of the class keyboardManager
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/utils/KeyboardManager.h"
 #include <conio.h>
 #include <iostream>

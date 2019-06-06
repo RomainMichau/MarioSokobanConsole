@@ -1,4 +1,8 @@
-
+/**
+ * \file maze.h
+ * \brief declaration of the class maze
+ * \version 2.1
+ */
 #ifndef MAZE_H_INCLUDED
 #define MAZE_H_INCLUDED
 

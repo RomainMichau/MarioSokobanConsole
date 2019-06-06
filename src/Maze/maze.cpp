@@ -1,3 +1,8 @@
+/**
+ * \file maze.cpp
+ * \brief implementation of the class maze
+ * \version 2.1
+ */
 #include "src/Maze/Maze.h"
 #include "src/utils/KeyboardManager.h"
 #include "src/utils/Console.h"

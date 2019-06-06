@@ -1,3 +1,9 @@
+/**
+ * \file Node.cpp
+ * \brief implementation of the class Node
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 
 

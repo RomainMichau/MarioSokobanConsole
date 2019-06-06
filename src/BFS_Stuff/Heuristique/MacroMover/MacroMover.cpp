@@ -1,3 +1,9 @@
+/**
+ * \file MacroMover.cpp
+ * \brief implementation of the class MacroMover
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h"
 #include <utility>
 #include <vector>

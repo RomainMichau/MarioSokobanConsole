@@ -1,3 +1,8 @@
+/**
+ * \file console.cpp
+ * \brief implementation of the class console
+ * \version 2.1
+ */
 #include "src/utils/Console.h"
 #include <windows.h>
 #include <conio.h>

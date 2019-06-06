@@ -1,3 +1,9 @@
+/**
+ * \file MacroMover.h
+ * \brief declaration of the class MacroMover
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef MACROMOVER_H
 #define MACROMOVER_H
 #include <utility>

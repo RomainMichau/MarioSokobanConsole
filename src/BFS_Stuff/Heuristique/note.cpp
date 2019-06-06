@@ -1,3 +1,9 @@
+/**
+ * \file note.cpp
+ * \brief implementation of the class note
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include <vector>
 

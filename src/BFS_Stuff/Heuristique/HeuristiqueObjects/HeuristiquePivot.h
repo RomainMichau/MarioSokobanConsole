@@ -1,3 +1,9 @@
+/**
+ * \file HeuristiquePivot.h
+ * \brief declaration of the class HeuristiquePivot
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef HEURISTIQUE_H
 #define HEURISTIQUE_H
 #include "src/Maze/Maze.h"

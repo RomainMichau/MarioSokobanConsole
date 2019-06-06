@@ -1,3 +1,10 @@
+/**
+ * \file case_morte.h
+ * \brief declaration of the class case_morte
+ * \author romain michau
+ * \version 2.1
+ */
+
 #ifndef CASE_MORTE_H
 #define CASE_MORTE_H
 #include "src/Maze/Maze.h"

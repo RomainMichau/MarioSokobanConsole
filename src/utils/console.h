@@ -1,3 +1,8 @@
+/**
+ * \file Console.h
+ * \brief declaration of the class console
+ * \version 2.1
+ */
 #ifndef CONSOLE_H_INCLUDED
 #define CONSOLE_H_INCLUDED
 

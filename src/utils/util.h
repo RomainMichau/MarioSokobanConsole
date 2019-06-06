@@ -1,3 +1,9 @@
+/**
+ * \file util.h
+ * \brief declaration of the class util
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef UTIL_H
 #define UTIL_H
 #include <queue>

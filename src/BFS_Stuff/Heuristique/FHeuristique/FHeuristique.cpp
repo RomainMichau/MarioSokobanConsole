@@ -1,3 +1,10 @@
+/**
+ * \file FHeurisitique.cpp
+ * \brief implementation of the class FHeurisitique
+ * \author romain michau
+ * \version 2.1
+ */
+
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 #include "FHeuristique.h"

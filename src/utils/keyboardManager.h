@@ -1,6 +1,9 @@
-//
-// Created by rmichau on 26/04/2019.
-//
+/**
+ * \file keyboardManager.h
+ * \brief declaration of the class keyboardManager
+ * \author romain michau
+ * \version 2.1
+ */
 
 #ifndef MARIOSOKOBAN_KEYBOARDMANAGER_H
 #define MARIOSOKOBAN_KEYBOARDMANAGER_H

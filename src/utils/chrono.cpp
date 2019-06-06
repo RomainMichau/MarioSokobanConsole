@@ -1,3 +1,9 @@
+/**
+ * \file chrono.cpp
+ * \brief implementation of the class chrono
+ * \author romain michau
+ * \version 2.1
+ */
 #include "src/utils/Chrono.h"
 #include <chrono>
 #include <ctime>

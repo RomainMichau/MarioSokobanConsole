@@ -1,3 +1,9 @@
+/**
+ * \file HeuristiqueClassique.h
+ * \brief declaration of the class HeuristiqueClassique
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef HEURISTIQUEC_H
 #define HEURISTIQUEC_H
 #include "src/Maze/Maze.h"

@@ -1,3 +1,9 @@
+/**
+ * \file BFSPLUS.cpp
+ * \brief implementation of the class BFSPLUS
+ * \author romain michau
+ * \version 2.1
+ */
 #include "BFSPLUS.h"
 
 #include "src/Maze/Maze.h"

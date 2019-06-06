@@ -1,3 +1,8 @@
+/**
+ * \file coord.h
+ * \brief declaration of the class coord
+ * \version 2.1
+ */
 #ifndef COORD_H_INCLUDED
 #define COORD_H_INCLUDED
 

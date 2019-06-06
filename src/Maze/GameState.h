@@ -1,3 +1,9 @@
+/**
+ * \file GameState.h
+ * \brief declaration of the class GameState
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef GAME_STATE
 #define GAME_STATE
 

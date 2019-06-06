@@ -1,3 +1,9 @@
+/**
+ * \file note.h
+ * \brief declaration of the class note
+ * \author romain michau
+ * \version 2.1
+ */
 #ifndef NOTE_H_INCLUDED
 #define NOTE_H_INCLUDED
 #include <vector>
