@@ -1,7 +1,7 @@
 /**
  * \file keyboardManager.cpp
  * \brief implementation of the class keyboardManager
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #include "src/utils/KeyboardManager.h"

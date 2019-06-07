@@ -1,7 +1,7 @@
 /**
  * \file keyboardManager.h
  * \brief declaration of the class keyboardManager
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 

@@ -1,7 +1,7 @@
 /**
  * \file case_morte.h
  * \brief declaration of the class case_morte
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 
@@ -14,46 +14,88 @@
 #include <fstream>
 #include <iomanip>
 #include <unordered_set>
-#include "src/BFS_Stuff/DeadLocks/case_morte.h" 
+#include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
+
+
+/** \class Case_morte
+ * \brief Contain tools for managging static and dynamic deadlocks
+ *
+ * Defintion: \n
+ *  Static DL: it is a square from which it is impossible to push a box on any goal (example: corners) \n
+ *  Dynamic DL: it is a node which will create an unsolvable situation becuause of boxes which blocks each other (example: square composed of 4 boxes)
+ */
 class Case_morte
 {
 
-	struct VectorHash {
-		size_t operator()(const std::unordered_set<unsigned short>& v) const {
-			std::hash<unsigned short> hasher;
-			size_t seed = 0;
-			for (int i : v) {
-				seed ^= hasher(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-			}
-			return seed;
-		}
-	};
-
+    /** \struct  VectorHash
+     *  \brief foncteur for generaing hash of a std::unordered_set<unsigned short>
+     */
+    struct VectorHash
+    {
+        size_t operator()(const std::unordered_set<unsigned short>& v) const
+        {
+            std::hash<unsigned short> hasher;
+            size_t seed = 0;
+            for (int i : v)
+            {
+                seed ^= hasher(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+            }
+            return seed;
+        }
+    };
+private:
+    Maze *m /**< Maze to work in */;
+    Util u /**< Util class */;
+    std::unordered_set<std::unordered_set<unsigned short>, VectorHash> knownDealocks; /**< Set of the known Dyn DL */
 public:
-	Case_morte(Maze *m);
-	~Case_morte();
 
-	void detect_dead_with_BFS_idealGoal(Maze& m, short idealGoal);
-	void detect_dead_with_BFS();
-	bool detect_dyn_dead_3( Node *node);
-	bool isMarqueAsDeadlocks(Node *node);
-	/**
-	* will execute a bfs on each square to see if an exit is accesible
-	* if not the square will be mark as dead_sqare
-	* will ofc not toak in accoount any box
-	*/
+    /** \brief Constrcutor of class Case_morte
+     * \param m Maze on which the class is going to work
+     */
+    Case_morte(Maze *m);
 
-protected:
+
+    /** \brief Destructor of the class Case_morte
+     */
+    ~Case_morte();
+
+    /** \brief Will detect static DL
+     *  Will make a BFS for each square. If it cant reach a goal, then is it a deadlocls
+     *  Will marque DL directly on the Maze
+     *
+     */
+    void detect_static_DL();
+
+    /** \brief Will detect dynamique Deadlocks on a Node
+     *
+     * Will also check if the current Node can only lead to other DL
+     * Will marque new encoutterd DL
+     * \param node: Node to work on
+     * \return true if this is a DL
+     *
+     */
+    bool detect_dyn_DL( Node *node);
+
+
+    /** \brief Check if the node is marque as a DL
+     *
+     * \param node: node to check
+     * \return true if it is marque as a DL
+     *
+     */
+    bool isMarqueAsDL(Node *node);
 
 private:
-	bool isADynDeadlock(std::unordered_set<unsigned short> aglomerateBoxes);
-	std::vector<unsigned short> deadLocks_list;
-	int nb_case_morte;
-	Maze *m;
-	Util u;
-	// liste des cas de deadLocks connu
-	std::unordered_set<std::unordered_set<unsigned short>, VectorHash> knownDealocks;
+
+    /** \brief Detect if an aglomerate is a DL
+     *
+     * \param aglomerateBoxes aglomareate to check
+     * \return true if it is a DL
+     *
+     */
+    bool isADynDeadlock(std::unordered_set<unsigned short> aglomerateBoxes);
+
 };
 
 #endif // CASE_MORTE_H

@@ -1,32 +1,55 @@
+#ifndef CHRONO_H
+#define CHRONO_H
 /**
  * \file chrono.h
  * \brief declaration of the class chrono
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
-#ifndef CHRONO_H
-#define CHRONO_H
-#include "ctime"
 #include <iostream>
 #include <chrono>
 #include <ctime>
 
+#include "ctime"
+
+/** \class Chrono
+ *  \brief the class in charge of measuring time in the game
+ */
 class Chrono
 {
-public:
-    Chrono();
-    virtual  ~Chrono();
-    void lancer_chrono();
-    double temps_ecoule();
-
-protected:
 
 private:
-    time_t deb_time;
-    time_t actual_time;
 
-    std::chrono::system_clock::time_point startc;
-    std::chrono::system_clock::time_point endc;
+    std::chrono::system_clock::time_point startc;/**< Time at the begining */
+    std::chrono::system_clock::time_point endc; /**< Time at the end */
+public:
+
+    /** \brief Constructor of the class Chrono
+     *
+     *
+     */
+    Chrono();
+    /** \brief Destructor of the class Chrono
+     *
+     */
+    virtual  ~Chrono();
+    /** \brief Launch chronometer
+     *
+     * \return void
+     *
+     */
+    void lancer_chrono();
+
+    /** \brief
+     *
+     * \return time
+     *
+     */
+    double temps_ecoule();
+
+
+
+
 
 };
 

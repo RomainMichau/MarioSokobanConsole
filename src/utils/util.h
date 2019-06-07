@@ -1,7 +1,7 @@
 /**
  * \file util.h
  * \brief declaration of the class util
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #ifndef UTIL_H
@@ -45,8 +45,8 @@ public:
     void vider(std::queue<std::vector<unsigned char>> &t);
     void vider(std::queue< BFSCase_relier_point> &queue);
 
-	//return the pos of the boxes which are aglomerate to the box sent in parameters
-	std::unordered_set<unsigned short> detectAgglomerateOFBoxes(Maze *m,short boxes);
+    //return the pos of the boxes which are aglomerate to the box sent in parameters
+    std::unordered_set<unsigned short> detectAgglomerateOFBoxes(Maze *m,short boxes);
 
     std::vector<bool> calcZoneAccessible(const Maze* m, short &normPos);
     std::vector<unsigned short> relier_point(Maze m, std::vector <unsigned short>);
@@ -85,7 +85,7 @@ private:
     std::vector<BFSCase_relier_point> marque;
     bool compare(BFSCase_relier_point tstCase);
     bool marqued(short acc, const  Maze *m, std::unordered_set<std::string > &marqueZoneBFS);
-	bool file_exist(const std::string& name);
+    bool file_exist(const std::string& name);
 
 
 };

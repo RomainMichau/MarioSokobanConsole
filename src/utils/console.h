@@ -1,12 +1,16 @@
+#ifndef CONSOLE_H_INCLUDED
+#define CONSOLE_H_INCLUDED
 /**
  * \file Console.h
  * \brief declaration of the class console
  * \version 2.1
  */
-#ifndef CONSOLE_H_INCLUDED
-#define CONSOLE_H_INCLUDED
+
 
 #include <iostream>
+
+/** \enum list of possible color for the console
+ */
 
 enum Color
 {
@@ -20,33 +24,33 @@ enum Color
     _COLOR_DEFAULT = 7, // gris couleur de base de la console
 };
 
+/** \class  Console
+ * \brief used for display things on the console
+ */
+
 class Console
 {
 private:
-    // Empecher la création
+    /** \brief constructor of the class Console
+     *
+     */
     Console();
 
+     /** \brief destructor of the class Console
+     *
+     */
     ~Console();
 
-    // Empecher la copie d'objet...
-    Console& operator= (const Console&)
-    {
-        return *this;
-    }
-    Console (const Console&) {}
-
-    // Attributs
     static Console* m_instance;
 
-    // Méthodes privées
+
     void _setColor(short unsigned int front, short unsigned int back);
 public:
-    // Méthodes statiques (publiques)
+
     static Console* getInstance();
 
     static void deleteInstance();
 
-    // Méthodes publiques
     void gotoLigCol(short int lig, short int col);
 
     void gotoCurrentLigCol(short int lig, short int col);

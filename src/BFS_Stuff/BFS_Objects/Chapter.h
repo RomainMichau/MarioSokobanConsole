@@ -1,56 +1,129 @@
+#ifndef CHAPTER_H
+#define CHAPTER_H
 /**
  * \file Chapter.h
  * \brief declaration of the class chapter
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
-#ifndef CHAPTER_H
-#define CHAPTER_H
+
 #include <vector>
-/**
-* represent a chapter.
-* work like a linked list
-*/
-class Chapter {
-public:
-	Chapter(short idealGoalId, short idealGoalPos, std::vector<short>  mapDist, short chapterIndex, short distPivotGoal)
-		:idealGoalId(idealGoalId), idealGoalPos(idealGoalPos), mapDistanceFromGoal(mapDist), chapterIndex(chapterIndex) ,distPivotGoal(distPivotGoal) {}
-	Chapter() {}
 
-	short getIdealGoalId()const { return idealGoalId; };
-	void setGoalId(short id) { idealGoalId = id; };
+/** \class Chapter
+ *  \brief Represent a step of the resolution of the game
 
-	short getIdealGoalPos()  ;
-	void setGoalPos(short Pos) { idealGoalPos = Pos; };
-
-	std::vector<short> getDistMap()const { return mapDistanceFromGoal; };
-	void setDistMap(std::vector<short> map) { mapDistanceFromGoal = map; };
-
-	short getIndex()const { return chapterIndex; };
-	void setIndex(short index) { chapterIndex = index; };
-
-	short getDistPivotGoal() const { return distPivotGoal; }
-	void setDistPivotGoal(short dist) { distPivotGoal = dist; };
-
-	Chapter* getNextChapter() { return nextChapter; };
-	void setNextChapter(Chapter* snextChapter) { nextChapter = snextChapter; };
-
+ *  Each chapter is define by an ideal Goal, this is the goal to reach during this step.
+ *  There is one Chapter by Goal.
+ *  Chapter are ordering like that: farest is the goal, first will be treat the corresponding Chapter
+ *  The CHapter is linked to the next chapter, so when the ideal Goal is reached, then we can access to the next Chapter * \n
+ * Chapters are calculated at the beginning of the resolution
+ */
+class Chapter
+{
 
 private:
-	//id of the ideal goal of this chapter
-	short  idealGoalId;
-	//pos of the idealGOal of this chapter
-	short idealGoalPos;
-	//dist map from the idealGoal of this chapter
-	std::vector<short> mapDistanceFromGoal;
-	//index of ths chapter
-	short chapterIndex;
-	//distance beetween the current IdealGOal and the pivot point
-	// use for ordering th e chapters
-	short distPivotGoal;
-	//pointer on the nex chapter
-	Chapter *nextChapter;
 
+    const short  idealGoalId;/**< ID of the ideal goal of this Chapter */
+    const short idealGoalPos;/**< Position of the ideal goal of this chapter */
+    short chapterIndex;/**< Index of this chapter */
+    const short distPivotGoal/**< Distance beetween the IdealGoal of this chapter and the pivot point */;
+    Chapter *nextChapter;/**< Pointer to the next chapter of the game */
+
+public:
+
+    /** \brief Constructor of the class Chapter
+     *
+     * \param idealGoalId: id of the ideal goal of the chapter
+     * \param idealGoalPos: position of the ideal goal
+     * \param chapterIndex: index of the chapter
+     * \param distPivotGoal: distance between the Pivot point of the maze and the ideal Goal of this Chapter
+     *
+     */
+    Chapter(short idealGoalId, short idealGoalPos, short chapterIndex, short distPivotGoal)
+        :idealGoalId(idealGoalId), idealGoalPos(idealGoalPos), chapterIndex(chapterIndex), distPivotGoal(distPivotGoal) {}
+
+    /** \brief Default constructor of the class Chapter
+     *  give default value to
+     */
+    Chapter()
+        :idealGoalId(-1), idealGoalPos(-1), chapterIndex(-1), distPivotGoal(-1) {}
+
+
+public:
+    /** \brief Destructor of the class Chapter
+     *  Does nothing special
+     */
+    ~Chapter() {}
+
+    /** \brief getter of idealGoalId
+     *
+     * \return return idealGoalId
+     *
+     */
+    short getIdealGoalId()const
+    {
+        return idealGoalId;
+    };
+
+    /** \brief getter of idealGoalPos
+     *
+     * \return idealGoalPos
+     *
+     */
+    short getIdealGoalPos()const
+    {
+        return idealGoalPos;
+    };
+
+    /** \brief getter of chapterIndex
+     *
+     * \return chapterIndex
+     *
+     */
+    short getIndex()const
+    {
+        return chapterIndex;
+    };
+
+    /** \brief setter of index
+     *
+     * \param index: new index of this chapter
+     *
+     */
+    void setIndex(short index)
+    {
+        chapterIndex = index;
+    };
+
+    /** \brief getter of distPivotGoal
+     *
+     * \return distPivotGoal
+     *
+     */
+    short getDistPivotGoal()const
+    {
+        return distPivotGoal;
+    };
+
+    /** \brief nextChapter
+     *
+     * \return the next nextChapter
+     *
+     */
+    Chapter* getNextChapter()
+    {
+        return nextChapter;
+    };
+
+    /** \brief setter of nextChapter
+     *
+     * \param snextChapter new next chapter of the chapter
+     *
+     */
+    void setNextChapter(Chapter* snextChapter)
+    {
+        nextChapter = snextChapter;
+    };
 };
 
 #endif

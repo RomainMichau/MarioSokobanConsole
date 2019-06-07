@@ -1,4 +1,9 @@
-
+/**
+ * \file main.cpp
+ * \brief main class
+ * \author Romain Michau
+ * \version 2.1
+ */
 #include "src/Maze/Maze.h"
 #include "src/utils/Console.h"
 #include "src/utils/coord.h"
@@ -15,19 +20,19 @@
 
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 {
-	FHeuristique heurBuilder(&m, 1, 2);
-	AHeuristique *heuristique = heurBuilder.getInstance();
-	BFSPLUS killa_bfs(&m, heuristique);
-	std::vector<unsigned char> chemin;
-	chemin = killa_bfs.runBFS(noeudVisite);
-	if (chemin.size() == 0 && heuristique->isPivotHeuristique())
-	{
-		std::cout << std::endl << "Pivot Heuritique failed #RT si t'es trise" << std::endl << "Trying with classical heuristique";
-		AHeuristique *	heuristiqueCL = heurBuilder.getClassicalHeuritique();
-		killa_bfs = BFSPLUS(&m, heuristiqueCL);
-		chemin = killa_bfs.runBFS(noeudVisite);
-	}
-	return chemin;
+    FHeuristique heurBuilder(&m, 1, 2);
+    AHeuristique *heuristique = heurBuilder.getInstance();
+    BFSPLUS killa_bfs(&m, heuristique);
+    std::vector<unsigned char> chemin;
+    chemin = killa_bfs.runBFS(noeudVisite);
+    if (chemin.size() == 0 && heuristique->isPivotHeuristique())
+    {
+        std::cout << std::endl << "Pivot Heuritique failed #RT si t'es trise" << std::endl << "Trying with classical heuristique";
+        AHeuristique *	heuristiqueCL = heurBuilder.getClassicalHeuritique();
+        killa_bfs = BFSPLUS(&m, heuristiqueCL);
+        chemin = killa_bfs.runBFS(noeudVisite);
+    }
+    return chemin;
 
 }
 
@@ -36,80 +41,80 @@ std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 int main()
 {
 
-	//std::cout<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
-	std::cout << "///////////////////////////MARIO SOKOBAN SOLVER///////////////////////////" << std::endl;
-	Util u;
+    //std::cout<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
+    std::cout << "///////////////////////////MARIO SOKOBAN SOLVER///////////////////////////" << std::endl;
+    Util u;
 
-	Console::getInstance()->setColor(_COLOR_DEFAULT);
-	std::vector<unsigned char> chemin;
-	std::string path = u.choose_level();
-	// Load level from a file
-	Maze m(path);
+    Console::getInstance()->setColor(_COLOR_DEFAULT);
+    std::vector<unsigned char> chemin;
+    std::string path = u.choose_level();
+    // Load level from a file
+    Maze m(path);
 
-	KeyboardManager g;
-	Chrono chr;
-	if (!m.init())
-		return -1;
+    KeyboardManager g;
+    Chrono chr;
+    if (!m.init())
+        return -1;
 
-	unsigned noeudvisite = 0;
-	std::cout << m << std::endl;
-	std::vector<unsigned char> vec = m.getField();
-	m.setFieldOr(vec);
-
-
-	m.setPlayerPosOr(m.getPosPlayer());
-	Case_morte lamoort(&m);
-	lamoort.detect_dead_with_BFS();
-	std::cout << m << std::endl;
-	//u.dispVector(m,	h.calcFrequentationSquares(m));
-
-	while (true)
-	{
-		std::cout << "press space for launch BFS" << std::endl;
-		while (!g.keyPressed())
-		{
-
-		}
-		// Check if user has pressed a key
-
-		char key = g.keyRead(); 
-		switch (key)
-		{
-		case ' ':
-		case 53:
-			//DEADLOCKS DYNAMIQUE
-
-			std::cout << "BEST BFS";
-			chr.lancer_chrono();
-			chemin = goHeursitique(m, noeudvisite);
-			break;
-		}
-
-		if (chemin.size() == 0)
-		{
-			std::cout << "no solution to this Maze :(";
-			system("pause");
-			return 0;
-		}
-
-		/**
-		*Montre le trajet à la fin de la partie
-		*/
-		m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);
-		std::cout << "Win ! " << std::endl;
-		break;
-	}
-
-	// Display on screen
+    unsigned noeudvisite = 0;
+    std::cout << m << std::endl;
+    std::vector<unsigned char> vec = m.getField();
+    m.setFieldOr(vec);
 
 
+    m.setPlayerPosOr(m.getPosPlayer());
+    Case_morte lamoort(&m);
+    lamoort.detect_static_DL();
+    std::cout << m << std::endl;
+    //u.dispVector(m,	h.calcFrequentationSquares(m));
+
+    while (true)
+    {
+        std::cout << "press space for launch BFS" << std::endl;
+        while (!g.keyPressed())
+        {
+
+        }
+        // Check if user has pressed a key
+
+        char key = g.keyRead();
+        switch (key)
+        {
+        case ' ':
+        case 53:
+            //DEADLOCKS DYNAMIQUE
+
+            std::cout << "BEST BFS";
+            chr.lancer_chrono();
+            chemin = goHeursitique(m, noeudvisite);
+            break;
+        }
+
+        if (chemin.size() == 0)
+        {
+            std::cout << "no solution to this Maze :(";
+            system("pause");
+            return 0;
+        }
+
+        /**
+        *Montre le trajet à la fin de la partie
+        */
+        m.drawMove(chemin, chr.temps_ecoule(), noeudvisite);
+        std::cout << "Win ! " << std::endl;
+        break;
+    }
+
+    // Display on screen
 
 
 
 
-	// Free memory
-	Console::deleteInstance();
-	system("pause");
-	return 0;
+
+
+    // Free memory
+    Console::deleteInstance();
+    system("pause");
+    return 0;
 }
 

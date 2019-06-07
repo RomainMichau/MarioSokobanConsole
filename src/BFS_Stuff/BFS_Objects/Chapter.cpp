@@ -1,12 +1,8 @@
+#include "Chapter.h"
 /**
  * \file Chapter.cpp
  * \brief implementation of the class chapter
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
-#include "Chapter.h"
 
-short Chapter:: getIdealGoalPos()
-{
-    return idealGoalPos;
-}

@@ -1,7 +1,7 @@
 /**
  * \file MacroMover.cpp
  * \brief implementation of the class MacroMover
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #include "src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h"
@@ -11,11 +11,11 @@
 
 /**
 * Make a automatical move.
-* return {player_box, box pos}	after moves
+* return {player_pos, box pos}	after moves
 */
-std::pair<short, short>   MacroMover::macroMovePivotToPoint(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxPosition)
+std::pair<short, short>   MacroMover::macroMoveBoxToIdealGoal(std::vector<Node::NodeRetrackInfo>&caseTracker, const Node *node, const short boxPosition)
 {
-	   	 
+
     short boxGoal = node->chapter->getIdealGoalPos();
     bool alreadySave = true;
     std::vector< Node::NodeRetrackInfo> retrackToGoal;

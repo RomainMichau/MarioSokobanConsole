@@ -1,7 +1,7 @@
 /**
  * \file chrono.cpp
  * \brief implementation of the class chrono
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #include "src/utils/Chrono.h"

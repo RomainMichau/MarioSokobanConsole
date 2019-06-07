@@ -1,0 +1,86 @@
+warning: source ..\src\BFS_Stuff\BFS_Objects\NodeStat.h is not a readable file or directory... skipping.
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.h:1: warning: the name `FHeurisitique.cpp' supplied as the second argument in the \file statement is not an input file
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.cpp:1: warning: the name `FHeurisitique.cpp' supplied as the second argument in the \file statement is not an input file
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/Abstract/AHeuristique.cpp:1: warning: the name `AHeurisitique.cpp' supplied as the second argument in the \file statement is not an input file
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h:1: warning: the name `AHeurisitique.h' supplied as the second argument in the \file statement is not an input file
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:27: warning: Documentation for undefined enum `represent' found.
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/Console.h:12: warning: Documentation for undefined enum `list' found.
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'std' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'vector' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'Node' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'NodeRetrackInfo' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.cpp:88: warning: argument 'boxID' of command @param is not found in the argument list of HeuristiquePivot::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h:170: warning: The following parameters of HeuristiquePivot::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition) are not documented:
+  parameter 'boxPosition'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h:43: warning: argument 'pivotPoint' of command @param is not found in the argument list of HeuristiquePivot::GameStatistique::GameStatistique(std::vector< short > mapFrequentationSquares, short pivotPointPos, std::vector< short > distMapFromPivotPoint, std::unordered_map< short, short > tunnelMap)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h:51: warning: The following parameters of HeuristiquePivot::GameStatistique::GameStatistique(std::vector< short > mapFrequentationSquares, short pivotPointPos, std::vector< short > distMapFromPivotPoint, std::unordered_map< short, short > tunnelMap) are not documented:
+  parameter 'pivotPointPos'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/MacroMover/MacroMover.cpp:12: warning: argument 'boxID' of command @param is not found in the argument list of MacroMover::macroMoveBoxToIdealGoal(std::vector< Node::NodeRetrackInfo > &caseTracker, const Node *node, const short boxPosition)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h:53: warning: The following parameters of MacroMover::macroMoveBoxToIdealGoal(std::vector< Node::NodeRetrackInfo > &caseTracker, const Node *node, const short boxPosition) are not documented:
+  parameter 'boxPosition'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:115: warning: argument 'path' from the argument list of Maze::Maze has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:240: warning: argument 'posBox' from the argument list of Maze::_canPushBox has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:240: warning: argument 'dir' from the argument list of Maze::_canPushBox has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:240: warning: argument 'newPosBox' from the argument list of Maze::_canPushBox has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:127: warning: argument 'path' from the argument list of Maze::_load has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:269: warning: argument 'newField' from the argument list of Maze::change_etat_jeu has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:269: warning: argument 'newPosPlayer' from the argument list of Maze::change_etat_jeu has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:769: warning: argument 'GameState' of command @param is not found in the argument list of Maze::change_etat_jeu(GameState gameState)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:769: warning: argument 'newField' of command @param is not found in the argument list of Maze::change_etat_jeu(GameState gameState)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:769: warning: argument 'newPosPlayer' of command @param is not found in the argument list of Maze::change_etat_jeu(GameState gameState)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:275: warning: The following parameters of Maze::change_etat_jeu(GameState gameState) are not documented:
+  parameter 'gameState'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:255: warning: argument 'toConvert' from the argument list of Maze::convert has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:294: warning: argument 'pos' from the argument list of Maze::isSquareGround has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:283: warning: argument 'pos' from the argument list of Maze::isSquareWalkable has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:214: warning: argument 'vec' from the argument list of Maze::lire_chemin has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:208: warning: argument 'posBox' from the argument list of Maze::move_box has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:208: warning: argument 'dir' from the argument list of Maze::move_box has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:429: warning: argument 'newField' from the argument list of Maze::setField has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:402: warning: argument 'vec' from the argument list of Maze::setFieldOr has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:435: warning: argument 'newPlayerPos' from the argument list of Maze::setPlayerPos has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:408: warning: argument 'newPlayerPosition' from the argument list of Maze::setPlayerPosOr has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:98: warning: argument 'newPlayerPosOr' of command @param is not found in the argument list of Maze::setPosBoxes(std::vector< unsigned short > newBoxPoses)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:98: warning: argument 'newPlayerPosOr' of command @param is not found in the argument list of Maze::setPosBoxes(std::vector< unsigned short > newBoxPoses)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:414: warning: The following parameters of Maze::setPosBoxes(std::vector< unsigned short > newBoxPoses) are not documented:
+  parameter 'newBoxPoses'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:116: warning: argument 'newPlayerPosOr' of command @param is not found in the argument list of Maze::setPosBoxes(std::unordered_set< unsigned short > newBoxPoses)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:116: warning: argument 'newPlayerPosOr' of command @param is not found in the argument list of Maze::setPosBoxes(std::unordered_set< unsigned short > newBoxPoses)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:420: warning: The following parameters of Maze::setPosBoxes(std::unordered_set< unsigned short > newBoxPoses) are not documented:
+  parameter 'newBoxPoses'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:375: warning: argument 'direcrion' of command @param is not found in the argument list of Maze::updateDraw(char mov)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:140: warning: The following parameters of Maze::updateDraw(char mov) are not documented:
+  parameter 'mov'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:262: warning: argument 'dir' from the argument list of Maze::updatePlayer has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.cpp:555: warning: unexpected token in comment block while parsing the argument of command param
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.cpp:9: warning: argument 'profondeur' of command @param is not found in the argument list of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, short nbOfBoxes)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.cpp:9: warning: argument 'nbBoxes' of command @param is not found in the argument list of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, short nbOfBoxes)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.cpp:9: warning: argument 'profondeur' of command @param is not found in the argument list of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, short nbOfBoxes)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.cpp:9: warning: argument 'nbBoxes' of command @param is not found in the argument list of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, short nbOfBoxes)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:92: warning: argument 'chapter' from the argument list of Node::Node has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:92: warning: argument 'accessibleZone' from the argument list of Node::Node has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:92: warning: argument 'gameState' from the argument list of Node::Node has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:92: warning: argument 'aglomeratBoxes' from the argument list of Node::Node has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:92: warning: argument 'bfsR' from the argument list of Node::Node has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:92: warning: The following parameters of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, short nbOfBoxes) are not documented:
+  parameter 'depht'
+  parameter 'nbOfBoxes'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:94: warning: argument 'profondeur' of command @param is not found in the argument list of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, std::vector< bool > placedBoxes)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/BFS_Objects/Node.h:105: warning: The following parameters of Node::Node(Chapter *chapter, std::vector< bool > accessibleZone, GameState gameState, std::unordered_set< unsigned short > aglomeratBoxes, unsigned short depht, NodeRetrackInfo bfsR, std::vector< bool > placedBoxes) are not documented:
+  parameter 'depht'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/note.h:81: warning: argument 'new' of command @param is not found in the argument list of Note::set_note_caisse_place(int note)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/note.h:85: warning: The following parameters of Note::set_note_caisse_place(int note) are not documented:
+  parameter 'note'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/note.h:74: warning: argument 'new' of command @param is not found in the argument list of Note::set_note_distance_box(int note)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/note.h:79: warning: The following parameters of Note::set_note_distance_box(int note) are not documented:
+  parameter 'note'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:314: warning: argument 'squareID' of command @param is not found in the argument list of Util::getPathSquareToGoalBM(const Maze *m, short square)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:61: warning: The following parameters of Util::getPathSquareToGoalBM(const Maze *m, short square) are not documented:
+  parameter 'm'
+  parameter 'square'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:69: warning: The following parameters of Util::getPathSquareToSquareBM(const Maze *m, short fromSquare, short toSquare) are not documented:
+  parameter 'm'
+  parameter 'toSquare'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:71: warning: The following parameters of Util::getPathSquareToSquarePM(const Maze *m, short fromSquare, short toSquare) are not documented:
+  parameter 'm'
+  parameter 'toSquare'

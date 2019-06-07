@@ -1,36 +1,31 @@
 # depslib dependency file v1.0
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\chapter.cpp
+1559902791 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\chapter.cpp
 	"Chapter.h"
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\chapter.h
+1559907701 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\chapter.h
 	<vector>
 
-1557497769 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\mother_class\nodecasemother.cpp
+1559898139 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\mother_class\nodecasemother.cpp
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\node.cpp
+1559904917 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfs_objects\node.cpp
 	"src/BFS_Stuff/BFS_Objects/Node.h"
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\node.h
+1559904830 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\node.h
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 	"src/BFS_Stuff/BFS_Objects/Chapter.h"
 	"src/Maze/GameState.h"
 	<unordered_set>
 
-1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\note.h
+1559918533 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\note.h
 	<vector>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\mother_class\nodecasemother.h
+1559902937 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\mother_class\nodecasemother.h
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\chapter.h
+1559907701 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfs_objects\chapter.h
 	<vector>
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.cpp
-	"BFSPLUS.h"
-	"src/Maze/Maze.h"
-	"src/utils/Util.h"
-	"src/BFS_Stuff/DeadLocks/case_morte.h"
-	"src/BFS_Stuff/BFS_Objects/Node.h"
+1559919807 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.cpp
 	<vector>
 	<algorithm>
 	<sstream>
@@ -38,17 +33,22 @@
 	<string>
 	<iterator>
 	<unordered_set>
+	"BFSPLUS.h"
+	"src/Maze/Maze.h"
+	"src/utils/Util.h"
+	"src/BFS_Stuff/DeadLocks/case_morte.h"
+	"src/BFS_Stuff/BFS_Objects/Node.h"
 	"src/Maze/GameState.h"
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.h
-	"src/Maze/Maze.h"
-	"src/BFS_Stuff/Heuristique/note.h"
+1559919735 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\bfsplus.h
 	<unordered_set>
 	<unordered_map>
 	"src/BFS_Stuff/BFS_Objects/Node.h"
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+	"src/Maze/Maze.h"
+	"src/BFS_Stuff/Heuristique/note.h"
 
-1559661390 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\maze\maze.h
+1559921193 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\maze\maze.h
 	<vector>
 	<string>
 	<stdio.h>
@@ -68,7 +68,7 @@
 	"src/BFS_Stuff/DeadLocks/case_morte.h"
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 
-1559661390 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\util.h
+1559913258 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\util.h
 	<queue>
 	"src/Maze/Maze.h"
 	<vector>
@@ -84,24 +84,23 @@
 	<iostream>
 	<unordered_set>
 
-1557497769 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\coord.h
+1559834385 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\coord.h
 
-1559662191 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\deadlocks\case_morte.h
+1559906359 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\deadlocks\case_morte.h
 	"src/Maze/Maze.h"
 	"src/utils/Console.h"
 	"src/utils/Coord.h"
 	"src/utils/util.h"
 	<fstream>
 	<iomanip>
-	<vector>
 	<unordered_set>
 	"src/BFS_Stuff/DeadLocks/case_morte.h"
 	"src/BFS_Stuff/BFS_Objects/Node.h"
 
-1557133570 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\console.h
+1559922434 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\console.h
 	<iostream>
 
-1559662896 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\deadlocks\case_morte.cpp
+1559906455 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\deadlocks\case_morte.cpp
 	"src/Maze/Maze.h"
 	"src/utils/Console.h"
 	"src/utils/Coord.h"
@@ -126,11 +125,11 @@
 	<unordered_set>
 	<algorithm>
 
-1557133570 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\note.cpp
+1559918237 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\note.cpp
 	"src/BFS_Stuff/Heuristique/note.h"
 	<vector>
 
-1559661390 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
+1559905412 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\main.cpp
 	"src/Maze/Maze.h"
 	"src/utils/Console.h"
 	"src/utils/coord.h"
@@ -143,23 +142,23 @@
 	"src/BFS_Stuff/DeadLocks/case_morte.h"
 	"src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.h"
 
-1557497769 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\keyboardmanager.h
+1559834798 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\keyboardmanager.h
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfsplus.h
-	"src/Maze/Maze.h"
-	"src/BFS_Stuff/Heuristique/note.h"
+1559919735 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\bfsplus.h
 	<unordered_set>
 	<unordered_map>
 	"src/BFS_Stuff/BFS_Objects/Node.h"
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+	"src/Maze/Maze.h"
+	"src/BFS_Stuff/Heuristique/note.h"
 
-1559661390 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\chrono.h
-	"ctime"
+1559922157 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\chrono.h
 	<iostream>
 	<chrono>
 	<ctime>
+	"ctime"
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze\maze.cpp
+1559920786 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\maze\maze.cpp
 	"src/Maze/Maze.h"
 	"src/utils/KeyboardManager.h"
 	"src/utils/Console.h"
@@ -170,31 +169,32 @@
 	<stack>
 	<iomanip>
 
-1557497769 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\chrono.cpp
+1559834798 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\chrono.cpp
 	"src/utils/Chrono.h"
 	<chrono>
 	<ctime>
 
-1557497769 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\console.cpp
+1559834361 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\console.cpp
 	"src/utils/Console.h"
 	<windows.h>
 	<conio.h>
 
-1557497769 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\coord.cpp
+1559834363 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\coord.cpp
 	"src/utils/Coord.h"
 
-1557497769 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\keyboardmanager.cpp
+1559834798 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\keyboardmanager.cpp
 	"src/utils/KeyboardManager.h"
 	<conio.h>
 	<iostream>
 
-1559661390 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\util.cpp
+1559913253 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\util.cpp
 	"src/utils/util.h"
 	"src/Maze/Maze.h"
 	"src/utils/Console.h"
 	"src/utils/Coord.h"
 	"src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 	"src/Maze/GameState.h"
+	"src/utils/Tinyxml2.h"
 	<math.h>
 	<sstream>
 	<fstream>
@@ -205,8 +205,11 @@
 	<sstream>
 	<iterator>
 	<unordered_set>
+	<fstream>
+	<sys/types.h>
+	<sys/stat.h>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\abstract\aheuristique.h
+1559916243 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\abstract\aheuristique.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/Util.h"
@@ -215,11 +218,11 @@
 	"src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h"
 	<unordered_map>
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\abstract\aheuristique.cpp
+1559913539 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\abstract\aheuristique.cpp
 	"AHeuristique.h"
 	<algorithm>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\abstract\aheuristique.h
+1559916243 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\abstract\aheuristique.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/Util.h"
@@ -249,7 +252,7 @@
 
 1559044447 D
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\fheuristique\fheuristique.cpp
+1559917494 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\fheuristique\fheuristique.cpp
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 	"FHeuristique.h"
@@ -280,31 +283,31 @@
 	<utility>
 	<unordered_map>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\fheuristique\fheuristique.h
+1559914662 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\fheuristique\fheuristique.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 	<unordered_map>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\fheuristique\fheuristique.h
+1559914662 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\fheuristique\fheuristique.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
 	<unordered_map>
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiqueclassique.cpp
+1559916305 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiqueclassique.cpp
 	"HeuristiqueClassique.h"
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiqueclassique.h
+1559915507 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiqueclassique.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/Util.h"
 	"src/BFS_Stuff/BFS_Objects/Node.h"
 	"src/BFS_Stuff/DeadLocks/case_morte.h"
-	<unordered_map>
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+	<unordered_map>
 
-1559662898 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.cpp
+1559917494 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.cpp
 	"src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiquePivot.h"
 	"src/Maze/Maze.h"
 	"src/utils/Util.h"
@@ -319,7 +322,7 @@
 	<unordered_set>
 	<algorithm>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.h
+1559917284 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiquepivot.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/Util.h"
@@ -329,18 +332,18 @@
 	<utility>
 	<unordered_map>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiqueclassique.h
+1559915507 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\heuristiqueobjects\heuristiqueclassique.h
 	"src/Maze/Maze.h"
 	"src/BFS_Stuff/Heuristique/note.h"
 	"src/utils/Util.h"
 	"src/BFS_Stuff/BFS_Objects/Node.h"
 	"src/BFS_Stuff/DeadLocks/case_morte.h"
-	<unordered_map>
 	"src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+	<unordered_map>
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\maze\gamestate.h
+1559835058 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\maze\gamestate.h
 
-1559661389 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\macromover\macromover.h
+1559917872 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\bfs_stuff\heuristique\macromover\macromover.h
 	<utility>
 	<unordered_map>
 	<vector>
@@ -349,9 +352,49 @@
 	"src/Maze/Maze.h"
 	"src/utils/Util.h"
 
-1559661389 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\macromover\macromover.cpp
+1559917701 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\bfs_stuff\heuristique\macromover\macromover.cpp
 	"src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h"
 	<utility>
 	<vector>
 	<unordered_map>
+
+1559902935 source:c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\tinyxml2.cpp
+	"tinyxml2.h"
+	<new>
+	<stddef.h>
+	<stdarg.h>
+	<cstddef>
+	<cstdarg>
+
+1559902937 c:\users\rmichau\documents\projetperso\mariosokobanconsole\src\utils\tinyxml2.h
+	<ctype.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+	<cctype>
+	<climits>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<stdint.h>
+	<android/log.h>
+	<assert.h>
+
+1559902937 c:\users\rmichau\documents\projetperso\mariosokobanconsole\\src\utils\tinyxml2.h
+	<ctype.h>
+	<limits.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+	<cctype>
+	<climits>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<stdint.h>
+	<android/log.h>
+	<assert.h>
 

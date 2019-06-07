@@ -15,6 +15,7 @@
 #include <unordered_set>
 #include <queue>
 #include <stack>
+
 #include "src/Maze/GameState.h"
 /**
  * Max size of the field
@@ -23,7 +24,9 @@
 #define NB_MAX_HEIGHT    30
 
 
-
+/** \enum represent all the possible type of square
+ *
+ */
 enum
 {
     SPRITE_GROUND = 0, SPRITE_WALL = 1, SPRITE_BOX = 2,
@@ -32,104 +35,122 @@ enum
 };
 
 /**
- * Represent the maze (labyrinthe)
+ * Represent the maze itself(labyrinthe)
  */
 class Maze
 {
-public:
-    /**
-    * Constructor
-    * @param path path of the file to load
-    */
-    Maze(const std::string &path);
-
-    /**
-     * destructor
-     */
-    ~Maze();
 
 private:
     /**
-     * Number of line of the maze
+     * \brief Number of line of the maze
      */
     unsigned short m_lig;
 
     /**
-     * Number of col of the maze
+     * \brief Number of col of the maze
      */
     unsigned short m_col;
 
     /**
-     * Position of the player
+     * \brief Position of the player
      */
     unsigned short m_pos_player;
-    char m_dir_player;
 
     /**
-     * Path of the file representing the level
+     * \brief Path of the file representing the level
      */
     std::string m_level_path;
 
     /**
-     * Original field (before any movement is made)
+     * \brief Original field (before any movement is made)
+     *
      * Is used for reinit the game
      */
     std::vector<unsigned char> m_field_or;
 
     /**
-     * original Position of the player
+     * \brief original Position of the player
+     *
      * is used for reinit the game
      */
     unsigned short m_pos_player_or;
 
     /**
-     * field
+     * \brief field itself
      */
     std::vector<unsigned char> m_field; // field
 
     /**
-     * Posisitons of all the boxex
+     * \brief Posisitons of all the boxes
+     *
+     * THE ORDER OF THE BOXES IN THE VECTOR MUST NOT ME CHANGED
      */
     std::vector<unsigned short> m_pos_boxes;
 
     /**
-     * Positions of goals
+     * \brief Positions of goals
      */
     std::vector<unsigned short> m_pos_goals;
 
-
+    /** \brief
+     *
+     * \param
+     * \param
+     * \return
+     *
+     */
 
     /**
-     * Surcharge de l'operateur (je sais pas trop comment ça marche)
-     * @param O
-     * @param n
-     * @return
+    * friend to the operatior << (used for display the maze)
      */
     friend std::ostream &operator<<(std::ostream &O, const Maze &n);
 
+public:
+        std::vector<char> allDirection;/**< List of all 4 directions (TOP,BOTTOM,RIGHT,LEFT) */
 
     /**
-     * Charge le fichier dont le chemin est envoyé en parametre
-     * @param path
-     * @return
+    * \brief Constructor of the class Maze
+    * \param path: path of the file to load
+    */
+    Maze(const std::string &path);
+
+    /** \brief destructor of the class Maze
+     *
+     */
+    ~Maze();
+
+    /**
+     * \brief load the content of the file sent in paramters
+     * \param path: file to load
+     * \return true if the file has been succesfully load
      */
     bool _load(const std::string &path);
 
     /**
-    * Draw the field in the current state
+    * \brief Draw the field in the current state
     */
     void initDraw();
 
     /**
-    * Update the draw of the field after a mov
+    *\brief Update the draw of the field after a mov
+    *
     * init draw must have been call first
-    * @param direcrion: direction of the move
+    * \param direcrion: direction of the move
     */
     void updateDraw(char direction);
 
+    /**
+     * \brief Draw a list of moves on the console
+     *
+     * Draw the maze on the console
+     */
+    void drawMove(std::vector<unsigned char> chemin, double temp, int noeudVisite);
 
-public:
-
+    /** \brief Getter of gameState
+     *
+     * \return the current gameState of the game
+     *
+     */
     GameState getGameState()
     {
         return GameState(m_field, m_pos_player, m_pos_boxes);
@@ -137,7 +158,8 @@ public:
 
 
     /**
-    * return offset caused by the move
+    * \brief return offset caused by the move
+    *
     * top: -col
     * down: +col
     * right +1
@@ -146,182 +168,188 @@ public:
     short getMoveOffset(unsigned char dir) const;
 
     /**
-    * return a vector of possible adjacents position.
-    * example:
-    * for top will return (left, right)
-    * for right will return (bootom,tom)
-    * for left will return (bottom,top)
+    * \brief return a vector of possible adjacents position.
+    *
+    * \return
+    * for TOP will return (LEFT, RIGHT)
+    * for RIGHT will return (BOTTOM,TOP)
+    * for LEFT will return (BOTTOM,TOP)
     */
     std::vector<char> getAdjacentDirection(char dir);
 
-	/**
-	* return position of adjacaent walkable square
-	*/
-	std::vector<short> getAdjacentWalkableSquare(short square);
+    /**
+    * \brief return position of adjacaent walkable square
+    * \return pos of the adjacent walkable squares
+    */
+    std::vector<short> getAdjacentWalkableSquare(short square);
 
     /**
-    * rreturn the oppsoite direction of the one send in paramter
+    * \brief return the oppsoite direction of the one send in paramter
+    * \return TOP => BOTTOM, LEFT=>RIGHT, BOTTOM=>TOP....
     */
     inline  char getOppositeDirection(char dir);
 
-
-    /**
-    List des 4 directions
-    */
-    std::vector<char> allDirection;
-
-    /**
-     * True if deadlocks are actives
-     */
-    bool case_morte_activ;
-
     /**
      *
-     * @return true if the game is currently won
+     * \return true if the game is currently won
      */
     bool _isCompleted() const;
 
     /**
-     * Reinit the maze
+     * \brief Reinit the maze (do not work very well)
      */
     void reinit();
 
     /**
-     * Move the box in the asked direction
-     * @param posBox
-     * @param dir
+     * \brief Move the box in the asked direction
+     * \param posBox: position of the box to move
+     * \param dir: direction to push the box
      */
     void move_box(int posBox, char dir);
 
     /**
-     * Draw the maze on the console
-     */
-    void drawMove(std::vector<unsigned char> chemin, double temp, int noeudVisite);
-
-
-    /**
-     * Display the path one the console
-     * @param vec
+     * \brief Display the path one the console
+     * \param vec
      */
     void lire_chemin(std::vector<unsigned char> vec);
 
-	/**
-	* return all the dir doable from the square sent in parameters.
-	* ignore boxes
-	*/
-	std::vector<char> getPossibleDirFromSquareIBox(short square);
+    /**
+    * \brief return all the dir doable from the square sent in parameters.
+    *
+    * ignore boxes
+    */
+    std::vector<char> getPossibleDirFromSquareIBox(short square);
 
-
-	/**
-	* return all the dir doable from the square sent in parameters.
-	* dont ignore boxes
-	*/
-	std::vector<char> getPossibleDirFromSquareWBox(short square);
-
-    bool _canPushBox(unsigned short posBox, char dir, unsigned short &newPosBox) const;
-	   
-    int cpt;
 
     /**
-    * Initialise la classe Maze.
+    * \brief return all the dir doable from the square sent in parameters.
+    *
+    * dont ignore boxes
+    */
+    std::vector<char> getPossibleDirFromSquareWBox(short square);
+
+
+    /** \brief return true if the box can be pushed in the wanted direction
+     *
+     * \param posBox posof the box we want to pushed
+     * \param dir direction where we wants to push the pox
+     * \param newPosBox unsigned short&
+     * \return true if the box can be pushed
+     *
+     */
+    bool _canPushBox(unsigned short posBox, char dir, unsigned short &newPosBox) const;
+
+    /**
+    * \brief Init the maze class
+    *
     * Charge le fichier du niveau
-    * @return true si le fichier c'est bien chargé
+    * \return true si le fichier c'est bien chargé
      */
     bool init();
 
     /**
      * Convert a field of short in a field of char
-     * @param toConvert
-     * @return
+     * \param toConvert: vector to convert
+     * \return converted vector
      */
     std::vector<unsigned char> convert(std::vector<unsigned short> toConvert);
 
     /**
-     * Move the player in the asked direction
-     * @param dir
-     * @return
+     * \brief Move the player in the asked direction
+     * \param dir: dir where wze wants to move the player
+     * \return true if the player has been effectively move
      */
     bool updatePlayer(char dir);
 
     /**
-     * Change the state of the game
+     * \brief Change the state of the game
+     *\param newField: new field of the game
+     * \param newPosPlayer: new position of the player
      */
-    void change_etat_jeu(std::vector<unsigned char>, unsigned short);
+    void change_etat_jeu(std::vector<unsigned char> newField, unsigned short newPosPlayer);
 
     /**
-     * Change the state of the game
-     * @param vec
-     * @param a
+     * \brief Change the state of the game
+     * \param GameState: new GameState
      */
-
     void change_etat_jeu(GameState);
 
 
     /**
      *
-     * @param pos
-     * @return true if pos is a walkable square
+     * \param pos
+     * \return true if pos is a walkable square
      */
     bool isSquareWalkable(unsigned short pos) const;
-
+    /**
+     *
+     * \param pos
+     * \return true if pos is a walkable square
+     */
+    /**
+     *
+     * \param pos
+     * \return true if pos is a ground square
+     */
     bool isSquareGround(unsigned short pos) const;
 
     /**
      * True if pos is a box
-     * @param pos
-     * @return
+     * \param pos
+     * \return
      */
     bool isSquareBox(unsigned short pos) const;
 
     /**
      *
-     * @param pos
-     * @return  true if pos is a goal
+     * \param pos
+     * \return  true if pos is a goal
      */
     bool isSquareGoal(unsigned short pos) const;
 
     /**
      *
-     * @param pos position of the field
-     * @return true if pos is a square wall
+     * \param pos position of the field
+     * \return true if pos is a square wall
      */
     bool isSquareWall(unsigned short pos) const;
 
     /**
      * true if pos is th eposition of a placed box
-     * @param pos
-     * @return
+     * \param pos
+     * \return
      */
     bool isSquareBoxPlaced(unsigned short pos) const;
 
     /**
-     * true if poos is a position of deadsquare
-     * @param pos
-     * @return
+     * true if pos is a position of deadsquare
+     * \param pos
+     * \return
      */
     bool isSquareDeadSquare(unsigned short pos) const;
 
-
+    /**
+     * true if pos is a position of Non placed box
+     * \param pos
+     * \return
+     */
     bool isSquareBoxNonPlaced(unsigned short pos) const;
-
-    // Other getters
-    const std::string &getLevelPath() const;
 
     /**
      *
-     * @return  the position of the player
+     * \return  the position of the player
      */
     unsigned short getPosPlayer() const;
 
     /**
      *
-     * @return the size of the field (number of square)
+     * \return the size of the field (number of square)
      */
     unsigned int getSize() const;
 
     /**
      *
-     * @return number of col
+     * \return number of col
      */
     unsigned int getCol() const
     {
@@ -330,7 +358,7 @@ public:
 
     /**
      *
-     * @return  number of lig
+     * \return  number of lig
      */
     unsigned int getLig()
     {
@@ -339,14 +367,14 @@ public:
 
     /**
      *
-     * @return the position of boxes
+     * \return the position of boxes
      */
     std::vector<unsigned short> getPosBoxes();
 
     /**
      * Set a square
-     * @param pos position of the square
-     * @param s net type of the square
+     * \param pos position of the square
+     * \param s net type of the square
      */
     void setSquare(unsigned short pos, unsigned char s);
 
@@ -357,52 +385,52 @@ public:
 
     /**
      *
-     * @return goalsPosition (reference)
+     * \return goalsPosition (reference)
      */
     const std::vector<unsigned short> &getGoals() const;
 
     /**
      *
-     * @return boxes Position
+     * \return boxes Position
      */
     std::vector<unsigned short> getPosBoxes() const;
 
     /**
      * Set original field
-     * @param vec
+     * \param vec
      */
     void setFieldOr(std::vector<unsigned char> vec);
 
     /**
      * Set original pos player
-     * @param newPlayerPosition
+     * \param newPlayerPosition
      */
     void setPlayerPosOr(unsigned short newPlayerPosition);
 
     /**
      * Set boxes position
-     * @param newPlayerPosOr
+     * \param newPlayerPosOr
      */
-	void setPosBoxes(std::vector<unsigned short> newPlayerPosBoxes);
+    void setPosBoxes(std::vector<unsigned short> newPlayerPosBoxes);
 
-	/**
-   * Set boxes position
-   * @param newPlayerPosOr
-   */
-	void setPosBoxes(std::unordered_set<unsigned short> newPosBoxes);
+    /**
+    * Set boxes position
+    * \param newPlayerPosOr
+    */
+    void setPosBoxes(std::unordered_set<unsigned short> newPosBoxes);
 
 
     void setPosBox(short i, short pos);
 
     /**
      * Set field
-     * @param newField
+     * \param newField
      */
     void setField(std::vector<unsigned char> newField);
 
     /**
      * Set player position
-     * @param newPlayerPos
+     * \param newPlayerPos
      */
     void setPlayerPos(unsigned short newPlayerPos);
 };
@@ -410,7 +438,7 @@ public:
 
 /**
  * Set the position of the player
- * @param newPlayerPos
+ * \param newPlayerPos
  */
 inline void Maze::setPlayerPos(unsigned short newPlayerPos)
 {
@@ -421,7 +449,7 @@ inline void Maze::setPlayerPos(unsigned short newPlayerPos)
 
 /**
  *
- * @return positions of goals
+ * \return positions of goals
  */
 inline const std::vector<unsigned short> &Maze::getGoals() const
 {
@@ -430,7 +458,7 @@ inline const std::vector<unsigned short> &Maze::getGoals() const
 
 /**
  *
- * @return the field
+ * \return the field
  */
 inline const std::vector<unsigned char> &Maze::getField() const
 {
@@ -439,7 +467,7 @@ inline const std::vector<unsigned char> &Maze::getField() const
 
 /**
  *
- * @return size of the maze
+ * \return size of the maze
  */
 inline  unsigned int Maze::getSize() const
 {
@@ -456,7 +484,7 @@ inline std::vector<unsigned short> Maze::getPosBoxes() const
 
 /**
  *
- * @return pos of the player
+ * \return pos of the player
  */
 inline unsigned short Maze::getPosPlayer() const
 {
@@ -474,14 +502,15 @@ inline void Maze::setSquare(unsigned short pos, unsigned char s)
 
 /**
  *
- * @param pos
- * @return true if pos is a walkable square (deadsquare, goal or ground)
+ * \param pos
+ * \return true if pos is a walkable square (deadsquare, goal or ground)
  */
 inline bool Maze::isSquareWalkable(unsigned short pos) const
 {
-	if (pos < 0 || pos >= getSize()) {
-		return false;
-	}
+    if (pos < 0 || pos >= getSize())
+    {
+        return false;
+    }
     return ((this->m_field[pos] == SPRITE_GROUND || this->m_field[pos] == SPRITE_GOAL ||
              this->m_field[pos] == SPRITE_DEADSQUARE) ? true : false);
 }
@@ -492,7 +521,7 @@ inline bool Maze::isSquareGround(unsigned short pos) const
 }
 
 /**
-* @return true is pos is a box (placed or not)
+* \return true is pos is a box (placed or not)
 */
 inline bool Maze::isSquareBox(unsigned short pos) const
 {

@@ -1,7 +1,7 @@
 /**
  * \file GameState.h
  * \brief declaration of the class GameState
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #ifndef GAME_STATE

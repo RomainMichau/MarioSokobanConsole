@@ -1,7 +1,7 @@
 /**
  * \file note.cpp
  * \brief implementation of the class note
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #include "src/BFS_Stuff/Heuristique/note.h"
@@ -42,13 +42,6 @@ int Note::get_note_distance_box()
     return note_distance_box;
 }
 
-
-std::vector<int> Note::get_note_distance_box_by_box()
-{
-    return note_distance_box_by_box;
-}
-
-
 void Note::set_note_total(int total)
 {
     note_total=total;
@@ -62,11 +55,6 @@ void Note::set_note_distance_box(int note)
 void Note::set_note_caisse_place(int note)
 {
     note_caisse_place=note;
-}
-
-void Note::set_note_distance_box_by_box(std::vector<int> note_by_caisse)
-{
-    note_distance_box_by_box=note_by_caisse;
 }
 
 void Note::calculTotal()

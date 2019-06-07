@@ -1,7 +1,7 @@
 /**
  * \file HeuristiquePivot.h
  * \brief declaration of the class HeuristiquePivot
- * \author romain michau
+ * \author Romain Michau
  * \version 2.1
  */
 #ifndef HEURISTIQUE_H
@@ -15,121 +15,203 @@
 #include <utility>
 #include <unordered_map>
 /**
-*	Class of heuristique wich use a Pivot Point Method (see def below)
-*	Method: When the pivot point is reached by a box, a macro drive the box to the ideal goal
+*	\class HeuristiquePivot
+*   \brief heuristique wich use a Pivot Point Method (see def below)
+*
+*	Method: \n
+*       -A pivot point is defined (it is a point where it is mandatory to passed to acces goals
+*       -Heuristique will pushed box to pivot point
+*       -When the box reach the pivot point, a macro will autmaticly drag it to the ideal goal
 */
 class HeuristiquePivot :public AHeuristique
 {
-	friend class FHeuristique;
+    /** \brief used for the factory design pattern
+     */
+    friend class FHeuristique;
 
 public:
 
 
-	/**
-	* Represent the calculated stat and informations about the Game	*
-	* only the information which are true for ALL the game are in this class
-	*/
-	class GameStat
-	{
-	public:
-		GameStat(std::vector<short> mapFrequentationSquares, short pivotPoint, std::vector<short> distMapFromPivotPoint, std::unordered_map<short, short> tunnelMap) :
-			mapFrequentationSquares(mapFrequentationSquares), pivotPoint(pivotPoint), distMapFromPivotPoint(distMapFromPivotPoint), tunnelMap(tunnelMap) {};
-		short getPivotPointPos() const
-		{
-			return pivotPoint;
-		};
-		void setPivotPoint(short pivotPoint)
-		{
-			this->pivotPoint = pivotPoint;
-		};
-		std::vector<short> getMapFrequentationSquares() const
-		{
-			return mapFrequentationSquares;
-		};
-		void setMapFrequentationSquares(std::vector<short> map)
-		{
-			this->mapFrequentationSquares = map;
+    /** \class GameStatistique
+    * \brief Represent the calculated stat and informations about the Game
+    * only the information which are true during ALL the game are in this class
+    */
+    class GameStatistique
+    {
+    public:
 
-		};
-		short getDistFromPivotPoint(short pos) const {
-			return distMapFromPivotPoint[pos];
-		};
+        /** \brief Constructor of GameStatistique
+         *
+         * \param mapFrequentationSquares: frequentation map of the maze
+         * \param pivotPoint: position of the pivot point
+         * \param distMapFromPivotPoint: dist map from the pivot point (for each square, the distance to go to the pivot point)
+         * \param tunnelMap: a map which identified tunnel in the maze
+         *
+         */
+        GameStatistique(std::vector<short> mapFrequentationSquares, short pivotPointPos, std::vector<short> distMapFromPivotPoint, std::unordered_map<short, short> tunnelMap) :
+            mapFrequentationSquares(mapFrequentationSquares), pivotPointPos(pivotPointPos), distMapFromPivotPoint(distMapFromPivotPoint), tunnelMap(tunnelMap) {};
 
-		std::unordered_map<short, short> getTunnelMap() const {
-			return tunnelMap;
-		}
-	private:
-		/**
-		* a vector of the side of the field wich is calculate like that:
-		*	we make a bfs for fin the way beetween each box and the goal
-		*	for each square we count how many time a box passed on it
-		*	we put this info in this vector
-		*
-		* will not change during the game
-		*/
-		std::vector<short> mapFrequentationSquares;
+        /** \brief Getter of the pivot Point position
+         *
+         * \return pivotPointPos
+         *
+         */
+        short getPivotPointPos() const
+        {
+            return pivotPointPos;
+        };
 
-		/**
-		* the pivotPoint is a square of the field where the passage is necessary for reach any goals
-		* will never change during the game
-		*/
-		short pivotPoint;
 
-		/**
-		* the dist map from the pivotPoint
-		*/
-		std::vector<short> distMapFromPivotPoint;
-		/**
-		* map of the tunnel in the Game:
-		* entrySquare => endSquare of the tunnel
-		*/
-		std::unordered_map<short, short> tunnelMap;
-	};
+        /** \brief Getter of the frequentation map of the game
+         *
+         * \return mapFrequentationSquares
+         *
+         */
+        std::vector<short> getMapFrequentationSquares() const
+        {
+            return mapFrequentationSquares;
+        };
+
+        /** \brief return the distance to the pivot point for a specific square
+         *
+         * \param pos: square from which we want to have the distance
+         * \return the distance
+         *
+         */
+        short getDistFromPivotPoint(short pos) const
+        {
+            return distMapFromPivotPoint[pos];
+        };
+
+        /** \brief Getter of the tunnel map
+         *
+         * \return the tunnel map
+         *
+         */
+        std::unordered_map<short, short> getTunnelMap() const
+        {
+            return tunnelMap;
+        }
+    private:
+        /**
+        * a vector of the side of the field wich is calculate like that:
+        *	we make a bfs for fin the way beetween each box and the goal
+        *	for each square we count how many time a box passed on it
+        *	we put this info in this vector
+        *
+        * will not change during the game
+        */
+        const std::vector<short> mapFrequentationSquares;
+
+        /**
+        * the pivotPoint is a square of the field where the passage is necessary for reach any goals
+        * will never change during the game
+        */
+        const short pivotPointPos;
+
+        /**
+        * the dist map from the pivotPoint
+        */
+        const std::vector<short> distMapFromPivotPoint;
+
+        /**
+        * map of the tunnel in the Game:
+        * entrySquare => endSquare of the tunnel
+        */
+        const std::unordered_map<short, short> tunnelMap;
+    };
 
 public:
-	/**
-	* PUBLIC METHOD
-	*/
-	~HeuristiquePivot();
-	void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
-	virtual std::string sayHello()
-	{
-		return "Pivot Method Heuristique";
-	};
-	Chapter* getChapters()
-	{
-		return &chapters;
-	};
-	std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
+
+    /** \brief Destructor of the class HeuristiquePivot
+     */
+    ~HeuristiquePivot();
+
+    /** \brief Calculate the note for a specific node
+     *
+     *  will automaticly set the note in the node
+     * \param node: node to calculate the note
+     * \param boxPushedID: box which have been pushed during the move
+     * \param newPos: new position of the box
+     *
+     */
+    virtual void calcHeuristiqueNote(Node *node, short boxPushedID, short newPos);
+
+    /** \brief Return the name of the class
+     *
+     * \return the name of the class
+     *
+     */
+    virtual std::string sayHello()
+    {
+        return "Pivot Method Heuristique";
+    };
+
+    /** \brief Return the first chapters of this heuristique
+     *
+     *  Chaptes are linked one to another
+     * \return chapters
+     *
+     */
+    Chapter* getChapters()
+    {
+        return &chapters;
+    };
+
+
+    /** \brief Will make the macro move if needed
+     *
+     * \param caseTracker: the list of already encoutnered Node (only there NodeRetrackInfo)
+     * \param node: the current node
+     * \param boxID: id of the box which have been pushed
+     * \return {player_pos, box pos}	after macro moves
+     *
+     */
+    std::pair<short, short> macroMove(std::vector<Node::NodeRetrackInfo>&caseTracker, Node *node, short boxID);
+
 private:
 
-	int nb_caisse_place_best;
-	/**
-	* PRIVATE METHOD
-	*/
-	HeuristiquePivot(Maze *m, int coefA, int coefB, GameStat gameStat);
-	Chapter  calcChapter();
-	unsigned short calc_note_distance_box_pivot();
 
+    /** \brief Constructor of the class HeuristiquePivot
+     *
+     * \param m: maze
+     * \param coefA: coef for notation of node
+     * \param coefB: coef for notation of node
+     * \param gameStatistique: GameStatistique of the Maze
+     */
+    HeuristiquePivot(Maze *m, int coefA, int coefB, GameStatistique gameStatistique);
 
-	/**
-	* PRIVATE ATTRIBUT
-	*/
+    /** \brief Calculates chapters of the game
+     *
+     * \return return the first chapter of the list
+     *
+     */
+    Chapter  calcChapter();
 
+    /** \brief Calculate the note of the current node
+     *
+     * with the distance beetween each box and the pivot point
+     * \return unsigned short
+     *
+     */
+    unsigned short calc_note_distance_box_pivot();
 
+private:
 
+    int nb_caisse_place_best;/**< Highest number of box which have been placed on a goal during this level */
 
-	/**
-	* stats about the game
-	*/
-	const GameStat gameStat;
-	/*
-	* lionked list of chapterts order by number:
-	*	chapters[0]=> chapter0
-	*	chapters[1]=> chapter1
-	*	chapters[2]=> chapter2
-	*/
-	Chapter  chapters;
+    /**
+    * stats about the game
+    */
+    const GameStatistique gameStatistique;
+
+    /*
+    * lionked list of chapterts order by number:
+    *	chapters[0]=> chapter0
+    *	chapters[1]=> chapter1
+    *	chapters[2]=> chapter2
+    */
+    Chapter  chapters;/**< Firsy chapter of the list */
 };
 
 
