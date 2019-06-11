@@ -375,12 +375,12 @@ bool Maze::updatePlayer(char dir)
 /**
  * Display field on the console
  */
-void Maze::updateDraw(char mov)
+void Maze::updateDraw(char dir)
 {
     Sleep(50);
     Console* c = Console::getInstance();
     bool boxPush = false;
-    short offset = getMoveOffset(mov);
+    short offset = getMoveOffset(dir);
     short orPlayer = getPosPlayer();
     short newPosPlayer = getPosPlayer() + offset;
     short newBoxPos = getPosPlayer() + offset * 2;
@@ -419,7 +419,7 @@ void Maze::updateDraw(char mov)
         Console::getInstance()->setColor(_COLOR_GREEN);
         std::cout << SPRITE_BOX;
     }
-    this->updatePlayer(mov);
+    this->updatePlayer(dir);
 }
 
 /**

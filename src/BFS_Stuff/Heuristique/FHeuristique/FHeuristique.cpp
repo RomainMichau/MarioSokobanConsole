@@ -179,7 +179,7 @@ bool FHeuristique::checkIfPivotLevel(short pivotPos)
         //	for(short box=0;box<m->getSize();box++){
         for (short goal : m->getGoals())
         {
-            short distPivotGoal = u.getPathSquareToSquareBM(m, pivotPos, goal).size();
+           unsigned short distPivotGoal = u.getPathSquareToSquareBM(m, pivotPos, goal).size();
 
             std::deque<short> path = u.getPathSquareToSquareBM(m, box, goal);
             if (path.size() < distPivotGoal)

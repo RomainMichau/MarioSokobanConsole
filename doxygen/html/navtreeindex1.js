@@ -1,8 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"maze_8h.html#a8cf17ce18596335aa55a1b149bbc723f":[1,0,23,2],
-"maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a0d065567658c7c6bbbbf33f6bd59ba58":[1,0,23,4],
-"maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a4a215af5decec1f04f07f73d438657db":[1,0,23,8],
 "maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a5cffffb8fe3aed5a82ce73c0ccd44cc2":[1,0,23,7],
 "maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a74f4c957cf3334e0739e6ab0cbff9706":[1,0,23,5],
 "maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a80021222f13eb7577ba30c483dcd4f3a":[1,0,23,3],

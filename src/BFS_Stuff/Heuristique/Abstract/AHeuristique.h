@@ -37,6 +37,7 @@ public:
     {
     public:
 
+        GameStatistique():pivotPoint(-1){};
         /** \brief getter of the position of the pivot point
          *
          *  the pivotPoint is a square of the field where the passage is necessary for reach any goals
@@ -44,7 +45,7 @@ public:
          * \return pivotPoint
          *
          */
-        short const getPivotPointPos()
+        short  getPivotPointPos() const
         {
             return pivotPoint;
         };
@@ -148,7 +149,7 @@ public:
 protected:
 
 
-    Util u;/**< Classe used for small operatio, */
+    Util u;/**< Classe used for small operation */
     Maze *m;/**< pointer to the maze */
     Note note;/**< Note class (used for give a note to nodes */
     Case_morte deadlocks; /**< Used for detect dynamics DL */

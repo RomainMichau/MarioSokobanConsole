@@ -18,8 +18,7 @@ var hierarchy =
     [ "Maze", "class_maze.html", null ],
     [ "Node", "class_node.html", null ],
     [ "NodeCaseMother", "class_node_case_mother.html", [
-      [ "Node::NodeRetrackInfo", "class_node_1_1_node_retrack_info.html", null ],
-      [ "Util::BFSCase_relier_point", "class_util_1_1_b_f_s_case__relier__point.html", null ]
+      [ "Node::NodeRetrackInfo", "class_node_1_1_node_retrack_info.html", null ]
     ] ],
     [ "Note", "class_note.html", null ],
     [ "Util", "class_util.html", null ]

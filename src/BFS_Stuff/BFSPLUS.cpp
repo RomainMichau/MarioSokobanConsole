@@ -221,12 +221,11 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
 
     resolution.push_back(pos_originel);
     std::reverse(resolution.begin(), resolution.end());
-    resolution = u.relier_point(*m, resolution);
+	chemin = u.relier_point(*m, resolution);
     for (unsigned short s : resolution)
     {
         std::cout << s << " ";
     }
-    chemin = m->convert(resolution);
 
     noeudvisite = marque.size();
     return chemin;

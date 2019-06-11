@@ -140,10 +140,10 @@ std::vector<bool> Util::calcZoneAccessible(const Maze  *m, short &normPos)
 * this method will receive a vector of succesive position.
 * it will give in return a vector of move directctive to follow in passed through each position of the vector
 */
-std::vector<unsigned short> Util::relier_point(Maze  m, std::vector <unsigned short> positions)
+std::vector<unsigned char> Util::relier_point(Maze  m, std::vector <unsigned short> positions)
 {
     std::cout << std::endl << "BFS DONE, linking points..." << std::endl;
-    std::vector<unsigned short> resolution, temp;
+    std::vector<unsigned char> resolution, temp;
     std::queue< BFSCase_relier_point> queue;
     std::vector <unsigned char> field = m.getField();
     unsigned short currentPosition = positions[0];
@@ -194,7 +194,7 @@ std::vector<unsigned short> Util::relier_point(Maze  m, std::vector <unsigned sh
         BFSCase_relier_point currentCase = marque.back();
         while (currentCase.idCase != 0)
         {
-            temp.push_back(currentCase.mov);
+            temp.push_back(currentCase.dir);
             currentCase = marque[currentCase.idParentCase];
         }
         std::reverse(temp.begin(), temp.end());
@@ -223,10 +223,10 @@ bool Util::compare(BFSCase_relier_point tstCase)
     return false;
 }
 
-bool Util::file_exist(const std::string& name)
+bool Util::file_exist(const std::string& filePath)
 {
     struct stat buffer;
-    return (stat(name.c_str(), &buffer) == 0);
+    return (stat(filePath.c_str(), &buffer) == 0);
 }
 
 /**
@@ -743,12 +743,12 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 * return true if the current boxPos of *m is already marqued
 * if it is not the case it wil marque it
 */
-bool Util::marqued(short acc, const  Maze *m, std::unordered_set<std::string > & marqueZoneBFS)
+bool Util::marqued(short nPos, const  Maze *m, std::unordered_set<std::string > & marqueZoneBFS)
 {
     std::vector<unsigned short> nposBoxes = m->getPosBoxes();
     std::vector<unsigned char> field = m->getField();
     std::stringstream result;
-    nposBoxes.push_back(acc);
+    nposBoxes.push_back(nPos);
     std::copy(nposBoxes.begin(), nposBoxes.end(), std::ostream_iterator<short>(result, "."));
     std::string hashG = result.str();
 

@@ -54,7 +54,6 @@ var files_dup =
     ] ],
     [ "util.cpp", "util_8cpp.html", "util_8cpp" ],
     [ "util.h", "util_8h.html", [
-      [ "Util", "class_util.html", "class_util" ],
-      [ "BFSCase_relier_point", "class_util_1_1_b_f_s_case__relier__point.html", "class_util_1_1_b_f_s_case__relier__point" ]
+      [ "Util", "class_util.html", "class_util" ]
     ] ]
 ];

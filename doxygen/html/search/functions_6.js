@@ -22,7 +22,6 @@ var searchData=
   ['getoppositedirection',['getOppositeDirection',['../class_maze.html#a009eea5366e3912f881146d2003ff0e7',1,'Maze']]],
   ['getpathsquaretogoalbm',['getPathSquareToGoalBM',['../class_util.html#a319a5e7e6ca70fb2e765f9571bc8d4a6',1,'Util']]],
   ['getpathsquaretosquarebm',['getPathSquareToSquareBM',['../class_util.html#a5b4b5b6d151e6fb4388a26f5fea13c70',1,'Util']]],
-  ['getpathsquaretosquarepm',['getPathSquareToSquarePM',['../class_util.html#afc64fdff8e06835f673d329db43c9ce3',1,'Util']]],
   ['getpathsquaretosquarezonemethod',['getPathSquareToSquareZoneMethod',['../class_util.html#afdcf4621797b62bd2a1268000a62556c',1,'Util']]],
   ['getpivotpointpos',['getPivotPointPos',['../class_heuristique_pivot_1_1_game_statistique.html#aa05f72bc4f8a1e57984a8e4613ddb3bf',1,'HeuristiquePivot::GameStatistique::getPivotPointPos()'],['../class_a_heuristique_1_1_game_statistique.html#ac8fcc3d00bd93dae4a089ccb91db93fb',1,'AHeuristique::GameStatistique::getPivotPointPos()']]],
   ['getposboxes',['getPosBoxes',['../class_maze.html#a549586cc5a25a9044e6dceb3f0e974ba',1,'Maze::getPosBoxes()'],['../class_maze.html#aa2f854dade900ddfcbebc4d88b3dd99a',1,'Maze::getPosBoxes() const']]],
