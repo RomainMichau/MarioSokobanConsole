@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['m',['m',['../class_util.html#a25344fdfdecf5bd38370b11cfced9c1d',1,'Util::m()'],['../class_a_heuristique.html#aa783ff481f4d88164d57827df87ab397',1,'AHeuristique::m()']]],
+  ['m',['m',['../class_a_heuristique.html#aa783ff481f4d88164d57827df87ab397',1,'AHeuristique']]],
   ['macromove',['macroMove',['../class_heuristique_pivot.html#a5154332d2bffaa56033cd220861369b1',1,'HeuristiquePivot::macroMove()'],['../class_heuristique_classique.html#a71262d046b10dc5fb47539f8fbec50aa',1,'HeuristiqueClassique::macroMove()'],['../class_a_heuristique.html#aaa83defd4ce07db9487115d452738773',1,'AHeuristique::macroMove()']]],
   ['macromoveboxtoidealgoal',['macroMoveBoxToIdealGoal',['../class_macro_mover.html#a8f4e45a9fff335f5682409856eabaab3',1,'MacroMover']]],
   ['macromover',['MacroMover',['../class_macro_mover.html',1,'MacroMover'],['../class_macro_mover.html#afc8c94c6e85116ccff8bb2d653af7309',1,'MacroMover::MacroMover()'],['../class_a_heuristique.html#a2612e1b36c55f5ef2e46d05e38d24132',1,'AHeuristique::macroMover()']]],

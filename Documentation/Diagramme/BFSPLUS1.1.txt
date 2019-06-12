@@ -1,0 +1,42 @@
+participant BFSPlus
+participant Util
+participant Heuristique
+participant Deadlocks
+participant macroMove
+BFSPlus->BFSPlus: O1.1 Get the top Node 
+BFSPlus->BFSPlus: O1.2 Select the Box (BOX)
+BFSPlus->BFSPlus: 01.3 Save state of the game (STATESAVE)
+loop L1 for each of 4 directions (DIR)
+   alt A1 if BOX can be push in DIR && player can access pushing square
+        BFSPlus->BFSPlus: O2 put the player on pushing zone
+        BFSPlus->BFSPlus: O3 push BOX in DIR
+        alt if Win
+            BFSPlus->BFSPlus: JOB IS DONE
+        end
+        BFSPlus->Util: recalculate accessible zone and normalise Pos
+        Util->Util: recalculate acceessible Zone AZ & NP
+        Util->BFSPlus: send new AZ & NP
+        BFSPlus->BFSPlus:check if the current situtation is recorded
+        alt is recorded
+            BFSPlus->BFSPlus: Pass to next DIR
+        else
+            BFSPlus->BFSPlus: record the situation
+        end
+        BFSPlus->BFSPlus: create a new Node corresponding to the current situation
+        BFSPlus->Deadlocks: detect dynamique deadlocks
+        Deadlocks->BFSPlus: return result of dynamque deadlocks
+        alt if dyn Deadlocks
+            BFSPlus->BFSPlus:Pass to next Dir
+        end
+        BFSPlus->Heuristique: ask for Node notation
+        Heuristique->Heuristique: give a note to the Node
+        Heuristique->BFSPlus: Done
+        BFSPlus->macroMove: detect macro move possibility
+        macroMove->BFSPlus: return macroMove possibily
+        opt if macro is possible
+            BFSPlus->BFSPlus: add macroMove in the current Node
+        end
+        BFSPlus->BFSPlus: add Node to the queue 
+        BFSPlus->BFSPlus: reset maze in STATESAVE
+   end
+end

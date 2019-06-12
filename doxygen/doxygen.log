@@ -5,7 +5,7 @@ C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heurist
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h:1: warning: the name `AHeurisitique.h' supplied as the second argument in the \file statement is not an input file
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/Maze/maze.h:27: warning: Documentation for undefined enum `represent' found.
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/Console.h:12: warning: Documentation for undefined enum `list' found.
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:477: warning: documented symbol `std::deque< short > Util::getPathSquareToSquarePM' was not declared or defined.
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/DeadLocks/case_morte.h:78: warning: argument 'node' from the argument list of Case_morte::detect_dyn_DL has muliple @param documentation sections
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'std' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'vector' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h:69: warning: argument 'Node' of command @param is not found in the argument list of HeuristiqueClassique::macroMove(std::vector< Node::NodeRetrackInfo > &caseTracker, Node *node, short boxPosition)
@@ -75,14 +75,17 @@ C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heurist
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/note.h:74: warning: argument 'new' of command @param is not found in the argument list of Note::set_note_distance_box(int note)
 C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/BFS_Stuff/Heuristique/note.h:79: warning: The following parameters of Note::set_note_distance_box(int note) are not documented:
   parameter 'note'
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:314: warning: argument 'squareID' of command @param is not found in the argument list of Util::getPathSquareToGoalBM(const Maze *m, short square)
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:314: warning: argument 'squareID' of command @param is not found in the argument list of Util::getPathSquareToGoalBM(const Maze *m, short square)
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:189: warning: The following parameters of Util::getPathSquareToGoalBM(const Maze *m, short square) are not documented:
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:147: warning: The following parameters of Util::detectAgglomerateOFBoxes(Maze *m, short initBox, unsigned short depht) are not documented:
+  parameter 'depht'
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:323: warning: argument 'squareID' of command @param is not found in the argument list of Util::getPathSquareToGoalBM(const Maze *m, short square)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:323: warning: argument 'squareID' of command @param is not found in the argument list of Util::getPathSquareToGoalBM(const Maze *m, short square)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:184: warning: The following parameters of Util::getPathSquareToGoalBM(const Maze *m, short square) are not documented:
   parameter 'square'
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:200: warning: argument 'fromSquare' from the argument list of Util::getPathSquareToSquareBM has muliple @param documentation sections
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:607: warning: argument 'm' of command @param is not found in the argument list of Util::getPathSquareToSquareZoneMethod(const Maze *orM, short fromSquare, short toSquare, short posPlayer)
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:211: warning: The following parameters of Util::getPathSquareToSquareZoneMethod(const Maze *orM, short fromSquare, short toSquare, short posPlayer) are not documented:
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:195: warning: argument 'fromSquare' from the argument list of Util::getPathSquareToSquareBM has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:220: warning: argument 'fromSquare' from the argument list of Util::getPathSquareToSquarePM has muliple @param documentation sections
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.cpp:616: warning: argument 'm' of command @param is not found in the argument list of Util::getPathSquareToSquareZoneMethod(const Maze *orM, short fromSquare, short toSquare, short posPlayer)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:206: warning: The following parameters of Util::getPathSquareToSquareZoneMethod(const Maze *orM, short fromSquare, short toSquare, short posPlayer) are not documented:
   parameter 'orM'
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:136: warning: argument 't' of command @param is not found in the argument list of Util::vider(std::queue< BFSCase_relier_point > &queue)
-C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:141: warning: The following parameters of Util::vider(std::queue< BFSCase_relier_point > &queue) are not documented:
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:130: warning: argument 't' of command @param is not found in the argument list of Util::vider(std::queue< BFSCase_relier_point > &queue)
+C:/Users/rmichau/Documents/projetPerso/MarioSokobanConsole/src/utils/util.h:135: warning: The following parameters of Util::vider(std::queue< BFSCase_relier_point > &queue) are not documented:
   parameter 'queue'

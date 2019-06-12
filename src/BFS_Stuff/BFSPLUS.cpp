@@ -144,7 +144,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
                     //[OPTIMIZER]
                     if (!win && !marqued(newNPos))
                     {
-                        std::unordered_set<unsigned short>aglomerat = u.detectAgglomerateOFBoxes(m, newPosBox);
+                        std::unordered_set<unsigned short>aglomerat = u.detectAgglomerateOFBoxes(m, newPosBox,1);
                         Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[boxID] - offset, posBoxes[boxID]);
                         Node newCase(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), aglomerat, profondeur + 1, bfsR, currentCase.placedBoxes);
 
@@ -182,7 +182,7 @@ std::vector<unsigned char> BFSPLUS::runBFS(unsigned &noeudvisite)   //plafond: n
                             new_zone_accessible = u.calcZoneAccessible(m, newNPos);
 
                          Node::NodeRetrackInfo    bfsMacro = caseTracker.back();
-                            aglomerat = u.detectAgglomerateOFBoxes(m, boxAfterMacro);
+                            aglomerat = u.detectAgglomerateOFBoxes(m, boxAfterMacro,1);
                             newCase = Node(currentCase.chapter, new_zone_accessible, GameState(m->getField(), newNPos, m->getPosBoxes()), aglomerat, profondeur + 2, bfsMacro, currentCase.placedBoxes);
                             heuristique->calcHeuristiqueNote(&newCase, boxID, boxAfterMacro);
 

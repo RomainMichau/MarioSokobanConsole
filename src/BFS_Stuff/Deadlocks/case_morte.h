@@ -94,7 +94,7 @@ private:
      * \return true if it is a DL
      *
      */
-    bool isADynDeadlock(std::unordered_set<unsigned short> aglomerateBoxes);
+    bool isADynDeadlock(Maze* m,std::unordered_set<unsigned short> aglomerateBoxes);
 
 };
 

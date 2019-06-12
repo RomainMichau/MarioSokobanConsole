@@ -14,7 +14,7 @@ TODO:
 
 
 DOING:
-	-emepcher le deadlock qui apparait sur le niveau 26  >> upgradeDynDeadLocks
+		-Simuler toutes les possibilité de deadlock au début du niveau
 =========================================================================================================================
 	
 DONE:
@@ -26,7 +26,7 @@ DONE:
 	-identifier les case de passage obligatoire (grace a un gros bfs). Des qu'une box est dessus, enclencher une macro ou mettre une tres grosse note heuristique >> MacroMove
 	-au lieu de faire un BFS pour mesurer les distance, utiliser la distmap >> staticMapMesasuringDist
 	-Detecter les tunnels >> tunnelDetector
-
+	-emepcher le deadlock qui apparait sur le niveau 26  >> upgradeDynDeadLocks
 
 	
 UNDOABLE:

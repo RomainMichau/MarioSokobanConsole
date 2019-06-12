@@ -174,7 +174,19 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if this is a DL </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if this is a DL</dd></dl>
+<p>Will also check if the current <a class="el" href="class_node.html" title="Represent a Node of the BFS used in BFSPLUS This class represent a Node of the bfs....">Node</a> can only lead to other DL Will marque new encoutterd DL </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td><a class="el" href="class_node.html" title="Represent a Node of the BFS used in BFSPLUS This class represent a Node of the bfs....">Node</a> to work on </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if this is a DL <pre class="fragment">  Method:
+          -if current Node is a deadlocks, return true else:      \n
+          -push all boxes which are part of the aglomerate in a queue     \n
+          -for each box of the queue, try to move in all  of the 4 direction
+          -if each one of this move create a DL, then the Node is a DL itself
+</pre> </dd></dl>
 
 </div>
 </div>
@@ -236,7 +248,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_case__morte.html">Case_morte</a></li>
-    <li class="footer">Generated on Tue Jun 11 2019 14:44:28 for new_sokoban_solver by
+    <li class="footer">Generated on Wed Jun 12 2019 15:10:34 for new_sokoban_solver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
   </ul>

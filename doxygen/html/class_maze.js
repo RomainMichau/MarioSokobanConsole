@@ -23,7 +23,7 @@ var class_maze =
     [ "getPosPlayer", "class_maze.html#a15518d2e3fa84debcfb01545c3652b1d", null ],
     [ "getPossibleDirFromSquareIBox", "class_maze.html#a8d19e29f4543cfbc268814d9fd65ad9c", null ],
     [ "getPossibleDirFromSquareWBox", "class_maze.html#a8da596fe641bbaaa5348ac30fa6cabab", null ],
-    [ "getSize", "class_maze.html#a418c58a6370c034dc1a05cc746a222c7", null ],
+    [ "getSize", "class_maze.html#a424a2059e631fb387ec2126f942a410a", null ],
     [ "init", "class_maze.html#a48029a056d88750c641664fe922acd34", null ],
     [ "initDraw", "class_maze.html#aeba6d9b53468125619176fac3108c13b", null ],
     [ "isSquareBox", "class_maze.html#ac2866d6a3a14b99d21f67738d32e6cca", null ],

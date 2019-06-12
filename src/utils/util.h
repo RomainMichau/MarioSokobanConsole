@@ -139,11 +139,12 @@ public:
      *
      * \param m: Maze
      * \param initBox: position of the box to check
+	 * \param: depht will define wich depht level we wants for our aglomerat
      * \return a vector of all the box forming an aglomerat (the one sent in paramters will also be in this vector)
      *
      *  An aglomerat is when many box are touching each other
      */
-    std::unordered_set<unsigned short> detectAgglomerateOFBoxes(Maze *m,short initBox);
+    std::unordered_set<unsigned short> detectAgglomerateOFBoxes(Maze *m,short initBox,unsigned short depht);
 
     /** \brief Calculate the accissble Zone of the Maze
      *

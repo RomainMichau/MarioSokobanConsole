@@ -88,7 +88,6 @@ $(document).ready(function(){initNavTree('class_util.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_util-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Util Class Reference</div>  </div>
@@ -117,52 +116,39 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac33fb3cde8b729ddc62e1367dc976367"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#ac33fb3cde8b729ddc62e1367dc976367">vider</a> (std::queue&lt; BFSCase_relier_point &gt; &amp;queue)</td></tr>
 <tr class="memdesc:ac33fb3cde8b729ddc62e1367dc976367"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty the queue sent in parameter.  <a href="#ac33fb3cde8b729ddc62e1367dc976367">More...</a><br /></td></tr>
 <tr class="separator:ac33fb3cde8b729ddc62e1367dc976367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d43386dba283994469583c13eb4454a"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; unsigned short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a3d43386dba283994469583c13eb4454a">detectAgglomerateOFBoxes</a> (<a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, short initBox)</td></tr>
-<tr class="memdesc:a3d43386dba283994469583c13eb4454a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect if an aglomerat of box exist around a box.  <a href="#a3d43386dba283994469583c13eb4454a">More...</a><br /></td></tr>
-<tr class="separator:a3d43386dba283994469583c13eb4454a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9fca4ae7c3ba74844a88567f49f1504"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#ad9fca4ae7c3ba74844a88567f49f1504">calcZoneAccessible</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, short &amp;normPos)</td></tr>
+<tr class="memitem:a061e6335888dfe43bb0288a01a82eaac"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; unsigned short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a061e6335888dfe43bb0288a01a82eaac">detectAgglomerateOFBoxes</a> (<a class="el" href="class_maze.html">Maze</a> *m, short initBox, unsigned short depht)</td></tr>
+<tr class="memdesc:a061e6335888dfe43bb0288a01a82eaac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect if an aglomerat of box exist around a box.  <a href="#a061e6335888dfe43bb0288a01a82eaac">More...</a><br /></td></tr>
+<tr class="separator:a061e6335888dfe43bb0288a01a82eaac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9fca4ae7c3ba74844a88567f49f1504"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#ad9fca4ae7c3ba74844a88567f49f1504">calcZoneAccessible</a> (const <a class="el" href="class_maze.html">Maze</a> *m, short &amp;normPos)</td></tr>
 <tr class="memdesc:ad9fca4ae7c3ba74844a88567f49f1504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the accissble Zone of the <a class="el" href="class_maze.html">Maze</a>.  <a href="#ad9fca4ae7c3ba74844a88567f49f1504">More...</a><br /></td></tr>
 <tr class="separator:ad9fca4ae7c3ba74844a88567f49f1504"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03161a201731432ae5a9f9742db14e77"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a03161a201731432ae5a9f9742db14e77">relier_point</a> (<a class="el" href="class_maze.html">Maze</a> <a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, std::vector&lt; unsigned short &gt; positions)</td></tr>
+<tr class="memitem:a03161a201731432ae5a9f9742db14e77"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a03161a201731432ae5a9f9742db14e77">relier_point</a> (<a class="el" href="class_maze.html">Maze</a> m, std::vector&lt; unsigned short &gt; positions)</td></tr>
 <tr class="memdesc:a03161a201731432ae5a9f9742db14e77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Will convert successive position in a vector of direction to take for reach all this positions.  <a href="#a03161a201731432ae5a9f9742db14e77">More...</a><br /></td></tr>
 <tr class="separator:a03161a201731432ae5a9f9742db14e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14fa4ece4810419561f99a29ba4cabd0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a14fa4ece4810419561f99a29ba4cabd0">choose_level</a> ()</td></tr>
 <tr class="memdesc:a14fa4ece4810419561f99a29ba4cabd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the player to choose a level.  <a href="#a14fa4ece4810419561f99a29ba4cabd0">More...</a><br /></td></tr>
 <tr class="separator:a14fa4ece4810419561f99a29ba4cabd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a319a5e7e6ca70fb2e765f9571bc8d4a6"><td class="memItemLeft" align="right" valign="top">std::deque&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a319a5e7e6ca70fb2e765f9571bc8d4a6">getPathSquareToGoalBM</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, short squareID)</td></tr>
+<tr class="memitem:a319a5e7e6ca70fb2e765f9571bc8d4a6"><td class="memItemLeft" align="right" valign="top">std::deque&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a319a5e7e6ca70fb2e765f9571bc8d4a6">getPathSquareToGoalBM</a> (const <a class="el" href="class_maze.html">Maze</a> *m, short squareID)</td></tr>
 <tr class="memdesc:a319a5e7e6ca70fb2e765f9571bc8d4a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul the path beetween a square and the neared Goal in BM.  <a href="#a319a5e7e6ca70fb2e765f9571bc8d4a6">More...</a><br /></td></tr>
 <tr class="separator:a319a5e7e6ca70fb2e765f9571bc8d4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b4b5b6d151e6fb4388a26f5fea13c70"><td class="memItemLeft" align="right" valign="top">std::deque&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a5b4b5b6d151e6fb4388a26f5fea13c70">getPathSquareToSquareBM</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, short fromSquare, short toSquare)</td></tr>
+<tr class="memitem:a5b4b5b6d151e6fb4388a26f5fea13c70"><td class="memItemLeft" align="right" valign="top">std::deque&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a5b4b5b6d151e6fb4388a26f5fea13c70">getPathSquareToSquareBM</a> (const <a class="el" href="class_maze.html">Maze</a> *m, short fromSquare, short toSquare)</td></tr>
 <tr class="memdesc:a5b4b5b6d151e6fb4388a26f5fea13c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the path beetween the squareID send in parameters and the toSquare.  <a href="#a5b4b5b6d151e6fb4388a26f5fea13c70">More...</a><br /></td></tr>
 <tr class="separator:a5b4b5b6d151e6fb4388a26f5fea13c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdcf4621797b62bd2a1268000a62556c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_node_1_1_node_retrack_info.html">Node::NodeRetrackInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#afdcf4621797b62bd2a1268000a62556c">getPathSquareToSquareZoneMethod</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, short fromSquare, short toSquare, short posPlayer)</td></tr>
+<tr class="memitem:afdcf4621797b62bd2a1268000a62556c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_node_1_1_node_retrack_info.html">Node::NodeRetrackInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#afdcf4621797b62bd2a1268000a62556c">getPathSquareToSquareZoneMethod</a> (const <a class="el" href="class_maze.html">Maze</a> *m, short fromSquare, short toSquare, short posPlayer)</td></tr>
 <tr class="memdesc:afdcf4621797b62bd2a1268000a62556c"><td class="mdescLeft">&#160;</td><td class="mdescRight">return the path beewteen fromSquare and toSquare with BFSPlus like method  <a href="#afdcf4621797b62bd2a1268000a62556c">More...</a><br /></td></tr>
 <tr class="separator:afdcf4621797b62bd2a1268000a62556c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb429d34d5900b53ee165bcfdb2e370f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#adb429d34d5900b53ee165bcfdb2e370f">getDistMapOfSquare</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, short toSquare)</td></tr>
-<tr class="memdesc:adb429d34d5900b53ee165bcfdb2e370f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return dist map of toSquare (in PM)  <a href="#adb429d34d5900b53ee165bcfdb2e370f">More...</a><br /></td></tr>
+<tr class="memitem:afc64fdff8e06835f673d329db43c9ce3"><td class="memItemLeft" align="right" valign="top">std::deque&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#afc64fdff8e06835f673d329db43c9ce3">getPathSquareToSquarePM</a> (const <a class="el" href="class_maze.html">Maze</a> *m, short fromSquare, short toSquare)</td></tr>
+<tr class="memdesc:afc64fdff8e06835f673d329db43c9ce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the path beetween 2 square in PM, ignore boxes.  <a href="#afc64fdff8e06835f673d329db43c9ce3">More...</a><br /></td></tr>
+<tr class="separator:afc64fdff8e06835f673d329db43c9ce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb429d34d5900b53ee165bcfdb2e370f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; short &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#adb429d34d5900b53ee165bcfdb2e370f">getDistMapOfSquare</a> (const <a class="el" href="class_maze.html">Maze</a> *m, short toSquare)</td></tr>
+<tr class="memdesc:adb429d34d5900b53ee165bcfdb2e370f"><td class="mdescLeft">&#160;</td><td class="mdescRight">return dist map of toSquare (in BM)  <a href="#adb429d34d5900b53ee165bcfdb2e370f">More...</a><br /></td></tr>
 <tr class="separator:adb429d34d5900b53ee165bcfdb2e370f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a322f66b7df9815c69ab1df347c252b6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a322f66b7df9815c69ab1df347c252b6b">dispVector</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, std::vector&lt; short &gt; vec)</td></tr>
+<tr class="memitem:a322f66b7df9815c69ab1df347c252b6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a322f66b7df9815c69ab1df347c252b6b">dispVector</a> (const <a class="el" href="class_maze.html">Maze</a> *m, std::vector&lt; short &gt; vec)</td></tr>
 <tr class="memdesc:a322f66b7df9815c69ab1df347c252b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a vector of the size of the field.  <a href="#a322f66b7df9815c69ab1df347c252b6b">More...</a><br /></td></tr>
 <tr class="separator:a322f66b7df9815c69ab1df347c252b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fad18144ea99148e70372ea56383751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a2fad18144ea99148e70372ea56383751">dispVector</a> (const <a class="el" href="class_maze.html">Maze</a> *<a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>, std::vector&lt; bool &gt; vec)</td></tr>
+<tr class="memitem:a2fad18144ea99148e70372ea56383751"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a2fad18144ea99148e70372ea56383751">dispVector</a> (const <a class="el" href="class_maze.html">Maze</a> *m, std::vector&lt; bool &gt; vec)</td></tr>
 <tr class="memdesc:a2fad18144ea99148e70372ea56383751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a vector of the size of the field.  <a href="#a2fad18144ea99148e70372ea56383751">More...</a><br /></td></tr>
 <tr class="separator:a2fad18144ea99148e70372ea56383751"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a25344fdfdecf5bd38370b11cfced9c1d"><td class="memItemLeft" align="right" valign="top"><a id="a25344fdfdecf5bd38370b11cfced9c1d"></a>
-**brief Display a vector of the size of the field **param&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_util.html#a25344fdfdecf5bd38370b11cfced9c1d">m</a>: <a class="el" href="class_maze.html">Maze</a>* * \param vec: vector to display * \return void * */ * Return the path beetween the fromSquare send in parameters and the toSquare . * If no possible path</td></tr>
-<tr class="memdesc:a25344fdfdecf5bd38370b11cfced9c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the path beetween 2 square in PM, ignore boxes. <br /></td></tr>
-<tr class="separator:a25344fdfdecf5bd38370b11cfced9c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd0f61bc8ad3e19385385507bdf6a176"><td class="memItemLeft" align="right" valign="top"><a id="abd0f61bc8ad3e19385385507bdf6a176"></a>
-**brief Display a vector of the size of the field **param return empty vector *path is the id of all the square *param&#160;</td><td class="memItemRight" valign="bottom"><b>m</b>: <a class="el" href="class_maze.html">Maze</a>* * \param fromSquare * \param toSquare * \return vector of square representing the path beetween fromSquare nd twoSquare * PM: player like movement * */ std::deque&lt;short&gt; getPathSquareToSquarePM(const <a class="el" href="class_maze.html">Maze</a>* m</td></tr>
-<tr class="separator:abd0f61bc8ad3e19385385507bdf6a176"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a542f29e4808ea3a410959bffe11656d2"><td class="memItemLeft" align="right" valign="top"><a id="a542f29e4808ea3a410959bffe11656d2"></a>
-**brief Display a vector of the size of the field **param return empty vector *path is the id of all the square *param short&#160;</td><td class="memItemRight" valign="bottom"><b>fromSquare</b></td></tr>
-<tr class="separator:a542f29e4808ea3a410959bffe11656d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33ec9bc5e78ba7d4c5cb196e44f2664f"><td class="memItemLeft" align="right" valign="top"><a id="a33ec9bc5e78ba7d4c5cb196e44f2664f"></a>
-**brief Display a vector of the size of the field **param return empty vector *path is the id of all the square *param short short&#160;</td><td class="memItemRight" valign="bottom"><b>toSquare</b></td></tr>
-<tr class="separator:a33ec9bc5e78ba7d4c5cb196e44f2664f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains a set of utilitary methodes. </p>
@@ -268,8 +254,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3d43386dba283994469583c13eb4454a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d43386dba283994469583c13eb4454a">&#9670;&nbsp;</a></span>detectAgglomerateOFBoxes()</h2>
+<a id="a061e6335888dfe43bb0288a01a82eaac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a061e6335888dfe43bb0288a01a82eaac">&#9670;&nbsp;</a></span>detectAgglomerateOFBoxes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,7 +270,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">short&#160;</td>
-          <td class="paramname"><em>initBox</em>&#160;</td>
+          <td class="paramname"><em>initBox</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>depht</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -299,6 +291,7 @@ Public Attributes</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">m</td><td><a class="el" href="class_maze.html">Maze</a> </td></tr>
     <tr><td class="paramname">initBox</td><td>position of the box to check </td></tr>
+    <tr><td class="paramname"></td><td>depht will define wich depht level we wants for our aglomerat </td></tr>
   </table>
   </dd>
 </dl>
@@ -410,7 +403,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>return dist map of toSquare (in PM) </p>
+<p>return dist map of toSquare (in BM) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">m</td><td>Maze* </td></tr>
@@ -523,6 +516,59 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>if the square can not reached a goal, return empty vector. If it is a wall or a goal return empty vector else will return a path of all the square ID to reach the goal calculating in "pushingBox movement" </dd></dl>
+<p>Si il ne s'agit pas d'une case marquable comme deadSquare</p>
+
+</div>
+</div>
+<a id="afc64fdff8e06835f673d329db43c9ce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc64fdff8e06835f673d329db43c9ce3">&#9670;&nbsp;</a></span>getPathSquareToSquarePM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::deque&lt; short &gt; Util::getPathSquareToSquarePM </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_maze.html">Maze</a> *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>fromSquare</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short&#160;</td>
+          <td class="paramname"><em>toSquare</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the path beetween 2 square in PM, ignore boxes. </p>
+<p>Return the path beetween the fromSquare send in parameters and the toSquare . If no possible path, return empty vector path is the id of all the square </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m</td><td>Maze* </td></tr>
+    <tr><td class="paramname">fromSquare</td><td></td></tr>
+    <tr><td class="paramname">toSquare</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>vector of square representing the path beetween fromSquare nd twoSquare PM: player like movement</dd></dl>
+<p>Return the path beetween the fromSquare send in parameters and the toSquare . If no possible path, return empty vector path is the id of all the square. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">:fromSquare</td><td>number of the square in the field </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>if the square can not reached a goal, return empty vector. If it is a wall or a goal return empty vector else will return a path of all the square ID to reach the goal calculating in "moving player movement" </dd></dl>
 <p>Si il ne s'agit pas d'une case marquable comme deadSquare</p>
 
 </div>
@@ -709,7 +755,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_util.html">Util</a></li>
-    <li class="footer">Generated on Tue Jun 11 2019 14:44:28 for new_sokoban_solver by
+    <li class="footer">Generated on Wed Jun 12 2019 15:10:34 for new_sokoban_solver by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
   </ul>

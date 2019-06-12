@@ -49,18 +49,25 @@ void Case_morte::detect_static_DL()
 
  /** \brief Will detect dynamique Deadlocks on a Node
      *
+	 *
      * Will also check if the current Node can only lead to other DL
      * Will marque new encoutterd DL
      * \param node: Node to work on
      * \return true if this is a DL
-     *
+	 *
+     *	Method:
+	 *		-if current Node is a deadlocks, return true else:	\n
+	 *		-push all boxes which are part of the aglomerate in a queue	\n
+	 *		-for each box of the queue, try to move in all  of the 4 direction
+	 *		-if each one of this move create a DL, then the Node is a DL itself
+	 *
      */
 bool Case_morte::detect_dyn_DL(Node *node)
 {
     std::unordered_set<unsigned short> aglomeratBoxes = node->aglomeratBoxes;
     if (aglomeratBoxes.size() < 2)
         return false;
-    bool res = isADynDeadlock(aglomeratBoxes);
+    bool res = isADynDeadlock(m,aglomeratBoxes);
     if (res)
     {
         return true;
@@ -99,8 +106,8 @@ bool Case_morte::detect_dyn_DL(Node *node)
 
                 m->setPlayerPos(pusherPlace);
                 m->updatePlayer(dir);
-                std::unordered_set<unsigned short> newAglomeratBoxes = u.detectAgglomerateOFBoxes(m, newBoxPlace);
-                if (!isADynDeadlock(newAglomeratBoxes))
+                std::unordered_set<unsigned short> newAglomeratBoxes = u.detectAgglomerateOFBoxes(m, newBoxPlace,1);
+                if (!isADynDeadlock(m,newAglomeratBoxes))
                 {
                     notDeadLocks = true;
                     *m = orM;
@@ -114,7 +121,7 @@ bool Case_morte::detect_dyn_DL(Node *node)
     }
     *m = orM;
     knownDealocks.insert(aglomeratBoxes);
-    return !notDeadLocks;
+	return true;
 }
 
  /** \brief Check if the node is marque as a DL
@@ -133,8 +140,13 @@ bool Case_morte::isMarqueAsDL(Node * node)
      * \param aglomerateBoxes aglomareate to check
      * \return true if it is a DL
      *
+	 *	Method:
+	 *		-Will only take in account box which make part of the aglomerat sent in parameters (s1)
+	 *		-Will remove all movable box from the aglomerate (recursively)	(s2)
+	 *		-If some box are still unmovable, then it is a deadlocks => return true	(s3)
+	 *
      */
-bool Case_morte::isADynDeadlock(std::unordered_set<unsigned short> aglomerateBoxes)
+bool Case_morte::isADynDeadlock(Maze* m, std::unordered_set<unsigned short> aglomerateBoxes)
 {
 
     std::unordered_set<short> movableBox;
@@ -153,11 +165,13 @@ bool Case_morte::isADynDeadlock(std::unordered_set<unsigned short> aglomerateBox
 
 
     //we marque all box as unmovable
+	// S1:
     for (unsigned short box : aglomerateBoxes)
     {
         unmovableSet.insert(box);
     }
 
+	//S2:
     bool movedOne = false;
     do
     {
@@ -193,6 +207,8 @@ bool Case_morte::isADynDeadlock(std::unordered_set<unsigned short> aglomerateBox
         unmovableSet = nextUnmovableSet;
     }
     while (movedOne&&unmovableSet.size() > 0);
+
+	//S3:
     if (unmovableSet.size() == 0)
     {
         return false;

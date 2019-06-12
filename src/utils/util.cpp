@@ -25,6 +25,7 @@
 #include <fstream>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <tuple>
 
 #define CONFIG_FILE_PATH "config.xml"
 Util::Util()
@@ -69,29 +70,37 @@ void Util::vider(std::queue< BFSCase_relier_point> &queue)
 /**
 * fait un mini BFS pour localiser la presence d'un aglomerat de box autour de celle envoyer en parametre
 */
-std::unordered_set<unsigned short> Util::detectAgglomerateOFBoxes(Maze *m, short initBox)
+std::unordered_set<unsigned short> Util::detectAgglomerateOFBoxes(Maze *m, short initBox, unsigned short depht)
 {
     std::vector<bool> marque;
     marque.resize(m->getSize(), false);
     std::unordered_set< unsigned short> res;
     res.insert(initBox);
-    std::queue<short> queue;
-    queue.push(initBox);
+    std::queue<std::pair< short,short>> queue;	//pair(position, current depht)			 current depht is the number of non box square that we have cross in the current case
+    queue.push(std::pair< short, short>(initBox,0));
     marque[initBox] = true;
     while (!queue.empty())
     {
-        short curPos = queue.front();
+        short curPos = queue.front().first;
+		short curDepht = queue.front().second;
         queue.pop();
         for (char dir : m->allDirection)
         {
             short offset = m->getMoveOffset(dir);
             short newPos = curPos + offset;
+			if (newPos<0 || newPos>m->getSize())
+				continue;
             if (!marque[newPos] && m->isSquareBox(newPos))
             {
                 marque[newPos] = true;
-                queue.push(newPos);
+                queue.push(std::pair< short, short>(newPos, curDepht));
                 res.insert(newPos);
             }
+			else if (!marque[newPos]&&curDepht<depht) {
+				marque[newPos] = true;
+				queue.push(std::pair< short, short>(newPos, curDepht+1));
+
+			}
         }
     }
     return res;
@@ -699,7 +708,7 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
                 //[OPTIMIZER]
                 if (!marqued(newNPos, &m, marqueZoneBFS))
                 {
-                    std::unordered_set<unsigned short> aglom = this->detectAgglomerateOFBoxes(&m, newPosBox);
+                    std::unordered_set<unsigned short> aglom = this->detectAgglomerateOFBoxes(&m, newPosBox,1);
                     Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
                     Node newCase(currentCase.chapter, new_zone_accessible, GameState(m.getField(), newNPos, m.getPosBoxes()), aglom, profondeur + 1, bfsR, currentCase.placedBoxes);
                     queue.push(newCase);

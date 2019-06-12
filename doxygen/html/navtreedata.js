@@ -49,7 +49,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_heuristique_8h_source.html",
-"maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a5cffffb8fe3aed5a82ce73c0ccd44cc2"
+"maze_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a80021222f13eb7577ba30c483dcd4f3a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
