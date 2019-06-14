@@ -11,6 +11,7 @@
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 #include "src/Maze/GameState.h"
 #include "src/utils/Tinyxml2.h"
+#include "src/Maze/MazeMap.h"
 
 #include <math.h>
 #include <sstream>
@@ -109,38 +110,41 @@ std::unordered_set<unsigned short> Util::detectAgglomerateOFBoxes(Maze *m, short
 
 
 
+
+
 /**
 * Calculate all the accesble square in the field with BFS
 * (endless bfs which end the the queue is empty)
 */
-std::vector<bool> Util::calcZoneAccessible(const Maze  *m, short &normPos)
+AccessZone Util::calcZoneAccessible(const Maze  *m)
 {
-    normPos = m->getSize();
-    std::vector<bool> marque;
-    marque.resize(m->getField().size(), false);
-    std::queue<unsigned short> file;
-    short position = m->getPosPlayer();
-    marque[position] = true;
-    file.push(position);
+	short normPos = m->getSize();
+	//std::vector<bool>  marque;
+//	marque.resize(m->getSize());
+	MazeMap<char> marque(m,false);
+	std::queue<unsigned short> file;
+	short position = m->getPosPlayer();
+	marque[position] = true;
+	file.push(position);
 
-    while (!file.empty())
-    {
-        position = file.front();
-        for (char dir : m->allDirection)
-        {
-            short offset = m->getMoveOffset(dir);
-            short newPos = position + offset;
-            if (m->isSquareWalkable(newPos) && !marque[newPos])
-            {
-                file.push(newPos);
-                marque[newPos] = true;
-                if (newPos < normPos)
-                    normPos = newPos;
-            }
-        }
-        file.pop();
-    }
-    return marque;
+	while (!file.empty())
+	{
+		position = file.front();
+		for (char dir : m->allDirection)
+		{
+			short offset = m->getMoveOffset(dir);
+			short newPos = position + offset;
+			if (m->isSquareWalkable(newPos) && !marque[newPos])
+			{
+				file.push(newPos);
+				marque[newPos] = true;
+				if (newPos < normPos)
+					normPos = newPos;
+			}
+		}
+		file.pop();
+	}
+	return AccessZone(marque,normPos);
 }
 
 
@@ -548,25 +552,25 @@ std::deque<short> Util::getPathSquareToSquarePM(const Maze  *m, short fromSquare
 * calcuate in ignoring box
 *  calcuate in "pushingBox movement"
 */
-std::vector<short> Util::getDistMapOfSquare(const Maze  *m, short toSquare)
+MazeMap<short> Util::getDistMapOfSquare(const Maze  *m, short toSquare)
 {
-    std::vector<short> res;
+	MazeMap<short> res(m,-1);
     std::vector<unsigned char> field = m->getField();
     for (unsigned square = 0; square < m->getField().size(); square++)
     {
         if (square == toSquare)
         {
-            res.push_back(0);
+			 res[square] = 0;
             continue;
         }
-        if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
+        else if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
         {
-            res.push_back(-1);
+			res[square] = 1;
             continue;
         }
         unsigned size = this->getPathSquareToSquareBM(m, square, toSquare).size();
         size = size == 0 ? -1 : size;
-        res.push_back(size);
+		res[square] = size;
     }
     return res;
 }
@@ -613,6 +617,16 @@ void Util::dispVector(const Maze  *m, std::vector<bool> vec)
 
 }
 
+/** \check if a short is present in a unordered_set
+	*	\param set: set to search in
+	*	\param value: value to search in
+	*	\return true if value is in set
+	*/
+bool Util::setContains(const std::unordered_set<short> set, const short value) const
+{
+	return set.find(value)!=set.end();
+}
+
 /**
 * return the path beewteen fromSquare and toSquare with BFSPlus like method
 */
@@ -635,11 +649,9 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
 
     m.setPlayerPos(posPlayer);
 
-    std::vector<bool> new_zone_accessible;
-    short pos_or;
     std::vector<unsigned char>  field_originel = m.getField();
     std::vector<unsigned short> posBoxes = m.getPosBoxes();
-    std::vector<bool> zone_originel = calcZoneAccessible(&m, pos_or);
+	AccessZone zone_originel(calcZoneAccessible(&m));
     //	marque.clear();
 
     int position_player_or = m.getPosPlayer();
@@ -647,14 +659,14 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
     unsigned short newPositionOfBox, pos_originel = m.getPosPlayer();
     unsigned short profondeur;
 
-    marqued(pos_or, &m, marqueZoneBFS);
+    marqued(zone_originel.getNPos(), &m, marqueZoneBFS);
     // Vector used for stocking all the bfs state. used for recreatnig the path at the end of the bfs
     std::vector< Node::NodeRetrackInfo>caseTracker;
     std::vector< Node::NodeRetrackInfo>res;
     std::queue<Node> queue;
     Node::NodeRetrackInfo bfsR(0, -1, position_player_or, -1);
     //bfsR.
-    Node initCase(NULL, zone_originel, GameState(m.getField(), pos_or, m.getPosBoxes()), std::unordered_set<unsigned short>(), (unsigned short)0, bfsR, m.getPosBoxes().size());
+    Node initCase(NULL, zone_originel, GameState(m.getField(), zone_originel.getNPos(), m.getPosBoxes()), std::unordered_set<unsigned short>(), (unsigned short)0, bfsR, m.getPosBoxes().size());
     caseTracker.push_back(bfsR);
     queue.push(initCase);
     bool win = false;
@@ -664,8 +676,7 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
         queue.pop();
         profondeur = currentCase.depht;
         GameState curGameState = currentCase.gameState;
-        short newNPos;
-        std::vector<bool> 	zone_accessible = currentCase.accessibleZone;
+        AccessZone 	zone_accessible = currentCase.accessZone;
         /**
         * We set the game in the state
         */
@@ -689,7 +700,7 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
             std::vector<char> adjDir = m.getAdjacentDirection(direction);
 
             //We look if the current box can be pushed in the direction
-            if (zone_accessible[pusherPlace] && (m._canPushBox(posBox, direction, newPositionOfBox) && !m.isSquareDeadSquare(newPosBox)))
+            if (zone_accessible.isAccessible(pusherPlace) && (m._canPushBox(posBox, direction, newPositionOfBox) && !m.isSquareDeadSquare(newPosBox)))
             {
                 //[OPTIMIZER]
                 //If yes we check that it will not create any dynamical deadlocks
@@ -701,16 +712,16 @@ std::vector< Node::NodeRetrackInfo> Util::getPathSquareToSquareZoneMethod(const 
                 //[OPTIMIZER TODO]
                 //we check that we didn't already marque this case and marqued it if ut is not the case
                 //We estimate if the accessible zone need to be recalculate (if a path path h as been open or closed we nn
-                new_zone_accessible = calcZoneAccessible(&m, newNPos);
+             AccessZone   new_zone_accessible = calcZoneAccessible(&m);
 
 
 
                 //[OPTIMIZER]
-                if (!marqued(newNPos, &m, marqueZoneBFS))
+                if (!marqued(new_zone_accessible.getNPos(), &m, marqueZoneBFS))
                 {
                     std::unordered_set<unsigned short> aglom = this->detectAgglomerateOFBoxes(&m, newPosBox,1);
                     Node::NodeRetrackInfo bfsR(caseTracker.size(), currentCase.bfsRetrack.idCase, posBoxes[idBox] - offset, posBoxes[idBox]);
-                    Node newCase(currentCase.chapter, new_zone_accessible, GameState(m.getField(), newNPos, m.getPosBoxes()), aglom, profondeur + 1, bfsR, currentCase.placedBoxes);
+                    Node newCase(currentCase.chapter,new_zone_accessible, GameState(m.getField(), new_zone_accessible.getNPos(), m.getPosBoxes()), aglom, profondeur + 1, bfsR, currentCase.placedBoxes);
                     queue.push(newCase);
                     caseTracker.push_back(bfsR);
                 }

@@ -107,7 +107,7 @@ Chapter  HeuristiquePivot::calcChapter()
     for (short i = 0; i < goals.size(); i++)
     {
         short posGOal = goals[i];
-        std::vector<short> distMap = u.getDistMapOfSquare(m, posGOal);
+		MazeMap<short> distMap = u.getDistMapOfSquare(m, posGOal);
 
         res.push_back(new Chapter(i, goals[i],  i, distMap[this->gameStatistique.getPivotPointPos()]));
     }

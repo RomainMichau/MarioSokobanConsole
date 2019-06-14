@@ -18,8 +18,8 @@
     *
     * Initialise the vector placedBoxes
     */
-Node:: Node( Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short  depht, NodeRetrackInfo bfsR,short nbOfBoxes) :
-    accessibleZone(accessibleZone),gameState(gameState), aglomeratBoxes(aglomeratBoxes), depht( depht), chapter(chapter), bfsRetrack(bfsR)
+Node:: Node( Chapter *chapter, AccessZone accessZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short  depht, NodeRetrackInfo bfsR,short nbOfBoxes) :
+	accessZone(accessZone), gameState(gameState), aglomeratBoxes(aglomeratBoxes), depht( depht), chapter(chapter), bfsRetrack(bfsR)
 {
     placedBoxes.resize(nbOfBoxes, false);
 }
@@ -35,8 +35,8 @@ Node:: Node( Chapter *chapter, std::vector<bool> accessibleZone, GameState gameS
      * \param placedBoxes std::vector<bool> : a vector wich represent which boxes is placed on its ideal Goals
      *
      */
-Node::Node( Chapter * chapter, std::vector<bool> accessibleZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short  depht, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes):
-    accessibleZone(accessibleZone),gameState(gameState),placedBoxes(placedBoxes), aglomeratBoxes(aglomeratBoxes),  depht( depht), chapter(chapter), bfsRetrack(bfsR)
+Node::Node( Chapter * chapter, AccessZone accessZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short  depht, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes):
+	accessZone(accessZone), gameState(gameState),placedBoxes(placedBoxes), aglomeratBoxes(aglomeratBoxes),  depht( depht), chapter(chapter), bfsRetrack(bfsR)
 {
 }
 

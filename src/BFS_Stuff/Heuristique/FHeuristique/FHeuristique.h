@@ -10,13 +10,15 @@
 #include "src/Maze/Maze.h"
 #include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
 #include "src/BFS_Stuff/Heuristique/HeuristiqueObjects/HeuristiqueClassique.h"
+#include "src/Maze/MazeMap.h"
+
 #include <unordered_map>
 /** \class FHeuristique
 * \brief Factory de l'heuristique
 *
 * methode getInstance renvoit:
 **	HeuritiquePivot si il s'agit d'un niveau avec une possiblité d'appliqer une heurtique pivot
-**	sinon Heuristique classique
+**	sinon Heuristique classique 
 */
 class FHeuristique
 {
@@ -71,14 +73,14 @@ private:
      * \return return a frequentation Map of the Maze
      *
      */
-    std::vector<short> calcFrequentationSquares();
+    MazeMap<short> calcFrequentationSquares();
 
     /** \brief for each square calculate the distance with the nearest goal
      *
      * \return  a vector with for each square the distance to the nearest goal (in Box Movement)
      *
      */
-    std::vector<short> calcMapDistanceFromNearestGoals();
+	MazeMap<short> calcMapDistanceFromNearestGoals();
 
     /**
     * \brief return the pivot point of the maze
@@ -86,7 +88,7 @@ private:
     * pivotPoint: the point with the most frequentation. \n
     * if there is many point with the same max frequentation, then the farest from goals win
     */
-    short calcPivotPointPos(std::vector<short> distMap, std::vector<short> freqMap);
+    short calcPivotPointPos(MazeMap<short> distMap, MazeMap<short> freqMap);
 
 
     /** \brief detect tunnels in the game

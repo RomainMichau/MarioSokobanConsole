@@ -12,6 +12,8 @@
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/Heuristique/Abstract/AHeuristique.h"
+#include "src/Maze/MazeMap.h"
+
 #include <utility>
 #include <unordered_map>
 /**
@@ -48,7 +50,7 @@ public:
          * \param tunnelMap: a map which identified tunnel in the maze
          *
          */
-        GameStatistique(std::vector<short> mapFrequentationSquares, short pivotPointPos, std::vector<short> distMapFromPivotPoint, std::unordered_map<short, short> tunnelMap) :
+        GameStatistique(MazeMap<short> mapFrequentationSquares, short pivotPointPos, MazeMap<short> distMapFromPivotPoint, std::unordered_map<short, short> tunnelMap) :
             mapFrequentationSquares(mapFrequentationSquares), pivotPointPos(pivotPointPos), distMapFromPivotPoint(distMapFromPivotPoint), tunnelMap(tunnelMap) {};
 
         /** \brief Getter of the pivot Point position
@@ -67,7 +69,7 @@ public:
          * \return mapFrequentationSquares
          *
          */
-        std::vector<short> getMapFrequentationSquares() const
+        MazeMap<short> getMapFrequentationSquares() const
         {
             return mapFrequentationSquares;
         };
@@ -101,7 +103,7 @@ public:
         *
         * will not change during the game
         */
-        const std::vector<short> mapFrequentationSquares;
+        const MazeMap<short> mapFrequentationSquares;
 
         /**
         * the pivotPoint is a square of the field where the passage is necessary for reach any goals
@@ -112,7 +114,7 @@ public:
         /**
         * the dist map from the pivotPoint
         */
-        const std::vector<short> distMapFromPivotPoint;
+        const MazeMap<short> distMapFromPivotPoint;
 
         /**
         * map of the tunnel in the Game:

@@ -16,6 +16,12 @@
 #include <unordered_set>
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
+#include "src/BFS_Stuff/Deadlocks/DeadlocksObjects/DynDeadLocks.h"
+
+
+   /** \struct  VectorHash
+     *  \brief foncteur for generaing hash of a std::unordered_set<unsigned short>
+     */
 
 
 /** \class Case_morte
@@ -28,26 +34,18 @@
 class Case_morte
 {
 
-    /** \struct  VectorHash
-     *  \brief foncteur for generaing hash of a std::unordered_set<unsigned short>
-     */
-    struct VectorHash
+     struct VectorHash
     {
-        size_t operator()(const std::unordered_set<unsigned short>& v) const
+        size_t operator()(const DynDeadLocks& dl) const
         {
-            std::hash<unsigned short> hasher;
-            size_t seed = 0;
-            for (int i : v)
-            {
-                seed ^= hasher(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-            }
-            return seed;
+			const short a= dl.getHash();
+			return a;
         }
     };
 private:
     Maze *m /**< Maze to work in */;
     Util u /**< Util class */;
-    std::unordered_set<std::unordered_set<unsigned short>, VectorHash> knownDealocks; /**< Set of the known Dyn DL */
+    std::unordered_set<DynDeadLocks, VectorHash> knownDealocks; /**< Set of the known Dyn DL */
 public:
 
     /** \brief Constrcutor of class Case_morte
@@ -94,7 +92,7 @@ private:
      * \return true if it is a DL
      *
      */
-    bool isADynDeadlock(Maze* m,std::unordered_set<unsigned short> aglomerateBoxes);
+    bool isADynDeadlock(Maze* m,std::unordered_set<unsigned short> aglomerateBoxes,short normPos);
 
 };
 

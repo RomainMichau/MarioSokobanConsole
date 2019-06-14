@@ -13,6 +13,7 @@
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/Heuristique/MacroMover/MacroMover.h"
+
 #include <unordered_map>
 
 /** \class  AHeuristique
@@ -23,68 +24,7 @@
 
 class AHeuristique
 {
-public:
 
-
-
-
-    /** \class GameStat
-    *   \brief Represent the calculated stat and informations about the Game
-    *
-    *   Only the information which are true for ALL the game are in this class
-    */
-    class GameStatistique
-    {
-    public:
-
-        GameStatistique():pivotPoint(-1){};
-        /** \brief getter of the position of the pivot point
-         *
-         *  the pivotPoint is a square of the field where the passage is necessary for reach any goals
-         *  will never change during the game
-         * \return pivotPoint
-         *
-         */
-        short  getPivotPointPos() const
-        {
-            return pivotPoint;
-        };
-
-
-
-        /** \brief getter of the mapFrequentationSquares
-         *
-         *this a vector of the side of the field wich is calculate like that: \n
-        *	we make a bfs for fin the way beetween each box and the goal
-        *	for each square we count how many time a box passed on it
-        *	we put this info in this vector
-        *
-        * will not change during the game
-         * \return mapFrequentationSquares
-         *
-         */
-        std::vector<short> const getMapFrequentationSquares()
-        {
-            return mapFrequentationSquares;
-        }
-
-    private:
-        /**
-        * a vector of the side of the field wich is calculate like that:
-        *	we make a bfs for fin the way beetween each box and the goal
-        *	for each square we count how many time a box passed on it
-        *	we put this info in this vector
-        *
-        * will not change during the game
-        */
-        const std::vector<short> mapFrequentationSquares;
-
-        /**
-        * the pivotPoint is a square of the field where the passage is necessary for reach any goals
-        * will never change during the game
-        */
-        const short pivotPoint;
-    };
 
 
 public:

@@ -10,7 +10,7 @@
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 #include "src/BFS_Stuff/BFS_Objects/Chapter.h"
 #include "src/Maze/GameState.h"
-
+#include "src/BFS_Stuff/BFS_Objects/accessZone.h"
 #include <unordered_set>
 
 /** \class Node
@@ -68,7 +68,7 @@ public:
     };
 
 public:
-    std::vector<bool> accessibleZone;/**< accessible zone ongoing during this Node */
+	AccessZone accessZone;/**< accessible zone ongoing during this Node (after the move)*/
     GameState gameState;/**< GameState ongoing during this node */
     std::vector<bool> placedBoxes;/**< a vector wich represent which boxes is placed on its ideal Goals : placedBoxes[i]==true if box i is on an ideal goal */
     Note note; /**< Note of this node */
@@ -76,6 +76,7 @@ public:
     unsigned short  depht; /**<  depht of this node */
     Chapter *chapter;/**<  chapter ongoing during this Node */
     NodeRetrackInfo  bfsRetrack;/**< NodeRetrackInfo of this node */
+
 
     public:
     /** \brief Constructor of the Class Node
@@ -89,7 +90,7 @@ public:
      * \param nbBoxes short: number of boxes of the maze
      *
      */
-    Node( Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short  depht, NodeRetrackInfo bfsR, short nbBoxes);
+    Node( Chapter *chapter, AccessZone accessZone,GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes, unsigned short  depht, NodeRetrackInfo bfsR, short nbBoxes);
 
     /** \brief Constructor of the Class Node
       *
@@ -102,7 +103,7 @@ public:
       * \param placedBoxes std::vector<bool> : a vector wich represent which boxes is placed on its ideal Goals
       *
       */
-    Node( Chapter *chapter, std::vector<bool> accessibleZone, GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes,unsigned short  depht, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
+    Node( Chapter *chapter, AccessZone accessZone,GameState gameState, std::unordered_set<unsigned short> aglomeratBoxes,unsigned short  depht, NodeRetrackInfo bfsR, std::vector<bool> placedBoxes);
 
 
     /** \brief Destructor of the class Node

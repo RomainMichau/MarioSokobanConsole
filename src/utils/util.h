@@ -12,6 +12,8 @@
 #include "src/BFS_Stuff/Heuristique/note.h"
 #include "src/BFS_Stuff/BFS_Objects/Mother_Class/NodeCaseMother.h"
 #include "src/BFS_Stuff/BFS_Objects/Node.h"
+#include "src/Maze/MazeMap.h"
+#include "src/BFS_Stuff/BFS_Objects/accessZone.h"
 
 #include <queue>
 #include <vector>
@@ -21,7 +23,6 @@
 #include <sstream>
 #include <iostream>
 #include <unordered_set>
-
 /** \class Util
  *
  *   \brief Contains a set of utilitary methodes
@@ -155,7 +156,10 @@ public:
      *  The accesible zone is the zone that the player can reach without having to push a box \n
      *  The normalize Position is the most top and most left square that the player can reach \n
      */
-    std::vector<bool> calcZoneAccessible(const Maze* m, short &normPos);
+
+
+
+	AccessZone calcZoneAccessible(const Maze* m);
 
     /** \brief Will convert successive position in a vector of direction to take for reach all this positions
      *
@@ -227,7 +231,7 @@ public:
      *
      * a dist map is a vector of the size of the field, which for each square it has for value the distance from toSquare
      */
-    std::vector<short>  getDistMapOfSquare(const Maze *m, short toSquare);
+    MazeMap<short>  getDistMapOfSquare(const Maze *m, short toSquare);
 
     /** \brief Display a vector of the size of the field
      *
@@ -247,7 +251,12 @@ public:
      */
     void dispVector(const Maze* m, std::vector<bool> vec);
 
-
+	/** \check if a short is present in a unordered_set
+	*	\param set: set to search in
+	*	\param value: value to search in
+	*	\return true if value is in set
+	*/
+	bool setContains(const std::unordered_set<short> set, const short value) const;
 
 
 

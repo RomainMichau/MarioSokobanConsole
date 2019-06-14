@@ -15,7 +15,7 @@
 #include "src/utils/util.h"
 #include "src/BFS_Stuff/DeadLocks/case_morte.h"
 #include "src/BFS_Stuff/Heuristique/FHeuristique/FHeuristique.h"
-
+#include "src/Maze/MazeMap.h"
 
 
 std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
@@ -40,6 +40,7 @@ std::vector<unsigned char>  goHeursitique(Maze m, unsigned &noeudVisite)
 
 int main()
 {
+
 
     //std::cout<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl<<std::endl;
     std::cout << "///////////////////////////MARIO SOKOBAN SOLVER///////////////////////////" << std::endl;
@@ -68,7 +69,8 @@ int main()
     std::cout << m << std::endl;
     //u.dispVector(m,	h.calcFrequentationSquares(m));
 
-    while (true)
+
+     while (true)
     {
         std::cout << "press space for launch BFS" << std::endl;
         while (!g.keyPressed())

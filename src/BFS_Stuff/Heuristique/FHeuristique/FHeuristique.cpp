@@ -19,10 +19,10 @@ FHeuristique::~FHeuristique()
 AHeuristique * FHeuristique::getInstance()
 {
     // calculatiing and setting frequentationMap
-    std::vector<short> freqMap = calcFrequentationSquares();
+    MazeMap<short> freqMap = calcFrequentationSquares(); 
 
     // get an estimation of the distance beetween all the squares and goals
-    std::vector<short> distanceMap = calcMapDistanceFromNearestGoals();
+	MazeMap<short> distanceMap = calcMapDistanceFromNearestGoals();
 
     // with the distance map and the previously calculated frequentation map, we calculate the piovtPoint
     short posPivotPointPos = calcPivotPointPos(distanceMap, freqMap);
@@ -39,28 +39,28 @@ HeuristiqueClassique * FHeuristique::getClassicalHeuritique()
 }
 
 
-std::vector<short> FHeuristique::calcMapDistanceFromNearestGoals()
+MazeMap<short> FHeuristique::calcMapDistanceFromNearestGoals()
 {
-    std::vector<short> res;
+	MazeMap<short> res(m,-1);
     std::vector<unsigned char> field = m->getField();
     for (unsigned square = 0; square < m->getField().size(); square++)
     {
         if (m->isSquareWall(square) || m->isSquareDeadSquare(square))
         {
-            res.push_back(-1);
+			res[square] = -1;
             continue;
         }
         unsigned size = u.getPathSquareToGoalBM(m, square).size();
-        res.push_back(size);
+		res[square] = size;
+
     }
     return res;
 }
 
 
-std::vector<short> FHeuristique::calcFrequentationSquares()
+MazeMap<short> FHeuristique::calcFrequentationSquares()
 {
-    std::vector<short> res;
-    res.resize(m->getField().size(), 0);
+	MazeMap<short> res(m,0);
     std::vector<unsigned char> field = m->getField();
     for (int box : m->getPosBoxes())
     {
@@ -81,7 +81,7 @@ std::vector<short> FHeuristique::calcFrequentationSquares()
 }
 
 
-short FHeuristique::calcPivotPointPos(std::vector<short> distMap, std::vector<short> freqMap)
+short FHeuristique::calcPivotPointPos(MazeMap<short> distMap, MazeMap<short> freqMap)
 {
 
     short pivotPointPos = -1;

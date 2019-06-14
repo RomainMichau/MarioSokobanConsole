@@ -27,6 +27,7 @@ private:
     AHeuristique* heuristique; /**< The heuristique used to resolve the Maze (must inherit of AHeuristique)  */
     Maze *m; /**< The Maze */
     std::unordered_set<std::string>marque;/**< List of already encountered case */
+	Case_morte dead;
 
 private:
 
@@ -75,6 +76,10 @@ public:
      *
      */
     std::vector<unsigned char> runBFS(unsigned &noeudvisite);
+
+	void simulateDeadLocks(short nbOfBoxes);
+
+	void reinitAttribute();
 };
 
 #endif // BFSPLUS_H
